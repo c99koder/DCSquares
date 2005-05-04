@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s0="urn:Scores" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" targetNamespace="urn:Scores" name="Scores" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <s:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:Scores">
+      <s:complexType name="ScoreEntry">
+        <s:all>
+          <s:element name="rank" type="s:int" />
+          <s:element name="username" type="s:string" />
+          <s:element name="userid" type="s:string" />
+          <s:element name="score" type="s:string" />
+          <s:element name="combo" type="s:int" />
+          <s:element name="time" type="s:float" />
+          <s:element name="platform" type="s:string" />
+          <s:element name="date" type="s:string" />
+        </s:all>
+      </s:complexType>
+      <s:complexType name="ScoreEntryArray">
+        <s:complexContent mixed="false">
+          <s:restriction base="soapenc:Array">
+            <s:attribute d7p1:arrayType="s0:ScoreEntry[]" ref="soapenc:arrayType" xmlns:d7p1="http://schemas.xmlsoap.org/wsdl/" />
+          </s:restriction>
+        </s:complexContent>
+      </s:complexType>
+    </s:schema>
+  </types>
+  <message name="submitScoreRequest">
+    <part name="username" type="s:string" />
+    <part name="password" type="s:string" />
+    <part name="score" type="s:int" />
+    <part name="combo" type="s:int" />
+    <part name="time" type="s:float" />
+    <part name="platform" type="s:string" />
+  </message>
+  <message name="submitScoreResponse">
+    <part name="result" type="s:int" />
+  </message>
+  <message name="getScoresRequest">
+    <part name="startDate" type="s:string" />
+    <part name="endDate" type="s:string" />
+    <part name="count" type="s:string" />
+  </message>
+  <message name="getScoresResponse">
+    <part name="scores" type="s0:ScoreEntryArray" />
+  </message>
+  <message name="getRankRequest">
+    <part name="userID" type="s:int" />
+  </message>
+  <message name="getRankResponse">
+    <part name="rank" type="s:int" />
+  </message>
+  <message name="getHighScoreRequest">
+    <part name="userID" type="s:int" />
+  </message>
+  <message name="getHighScoreResponse">
+    <part name="score" type="s:string" />
+  </message>
+  <portType name="ScoresPort">
+    <operation name="submitScore">
+      <input message="s0:submitScoreRequest" />
+      <output message="s0:submitScoreResponse" />
+    </operation>
+    <operation name="getScores">
+      <input message="s0:getScoresRequest" />
+      <output message="s0:getScoresResponse" />
+    </operation>
+    <operation name="getRank">
+      <input message="s0:getRankRequest" />
+      <output message="s0:getRankResponse" />
+    </operation>
+    <operation name="getHighScore">
+      <input message="s0:getHighScoreRequest" />
+      <output message="s0:getHighScoreResponse" />
+    </operation>
+  </portType>
+  <binding name="ScoresBinding" type="s0:ScoresPort">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <operation name="submitScore">
+      <soap:operation soapAction="urn:Scores#scores#submitScore" />
+      <input>
+        <soap:body use="encoded" namespace="urn:Scores" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:Scores" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="getScores">
+      <soap:operation soapAction="urn:Scores#scores#getScores" />
+      <input>
+        <soap:body use="encoded" namespace="urn:Scores" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:Scores" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="getRank">
+      <soap:operation soapAction="urn:Scores#scores#getRank" />
+      <input>
+        <soap:body use="encoded" namespace="urn:Scores" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:Scores" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="getHighScore">
+      <soap:operation soapAction="urn:Scores#scores#getHighScore" />
+      <input>
+        <soap:body use="encoded" namespace="urn:Scores" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:Scores" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="ScoresService">
+    <port name="ScoresPort" binding="s0:ScoresBinding">
+      <soap:address location="http://dcsquares.c99.org/2.0/SOAP/scores.php" />
+    </port>
+  </service>
+</definitions>
