@@ -109,7 +109,7 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 2;
 				GCC_PREPROCESSOR_DEFINITIONS = "MACOS UNIX OPENGL OPENAL";
-				HEADER_SEARCH_PATHS = "al_osx/include /sw/include/plib ../include";
+				HEADER_SEARCH_PATHS = "../include . /sw/include/plib";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = .;
@@ -678,7 +678,7 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				OPTIMIZATION_CFLAGS = "-O0";
-				ZERO_LINK = YES;
+				ZERO_LINK = NO;
 			};
 			isa = PBXBuildStyle;
 			name = Development;
