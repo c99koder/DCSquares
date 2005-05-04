@@ -13,16 +13,15 @@ int main(int argc, const char *argv[])
 {
 	char text[PATH_MAX];
 	char text2[100];
-	char *val;
 	int len=0;
+	char *val;
+	struct stat s;
 
 	srand(time(NULL));
 
 	if(readlink(argv[0],text,100)==-1) strcpy(text,argv[0]);
 
 	if(text[0]!='/' && text[0]!='.') {
-		char *val;
-	  struct stat s;
 		
 		val=strtok(getenv("PATH"),":");
 		do {

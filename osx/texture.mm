@@ -242,8 +242,8 @@ floaded:
 		textures[pos].ysize=TextureImage->h;
 #endif
 #ifdef MACOS
-		textures[pos].xsize=[bitmap size].width;
-		textures[pos].ysize=[bitmap size].height;
+		textures[pos].xsize=(int)[bitmap size].width;
+		textures[pos].ysize=(int)[bitmap size].height;
 		//Compensate for buggy NSBitmap size
 		if(textures[pos].xsize == 511 || textures[pos].xsize == 1023) textures[pos].xsize++; 
 		if(textures[pos].ysize == 511 || textures[pos].ysize == 1023) textures[pos].ysize++; 

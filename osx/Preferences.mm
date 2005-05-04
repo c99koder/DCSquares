@@ -24,7 +24,6 @@ extern ALuint sources[6];
   DIR *dp;
 	struct dirent *dir_entry;
 	struct stat stat_info;
-	int x=0;
 
 	if((dp = opendir("themes")) == NULL) {
 			fprintf(stderr,"cannot open directory\n");

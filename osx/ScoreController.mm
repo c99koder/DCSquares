@@ -7,13 +7,11 @@
 
 - (IBAction)getScores:(id)sender
 {
-		int count=10;
-		int index;
+		unsigned int index;
     scores = (NSArray*)[ScoresService getScores:@"" in_endDate:@"" in_count:@"15"];
 		//printf("Read %i records\n",[scores count]);
 		for(index =0; index< [scores count]; index++){
 			scoreInfo = (NSDictionary*)[scores objectAtIndex:index];
-    	NSString *name = [scoreInfo objectForKey: @"name"];
 		}
 		[scoreWindow center];
 		[scoreWindow makeKeyAndOrderFront:nil];

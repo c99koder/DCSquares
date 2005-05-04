@@ -105,15 +105,13 @@ float gt=0;
 {
 	[timer invalidate];
 	[timer release];
+	[super dealloc];
 }
 
 - (void) updateSquares
 {
 	squarelist *c;
-	char tmp[100];
-	char tmp2[100];
 	int play=0;
-	int x,seed;
 
 	if(fade>0) {
 		fade -= [timer timeInterval];
@@ -182,7 +180,7 @@ float gt=0;
 	}
 #endif
 	if(state==0) {
-		[updates autoUpdate];
+		//[updates autoUpdate];
 	}
 	if(state==1 && fade<=0) {
 		c=check_collide(player);
@@ -285,8 +283,8 @@ float gt=0;
 
 - (void) mouseMoved: (NSEvent *) theEvent
 {
-	mousex=[theEvent locationInWindow].x;
-	mousey=480-[theEvent locationInWindow].y;
+	mousex=(int)[theEvent locationInWindow].x;
+	mousey=480-(int)[theEvent locationInWindow].y;
 		
 	if((mousex >= 0) && (mousex < 640) && (mousey >= 0) && (mousey < 480)) {
 		if(player!=NULL && fade<=0) {

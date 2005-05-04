@@ -170,6 +170,30 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
+			PBXConfiguration.PBXFileTableDataSource3.XCSCMDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					20,
+					219,
+					20,
+					48.1626,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_SCM_ColumnID,
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
 			PBXConfiguration.PBXTargetDataSource.PBXTargetDataSource = {
 				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
@@ -210,11 +234,44 @@
 		userBuildSettings = {
 		};
 	};
+	29B97316FDCFA39411CA2CEA = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {711, 770}}";
+			sepNavSelRange = "{295, 0}";
+			sepNavVisRect = "{{0, 0}, {711, 429}}";
+			sepNavWindowFrame = "{{254, 150}, {750, 558}}";
+		};
+	};
 	4F0718CC07669C1F00827E7D = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {752, 5460}}";
-			sepNavSelRange = "{61, 19}";
-			sepNavVisRect = "{{0, 0}, {459, 186}}";
+			sepNavIntBoundsRect = "{{0, 0}, {752, 5432}}";
+			sepNavSelRange = "{6371, 48}";
+			sepNavVisRect = "{{0, 3783}, {711, 429}}";
+			sepNavWindowFrame = "{{61, 141}, {750, 558}}";
+		};
+	};
+	4F0719520766B1A200827E7D = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1310, 4872}}";
+			sepNavSelRange = "{6030, 0}";
+			sepNavVisRect = "{{0, 3209}, {711, 429}}";
+			sepNavWindowFrame = "{{130, 78}, {750, 558}}";
+		};
+	};
+	4F29FE8A0808A7780019E209 = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {711, 588}}";
+			sepNavSelRange = "{390, 0}";
+			sepNavVisRect = "{{0, 0}, {711, 429}}";
+			sepNavWindowFrame = "{{107, 99}, {750, 558}}";
+		};
+	};
+	4FE5E4980767DD6A00278B04 = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {764, 1330}}";
+			sepNavSelRange = "{479, 0}";
+			sepNavVisRect = "{{0, 0}, {711, 429}}";
+			sepNavWindowFrame = "{{84, 120}, {750, 558}}";
 		};
 	};
 }
