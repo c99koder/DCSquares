@@ -243,7 +243,7 @@ void render_title(float gt) {
 	center_shad_rgb(310,"Click to Begin",20,alpha,1,1,1);
 #endif
 	set_font_size(12);
-	draw_txt(640-txt_width("Version 1.6"),480,"Version 1.6",0,0,0,1,12);
+	draw_txt(640-txt_width("Version 1.8"),480,"Version 1.8",0,0,0,1,12);
 	set_font_size(16);
 	center_shad(355,"Programming: Sam Steele",18,1);
 	sprintf(tmp,"Artwork: %s",themeinfo.bg_auth);
