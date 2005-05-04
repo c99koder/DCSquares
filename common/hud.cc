@@ -20,14 +20,14 @@
 #include <stdio.h>
 #include <math.h>
 #include "text.h"
-#if defined(DREAMCAST) || defined(SDL)
-#include "sys.h"
-#endif
 #include "theme.h"
 #include "squares.h"
 #include "game.h"
 #include "score.h"
+#if defined(SDL) || defined(DREAMCAST)
+#include "sys.h"
 #include "input.h"
+#endif
 
 extern themeinfo_t themeinfo;
 extern char highcode[20];
@@ -230,7 +230,7 @@ void render_score(float gt) {
 void render_title(float gt) {
 	char tmp[100];
 	static float alpha=1.0f;
-	static float bstep=-0.025f;
+	static float bstep=-0.01f;
 	static float st=0;
 
 	if(highcode[0]!='\0') {
@@ -239,7 +239,9 @@ void render_title(float gt) {
 		sprintf(tmp,"%s",highcode);
 		center_shad(120,tmp,16,1);
 	}
-	center_shad_rgb(310,"Press Start",20,alpha,1,1,1);
+#if !defined(SDL) && !defined(DREAMCAST)
+	center_shad_rgb(310,"Click to Begin",20,alpha,1,1,1);
+#endif
 	set_font_size(12);
 	draw_txt(640-txt_width("Version 1.6"),480,"Version 1.6",0,0,0,1,12);
 	set_font_size(16);
@@ -302,13 +304,15 @@ void render_highscores() {
 	center_shad_rgb(420,"http://dcsquares.c99.org/",16,1,1,1,1);
 }
 
-#if defined(DREAMCAST) || defined(SDL)
+void high_scores();
+
 void name_entry(unsigned long time) {
+#if 0
 	char L1[2]="_";
 	char L2[2]="_";
 	char L3[2]="_";
 	static char name[4]="   ";
-	int pos=0,loop=1,x;
+	int pos=0,loop=1,x,ox;
 	float r,g,b;
 	char buf[100];
 	
@@ -333,15 +337,28 @@ void name_entry(unsigned long time) {
 			case START_BTN:
 				loop=0;
 				break;
+			case QUIT_BTN:
+				name[pos]=' ';
 			case MOVE_LEFT:
 				pos--;
 				if(pos<0) pos=0;
 				break;
+			case FIRE_BTN:
+				if(ox==FIRE_BTN) break;
+				pos++;
+				if(pos>2) {
+					loop=0;
+				} else {
+					if(name[pos]==' ') name[pos]='A';
+				}
+				break;			
 			case MOVE_RIGHT:
 				pos++;
 				if(pos>2) pos=2;
 				break;
 		}
+		
+		ox=x;
 				
 		L1[0]=name[0];
 		L2[0]=name[1];
@@ -389,5 +406,7 @@ void name_entry(unsigned long time) {
 		if(x>0) delay((x==MOVE_LEFT || x==MOVE_RIGHT)?0.20:0.15);
 	}
 	score_list_insert(name,score,maxcombo,time,0);
-}
+	save_scores();
+	high_scores();
 #endif
+}

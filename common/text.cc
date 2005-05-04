@@ -49,7 +49,7 @@ fntRenderer *textR;
 fntTexFont *font;
 #else
 RefPtr<Font> fnt;
-float text_z=1.0f;
+float text_z=0.95f;
 
 void text_set_z(float z) { text_z=z; }
 #endif 

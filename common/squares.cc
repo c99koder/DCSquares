@@ -36,7 +36,9 @@ extern CSound *gameover;
 #include <SDL/SDL_mixer.h>
 #endif
 #endif
+#if defined(DREAMCAST) || defined(SDL)
 #include "input.h"
+#endif
 #include "squares.h"
 #include "theme.h"
 #include "hud.h"
@@ -234,17 +236,31 @@ void update_squares(float s) {
 			c->angle+=180*s;
 			if(c->angle>360) c->angle-=360;
 		}
+#if defined(SDL) || defined(DREAMCAST)
 		if(c->type<PLAYER_NET) {
-#if defined(DREAMCAST) || defined(SDL)
 			read_mouse(&mx,&my,&lmb);
+			switch(poll_game_device(0)) {
+				case MOVE_UP:
+					my-=8;
+					break;
+				case MOVE_DOWN:
+					my+=8;
+					break;
+				case MOVE_LEFT:
+					mx-=8;
+					break;
+				case MOVE_RIGHT:
+					mx+=8;
+					break;
+			}
 			c->x=mx;
-			c->y=my;				
+			c->y=my;			
 			if(c->x<0) c->x=0;
 			if(c->x>640) c->x=640;
 			if(c->y<0) c->y=0;
 			if(c->y>480) c->y=480;
-#endif
 		}
+#endif
 		if(c->type>PLAYER_NET) {
 			if(c->x<0-c->size || c->x>640+c->size || c->y < 0-c->size || c->y > 480+c->size) {
 				c->deleted=1;

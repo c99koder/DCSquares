@@ -1,6 +1,13 @@
+#ifdef DIRECTX
+#define UNICODE
+#endif
 #ifdef WIN32
 #include <windows.h>
 #include <atlconv.h>
+#endif
+#ifdef DIRECTX
+#include "dxutil.h"
+#include "dsutil.h"
 #endif
 #ifdef DREAMCAST
 #include <kos.h>
@@ -33,20 +40,20 @@
 #include "sys.h"
 #endif
 
-int loading_tex=0;
-int title_tex=1;
-int bg_tex=2;
-int score_tex=3;
-int enemy_tex=4;
-int invinc_tex=5;
-int slow_tex=6; 
-int mini_tex=7;
-int plus_tex=8;
-int evil_tex=9;
-int speed_tex=10;
-int minus_tex=11;
-int big_tex=12;
-int shadow_tex=13;
+int loading_tex=15;
+int title_tex=2;
+int bg_tex=3;
+int score_tex=4;
+int enemy_tex=5;
+int invinc_tex=6;
+int slow_tex=7; 
+int mini_tex=8;
+int plus_tex=9;
+int evil_tex=10;
+int speed_tex=11;
+int minus_tex=12;
+int big_tex=13;
+int shadow_tex=14;
 char dcs_theme[100];
 
 void MessageBox(char *title, char *msg);
@@ -100,10 +107,10 @@ void LoadOgg( char* inSoundFile, int buffer )
 #endif
 
 void render_bg(int tex, float fade) {
-#if defined(SDL) || defined(MACOS)
-  GLfloat uv[4]={0,0,1,1};
-#else
+#ifdef DREAMCAST
   GLfloat uv[4]={1,1,0,0};
+#else
+  GLfloat uv[4]={0,0,1,1};
 #endif
 	glEnable(GL_TEXTURE_2D);
 	glLoadIdentity();	
@@ -129,7 +136,7 @@ void render_bg_game(int tex, float fade) {
 	glColor3f(fade,fade,fade);
 	switch_tex(tex);
 	glBegin(GL_QUADS);
-#if defined(SDL) || defined(MACOS)
+#ifndef DREAMCAST
 	glTexCoord2f(0,0);
 	glVertex3f(0,0,0.9);
 	glTexCoord2f(24.0f/640.0f,0);
@@ -225,10 +232,10 @@ void render_bg_game(int tex, float fade) {
 }
 
 void render_poly(int size, int tex, float fade) {
-#if defined(SDL) || defined(MACOS)
-  GLfloat uv[4]={0,0,1,1};
-#else
+#ifdef DREAMCAST
   GLfloat uv[4]={1,1,0,0};
+#else
+  GLfloat uv[4]={0,0,1,1};
 #endif
 	glEnable(GL_TEXTURE_2D);
 	glColor4f(1,1,1,fade);
@@ -302,6 +309,9 @@ char *theme_dir(char *filename) {
 }
 
 int load_theme(char *theme, int sfx) {
+#ifdef DIRECTX
+	USES_CONVERSION;
+#endif
 #ifdef OPENAL
     // Variables to load into.
     ALenum format;
@@ -315,15 +325,15 @@ int load_theme(char *theme, int sfx) {
 	char *p=NULL;
 	char *val;
 
-	if(theme!=NULL) strcpy(dcs_theme,theme); else strcpy(dcs_theme,"goat");
+	if(theme!=NULL) strcpy(dcs_theme,theme); else strcpy(dcs_theme,"default");
 
   f=fopen(theme_dir("theme.ini"),"r");
 	if(!f) {
 		if(strcmp("default",theme)) {
-			return load_theme("goat",sfx);
+			return load_theme("default",sfx);
 		} else {
 #ifdef WIN32
-			MessageBox(NULL,"Cannot load default theme","Error",MB_OK|MB_ICONHAND);
+			MessageBox(NULL,A2W("Cannot load default theme"),A2W("Error"),MB_OK|MB_ICONHAND);
 #endif
 #ifdef MACOS
 			MessageBox("Error","Cannot load default theme");
@@ -369,8 +379,8 @@ int load_theme(char *theme, int sfx) {
 	  }
 	}
 	fclose(f);
-	load_texture(theme_dir("loading"),loading_tex,0);
-#if defined(DREAMCAST) || defined(SDL)
+	//load_texture(theme_dir("loading"),loading_tex,0);
+#if defined(SDL) || defined(DREAMCAST)
 	for(float x=0; x<=1; x+=0.01) {
 		if(sys_render_begin()) {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -379,7 +389,7 @@ int load_theme(char *theme, int sfx) {
 		}		
 		delay(0.01);
 	}
-#endif
+#endif	
 	load_texture(theme_dir("bg"),bg_tex,0);
 	load_texture(theme_dir("title"),title_tex,0);
 	load_texture(theme_dir("green_square"),score_tex,1);
@@ -440,7 +450,7 @@ int load_theme(char *theme, int sfx) {
   g_pSoundManager->Create( &gameover, A2W(theme_dir("gameover.wav")), 0, GUID_NULL );
 	}
 #endif
-#if defined(DREAMCAST) || defined(SDL)
+#if defined(SDL) || defined(DREAMCAST)
 	for(float x=0; x<=1; x+=0.01) {
 		if(sys_render_begin()) {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

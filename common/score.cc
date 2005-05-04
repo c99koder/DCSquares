@@ -7,9 +7,11 @@
  *
  */
 #ifdef WIN32
+#ifndef DIRECTX
 #include <windows.h>
 #include <shlobj.h>
-#ifdef DIRECTX
+#else
+#include "stdafx.h"
 #include "DCSquares-MFC.h"
 #endif
 #endif
