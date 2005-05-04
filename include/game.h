@@ -1,0 +1,1 @@
+void add_squares(float gt);

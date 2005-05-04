@@ -1,0 +1,489 @@
+#ifdef WIN32
+#include <windows.h>
+#include <atlconv.h>
+#endif
+#ifdef DREAMCAST
+#include <kos.h>
+#endif
+#ifdef MACOS
+#include <OpenGL/gl.h>
+#else
+#include <GL/gl.h>
+#endif
+#ifdef OPENAL
+#define AL_FORMAT_VORBIS_EXT 0x10003
+#include <AL/al.h>
+#include <AL/alut.h>
+#endif
+#ifdef SDL
+#include <SDL/SDL.h>
+#ifdef MACOS
+#include <SDL_mixer/SDL_mixer.h>
+#else
+#include <SDL/SDL_mixer.h>
+#endif
+#endif
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "theme.h"
+#include "texture.h"
+#if defined(DREAMCAST) || defined(SDL)
+#include "sys.h"
+#endif
+
+int loading_tex=0;
+int title_tex=1;
+int bg_tex=2;
+int score_tex=3;
+int enemy_tex=4;
+int invinc_tex=5;
+int slow_tex=6; 
+int mini_tex=7;
+int plus_tex=8;
+int evil_tex=9;
+int speed_tex=10;
+int minus_tex=11;
+int big_tex=12;
+int shadow_tex=13;
+char dcs_theme[100];
+
+void MessageBox(char *title, char *msg);
+#ifdef OPENAL
+#include <sys/stat.h>
+ALuint buffers[6];
+ALuint sources[6];
+
+void addSource( int buffer, int loop ) {
+	alSource3f( sources[buffer] , AL_POSITION       , 0.0f , 0.0f , 0.0f );
+	alSource3f( sources[buffer] , AL_VELOCITY       , 0.0f , 0.0f , 0.0f );
+	alSource3f( sources[buffer] , AL_DIRECTION      , 0.0f , 0.0f , 0.0f );
+	alSourcef ( sources[buffer] , AL_ROLLOFF_FACTOR  , 0.0                );
+	alSourcei ( sources[buffer] , AL_SOURCE_RELATIVE , AL_TRUE            );
+	alSourcei(sources[buffer] , AL_LOOPING, loop);
+	alSourcei(sources[buffer] , AL_BUFFER , buffers[buffer]);  
+}
+
+void LoadOgg( char* inSoundFile, int buffer ) 
+{
+  void  *   ovdata  ;	
+  FILE  *   fh      ;
+  
+  fh = fopen( inSoundFile , "rb") ;
+  if( fh != NULL ) 
+  {
+    struct stat sbuf ;
+   
+    if( stat( inSoundFile , &sbuf ) != -1 ) 
+    {
+      ovdata = malloc( sbuf.st_size ) ;
+      if( ovdata != NULL )
+      {
+        fread( ovdata       ,
+               1            ,
+               sbuf.st_size , 
+               fh           ) ;
+        
+        alBufferData( buffers[buffer]               ,
+                      AL_FORMAT_VORBIS_EXT  ,
+                      ovdata                ,
+                      sbuf.st_size          ,
+                      1                     ) ;
+        
+        free( ovdata ) ;
+      }				 
+      fclose( fh ) ;
+    }	   
+  }
+}
+#endif
+
+void render_bg(int tex, float fade) {
+#if defined(SDL) || defined(MACOS)
+  GLfloat uv[4]={0,0,1,1};
+#else
+  GLfloat uv[4]={1,1,0,0};
+#endif
+	glEnable(GL_TEXTURE_2D);
+	glLoadIdentity();	
+	glColor3f(fade,fade,fade);
+	switch_tex(tex);
+	glBegin(GL_QUADS);
+	glTexCoord2f(0,uv[0]);
+	glVertex3f(0,0,0.1);
+	glTexCoord2f(1,uv[1]);
+	glVertex3f(640,0,0.1);
+	glTexCoord2f(1,uv[2]);
+	glVertex3f(640,480,0.1);
+	glTexCoord2f(0,uv[3]);
+	glVertex3f(0,480,0.1);
+	glEnd();
+	glDisable(GL_TEXTURE_2D);
+}
+
+
+void render_bg_game(int tex, float fade) {
+	glEnable(GL_TEXTURE_2D);
+	glLoadIdentity();	
+	glColor3f(fade,fade,fade);
+	switch_tex(tex);
+	glBegin(GL_QUADS);
+#if defined(SDL) || defined(MACOS)
+	glTexCoord2f(0,0);
+	glVertex3f(0,0,0.9);
+	glTexCoord2f(24.0f/640.0f,0);
+	glVertex3f(24,0,0.9);
+	glTexCoord2f(24.0f/640.0f,1);
+	glVertex3f(24,480,0.9);
+	glTexCoord2f(0,1);
+	glVertex3f(0,480,0.9);
+
+	glTexCoord2f(24.0f/640.0f,0);
+	glVertex3f(24,0,0.9);
+	glTexCoord2f((24.0f+497.0f)/640.0f,0);
+	glVertex3f(24+497,0,0.9);
+	glTexCoord2f((24.0f+497.0f)/640.0f,24.0f/480.0f);
+	glVertex3f(24+497,24,0.9);
+	glTexCoord2f(24.0f/640.0f,24.0f/480.0f);
+	glVertex3f(24,24,0.9);
+//497, 433
+	glTexCoord2f((24.0f+497.0f)/640.0f,0);
+	glVertex3f(24+497,0,0.9);
+	glTexCoord2f(1,0);
+	glVertex3f(640,0,0.9);
+	glTexCoord2f(1,((24.0f+433.0f)/480.0f));
+	glVertex3f(640,24+433,0.9);
+	glTexCoord2f((24.0f+497.0f)/640.0f,((24.0f+433.0f)/480.0f));
+	glVertex3f(24+497,24+433,0.9);
+
+	glTexCoord2f(24.0f/640.0f,((24.0f+433.0f)/480.0f));
+	glVertex3f(24,24+433,0.9);
+	glTexCoord2f(1,((24.0f+433.0f)/480.0f));
+	glVertex3f(640,24+433,0.9);
+	glTexCoord2f(1,1);
+	glVertex3f(640,480,0.9);
+	glTexCoord2f(24.0f/640.0f,1);
+	glVertex3f(24,480,0.9);
+	
+	glTexCoord2f(24.0f/640.0f,24.0f/480.0f);
+	glVertex3f(24,24,0.1);
+	glTexCoord2f((24.0f+497.0f)/640.0f,24.0f/480.0f);
+	glVertex3f(24+497,24,0.1);
+	glTexCoord2f((24.0f+497.0f)/640.0f,(24.0f+433.0f)/480.0f);
+	glVertex3f(24+497,24+433,0.1);
+	glTexCoord2f(24.0f/640.0f,(24.0f+433.0f)/480.0f);
+	glVertex3f(24,24+433,0.1);
+#else
+	glTexCoord2f(0,1);
+	glVertex3f(0,0,0.9);
+	glTexCoord2f(24.0f/640.0f,1);
+	glVertex3f(24,0,0.9);
+	glTexCoord2f(24.0f/640.0f,0);
+	glVertex3f(24,480,0.9);
+	glTexCoord2f(0,0);
+	glVertex3f(0,480,0.9);
+
+	glTexCoord2f(24.0f/640.0f,1);
+	glVertex3f(24,0,0.9);
+	glTexCoord2f((24.0f+497.0f)/640.0f,1);
+	glVertex3f(24+497,0,0.9);
+	glTexCoord2f((24.0f+497.0f)/640.0f,1-(40.0f/480.0f));
+	glVertex3f(24+497,40,0.9);
+	glTexCoord2f(24.0f/640.0f,1-(40.0f/480.0f));
+	glVertex3f(24,40,0.9);
+//497, 433
+	glTexCoord2f((24.0f+497.0f)/640.0f,1);
+	glVertex3f(24+497,0,0.9);
+	glTexCoord2f(1,1);
+	glVertex3f(640,0,0.9);
+	glTexCoord2f(1,1-((24.0f+433.0f)/480.0f));
+	glVertex3f(640,24+433,0.9);
+	glTexCoord2f((24.0f+497.0f)/640.0f,1-((24.0f+433.0f)/480.0f));
+	glVertex3f(24+497,24+433,0.9);
+
+	glTexCoord2f(24.0f/640.0f,1-((40.0f+401.0f)/480.0f));
+	glVertex3f(24,40+401,0.9);
+	glTexCoord2f(1,1-((24.0f+433.0f)/480.0f));
+	glVertex3f(640,40+401,0.9);
+	glTexCoord2f(1,0);
+	glVertex3f(640,480,0.9);
+	glTexCoord2f(24.0f/640.0f,0);
+	glVertex3f(24,480,0.9);
+
+	glTexCoord2f(24.0f/640.0f,1-(40.0f/480.0f));
+	glVertex3f(24,40,0.1);
+	glTexCoord2f((24.0f+497.0f)/640.0f,1-(40.0f/480.0f));
+	glVertex3f(24+497,40,0.1);
+	glTexCoord2f((24.0f+497.0f)/640.0f,1-((40.0f+401.0f)/480.0f));
+	glVertex3f(24+497,40+401,0.1);
+	glTexCoord2f(24.0f/640.0f,1-((40.0f+401.0f)/480.0f));
+	glVertex3f(24,40+401,0.1);
+#endif
+	glEnd();
+	glDisable(GL_TEXTURE_2D);
+}
+
+void render_poly(int size, int tex, float fade) {
+#if defined(SDL) || defined(MACOS)
+  GLfloat uv[4]={0,0,1,1};
+#else
+  GLfloat uv[4]={1,1,0,0};
+#endif
+	glEnable(GL_TEXTURE_2D);
+	glColor4f(1,1,1,fade);
+	switch_tex(tex);
+	glBegin(GL_QUADS);
+	glTexCoord2f(0,uv[0]);
+	glVertex3f(-size,-size,0.1);
+	glTexCoord2f(1,uv[1]);
+	glVertex3f(size,-size,0.1);
+	glTexCoord2f(1,uv[2]);
+	glVertex3f(size,size,0.1);
+	glTexCoord2f(0,uv[3]);
+	glVertex3f(-size,size,0.1);
+	glEnd();
+	glDisable(GL_TEXTURE_2D);
+}
+
+
+themeinfo_t themeinfo = {
+	"None",
+	"None",
+	"None",
+	"None",
+	0,0,0,
+	192,0,0,
+	0,0,0
+};
+
+#ifdef DREAMCAST
+sfxhnd_t powerup=-1;
+sfxhnd_t powerdown=-1;
+sfxhnd_t collect=-1;
+sfxhnd_t gameover=-1;
+
+extern "C" {
+void update_lcds();
+}
+#endif
+#ifdef SDL
+Mix_Chunk *powerup;
+Mix_Chunk *powerdown;
+Mix_Chunk *collect;
+Mix_Chunk *gameover;
+Mix_Music *bgm;
+Mix_Music *title;
+#endif
+#ifdef DIRECTX
+extern HDC hDC;
+extern HWND hWnd;
+extern CSoundManager *g_pSoundManager;
+CSound *powerup=NULL;
+CSound *powerdown=NULL;
+CSound *collect=NULL;
+CSound *gameover=NULL;
+
+void audio_init();
+void audio_shutdown();
+void play_bgm(LPCWSTR fn);
+void stop_bgm();
+void c99_show_cursor(bool r);
+#endif
+
+char *theme_dir(char *filename) {
+  static char buf[256];
+#ifdef WIN32
+  sprintf(buf,"themes\\%s\\%s",dcs_theme,filename);
+#else
+  sprintf(buf,"themes/%s/%s",dcs_theme,filename);
+#endif
+  return buf;
+}
+
+int load_theme(char *theme, int sfx) {
+#ifdef OPENAL
+    // Variables to load into.
+    ALenum format;
+    ALsizei size;
+    ALvoid* data;
+    ALsizei freq;
+    ALboolean loop;
+#endif
+    FILE *f;
+	char buf[200];
+	char *p=NULL;
+	char *val;
+
+	if(theme!=NULL) strcpy(dcs_theme,theme); else strcpy(dcs_theme,"goat");
+
+  f=fopen(theme_dir("theme.ini"),"r");
+	if(!f) {
+		if(strcmp("default",theme)) {
+			return load_theme("goat",sfx);
+		} else {
+#ifdef WIN32
+			MessageBox(NULL,"Cannot load default theme","Error",MB_OK|MB_ICONHAND);
+#endif
+#ifdef MACOS
+			MessageBox("Error","Cannot load default theme");
+#endif
+			return -1;
+		}
+	}
+	while(fgets(buf,200,f)!=NULL) {
+	  p=NULL;
+	  strtok(buf,"=");
+	  //printf("Name: %s\n",buf);
+	  val=strtok(NULL,"\n");
+	  //printf("Val: %s\n",val);
+	  if(!strcmp(buf,"bg_auth")) {
+		p=themeinfo.bg_auth;
+	  }
+	  if(!strcmp(buf,"sfx_auth")) {
+		p=themeinfo.sfx_auth;
+	  }
+		if(!strcmp(buf,"music_auth")) {
+		p=themeinfo.music_auth;
+		}
+	  if(!strcmp(buf,"good_r")) {
+	    themeinfo.good_r=atoi(val);
+	  }
+	  if(!strcmp(buf,"good_g")) {
+	    themeinfo.good_g=atoi(val);
+	  }
+	  if(!strcmp(buf,"good_b")) {
+	    themeinfo.good_b=atoi(val);
+	  }
+	  if(!strcmp(buf,"evil_r")) {
+	    themeinfo.evil_r=atoi(val);
+	  }
+	  if(!strcmp(buf,"evil_g")) {
+	    themeinfo.evil_g=atoi(val);
+	  }
+	  if(!strcmp(buf,"evil_b")) {
+	    themeinfo.evil_b=atoi(val);
+	  }
+	  if(p!=NULL) {
+	    strcpy(p,val);
+	  }
+	}
+	fclose(f);
+	load_texture(theme_dir("loading"),loading_tex,0);
+#if defined(DREAMCAST) || defined(SDL)
+	for(float x=0; x<=1; x+=0.01) {
+		if(sys_render_begin()) {
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			render_bg(loading_tex,x);
+			sys_render_finish();
+		}		
+		delay(0.01);
+	}
+#endif
+	load_texture(theme_dir("bg"),bg_tex,0);
+	load_texture(theme_dir("title"),title_tex,0);
+	load_texture(theme_dir("green_square"),score_tex,1);
+	load_texture(theme_dir("green_invincible"),invinc_tex,1);
+	load_texture(theme_dir("green_plus1000"),plus_tex,1);
+	load_texture(theme_dir("green_slowdown"),slow_tex,1);
+	load_texture(theme_dir("green_smallsquare"),mini_tex,1);
+	load_texture(theme_dir("red_square"),enemy_tex,1);
+	load_texture(theme_dir("red_bigsquare"),big_tex,1);
+	load_texture(theme_dir("red_evil"),evil_tex,1);
+	load_texture(theme_dir("red_minus1000"),minus_tex,1);
+	load_texture(theme_dir("red_speedup"),speed_tex,1);
+	load_texture(theme_dir("orb_shadow"),shadow_tex,1);
+#ifdef SDL
+	powerup=Mix_LoadWAV(theme_dir("powerup.wav"));
+	powerdown=Mix_LoadWAV(theme_dir("powerdown.wav"));
+	collect=Mix_LoadWAV(theme_dir("collect.wav"));
+	gameover=Mix_LoadWAV(theme_dir("gameover.wav"));
+	bgm=Mix_LoadMUS(theme_dir("bg_loop.ogg"));
+	title=Mix_LoadMUS(theme_dir("bgdim_loop.ogg"));
+#endif
+#ifdef OPENAL
+	alGenBuffers(6, buffers);
+	alGenSources(6, sources);
+	alutLoadWAVFile(theme_dir("collect.wav"), &format, &data, &size, &freq, &loop);
+  alBufferData(buffers[SND_COLLECT], format, data, size, freq);
+  alutUnloadWAV(format, data, size, freq);
+	addSource(SND_COLLECT,AL_FALSE);
+	alutLoadWAVFile(theme_dir("powerup.wav"), &format, &data, &size, &freq, &loop);
+  alBufferData(buffers[SND_POWERUP], format, data, size, freq);
+  alutUnloadWAV(format, data, size, freq);
+	addSource(SND_POWERUP,AL_FALSE);
+	alutLoadWAVFile(theme_dir("powerdown.wav"), &format, &data, &size, &freq, &loop);
+  alBufferData(buffers[SND_POWERDOWN], format, data, size, freq);
+  alutUnloadWAV(format, data, size, freq);
+	addSource(SND_POWERDOWN,AL_FALSE);
+	alutLoadWAVFile(theme_dir("gameover.wav"), &format, &data, &size, &freq, &loop);
+  alBufferData(buffers[SND_GAMEOVER], format, data, size, freq);
+  alutUnloadWAV(format, data, size, freq);
+	addSource(SND_GAMEOVER,AL_FALSE);
+	LoadOgg(theme_dir("bgdim_loop.ogg"),SND_TITLE);
+	addSource(SND_TITLE,AL_TRUE);
+	LoadOgg(theme_dir("bg_loop.ogg"),SND_BGM);
+	addSource(SND_BGM,AL_TRUE);
+#endif
+#ifdef DREAMCAST
+	powerup=snd_sfx_load(theme_dir("powerup.wav"));
+	powerdown=snd_sfx_load(theme_dir("powerdown.wav"));
+	collect=snd_sfx_load(theme_dir("collect.wav"));
+	gameover=snd_sfx_load(theme_dir("gameover.wav"));
+#endif
+#ifdef DIRECTX
+	if(sfx) {
+  USES_CONVERSION;
+  g_pSoundManager->Create( &powerup, A2W(theme_dir("powerup.wav")), 0, GUID_NULL );
+  g_pSoundManager->Create( &powerdown, A2W(theme_dir("powerdown.wav")), 0, GUID_NULL );
+  g_pSoundManager->Create( &collect, A2W(theme_dir("collect.wav")), 0, GUID_NULL );
+  g_pSoundManager->Create( &gameover, A2W(theme_dir("gameover.wav")), 0, GUID_NULL );
+	}
+#endif
+#if defined(DREAMCAST) || defined(SDL)
+	for(float x=0; x<=1; x+=0.01) {
+		if(sys_render_begin()) {
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			render_bg(loading_tex,1.0f-x);
+			sys_render_finish();
+		}		
+		delay(0.01);
+	}
+#endif
+  return 0;
+}
+
+void unload_theme() {
+  clear_texture_cache();
+#ifdef SDL
+	Mix_FreeChunk(powerup);
+	Mix_FreeChunk(powerdown);
+	Mix_FreeChunk(collect);
+	Mix_FreeChunk(gameover);
+	Mix_FreeMusic(bgm);
+	Mix_FreeMusic(title);
+#endif
+#ifdef DREAMCAST
+	snd_sfx_unload(powerup);
+	snd_sfx_unload(powerdown);
+	snd_sfx_unload(collect);
+	snd_sfx_unload(gameover);
+#endif
+#ifdef OPENAL
+	for(int x=0; x<6; x++) {
+		alSourceStop(sources[x]);
+	}
+	alDeleteBuffers(6,buffers);
+	alDeleteSources(6,sources);
+#endif
+#ifdef DIRECTX
+  delete powerup;
+  delete powerdown;
+  delete gameover;
+  delete collect;
+  powerup=NULL;
+  powerdown=NULL;
+  gameover=NULL;
+  collect=NULL;
+#endif
+}

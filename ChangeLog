@@ -1,0 +1,32 @@
+11/16/04 - Version 1.3
+* Themes
+* Options menu
+* Online scoring
+
+Dreamcast:
+* D-Pad can be used to player
+* BBA configuration menu
+* Speed matches Windows version
+
+Mac:
+* Speed matches Windows version
+* Configuration saved as ".dcsquares" in your home directory
+
+Windows:
+* Configuration saved in current user's "Application Data" directory
+* DirectInput code replaced by Windows API mouse
+
+10/8/04 - Version 1.1
+* Collecting powerups while a powerup is already active recharges your bar (NumberSix)
+* Player can no longer be moved off screen (NumberSix)
+* Combos are earned by not missing any score squares.  You will recieve additional points per square
+  based on your combo.  Combos start at 5.  (NumberSix)
+* New score encoding formula. New maximum score: approx. 100 million.  Also encodes platform.
+* Decreased sensativity on Dreamcast's analog stick (Smiles)
+* Increased maximum speed of game
+* Increased maximum size of player
+* Fix bug when minimizing  / restoring on Windows
+* Fix Dreamcast VMU LCD icon
+
+10/7/04 - Version 1.0
+* Initial public release of DCSquares

@@ -1,0 +1,48 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            CLASS = MyOpenGLView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {prefs = Preferences; updates = UpdateChecker; }; 
+            SUPERCLASS = NSOpenGLView; 
+        }, 
+        {
+            ACTIONS = {onMusicChange = id; onPrefs = id; onThemeChange = id; }; 
+            CLASS = Preferences; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                autoSubmit = NSButton; 
+                bgm = NSButton; 
+                password = NSTextField; 
+                prefsWin = NSWindow; 
+                sfx = NSButton; 
+                theme = NSPopUpButton; 
+                updates = NSPopUpButton; 
+                username = NSTextField; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            ACTIONS = {getScores = id; }; 
+            CLASS = ScoreController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {scoreList = id; scoreWindow = NSWindow; }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            ACTIONS = {CloseBtnClicked = id; WebBtnClicked = id; checkUpdate = id; init = id; }; 
+            CLASS = UpdateChecker; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {updateTxt = id; updateWin = id; webBtn = id; }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            ACTIONS = {onHowToPlay = id; onWebsite = id; }; 
+            CLASS = WindowController; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSObject; 
+        }
+    ); 
+    IBVersion = 1; 
+}
