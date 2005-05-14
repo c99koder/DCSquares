@@ -328,9 +328,9 @@ int load_theme(char *theme, int sfx) {
 	if(theme!=NULL) strcpy(dcs_theme,theme); else strcpy(dcs_theme,"default");
 
 	themeinfo.scale=2;
-	themeinfo.text_r=0;
-	themeinfo.text_g=0;
-	themeinfo.text_b=0;
+	themeinfo.text_r=100;
+	themeinfo.text_g=100;
+	themeinfo.text_b=100;
 	themeinfo.game_x=0;
 	themeinfo.game_y=0;
 	themeinfo.game_w=640;
@@ -398,6 +398,15 @@ int load_theme(char *theme, int sfx) {
 	  }
 	  if(!strcmp(buf,"squares_size")) {
 	    themeinfo.squares_size=atoi(val);
+	  }
+	  if(!strcmp(buf,"score_x")) {
+	    themeinfo.score_x=atoi(val);
+	  }
+	  if(!strcmp(buf,"score_y")) {
+	    themeinfo.score_y=atoi(val);
+	  }
+	  if(!strcmp(buf,"score_size")) {
+	    themeinfo.score_size=atoi(val);
 	  }
 		if(!strcmp(buf,"combo_caption")) {
 			p=themeinfo.combo_caption;
@@ -487,7 +496,11 @@ int load_theme(char *theme, int sfx) {
 	    themeinfo.game_h=atoi(val);
 	  }		
 	  if(p!=NULL) {
-	    strcpy(p,val);
+			if(val==NULL) {
+				p[0]='\0';
+			} else {
+				strcpy(p,val);
+			}
 	  }
 	}
 	fclose(f);
