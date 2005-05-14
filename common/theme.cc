@@ -327,7 +327,7 @@ int load_theme(char *theme, int sfx) {
 
 	if(theme!=NULL) strcpy(dcs_theme,theme); else strcpy(dcs_theme,"default");
 
-	themeinfo.scale=1.5;
+	themeinfo.scale=2;
 	themeinfo.text_r=0;
 	themeinfo.text_g=0;
 	themeinfo.text_b=0;
