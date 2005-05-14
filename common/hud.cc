@@ -213,13 +213,13 @@ void render_score(float gt) {
 	}
 	oldpt=gt;
 	sprintf(tmp,"%i",score);
-	center(580,86,tmp,20,1.0);
-	sprintf(tmp,"%i",squares);
-	center(580,150,tmp,20,1.0);
-    if(combo>4) {
-			sprintf(tmp,"%i",combo);
-			center(580,214,tmp,20,1.0);
-    }
+	center(themeinfo.score_x,themeinfo.score_y,tmp,themeinfo.score_size,1.0);
+	sprintf(tmp,"%i%s",squares,themeinfo.squares_caption);
+	center(themeinfo.squares_x,themeinfo.squares_y,tmp,themeinfo.squares_size,1.0);
+	if(combo>4) {
+		sprintf(tmp,"%i%s",combo,themeinfo.combo_caption);
+		center(themeinfo.combo_x,themeinfo.combo_y,tmp,themeinfo.combo_size,1.0);
+	}
 
 	if(gt-oldgt>tickval) {
 		score++;

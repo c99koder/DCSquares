@@ -38,6 +38,7 @@
 void MessageBox(char *title, char *msg);
 #endif
 
+#include "theme.h"
 #include "text.h"
 #ifndef DREAMCAST
 #include "ul.h"
@@ -54,20 +55,22 @@ float text_z=0.95f;
 void text_set_z(float z) { text_z=z; }
 #endif 
 
+extern themeinfo_t themeinfo;
+
 void center(int x, int y,char *text, int point, float fade) {
 	set_font_size(point);
-	draw_txt((x)-(txt_width(text)/2),y,text,0.03,0.58,1,fade,point);
+	draw_txt((x)-(txt_width(text)/2),y,text,(float)themeinfo.text_r / 255.0f,(float)themeinfo.text_g / 255.0f,(float)themeinfo.text_b / 255.0f,fade,point);
 }
 
 void center_shad_rgb(int y,char *text, int point, float fade, float r, float g, float b) {
 	set_font_size(point);
-	draw_txt((23+250)-(txt_width(text)/2)+1,y+1,text,0,0,0,fade*0.2,point);
-	draw_txt((23+250)-(txt_width(text)/2)-1,y-1,text,r,g,b,fade,point);
+	draw_txt((themeinfo.game_x+(themeinfo.game_w/2))-(txt_width(text)/2)+1,y+1,text,0,0,0,fade*0.2,point);
+	draw_txt((themeinfo.game_x+(themeinfo.game_w/2))-(txt_width(text)/2)-1,y-1,text,r,g,b,fade,point);
 }
 void center_shad(int y,char *text, int point, float fade) {
 	set_font_size(point);
-	draw_txt((23+250)-(txt_width(text)/2)+1,y+1,text,0,0,0,fade*0.2,point);
-	draw_txt((23+250)-(txt_width(text)/2)-1,y-1,text,0.13,0.68,1,fade,point);
+	draw_txt((themeinfo.game_x+(themeinfo.game_w/2))-(txt_width(text)/2)+1,y+1,text,0,0,0,fade*0.2,point);
+	draw_txt((themeinfo.game_x+(themeinfo.game_w/2))-(txt_width(text)/2)-1,y-1,text,(float)themeinfo.text_r / 255.0f,(float)themeinfo.text_g / 255.0f,(float)themeinfo.text_b / 255.0f,fade,point);
 }
 void draw_txt(int x, int y, char *text, float r, float g, float b, float a, int point) {
   if(r>1) r=1; if(r<0) r=0;

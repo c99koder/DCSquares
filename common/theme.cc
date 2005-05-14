@@ -327,6 +327,37 @@ int load_theme(char *theme, int sfx) {
 
 	if(theme!=NULL) strcpy(dcs_theme,theme); else strcpy(dcs_theme,"default");
 
+	themeinfo.scale=1.5;
+	themeinfo.text_r=0;
+	themeinfo.text_g=0;
+	themeinfo.text_b=0;
+	themeinfo.game_x=0;
+	themeinfo.game_y=0;
+	themeinfo.game_w=640;
+	themeinfo.game_h=480;
+	themeinfo.invinc[0]='\0';
+	themeinfo.plus1000[0]='\0';
+	themeinfo.slowdown[0]='\0';
+	themeinfo.minisquare[0]='\0';
+	themeinfo.score[0]='\0';
+	themeinfo.powershadow[0]='\0';
+	themeinfo.bigsquare[0]='\0';
+	themeinfo.minus1000[0]='\0';
+	themeinfo.speedup[0]='\0';
+	themeinfo.evil[0]='\0';
+	themeinfo.enemy[0]='\0';
+	themeinfo.score_x=320;
+	themeinfo.score_y=240;
+	themeinfo.score_size=26;
+	strcpy(themeinfo.squares_caption," squares");
+	themeinfo.squares_x=320;
+	themeinfo.squares_y=260;
+	themeinfo.squares_size=20;
+	strcpy(themeinfo.combo_caption," combo");
+	themeinfo.combo_x=320;
+	themeinfo.combo_y=280;
+	themeinfo.combo_size=16;
+	
   f=fopen(theme_dir("theme.ini"),"r");
 	if(!f) {
 		if(strcmp("default",theme)) {
@@ -348,14 +379,74 @@ int load_theme(char *theme, int sfx) {
 	  val=strtok(NULL,"\n");
 	  //printf("Val: %s\n",val);
 	  if(!strcmp(buf,"bg_auth")) {
-		p=themeinfo.bg_auth;
+			p=themeinfo.bg_auth;
 	  }
 	  if(!strcmp(buf,"sfx_auth")) {
-		p=themeinfo.sfx_auth;
+			p=themeinfo.sfx_auth;
 	  }
 		if(!strcmp(buf,"music_auth")) {
-		p=themeinfo.music_auth;
+			p=themeinfo.music_auth;
 		}
+		if(!strcmp(buf,"squares_caption")) {
+			p=themeinfo.squares_caption;
+		}
+	  if(!strcmp(buf,"squares_x")) {
+	    themeinfo.squares_x=atoi(val);
+	  }
+	  if(!strcmp(buf,"squares_y")) {
+	    themeinfo.squares_y=atoi(val);
+	  }
+	  if(!strcmp(buf,"squares_size")) {
+	    themeinfo.squares_size=atoi(val);
+	  }
+		if(!strcmp(buf,"combo_caption")) {
+			p=themeinfo.combo_caption;
+		}
+	  if(!strcmp(buf,"combo_x")) {
+	    themeinfo.combo_x=atoi(val);
+	  }
+	  if(!strcmp(buf,"combo_y")) {
+	    themeinfo.combo_y=atoi(val);
+	  }
+	  if(!strcmp(buf,"combo_size")) {
+	    themeinfo.combo_size=atoi(val);
+	  }
+		if(!strcmp(buf,"invinc")) {
+			p=themeinfo.invinc;
+		}
+		if(!strcmp(buf,"plus1000")) {
+			p=themeinfo.plus1000;
+		}
+		if(!strcmp(buf,"slowdown")) {
+			p=themeinfo.slowdown;
+		}
+		if(!strcmp(buf,"minisquare")) {
+			p=themeinfo.minisquare;
+		}
+		if(!strcmp(buf,"score")) {
+			p=themeinfo.score;
+		}
+		if(!strcmp(buf,"powershadow")) {
+			p=themeinfo.powershadow;
+		}
+		if(!strcmp(buf,"bigsquare")) {
+			p=themeinfo.bigsquare;
+		}
+		if(!strcmp(buf,"minus1000")) {
+			p=themeinfo.minus1000;
+		}
+		if(!strcmp(buf,"speedup")) {
+			p=themeinfo.speedup;
+		}
+		if(!strcmp(buf,"evil")) {
+			p=themeinfo.evil;
+		}
+		if(!strcmp(buf,"enemy")) {
+			p=themeinfo.enemy;
+		}
+	  if(!strcmp(buf,"scale")) {
+	    themeinfo.scale=atof(val);
+	  }
 	  if(!strcmp(buf,"good_r")) {
 	    themeinfo.good_r=atoi(val);
 	  }
@@ -364,6 +455,15 @@ int load_theme(char *theme, int sfx) {
 	  }
 	  if(!strcmp(buf,"good_b")) {
 	    themeinfo.good_b=atoi(val);
+	  }
+	  if(!strcmp(buf,"text_r")) {
+	    themeinfo.text_r=atoi(val);
+	  }
+	  if(!strcmp(buf,"text_g")) {
+	    themeinfo.text_g=atoi(val);
+	  }
+	  if(!strcmp(buf,"text_b")) {
+	    themeinfo.text_b=atoi(val);
 	  }
 	  if(!strcmp(buf,"evil_r")) {
 	    themeinfo.evil_r=atoi(val);
@@ -374,6 +474,18 @@ int load_theme(char *theme, int sfx) {
 	  if(!strcmp(buf,"evil_b")) {
 	    themeinfo.evil_b=atoi(val);
 	  }
+	  if(!strcmp(buf,"game_x")) {
+	    themeinfo.game_x=atoi(val);
+	  }
+	  if(!strcmp(buf,"game_y")) {
+	    themeinfo.game_y=atoi(val);
+	  }
+	  if(!strcmp(buf,"game_w")) {
+	    themeinfo.game_w=atoi(val);
+	  }		
+	  if(!strcmp(buf,"game_h")) {
+	    themeinfo.game_h=atoi(val);
+	  }		
 	  if(p!=NULL) {
 	    strcpy(p,val);
 	  }
@@ -392,17 +504,17 @@ int load_theme(char *theme, int sfx) {
 #endif	
 	load_texture(theme_dir("bg"),bg_tex,0);
 	load_texture(theme_dir("title"),title_tex,0);
-	load_texture(theme_dir("green_square"),score_tex,1);
-	load_texture(theme_dir("green_invincible"),invinc_tex,1);
-	load_texture(theme_dir("green_plus1000"),plus_tex,1);
-	load_texture(theme_dir("green_slowdown"),slow_tex,1);
-	load_texture(theme_dir("green_smallsquare"),mini_tex,1);
-	load_texture(theme_dir("red_square"),enemy_tex,1);
-	load_texture(theme_dir("red_bigsquare"),big_tex,1);
-	load_texture(theme_dir("red_evil"),evil_tex,1);
-	load_texture(theme_dir("red_minus1000"),minus_tex,1);
-	load_texture(theme_dir("red_speedup"),speed_tex,1);
-	load_texture(theme_dir("orb_shadow"),shadow_tex,1);
+	if(themeinfo.score[0]!='\0') load_texture(theme_dir(themeinfo.score),score_tex,1);
+	if(themeinfo.invinc[0]!='\0') load_texture(theme_dir(themeinfo.invinc),invinc_tex,1);
+	if(themeinfo.plus1000[0]!='\0') load_texture(theme_dir(themeinfo.plus1000),plus_tex,1);
+	if(themeinfo.slowdown[0]!='\0') load_texture(theme_dir(themeinfo.slowdown),slow_tex,1);
+	if(themeinfo.minisquare[0]!='\0') load_texture(theme_dir(themeinfo.minisquare),mini_tex,1);
+	if(themeinfo.enemy[0]!='\0') load_texture(theme_dir(themeinfo.enemy),enemy_tex,1);
+	if(themeinfo.bigsquare[0]!='\0') load_texture(theme_dir(themeinfo.bigsquare),big_tex,1);
+	if(themeinfo.evil[0]!='\0') load_texture(theme_dir(themeinfo.evil),evil_tex,1);
+	if(themeinfo.minus1000[0]!='\0') load_texture(theme_dir(themeinfo.minus1000),minus_tex,1);
+	if(themeinfo.speedup[0]!='\0') load_texture(theme_dir(themeinfo.speedup),speed_tex,1);
+	if(themeinfo.powershadow[0]!='\0') load_texture(theme_dir(themeinfo.powershadow),shadow_tex,1);
 #ifdef SDL
 	powerup=Mix_LoadWAV(theme_dir("powerup.wav"));
 	powerdown=Mix_LoadWAV(theme_dir("powerdown.wav"));

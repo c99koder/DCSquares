@@ -72,6 +72,17 @@ int dcs_sfx=1;
 extern float power;
 extern int score,score_tex,enemy_tex;
 
+extern int combo;
+extern int maxcombo;
+extern themeinfo_t themeinfo;
+extern int score_tex;
+extern int enemy_tex;
+extern int invinc_tex;
+extern int evil_tex;
+extern int shadow_tex;
+
+int square_count=0;
+
 float limit(float val, float min, float max) {
   if(val<min) {
 		return min;
@@ -90,52 +101,51 @@ void render_squares(float square_alpha) {
 	squarelist *c=squarehead;
 	float angle,x,y,dx,dy,l,i;
 	
-	glViewport(24,40,497,401);
-			glEnable(GL_BLEND);
-			glDisable(GL_DEPTH_TEST);
-			glDisable(GL_TEXTURE_2D);
-			
-			if(effect_type!=-1) {
-			//glLoadIdentity();
-			switch(effect_type) {
-				case INVINC:
-					glColor4f(0,1,0,0.4 * effect_timer);
-					glBegin(GL_QUADS);
-					glVertex3f(0,0,0.11);
-					glVertex3f(640,0,0.11);
-					glVertex3f(640,480,0.11);
-					glVertex3f(0,480,0.11);
-					glEnd();
-					break;
-				case SLOWMO:
-					glColor4f(0,0,0,0.4 * effect_timer);
-					glBegin(GL_QUADS);
-					glVertex3f(0,0,0.11);
-					glVertex3f(640,0,0.11);
-					glVertex3f(640,480,0.11);
-					glVertex3f(0,480,0.11);
-					glEnd();
-					break;
-				case EVIL:
-					glColor4f(1,0,0,0.4 * effect_timer);
-					glBegin(GL_QUADS);
-					glVertex3f(0,0,0.11);
-					glVertex3f(640,0,0.11);
-					glVertex3f(640,480,0.11);
-					glVertex3f(0,480,0.11);
-					glEnd();
-					break;
-				case SPEED:
-					glColor4f(1,1,1,0.4 * effect_timer);
-					glBegin(GL_QUADS);
-					glVertex3f(0,0,0.11);
-					glVertex3f(640,0,0.11);
-					glVertex3f(640,480,0.11);
-					glVertex3f(0,480,0.11);
-					glEnd();
-					break;
-				}
-			}	
+	glViewport(themeinfo.game_x,themeinfo.game_y,themeinfo.game_w,themeinfo.game_h);
+	glEnable(GL_BLEND);
+	glDisable(GL_DEPTH_TEST);
+	glDisable(GL_TEXTURE_2D);
+	
+	if(effect_type!=-1) {
+		switch(effect_type) {
+			case INVINC:
+				glColor4f(0,1,0,0.4 * effect_timer);
+				glBegin(GL_QUADS);
+				glVertex3f(0,0,0.11);
+				glVertex3f(640,0,0.11);
+				glVertex3f(640,480,0.11);
+				glVertex3f(0,480,0.11);
+				glEnd();
+				break;
+			case SLOWMO:
+				glColor4f(0,0,0,0.4 * effect_timer);
+				glBegin(GL_QUADS);
+				glVertex3f(0,0,0.11);
+				glVertex3f(640,0,0.11);
+				glVertex3f(640,480,0.11);
+				glVertex3f(0,480,0.11);
+				glEnd();
+				break;
+			case EVIL:
+				glColor4f(1,0,0,0.4 * effect_timer);
+				glBegin(GL_QUADS);
+				glVertex3f(0,0,0.11);
+				glVertex3f(640,0,0.11);
+				glVertex3f(640,480,0.11);
+				glVertex3f(0,480,0.11);
+				glEnd();
+				break;
+			case SPEED:
+				glColor4f(1,1,1,0.4 * effect_timer);
+				glBegin(GL_QUADS);
+				glVertex3f(0,0,0.11);
+				glVertex3f(640,0,0.11);
+				glVertex3f(640,480,0.11);
+				glVertex3f(0,480,0.11);
+				glEnd();
+				break;
+		}
+	}	
 	while(c!=NULL) {
 		glLoadIdentity();
 		for(i=(c->type>PLAYER_NET && (powerup_mode==SLOWMO || powerup_mode==SPEED))?4:0;i>=0;i--) {
@@ -152,7 +162,7 @@ void render_squares(float square_alpha) {
 		glTranslatef(c->x+dx,c->y+dy,0);
 		glRotatef(c->angle,0,0,1);
 		
-		glScalef(2.5,2.5,1.0);
+		glScalef(themeinfo.scale,themeinfo.scale,1.0);
 		if(c->tex==-1) {
 			if(c->type<POWERUP) {
 				glBegin(GL_QUADS);
@@ -202,17 +212,6 @@ void render_squares(float square_alpha) {
 	glViewport(0,0,640,480);
 	glLoadIdentity();
 }
-
-extern int combo;
-extern int maxcombo;
-extern themeinfo_t themeinfo;
-extern int score_tex;
-extern int enemy_tex;
-extern int invinc_tex;
-extern int evil_tex;
-extern int shadow_tex;
-
-int square_count=0;
 
 void update_squares(float s) {
 	squarelist *c=squarehead;
@@ -297,13 +296,13 @@ void update_squares(float s) {
 squarelist *check_collide(squarelist *player) {
 	squarelist *c=squarehead;
 	sgBox b1,b2;
-	b2.setMin(player->x-(player->size*2.5f),player->y-(player->size*2.5f),-1);
-	b2.setMax(player->x+(player->size*2.5f),player->y+(player->size*2.5f),1);
+	b2.setMin(player->x-(player->size*themeinfo.scale),player->y-(player->size*themeinfo.scale),-1);
+	b2.setMax(player->x+(player->size*themeinfo.scale),player->y+(player->size*themeinfo.scale),1);
 	
 	while(c!=NULL) {
 		if(c!=player) {
-			b1.setMin(c->x-(c->size*2.5f),c->y-(c->size*2.5),-1);
-			b1.setMax(c->x+(c->size*2.5f),c->y+(c->size*2.5),1);
+			b1.setMin(c->x-(c->size*themeinfo.scale),c->y-(c->size*themeinfo.scale),-1);
+			b1.setMax(c->x+(c->size*themeinfo.scale),c->y+(c->size*themeinfo.scale),1);
 			if(b1.intersects(&b2)) {
 				if(c!=NULL&&c->type>PLAYER_NET) {
 					c->deleted=1;
@@ -435,29 +434,29 @@ squarelist *create_square(int x, int y, int size, int type) {
 	c->shadow_tex=-1;
 	switch(type) {
 		case SCORE:
-		c->tex=score_tex;
-		c->r=(float)themeinfo.good_r/255.0f; c->g=(float)themeinfo.good_g/255.0f; c->b=(float)themeinfo.good_b/255.0f;
-		break;
+			if(themeinfo.score[0]!='\0') c->tex=score_tex;
+			c->r=(float)themeinfo.good_r/255.0f; c->g=(float)themeinfo.good_g/255.0f; c->b=(float)themeinfo.good_b/255.0f;
+			break;
 		case ENEMY:
-		c->tex=enemy_tex;
-		c->r=(float)themeinfo.evil_r/255.0f; c->g=(float)themeinfo.evil_g/255.0f; c->b=(float)themeinfo.evil_b/255.0f;
-		break;
+			if(themeinfo.enemy[0]!='\0') c->tex=enemy_tex;
+			c->r=(float)themeinfo.evil_r/255.0f; c->g=(float)themeinfo.evil_g/255.0f; c->b=(float)themeinfo.evil_b/255.0f;
+			break;
 		case POWERDOWN:
-		c->r=(float)themeinfo.evil_r/255.0f; c->g=(float)themeinfo.evil_g/255.0f; c->b=(float)themeinfo.evil_b/255.0f;
-		c->type=14+(genrand_int32()%4);
-		c->tex=evil_tex+(c->type-14);
-		c->shadow_tex=shadow_tex;
-		c->size=10;
-		break;
+			c->r=(float)themeinfo.evil_r/255.0f; c->g=(float)themeinfo.evil_g/255.0f; c->b=(float)themeinfo.evil_b/255.0f;
+			c->type=14+(genrand_int32()%4);
+			if(themeinfo.evil[0]!='\0') c->tex=evil_tex+(c->type-14);
+			if(themeinfo.powershadow[0]!='\0') c->shadow_tex=shadow_tex;
+			c->size=10;
+			break;
 		case POWERUP:
-		c->r=(float)themeinfo.good_r/255.0f; c->g=(float)themeinfo.good_g/255.0f; c->b=(float)themeinfo.good_b/255.0f;
-		c->type=10+(genrand_int32()%4);
-		c->tex=invinc_tex+(c->type-10);
-		c->shadow_tex=shadow_tex;
-		c->size=10;
+			c->r=(float)themeinfo.good_r/255.0f; c->g=(float)themeinfo.good_g/255.0f; c->b=(float)themeinfo.good_b/255.0f;
+			c->type=10+(genrand_int32()%4);
+			if(themeinfo.invinc[0]!='\0') c->tex=invinc_tex+(c->type-10);
+			if(themeinfo.powershadow[0]!='\0') c->shadow_tex=shadow_tex;
+			c->size=10;
 		default:
-		c->r=(float)themeinfo.good_r/255.0f; c->g=(float)themeinfo.good_g/255.0f; c->b=(float)themeinfo.good_b/255.0f;
-		break;
+			c->r=(float)themeinfo.good_r/255.0f; c->g=(float)themeinfo.good_g/255.0f; c->b=(float)themeinfo.good_b/255.0f;
+			break;
 	}
 	//c->tex=-1;
 	c->next=NULL;

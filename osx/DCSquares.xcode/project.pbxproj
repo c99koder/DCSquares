@@ -139,6 +139,16 @@
 				220695810823590E00D46540,
 				220695820823590E00D46540,
 				220695830823590E00D46540,
+				2211E45508364ABF0059F43E,
+				2211E45608364AC00059F43E,
+				2211E45708364AC00059F43E,
+				2211E45808364AC00059F43E,
+				2211E45908364AC00059F43E,
+				2211E45A08364AC00059F43E,
+				2211E45B08364AC00059F43E,
+				2211E45C08364AC00059F43E,
+				2211E45D08364AC00059F43E,
+				2211E45E08364AC00059F43E,
 			);
 			isa = PBXHeadersBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -349,6 +359,156 @@
 			path = DCSquares.app;
 			refType = 3;
 			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2211E44B08364ABF0059F43E = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = font.h;
+			path = ../include/font.h;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		2211E44C08364ABF0059F43E = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = game.h;
+			path = ../include/game.h;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		2211E44D08364ABF0059F43E = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = hud.h;
+			path = ../include/hud.h;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		2211E44E08364ABF0059F43E = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = input.h;
+			path = ../include/input.h;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		2211E44F08364ABF0059F43E = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = rand.h;
+			path = ../include/rand.h;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		2211E45008364ABF0059F43E = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = score.h;
+			path = ../include/score.h;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		2211E45108364ABF0059F43E = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = squares.h;
+			path = ../include/squares.h;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		2211E45208364ABF0059F43E = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = text.h;
+			path = ../include/text.h;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		2211E45308364ABF0059F43E = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = texture.h;
+			path = ../include/texture.h;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		2211E45408364ABF0059F43E = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = theme.h;
+			path = ../include/theme.h;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		2211E45508364ABF0059F43E = {
+			fileRef = 2211E44B08364ABF0059F43E;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		2211E45608364AC00059F43E = {
+			fileRef = 2211E44C08364ABF0059F43E;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		2211E45708364AC00059F43E = {
+			fileRef = 2211E44D08364ABF0059F43E;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		2211E45808364AC00059F43E = {
+			fileRef = 2211E44E08364ABF0059F43E;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		2211E45908364AC00059F43E = {
+			fileRef = 2211E44F08364ABF0059F43E;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		2211E45A08364AC00059F43E = {
+			fileRef = 2211E45008364ABF0059F43E;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		2211E45B08364AC00059F43E = {
+			fileRef = 2211E45108364ABF0059F43E;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		2211E45C08364AC00059F43E = {
+			fileRef = 2211E45208364ABF0059F43E;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		2211E45D08364AC00059F43E = {
+			fileRef = 2211E45308364ABF0059F43E;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		2211E45E08364AC00059F43E = {
+			fileRef = 2211E45408364ABF0059F43E;
+			isa = PBXBuildFile;
+			settings = {
+			};
 		};
 		2245F4720829608F0008B01F = {
 			fileEncoding = 30;
@@ -574,6 +734,16 @@
 		};
 		29B97315FDCFA39411CA2CEA = {
 			children = (
+				2211E44B08364ABF0059F43E,
+				2211E44C08364ABF0059F43E,
+				2211E44D08364ABF0059F43E,
+				2211E44E08364ABF0059F43E,
+				2211E44F08364ABF0059F43E,
+				2211E45008364ABF0059F43E,
+				2211E45108364ABF0059F43E,
+				2211E45208364ABF0059F43E,
+				2211E45308364ABF0059F43E,
+				2211E45408364ABF0059F43E,
 				2245F4720829608F0008B01F,
 				2245F4730829608F0008B01F,
 				2245F4740829608F0008B01F,

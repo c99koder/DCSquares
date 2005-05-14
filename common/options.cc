@@ -40,7 +40,9 @@
 #include <stdlib.h>
 
 #include "input.h"
+#if defined(DREAMCAST) || defined(SDL)
 #include "sys.h"
+#endif
 #include "texture.h"
 #include "options.h"
 #include "text.h"
@@ -175,7 +177,7 @@ void load_options() {
 	int oops=0;
 
 	strcpy(gameoptions.theme,"goat");
-  gameoptions.bgm=0;
+  gameoptions.bgm=1;
   gameoptions.username[0]='\0';
   gameoptions.password[0]='\0';
 #ifdef DREAMCAST
@@ -219,7 +221,7 @@ void load_options() {
 		}
 		if(!strcmp(buf,"music")) {
 			p=NULL;
-			//gameoptions.bgm=atoi(val);
+			gameoptions.bgm=atoi(val);
 		}
 	  if(!strcmp(buf,"theme")) {
 			p=gameoptions.theme;
