@@ -80,13 +80,6 @@
 		vrLen = 793;
 		vrLoc = 0;
 	};
-	2211E48E083650C40059F43E = {
-		fileReference = 2245F47B0829608F0008B01F;
-		functionName = "load_theme()";
-		isa = PBXFileBreakpoint;
-		lineNumber = 507;
-		state = 1;
-	};
 	2211E4AC0836516B0059F43E = {
 		fRef = 4F0719520766B1A200827E7D;
 		isa = PBXTextBookmark;
@@ -182,7 +175,7 @@
 		isa = PBXTextBookmark;
 		name = "theme.cc: 350";
 		rLen = 0;
-		rLoc = 7942;
+		rLoc = 7948;
 		rType = 0;
 		vrLen = 1083;
 		vrLoc = 7456;
@@ -261,9 +254,9 @@
 	};
 	2245F47B0829608F0008B01F = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {749, 6566}}";
-			sepNavSelRange = "{7431, 0}";
-			sepNavVisRect = "{{0, 4578}, {749, 145}}";
+			sepNavIntBoundsRect = "{{0, 0}, {748, 8750}}";
+			sepNavSelRange = "{8676, 0}";
+			sepNavVisRect = "{{0, 4924}, {748, 558}}";
 			sepNavWindowFrame = "{{15, 183}, {750, 558}}";
 		};
 	};
@@ -406,6 +399,286 @@
 		rType = 0;
 		vrLen = 275;
 		vrLoc = 7336;
+	};
+	22ADEF580836658500403AE5 = {
+		fRef = 2245F47B0829608F0008B01F;
+		isa = PBXTextBookmark;
+		name = "theme.cc: 330";
+		rLen = 0;
+		rLoc = 7431;
+		rType = 0;
+		vrLen = 275;
+		vrLoc = 7336;
+	};
+	22ADEF5B0836659500403AE5 = {
+		fRef = 2245F47B0829608F0008B01F;
+		isa = PBXTextBookmark;
+		name = "theme.cc: 334";
+		rLen = 0;
+		rLoc = 7521;
+		rType = 0;
+		vrLen = 992;
+		vrLoc = 7179;
+	};
+	22ADEF5C0836659500403AE5 = {
+		fRef = 2245F47B0829608F0008B01F;
+		isa = PBXTextBookmark;
+		name = "theme.cc: 334";
+		rLen = 0;
+		rLoc = 7521;
+		rType = 0;
+		vrLen = 949;
+		vrLoc = 7127;
+	};
+	22ADEF5D0836659500403AE5 = {
+		fRef = 2245F47B0829608F0008B01F;
+		isa = PBXTextBookmark;
+		name = "theme.cc: 334";
+		rLen = 0;
+		rLoc = 7521;
+		rType = 0;
+		vrLen = 236;
+		vrLoc = 7308;
+	};
+	22ADEF5E083665C400403AE5 = {
+		fRef = 2245F47B0829608F0008B01F;
+		isa = PBXTextBookmark;
+		name = "theme.cc: 334";
+		rLen = 0;
+		rLoc = 7521;
+		rType = 0;
+		vrLen = 236;
+		vrLoc = 7308;
+	};
+	22ADEF5F083665C400403AE5 = {
+		fRef = 2245F47B0829608F0008B01F;
+		isa = PBXTextBookmark;
+		name = "theme.cc: 334";
+		rLen = 0;
+		rLoc = 7521;
+		rType = 0;
+		vrLen = 236;
+		vrLoc = 7308;
+	};
+	22ADEF62083665DB00403AE5 = {
+		fRef = 2245F47B0829608F0008B01F;
+		isa = PBXTextBookmark;
+		name = "theme.cc: 380";
+		rLen = 0;
+		rLoc = 8676;
+		rType = 0;
+		vrLen = 937;
+		vrLoc = 8024;
+	};
+	22ADEF63083665DC00403AE5 = {
+		fRef = 2245F47B0829608F0008B01F;
+		isa = PBXTextBookmark;
+		name = "theme.cc: 380";
+		rLen = 0;
+		rLoc = 8676;
+		rType = 0;
+		vrLen = 966;
+		vrLoc = 8221;
+	};
+	22ADEF64083665DC00403AE5 = {
+		fRef = 2245F47B0829608F0008B01F;
+		isa = PBXTextBookmark;
+		name = "theme.cc: 380";
+		rLen = 0;
+		rLoc = 8676;
+		rType = 0;
+		vrLen = 280;
+		vrLoc = 8024;
+	};
+	22ADEF65083665EB00403AE5 = {
+		fRef = 2245F47B0829608F0008B01F;
+		isa = PBXTextBookmark;
+		name = "theme.cc: 380";
+		rLen = 0;
+		rLoc = 8676;
+		rType = 0;
+		vrLen = 280;
+		vrLoc = 8024;
+	};
+	22ADEF680836660E00403AE5 = {
+		fRef = 2245F47B0829608F0008B01F;
+		isa = PBXTextBookmark;
+		name = "theme.cc: 494";
+		rLen = 0;
+		rLoc = 11418;
+		rType = 0;
+		vrLen = 889;
+		vrLoc = 10479;
+	};
+	22ADEF690836660F00403AE5 = {
+		fRef = 2245F47B0829608F0008B01F;
+		isa = PBXTextBookmark;
+		name = "theme.cc: 494";
+		rLen = 0;
+		rLoc = 11418;
+		rType = 0;
+		vrLen = 1185;
+		vrLoc = 10760;
+	};
+	22ADEF6A0836660F00403AE5 = {
+		fRef = 2245F47B0829608F0008B01F;
+		isa = PBXTextBookmark;
+		name = "theme.cc: 494";
+		rLen = 0;
+		rLoc = 11418;
+		rType = 0;
+		vrLen = 243;
+		vrLoc = 10479;
+	};
+	22ADEF6B0836663E00403AE5 = {
+		fRef = 2245F47B0829608F0008B01F;
+		isa = PBXTextBookmark;
+		name = "theme.cc: 494";
+		rLen = 0;
+		rLoc = 11418;
+		rType = 0;
+		vrLen = 243;
+		vrLoc = 10479;
+	};
+	22ADEF6E0836667100403AE5 = {
+		fRef = 2245F47B0829608F0008B01F;
+		isa = PBXTextBookmark;
+		name = "theme.cc: 409";
+		rLen = 0;
+		rLoc = 9393;
+		rType = 0;
+		vrLen = 978;
+		vrLoc = 8753;
+	};
+	22ADEF6F0836667100403AE5 = {
+		fRef = 2245F47B0829608F0008B01F;
+		isa = PBXTextBookmark;
+		name = "theme.cc: 409";
+		rLen = 0;
+		rLoc = 9393;
+		rType = 0;
+		vrLen = 969;
+		vrLoc = 8882;
+	};
+	22ADEF700836667100403AE5 = {
+		fRef = 2245F47B0829608F0008B01F;
+		isa = PBXTextBookmark;
+		name = "theme.cc: 409";
+		rLen = 0;
+		rLoc = 9393;
+		rType = 0;
+		vrLen = 253;
+		vrLoc = 9478;
+	};
+	22ADEF710836669E00403AE5 = {
+		fRef = 2245F47B0829608F0008B01F;
+		isa = PBXTextBookmark;
+		name = "theme.cc: 409";
+		rLen = 0;
+		rLoc = 9393;
+		rType = 0;
+		vrLen = 253;
+		vrLoc = 9478;
+	};
+	22ADEF74083666C300403AE5 = {
+		fRef = 2245F47B0829608F0008B01F;
+		isa = PBXTextBookmark;
+		name = "theme.cc: 333";
+		rLen = 0;
+		rLoc = 7500;
+		rType = 0;
+		vrLen = 1042;
+		vrLoc = 7323;
+	};
+	22ADEF75083666C400403AE5 = {
+		fRef = 2245F47B0829608F0008B01F;
+		isa = PBXTextBookmark;
+		name = "theme.cc: 333";
+		rLen = 0;
+		rLoc = 7500;
+		rType = 0;
+		vrLen = 941;
+		vrLoc = 7109;
+	};
+	22ADEF76083666C400403AE5 = {
+		fRef = 2245F47B0829608F0008B01F;
+		isa = PBXTextBookmark;
+		name = "theme.cc: 333";
+		rLen = 0;
+		rLoc = 7500;
+		rType = 0;
+		vrLen = 261;
+		vrLoc = 8104;
+	};
+	22ADEF77083666CD00403AE5 = {
+		fRef = 2245F47B0829608F0008B01F;
+		isa = PBXTextBookmark;
+		name = "theme.cc: 333";
+		rLen = 0;
+		rLoc = 7500;
+		rType = 0;
+		vrLen = 261;
+		vrLoc = 8104;
+	};
+	22ADEF7A083666DA00403AE5 = {
+		fRef = 2245F47B0829608F0008B01F;
+		isa = PBXTextBookmark;
+		name = "theme.cc: 333";
+		rLen = 0;
+		rLoc = 7500;
+		rType = 0;
+		vrLen = 1012;
+		vrLoc = 7292;
+	};
+	22ADEF7B083666DB00403AE5 = {
+		fRef = 2245F47B0829608F0008B01F;
+		isa = PBXTextBookmark;
+		name = "theme.cc: 333";
+		rLen = 0;
+		rLoc = 7500;
+		rType = 0;
+		vrLen = 941;
+		vrLoc = 7109;
+	};
+	22ADEF7C083666DB00403AE5 = {
+		fRef = 2245F47B0829608F0008B01F;
+		isa = PBXTextBookmark;
+		name = "theme.cc: 333";
+		rLen = 0;
+		rLoc = 7500;
+		rType = 0;
+		vrLen = 280;
+		vrLoc = 8024;
+	};
+	22ADEF7D0836676900403AE5 = {
+		fRef = 2245F47B0829608F0008B01F;
+		isa = PBXTextBookmark;
+		name = "theme.cc: 333";
+		rLen = 0;
+		rLoc = 7500;
+		rType = 0;
+		vrLen = 280;
+		vrLoc = 8024;
+	};
+	22ADEF7E0836677000403AE5 = {
+		fRef = 2245F47B0829608F0008B01F;
+		isa = PBXTextBookmark;
+		name = "theme.cc: 333";
+		rLen = 0;
+		rLoc = 7500;
+		rType = 0;
+		vrLen = 971;
+		vrLoc = 7252;
+	};
+	22ADEF7F0836677000403AE5 = {
+		fRef = 2245F47B0829608F0008B01F;
+		isa = PBXTextBookmark;
+		name = "theme.cc: 333";
+		rLen = 0;
+		rLoc = 7500;
+		rType = 0;
+		vrLen = 280;
+		vrLoc = 8024;
 	};
 	22FA9B1E0829750B00C9F26E = {
 		activeArgIndex = 2147483647;
@@ -948,7 +1221,6 @@
 			220695730823590E00D46540,
 		);
 		breakpoints = (
-			2211E48E083650C40059F43E,
 		);
 		codeSenseManager = 22FA9B750829752F00C9F26E;
 		executables = (
@@ -1075,6 +1347,34 @@
 			22ADEF55083664A800403AE5 = 22ADEF55083664A800403AE5;
 			22ADEF56083664A800403AE5 = 22ADEF56083664A800403AE5;
 			22ADEF57083664A800403AE5 = 22ADEF57083664A800403AE5;
+			22ADEF580836658500403AE5 = 22ADEF580836658500403AE5;
+			22ADEF5B0836659500403AE5 = 22ADEF5B0836659500403AE5;
+			22ADEF5C0836659500403AE5 = 22ADEF5C0836659500403AE5;
+			22ADEF5D0836659500403AE5 = 22ADEF5D0836659500403AE5;
+			22ADEF5E083665C400403AE5 = 22ADEF5E083665C400403AE5;
+			22ADEF5F083665C400403AE5 = 22ADEF5F083665C400403AE5;
+			22ADEF62083665DB00403AE5 = 22ADEF62083665DB00403AE5;
+			22ADEF63083665DC00403AE5 = 22ADEF63083665DC00403AE5;
+			22ADEF64083665DC00403AE5 = 22ADEF64083665DC00403AE5;
+			22ADEF65083665EB00403AE5 = 22ADEF65083665EB00403AE5;
+			22ADEF680836660E00403AE5 = 22ADEF680836660E00403AE5;
+			22ADEF690836660F00403AE5 = 22ADEF690836660F00403AE5;
+			22ADEF6A0836660F00403AE5 = 22ADEF6A0836660F00403AE5;
+			22ADEF6B0836663E00403AE5 = 22ADEF6B0836663E00403AE5;
+			22ADEF6E0836667100403AE5 = 22ADEF6E0836667100403AE5;
+			22ADEF6F0836667100403AE5 = 22ADEF6F0836667100403AE5;
+			22ADEF700836667100403AE5 = 22ADEF700836667100403AE5;
+			22ADEF710836669E00403AE5 = 22ADEF710836669E00403AE5;
+			22ADEF74083666C300403AE5 = 22ADEF74083666C300403AE5;
+			22ADEF75083666C400403AE5 = 22ADEF75083666C400403AE5;
+			22ADEF76083666C400403AE5 = 22ADEF76083666C400403AE5;
+			22ADEF77083666CD00403AE5 = 22ADEF77083666CD00403AE5;
+			22ADEF7A083666DA00403AE5 = 22ADEF7A083666DA00403AE5;
+			22ADEF7B083666DB00403AE5 = 22ADEF7B083666DB00403AE5;
+			22ADEF7C083666DB00403AE5 = 22ADEF7C083666DB00403AE5;
+			22ADEF7D0836676900403AE5 = 22ADEF7D0836676900403AE5;
+			22ADEF7E0836677000403AE5 = 22ADEF7E0836677000403AE5;
+			22ADEF7F0836677000403AE5 = 22ADEF7F0836677000403AE5;
 		};
 		sourceControlManager = 22FA9B740829752F00C9F26E;
 		userBuildSettings = {
