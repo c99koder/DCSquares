@@ -20,6 +20,7 @@
 #include "hud.h"
 #include "texture.h"
 #include "score.h"
+#include "level.h"
 
 #ifdef OPENAL
 extern ALuint buffers[6];
@@ -41,7 +42,11 @@ extern float power;
 extern int effect_type;
 extern float speedval;
 extern int powerup_mode;
+extern int gametime;
 extern char highcode[20];
+extern int bg_tex;
+extern int title_tex;
+extern int menu_tex;
 NSWindow *gamewindow;
 float gt=0;
 
@@ -116,39 +121,45 @@ float gt=0;
 	if(fade>0) {
 		fade -= [timer timeInterval];
 		if(fade<=0) {
-			if(state==0) {
-				state=1;
-				destroy_list();
-#ifdef OPENAL
-		alSourceStop( sources[SND_TITLE] );
-#endif
-				player=create_square(mousex,mousey,6,PLAYER1);
-				square_alpha=1.0;
-			} else if(state==1) {
-				state=0;
-				if([prefs getAutoSubmit] && strlen([prefs getUsername])>0 && strlen([prefs getPassword])>0) {
-					[ScoresService submitScore:[NSString stringWithCString:[prefs getUsername]] 
-					in_password:[NSString stringWithCString:[prefs getPassword]] 
-					in_score:score in_combo:maxcombo in_time:gt in_platform:@"Mac"];
-				}
-				/*if(score>highscore) {
-					x=0;
-					highscore=score;
-					encode(score,tmp);
-					do {
-						seed=rand()%26;
-						encrypt(seed,(unsigned char *)tmp, (unsigned char *)tmp2);
-						x++;
-						if(x>20) {
-							strcpy(tmp2,"_INVALID_CODE");
+			if(state==0 || state==2) {
+				if(state==0) {
+					current_level=level_list_head;
+					state=1;
+				} else {
+					if(check_win(gt) == 1) {
+						state=1;
+						if(current_level->next!=NULL) {
+							current_level=current_level->next;
+						} else {
+							state=0;
 						}
-					} while(invalid_code(tmp2));
-					sprintf(highcode,"%c%s",(unsigned char)seed+'A',tmp2);
-
-					if([prefs getAutoSubmit] && strlen([prefs getUsername])>0 && strlen([prefs getPassword])>0) {
-						submit_code(highcode,[prefs getUsername],[prefs getPassword]);
+					} else {
+						state=0;
 					}
-				}*/
+					if(state==0) {
+						[NSCursor unhide];
+					}
+				}
+				if(state!=0) {
+					destroy_list();
+	#ifdef OPENAL
+					alSourceStop( sources[SND_TITLE] );
+	#endif
+					player=create_square(mousex,mousey,6,PLAYER1);
+					square_alpha=1.0;
+				}
+			} else if(state==1) {
+				gametime=gt;
+				if(check_win(gt) == 1) {
+					state=2;
+				} else {
+					state=2;
+					if([prefs getAutoSubmit] && strlen([prefs getUsername])>0 && strlen([prefs getPassword])>0) {
+						[ScoresService submitScore:[NSString stringWithCString:[prefs getUsername]] 
+						in_password:[NSString stringWithCString:[prefs getPassword]] 
+						in_score:score in_combo:maxcombo in_time:gt in_platform:@"Mac"];
+					}
+				}
 				destroy_list();
 				player=NULL;
 #ifdef OPENAL
@@ -157,17 +168,19 @@ float gt=0;
 				[NSCursor unhide];
 				square_alpha=0.4;
 			}
-			tickval=1.0f; //1.0
-			speedval=1.2f; //1.2
-			scoreval=100; //100
-			score=0;
-			combo=0;
-			squares=0;
-			maxcombo=0;
+			if(state != 2) {
+				tickval=current_level->tickval; //1.0
+				speedval=current_level->speedval; //1.2
+				scoreval=current_level->scoreval; //100
+				score=0;
+				combo=0;
+				squares=0;
+				maxcombo=0;
+				gt=0;
+			}
 			power=0;
 			powerup_mode=-1;
 			effect_type=-1;
-			gt=0;
 		}
 	}
 
@@ -175,8 +188,10 @@ float gt=0;
 	update_squares([timer timeInterval]);
 #ifdef OPENAL
 	if([prefs getBgm]) {
-		alGetSourcei(sources[state], AL_SOURCE_STATE, &play);
-		if(play!=AL_PLAYING) alSourcePlay( sources[state] );
+		alGetSourcei(sources[(state==1)?1:0], AL_SOURCE_STATE, &play);
+		if(play!=AL_PLAYING) {
+			alSourcePlay( sources[(state==1)?1:0] );
+		}
 	}
 #endif
 	if(state==0) {
@@ -223,6 +238,14 @@ float gt=0;
 					break;
 			}
 		}
+		switch(check_win(gt)) {
+			case 1: //win
+				fade=1.0;
+				break;
+			case -1: //lose
+				fade=1.0;
+				break;
+		}
 	}
 	[self setNeedsDisplay:YES];
 }
@@ -243,6 +266,7 @@ float gt=0;
 	glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 	texture_init();
 	text_init("Helvetica-Bold.txf",20);
+	levels_init();
 #ifdef OPENAL
 	dev = alcOpenDevice((ALubyte *)getenv("OPENAL_DEVICE"));  // getenv()==NULL is okay.
   if (dev != NULL) {
@@ -308,9 +332,12 @@ float gt=0;
 
 - (void) mouseDown: (NSEvent *) theEvent
 {
-	if(state==0) {
+	if(state==0 || state==2) {
 		fade=0.5;
-
+		if(current_level==NULL) {
+			//current_level=free_play;
+			current_level=level_list_head;
+		}
 		[NSCursor hide];
 	}
 }
@@ -319,20 +346,20 @@ float gt=0;
 	Override the view's drawRect: to draw our GL content.
 */	 
 
-extern int bg_tex;
-extern int title_tex;
-
 - (void) drawRect: (NSRect) rect
 {
-		gt+=[timer timeInterval];
+		if(state!=2) gt+=[timer timeInterval];
     glClearColor( 0, 0, 0, 0 ) ;
     glClear( GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT ) ;
-		if(state==1) render_bg(bg_tex,1); else render_bg(title_tex,1);
+		if(state==0) render_bg(title_tex,1);
+		else if(state==1) render_bg(bg_tex,1); 
+		else render_bg(menu_tex,1);
 		glEnable(GL_BLEND);
 		glDisable(GL_DEPTH_TEST);
     render_squares((gt<1?(gt*square_alpha):fade<=0?square_alpha:fade*square_alpha));
 		if(state==0) render_title(gt);
 		if(state==1) render_score(gt);
+		if(state==2) render_win(gt);
 		if(gt<0.5) {
 #ifndef DREAMCAST
 			glEnable(GL_BLEND);

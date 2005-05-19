@@ -149,6 +149,7 @@
 				2211E45C08364AC00059F43E,
 				2211E45D08364AC00059F43E,
 				2211E45E08364AC00059F43E,
+				226EBC2B083BD3A6005D5ECC,
 			);
 			isa = PBXHeadersBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -246,6 +247,7 @@
 				2245F4830829608F0008B01F,
 				2245F4840829608F0008B01F,
 				2245F4850829608F0008B01F,
+				226EBC2C083BD3A6005D5ECC,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -692,6 +694,36 @@
 			settings = {
 			};
 		};
+		226EBC29083BD3A6005D5ECC = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = level.h;
+			path = ../common/level.h;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		226EBC2A083BD3A6005D5ECC = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = level.cc;
+			path = ../common/level.cc;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		226EBC2B083BD3A6005D5ECC = {
+			fileRef = 226EBC29083BD3A6005D5ECC;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		226EBC2C083BD3A6005D5ECC = {
+			fileRef = 226EBC2A083BD3A6005D5ECC;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 //220
 //221
 //222
@@ -738,6 +770,7 @@
 				2211E44C08364ABF0059F43E,
 				2211E44D08364ABF0059F43E,
 				2211E44E08364ABF0059F43E,
+				226EBC29083BD3A6005D5ECC,
 				2211E44F08364ABF0059F43E,
 				2211E45008364ABF0059F43E,
 				2211E45108364ABF0059F43E,
@@ -747,6 +780,7 @@
 				2245F4720829608F0008B01F,
 				2245F4730829608F0008B01F,
 				2245F4740829608F0008B01F,
+				226EBC2A083BD3A6005D5ECC,
 				2245F4750829608F0008B01F,
 				2245F4770829608F0008B01F,
 				2245F4780829608F0008B01F,
