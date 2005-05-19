@@ -43,6 +43,7 @@ extern CSound *gameover;
 #include "theme.h"
 #include "hud.h"
 #include "rand.h"
+#include "level.h"
 #ifdef DREAMCAST
 #include <dcplib/sg.h>
 #else
@@ -460,6 +461,18 @@ squarelist *create_square(int x, int y, int size, int type) {
 	}
 	//c->tex=-1;
 	c->next=NULL;
+	
+	if((c->type-10 == INVINC && current_level->power_evil==0) ||
+		 (c->type-10 == SLOWMO && current_level->power_speed==0) ||
+		 (c->type-10 == MINISQUARE && current_level->power_size==0) ||
+		 (c->type-10 == PLUS1000 && current_level->power_score==0) ||
+		 (c->type-10 == EVIL && current_level->power_evil==0) ||
+		 (c->type-10 == SPEED && current_level->power_speed==0) ||
+		 (c->type-10 == MINUS1000 && current_level->power_score==0) ||
+		 (c->type-10 == BIGSQUARE && current_level->power_size==0)) {
+		delete c;
+		return NULL;
+	}
 	
 	if(squarehead==NULL) {
 		squarehead=c; 

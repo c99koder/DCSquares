@@ -41,6 +41,7 @@
 #endif
 
 int loading_tex=15;
+int menu_tex=1;
 int title_tex=2;
 int bg_tex=3;
 int score_tex=4;
@@ -357,6 +358,9 @@ int load_theme(char *theme, int sfx) {
 	themeinfo.combo_x=320;
 	themeinfo.combo_y=280;
 	themeinfo.combo_size=16;
+	themeinfo.time_x=320;
+	themeinfo.time_y=300;
+	themeinfo.time_size=16;
 	
   f=fopen(theme_dir("theme.ini"),"r");
 	if(!f) {
@@ -419,6 +423,15 @@ int load_theme(char *theme, int sfx) {
 	  }
 	  if(!strcmp(buf,"combo_size")) {
 	    themeinfo.combo_size=atoi(val);
+	  }
+	  if(!strcmp(buf,"time_x")) {
+	    themeinfo.time_x=atoi(val);
+	  }
+	  if(!strcmp(buf,"time_y")) {
+	    themeinfo.time_y=atoi(val);
+	  }
+	  if(!strcmp(buf,"time_size")) {
+	    themeinfo.time_size=atoi(val);
 	  }
 		if(!strcmp(buf,"invinc")) {
 			p=themeinfo.invinc;
@@ -515,6 +528,7 @@ int load_theme(char *theme, int sfx) {
 		delay(0.01);
 	}
 #endif	
+	load_texture(theme_dir("menu"),menu_tex,0);
 	load_texture(theme_dir("bg"),bg_tex,0);
 	load_texture(theme_dir("title"),title_tex,0);
 	if(themeinfo.score[0]!='\0') load_texture(theme_dir(themeinfo.score),score_tex,1);

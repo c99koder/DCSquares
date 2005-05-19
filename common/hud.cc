@@ -19,11 +19,13 @@
 #endif
 #include <stdio.h>
 #include <math.h>
+#include <string.h>
 #include "text.h"
 #include "theme.h"
 #include "squares.h"
 #include "game.h"
 #include "score.h"
+#include "level.h"
 #if defined(SDL) || defined(DREAMCAST)
 #include "sys.h"
 #include "input.h"
@@ -37,6 +39,7 @@ int score=0;
 int squares=0;
 int scoreval=20;
 int maxcombo=0;
+int gametime=0;
 float tickval=0.5;
 float power=0;
 float speedval=1.0;
@@ -62,6 +65,17 @@ extern sfxhnd_t gameover;
 float effect_timer=0;
 float effect_mode=0;
 int effect_type=-1;
+
+char *format_time(int seconds) {
+	static char buf[100];
+	int m,s;
+	
+	m=seconds/60;
+	s=seconds%60;
+	
+	sprintf(buf,"%02i:%02i",m,s);
+	return buf;
+}
 
 void give_points(squarelist *player) {
 #ifdef DREAMCAST
@@ -171,6 +185,7 @@ void render_score(float gt) {
 	static float oldet=gt;
 	
 	char tmp[100];
+	char tmp2[100];
 	
 	if(gt<oldgt) oldgt=gt;
 	if(gt<oldpt) oldpt=gt;
@@ -212,15 +227,46 @@ void render_score(float gt) {
 		effect_type=-1;
 	}
 	oldpt=gt;
+	
+	if(gt <= 3) {
+		if(current_level->win_mode & MODE_SQUARES) {
+			sprintf(tmp,"Collect %i squares",current_level->squares);
+			center_shad(themeinfo.game_y+60,tmp,24,(gt<2)?limit(gt,0,1):(3-gt));
+		}
+		if(current_level->win_mode & MODE_SCORE) {
+			sprintf(tmp,"Earn %i points",current_level->score);
+			center_shad(themeinfo.game_y+60,tmp,24,(gt<2)?limit(gt,0,1):(3-gt));
+		}
+		if(current_level->win_mode & MODE_TIME) {
+			sprintf(tmp,"Survive for %i seconds",current_level->time);
+			center_shad(themeinfo.game_y+60,tmp,24,(gt<2)?limit(gt,0,1):(3-gt));
+		}
+		if(current_level->lose_mode & MODE_TIME) {
+			sprintf(tmp,"in %i seconds",current_level->time);
+			center_shad(themeinfo.game_y+84,tmp,24,(gt<2)?limit(gt,0,1):(3-gt));
+		}
+	}
+	
 	sprintf(tmp,"%i",score);
 	center(themeinfo.score_x,themeinfo.score_y,tmp,themeinfo.score_size,1.0);
-	sprintf(tmp,"%i%s",squares,themeinfo.squares_caption);
+	if(current_level->win_mode & MODE_SQUARES) {
+		sprintf(tmp,"%i/%i%s",squares,current_level->squares,themeinfo.squares_caption);
+	} else {
+		sprintf(tmp,"%i%s",squares,themeinfo.squares_caption);
+	}
 	center(themeinfo.squares_x,themeinfo.squares_y,tmp,themeinfo.squares_size,1.0);
 	if(combo>4) {
 		sprintf(tmp,"%i%s",combo,themeinfo.combo_caption);
 		center(themeinfo.combo_x,themeinfo.combo_y,tmp,themeinfo.combo_size,1.0);
 	}
 
+	if(current_level->lose_mode & MODE_TIME) {
+		center(themeinfo.time_x,themeinfo.time_y,format_time(current_level->time - gt),themeinfo.time_size,1.0);
+	}		
+	if(current_level->win_mode & MODE_TIME) {
+		center(themeinfo.time_x,themeinfo.time_y,format_time(gt),themeinfo.time_size,1.0);
+	}		
+		
 	if(gt-oldgt>tickval) {
 		score++;
 		oldgt=gt;
@@ -259,6 +305,41 @@ void render_title(float gt) {
 		if(alpha>=1 || alpha <= 0.6) bstep *= -1;
 		st=0;
 	}
+}
+
+void render_win(float gt) {
+	char tmp[100];
+	char tmp2[100];
+	
+	if(combo > maxcombo) maxcombo = combo;
+	
+	if(check_win(gt)==1) {
+		center_shad(themeinfo.game_y+40,"Level Complete",24,1);
+	} else {
+		center_shad(themeinfo.game_y+40,"Game Over",24,1);
+	}
+	sprintf(tmp,"Squares: %i",squares);
+	if(current_level->win_mode & MODE_SQUARES) {
+		sprintf(tmp2,"/%i",current_level->squares);
+		strcat(tmp,tmp2);
+	}
+	draw_txt(themeinfo.game_x+40,themeinfo.game_y+100,tmp,float(themeinfo.text_r)/255.0f,float(themeinfo.text_g)/255.0f,float(themeinfo.text_b)/255.0f,1,18);
+	sprintf(tmp,"Score: %i",score);
+	if(current_level->win_mode & MODE_SCORE) {
+		sprintf(tmp2,"/%i",current_level->score);
+		strcat(tmp,tmp2);
+	}
+	draw_txt(themeinfo.game_x+40,themeinfo.game_y+120,tmp,float(themeinfo.text_r)/255.0f,float(themeinfo.text_g)/255.0f,float(themeinfo.text_b)/255.0f,1,18);
+	sprintf(tmp,"Combo: %i",maxcombo);
+	draw_txt(themeinfo.game_x+40,themeinfo.game_y+140,tmp,float(themeinfo.text_r)/255.0f,float(themeinfo.text_g)/255.0f,float(themeinfo.text_b)/255.0f,1,18);
+	sprintf(tmp,"Time: %s",format_time(gametime));
+	if(current_level->time != 0) {
+		sprintf(tmp2,"/%s",format_time(current_level->time));
+		strcat(tmp,tmp2);
+	}
+	draw_txt(themeinfo.game_x+40,themeinfo.game_y+160,tmp,float(themeinfo.text_r)/255.0f,float(themeinfo.text_g)/255.0f,float(themeinfo.text_b)/255.0f,1,18);
+	if(check_win(gt)==1) center_shad(themeinfo.game_y+themeinfo.game_h-22,"Congratulations!  You have completed this level!",16,1);
+	center_shad(themeinfo.game_y+themeinfo.game_h-2,"Click the mouse to continue.",16,1);
 }
 
 int rank=-1;
