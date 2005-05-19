@@ -307,9 +307,18 @@ void render_title(float gt) {
 	}
 }
 
-void render_win(float gt) {
+void render_win(float gametime, float interval) {
 	char tmp[100];
 	char tmp2[100];
+	static float gt=0;
+	static float oldgt=0;
+	
+	if(oldgt != gametime) {
+		oldgt=gametime;
+		gt=0;
+	}
+	
+	gt+=interval;
 	
 	if(combo > maxcombo) maxcombo = combo;
 	
@@ -318,27 +327,35 @@ void render_win(float gt) {
 	} else {
 		center_shad(themeinfo.game_y+40,"Game Over",24,1);
 	}
-	sprintf(tmp,"Squares: %i",squares);
-	if(current_level->win_mode & MODE_SQUARES) {
-		sprintf(tmp2,"/%i",current_level->squares);
-		strcat(tmp,tmp2);
+	if(gt>0.5) {
+		sprintf(tmp,"Squares: %i",squares);
+		if(current_level->win_mode & MODE_SQUARES) {
+			sprintf(tmp2,"/%i",current_level->squares);
+			strcat(tmp,tmp2);
+		}
+		draw_txt(themeinfo.game_x+40,themeinfo.game_y+100,tmp,float(themeinfo.text_r)/255.0f,float(themeinfo.text_g)/255.0f,float(themeinfo.text_b)/255.0f,1,18);
 	}
-	draw_txt(themeinfo.game_x+40,themeinfo.game_y+100,tmp,float(themeinfo.text_r)/255.0f,float(themeinfo.text_g)/255.0f,float(themeinfo.text_b)/255.0f,1,18);
-	sprintf(tmp,"Score: %i",score);
-	if(current_level->win_mode & MODE_SCORE) {
-		sprintf(tmp2,"/%i",current_level->score);
-		strcat(tmp,tmp2);
+	if(gt>1) {
+		sprintf(tmp,"Score: %i",score);
+		if(current_level->win_mode & MODE_SCORE) {
+			sprintf(tmp2,"/%i",current_level->score);
+			strcat(tmp,tmp2);
+		}
+		draw_txt(themeinfo.game_x+40,themeinfo.game_y+120,tmp,float(themeinfo.text_r)/255.0f,float(themeinfo.text_g)/255.0f,float(themeinfo.text_b)/255.0f,1,18);
 	}
-	draw_txt(themeinfo.game_x+40,themeinfo.game_y+120,tmp,float(themeinfo.text_r)/255.0f,float(themeinfo.text_g)/255.0f,float(themeinfo.text_b)/255.0f,1,18);
-	sprintf(tmp,"Combo: %i",maxcombo);
-	draw_txt(themeinfo.game_x+40,themeinfo.game_y+140,tmp,float(themeinfo.text_r)/255.0f,float(themeinfo.text_g)/255.0f,float(themeinfo.text_b)/255.0f,1,18);
-	sprintf(tmp,"Time: %s",format_time(gametime));
-	if(current_level->time != 0) {
-		sprintf(tmp2,"/%s",format_time(current_level->time));
-		strcat(tmp,tmp2);
+	if(gt>1.5) {
+		sprintf(tmp,"Combo: %i",maxcombo);
+		draw_txt(themeinfo.game_x+40,themeinfo.game_y+140,tmp,float(themeinfo.text_r)/255.0f,float(themeinfo.text_g)/255.0f,float(themeinfo.text_b)/255.0f,1,18);
 	}
-	draw_txt(themeinfo.game_x+40,themeinfo.game_y+160,tmp,float(themeinfo.text_r)/255.0f,float(themeinfo.text_g)/255.0f,float(themeinfo.text_b)/255.0f,1,18);
-	if(check_win(gt)==1) center_shad(themeinfo.game_y+themeinfo.game_h-22,"Congratulations!  You have completed this level!",16,1);
+	if(gt>2) {
+		sprintf(tmp,"Time: %s",format_time(gametime));
+		if(current_level->time != 0) {
+			sprintf(tmp2,"/%s",format_time(current_level->time));
+			strcat(tmp,tmp2);
+		}
+		draw_txt(themeinfo.game_x+40,themeinfo.game_y+160,tmp,float(themeinfo.text_r)/255.0f,float(themeinfo.text_g)/255.0f,float(themeinfo.text_b)/255.0f,1,18);
+	}
+	if(check_win(gametime)==1) center_shad(themeinfo.game_y+themeinfo.game_h-22,"Congratulations!  You have completed this level!",16,1);
 	center_shad(themeinfo.game_y+themeinfo.game_h-2,"Click the mouse to continue.",16,1);
 }
 
