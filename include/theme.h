@@ -24,6 +24,7 @@ struct themeinfo_t {
 	int squares_x, squares_y, squares_size;
 	char combo_caption[40];
 	int combo_x,combo_y,combo_size;
+	int time_x,time_y,time_size;
 };
 
 

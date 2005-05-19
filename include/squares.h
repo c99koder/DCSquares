@@ -52,6 +52,7 @@ void render_squares(float square_alpha);
 void update_squares(float s);
 void set_fade_color(float f);
 void destroy_list();
+float limit(float val, float min, float max);
 squarelist *check_collide(squarelist *player);
 squarelist *create_square(int x, int y, int size, int type);
 squarelist *get_square_by_id(int id);
