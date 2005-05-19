@@ -359,7 +359,7 @@ float gt=0;
     render_squares((gt<1?(gt*square_alpha):fade<=0?square_alpha:fade*square_alpha));
 		if(state==0) render_title(gt);
 		if(state==1) render_score(gt);
-		if(state==2) render_win(gt);
+		if(state==2) render_win(gt,[timer timeInterval]);
 		if(gt<0.5) {
 #ifndef DREAMCAST
 			glEnable(GL_BLEND);
