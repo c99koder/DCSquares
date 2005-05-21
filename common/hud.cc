@@ -242,7 +242,11 @@ void render_score(float gt) {
 			center_shad(themeinfo.game_y+60,tmp,24,(gt<2)?limit(gt,0,1):(3-gt));
 		}
 		if(current_level->lose_mode & MODE_TIME) {
-			sprintf(tmp,"in %i seconds",current_level->time);
+			if(current_level->time < 60) {
+				sprintf(tmp,"in %i seconds",current_level->time);
+			} else {
+				sprintf(tmp,"in %i minutes",current_level->time/60);
+			}
 			center_shad(themeinfo.game_y+84,tmp,24,(gt<2)?limit(gt,0,1):(3-gt));
 		}
 	}
