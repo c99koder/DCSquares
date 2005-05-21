@@ -4,13 +4,16 @@
 
 @interface MyOpenGLView : NSOpenGLView
 {
-	NSTimer *timer;
-	int state;
-	IBOutlet Preferences *prefs;
-	IBOutlet UpdateChecker *updates;
-	int mousex,mousey;
+    IBOutlet NSMenuItem *mnuChallengeMode;
+    IBOutlet NSMenuItem *mnuFreePlay;
+    IBOutlet Preferences *prefs;
+    IBOutlet UpdateChecker *updates;
+		NSTimer *timer;
+		int state;
+		int mousex,mousey;
 }
-
+- (IBAction)onChallengeMode:(id)sender;
+- (IBAction)onFreePlay:(id)sender;
 - (void) mouseDown: (NSEvent *) theEvent ;
 - (void) mouseEntered: (NSEvent *) theEvent ;
 - (void) mouseExited: (NSEvent *) theEvent ;

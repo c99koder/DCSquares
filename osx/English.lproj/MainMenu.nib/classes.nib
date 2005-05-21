@@ -2,9 +2,15 @@
     IBClasses = (
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {
+            ACTIONS = {onChallengeMode = id; onFreePlay = id; }; 
             CLASS = MyOpenGLView; 
             LANGUAGE = ObjC; 
-            OUTLETS = {prefs = Preferences; updates = UpdateChecker; }; 
+            OUTLETS = {
+                mnuChallengeMode = NSMenuItem; 
+                mnuFreePlay = NSMenuItem; 
+                prefs = Preferences; 
+                updates = UpdateChecker; 
+            }; 
             SUPERCLASS = NSOpenGLView; 
         }, 
         {
@@ -41,6 +47,7 @@
             ACTIONS = {onHowToPlay = id; onWebsite = id; }; 
             CLASS = WindowController; 
             LANGUAGE = ObjC; 
+            OUTLETS = {}; 
             SUPERCLASS = NSObject; 
         }
     ); 

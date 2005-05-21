@@ -123,7 +123,12 @@ float gt=0;
 		if(fade<=0) {
 			if(state==0 || state==2) {
 				if(state==0) {
-					current_level=level_list_head;
+					if([mnuChallengeMode state] == NSOnState) {
+						current_level=level_list_head;
+					}
+					if([mnuFreePlay state] == NSOnState) {
+						current_level=free_play;
+					}
 					state=1;
 				} else {
 					if(check_win(gt) == 1) {
@@ -341,6 +346,18 @@ float gt=0;
 		[NSCursor hide];
 	}
 }
+
+- (IBAction)onChallengeMode:(id)sender
+{
+		[mnuChallengeMode setState:NSOnState];
+		[mnuFreePlay setState:NSOffState];
+}	
+
+- (IBAction)onFreePlay:(id)sender
+{
+		[mnuChallengeMode setState:NSOffState];
+		[mnuFreePlay setState:NSOnState];
+}	
 
 /*
 	Override the view's drawRect: to draw our GL content.
