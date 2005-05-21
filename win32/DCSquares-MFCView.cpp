@@ -14,6 +14,7 @@
 #include "hud.h"
 #include "game.h"
 #include "score.h"
+#include "level.h"
 #include "DCSquares-MFC.h"
 #include "hyperlink.h"
 #include "DCSquares-MFCDoc.h"
@@ -38,6 +39,8 @@ BEGIN_MESSAGE_MAP(CDCSquaresMFCView, CView)
 	ON_WM_MOUSEMOVE()
 	ON_WM_LBUTTONDOWN()
 	ON_COMMAND(ID_HELP_HOWTOPLAY, OnHelpHowtoplay)
+	ON_COMMAND(ID_GAME_FREEPLAY, OnGameFreeplay)
+	ON_COMMAND(ID_GAME_CHALLENGEMODE, OnGameChallengemode)
 END_MESSAGE_MAP()
 
 // CDCSquaresMFCView construction/destruction
@@ -56,6 +59,7 @@ extern int effect_type;
 float square_alpha=1.0;
 extern int bg_tex;
 extern int title_tex;
+extern int menu_tex;
 float gt = 0;
 float fade = 0;
 
@@ -109,7 +113,9 @@ void CDCSquaresMFCView::OnDraw(CDC* /*pDC*/)
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clear Screen And Depth Buffer
 	glLoadIdentity();									// Reset The Current Modelview Matrix
-	if(state==1) render_bg(bg_tex,1); else render_bg(title_tex,1);
+	if(state==0) render_bg(title_tex,1);
+	else if(state==1) render_bg(bg_tex,1);
+	else render_bg(menu_tex,1);
 #ifdef DREAMCAST
 	glKosFinishList();
 #else
@@ -119,6 +125,7 @@ void CDCSquaresMFCView::OnDraw(CDC* /*pDC*/)
 	render_squares((gt<1?(gt*square_alpha):fade<=0?square_alpha:fade*square_alpha));
 	if(state==0) render_title(gt);
 	if(state==1) render_score(gt);
+	if(state==2) render_win(gt,85.0f/1000.0f);
 		if(gt<0.5) {
 #ifndef DREAMCAST
 			glEnable(GL_BLEND);
@@ -200,6 +207,7 @@ int CDCSquaresMFCView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	InitGL();
 	texture_init();
+	levels_init();
 	if(text_init("Helvetica-Bold.txf",20)==0) {
 		SetTimer(1000,1000 / 85,NULL);
 	}
@@ -337,7 +345,7 @@ void CDCSquaresMFCView::OnTimer(UINT nIDEvent)
 	static float oe = 0;
 	ScoresService::CScoresService Scores;
 	float e = ((float)GetTickCount() / 1000.0f);
-	gt += (e - oe);
+	if(state!=2) gt += (e - oe);
 
 	if(state==0) square_alpha=0.4f;
 	if(state==1) square_alpha=1.0f;
@@ -345,32 +353,69 @@ void CDCSquaresMFCView::OnTimer(UINT nIDEvent)
 	if(fade>0) {
 		fade -= (e - oe);
 		if(fade<=0) {
-			if(state==0) {
-				state=1;
-				destroy_list();
-				player=create_square(mousex,mousey,6,PLAYER1);
-				gt=0;
-				square_alpha=1.0;
+			if(state==0 || state==2) {
+				if(state==0) {
+					if(theApp.GetMainWnd()->GetMenu()->GetMenuState(ID_GAME_CHALLENGEMODE,MF_BYCOMMAND) == MF_CHECKED) {
+						current_level=level_list_head;
+					}
+					if(theApp.GetMainWnd()->GetMenu()->GetMenuState(ID_GAME_FREEPLAY,MF_BYCOMMAND) == MF_CHECKED) {
+						current_level=free_play;
+					}
+					state=1;
+					while(ShowCursor(FALSE)>=0);
+				} else {
+					if(check_win(gt) == 1) {
+						state=1;
+						if(current_level->next!=NULL) {
+							current_level=current_level->next;
+						} else {
+							state=0;
+						}
+					} else {
+						state=0;
+					}
+					if(state==0) {
+						while(ShowCursor(TRUE)<0);
+						//[NSCursor unhide];
+					}
+				}
+				if(state!=0) {
+					destroy_list();
+					player=create_square(mousex,mousey,6,PLAYER1);
+					square_alpha=1.0;
+				}
 			} else if(state==1) {
-				state=0;
+				if(combo > maxcombo) maxcombo = combo;
+				if(check_win(gt) == 1) {
+					state=2;
+				} else {
+					state=2;
+					if(theApp.autoSubmit && (theApp.username.GetLength()>0 && theApp.password.GetLength()>0)) {
+						theApp.statusDlg.statusTxt.SetWindowText("Submitting score");
+						theApp.statusDlg.ShowWindow(SW_SHOW);
+						theApp.statusDlg.UpdateWindow();
+						Scores.submitScore(theApp.username.AllocSysString(),theApp.password.AllocSysString(),score,maxcombo,gt,L"PC",&x);
+						theApp.statusDlg.ShowWindow(SW_HIDE);
+					}
+				}
 				destroy_list();
 				player=NULL;
 				square_alpha=0.4;
-				if(theApp.autoSubmit && (theApp.username.GetLength()>0 && theApp.password.GetLength()>0))
-					Scores.submitScore(theApp.username.AllocSysString(),theApp.password.AllocSysString(),score,maxcombo,gt,L"PC",&x);
 			}
-			tickval=1.0f; //1.0
-			speedval=1.2f; //1.2
-			scoreval=100; //100
-			score=0;
-			combo=0;
-			squares=0;
-			maxcombo=0;
+			if(state != 2) {
+				tickval=current_level->tickval; //1.0
+				speedval=current_level->speedval; //1.2
+				scoreval=current_level->scoreval; //100
+				score=0;
+				combo=0;
+				squares=0;
+				maxcombo=0;
+				gt=0;
+				theApp.mp3player.hrStop();
+			}
 			power=0;
 			powerup_mode=-1;
 			effect_type=-1;
-			gt=0;
-			theApp.mp3player.hrStop();
 		}
 	}
 
@@ -409,6 +454,14 @@ void CDCSquaresMFCView::OnTimer(UINT nIDEvent)
 					submit_code(highcode);
 			}*/
 		}
+		switch(check_win(gt)) {
+			case 1: //win
+				fade=1.0;
+				break;
+			case -1: //lose
+				fade=1.0;
+				break;
+		}
 	}
 	update_squares(e-oe);
 	oe = e;
@@ -431,9 +484,8 @@ void CDCSquaresMFCView::OnMouseMove(UINT nFlags, CPoint point)
 void CDCSquaresMFCView::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	// TODO: Add your message handler code here and/or call default
-	if(state==0) {
+	if(state==0 || state==2) {
 		fade=0.5;
-		while(ShowCursor(FALSE)>=0);
 	}
 	CView::OnLButtonDown(nFlags, point);
 }
@@ -442,4 +494,16 @@ void CDCSquaresMFCView::OnHelpHowtoplay()
 {
 	// TODO: Add your command handler code here
 	CHyperLink::GotoURL("http://dcsquares.c99.org/howtoplay.php",0);
+}
+
+void CDCSquaresMFCView::OnGameFreeplay()
+{
+	theApp.GetMainWnd()->GetMenu()->CheckMenuItem(ID_GAME_FREEPLAY,MF_CHECKED);
+	theApp.GetMainWnd()->GetMenu()->CheckMenuItem(ID_GAME_CHALLENGEMODE,MF_UNCHECKED);
+}
+
+void CDCSquaresMFCView::OnGameChallengemode()
+{
+	theApp.GetMainWnd()->GetMenu()->CheckMenuItem(ID_GAME_FREEPLAY,MF_UNCHECKED);
+	theApp.GetMainWnd()->GetMenu()->CheckMenuItem(ID_GAME_CHALLENGEMODE,MF_CHECKED);
 }

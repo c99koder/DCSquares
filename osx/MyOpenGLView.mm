@@ -154,7 +154,7 @@ float gt=0;
 					square_alpha=1.0;
 				}
 			} else if(state==1) {
-				gametime=gt;
+				if(combo > maxcombo) maxcombo = combo;
 				if(check_win(gt) == 1) {
 					state=2;
 				} else {

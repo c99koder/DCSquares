@@ -158,6 +158,12 @@
 			<File
 				RelativePath="..\..\..\..\..\dx90sdk\Samples\C++\Common\DXUTsound.cpp">
 				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						PreprocessorDefinitions="UNICODE"/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="Release|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
@@ -309,6 +315,12 @@
 			</File>
 			<File
 				RelativePath="..\include\input.h">
+			</File>
+			<File
+				RelativePath="..\common\level.cc">
+			</File>
+			<File
+				RelativePath="..\include\level.h">
 			</File>
 			<File
 				RelativePath="..\common\net.cc">

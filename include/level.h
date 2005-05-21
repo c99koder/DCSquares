@@ -6,12 +6,6 @@
  *  Copyright 2005 __MyCompanyName__. All rights reserved.
  *
  */
-
-#ifdef __cplusplus
-extern "C"
-{
-#endif
-
 #define MODE_SCORE 1
 #define MODE_TIME 2
 #define MODE_SQUARES 4
@@ -41,7 +35,3 @@ extern level_node *free_play;
 level_node *create_level(int win_mode, int lose_mode);
 void levels_init();
 int check_win(float gt);
-
-#ifdef __cplusplus
-}
-#endif

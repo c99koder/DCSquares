@@ -85,6 +85,12 @@ BEGIN
     BEGIN
         MENUITEM "&High Scores",                ID_SCORES_HIGHSCORES
     END
+    POPUP "&Game"
+    BEGIN
+        MENUITEM "&Challenge Mode",             ID_GAME_CHALLENGEMODE
+        , CHECKED
+        MENUITEM "&Free Play",                  ID_GAME_FREEPLAY
+    END
     POPUP "&Help"
     BEGIN
         MENUITEM "&How to Play...",             ID_HELP_HOWTOPLAY
@@ -129,7 +135,7 @@ CAPTION "About DCSquares"
 FONT 8, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
-    LTEXT           "DCSquares 1.6",IDC_STATIC,40,10,119,8,SS_NOPREFIX
+    LTEXT           "DCSquares 1.8",IDC_STATIC,40,10,119,8,SS_NOPREFIX
     LTEXT           "Copyright (C) 2005 Sam Steele",IDC_STATIC,40,23,119,8
     DEFPUSHBUTTON   "OK",IDOK,178,7,50,16,WS_GROUP
     LTEXT           "http://dcsquares.c99.org/",IDC_DCS_URL,40,36,88,8
@@ -215,13 +221,13 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,5,5,0
- PRODUCTVERSION 1,6,0,0
- FILEFLAGSMASK 0x3fL
+ FILEVERSION 1,8,0,0
+ PRODUCTVERSION 1,8,0,0
+ FILEFLAGSMASK 0x37L
 #ifdef _DEBUG
- FILEFLAGS 0x9L
+ FILEFLAGS 0x1L
 #else
- FILEFLAGS 0x8L
+ FILEFLAGS 0x0L
 #endif
  FILEOS 0x4L
  FILETYPE 0x1L
@@ -232,14 +238,13 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "Sam Steele"
-            VALUE "FileDescription", "DCSquares 1.6"
-            VALUE "FileVersion", "1.55"
+            VALUE "FileDescription", "DCSquares 1.8"
+            VALUE "FileVersion", "1.8"
             VALUE "InternalName", "DCSquares-MFC.exe"
-            VALUE "LegalCopyright", "(c) Sam Steele.  All rights reserved."
+            VALUE "LegalCopyright", "(C) Sam Steele.  All rights reserved."
             VALUE "OriginalFilename", "DCSquares-MFC.exe"
-            VALUE "PrivateBuild", "GOATMFCtest1"
             VALUE "ProductName", "DCSquares"
-            VALUE "ProductVersion", "1.6"
+            VALUE "ProductVersion", "1.8"
         END
     END
     BLOCK "VarFileInfo"

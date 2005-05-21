@@ -62,6 +62,8 @@ public:
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 
 	afx_msg void OnHelpHowtoplay();
+	afx_msg void OnGameFreeplay();
+	afx_msg void OnGameChallengemode();
 };
 
 #ifndef _DEBUG  // debug version in DCSquares-MFCView.cpp
