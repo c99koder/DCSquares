@@ -150,62 +150,63 @@ void render_squares(float square_alpha) {
 	while(c!=NULL) {
 		glLoadIdentity();
 		for(i=(c->type>PLAYER_NET && (powerup_mode==SLOWMO || powerup_mode==SPEED))?4:0;i>=0;i--) {
-		dx=0;
-		dy=0;
-		if(c->xv!=0) {
-			dx=(i*10) * effect_timer;
-			if(c->xv>0) dx*=-1;
-		}
-		if(c->yv!=0) {
-			dy=(i*10) * effect_timer;
-			if(c->yv>0) dy*=-1;
-		}
-		glTranslatef(c->x+dx,c->y+dy,0);
-		glRotatef(c->angle,0,0,1);
-		
-		glScalef(themeinfo.scale,themeinfo.scale,1.0);
-		if(c->tex==-1) {
-			if(c->type<POWERUP) {
-				glBegin(GL_QUADS);
-					glColor4f(limit(c->r+0.4,0,1),limit(c->g+0.4,0,1),limit(c->b+0.4,0,1),square_alpha);
-					glVertex3f(-c->size,-c->size,0.1);
-					glColor4f(limit(c->r+0.1,0,1),limit(c->g+0.1,0,1),limit(c->b+0.1,0,1),square_alpha);
-					glVertex3f(c->size,-c->size,0.1);
-					glColor4f(limit(c->r,0,1),limit(c->g,0,1),limit(c->b,0,1),square_alpha);
-					glVertex3f(c->size,c->size,0.1);
-					glColor4f(limit(c->r+0.1,0,1),limit(c->g+0.1,0,1),limit(c->b+0.1,0,1),square_alpha);
-					glVertex3f(-c->size,c->size,0.1);
-				glEnd();
-			} else {
-				glBegin(GL_POLYGON);
-					for(int i =0;i<16;i++){
-							angle = i*2*M_PI/16;
-							x = cos(angle)*c->size;
-							y = sin(angle)*c->size;
-							dx = c->size - x;
-							dy = c->size - y;
-							l = (sqrt((dx*dx)+(dy*dy))/(c->size*4)) * 0.4;
-							glColor4f(c->r+l, c->g+l, c->b+l,square_alpha);  
-							glVertex3f(cos(angle)*c->size,sin(angle)*c->size,0.9);
-					}
-				glEnd();
+			dx=0;
+			dy=0;
+			if(c->xv!=0) {
+				dx=(i*10) * effect_timer;
+				if(c->xv>0) dx*=-1;
 			}
-		} else {
-			if(c->shadow_tex!=-1) {
-				glLoadIdentity();
-				glTranslatef(c->x+2+dx,c->y+2+dy,0.1);
-				glRotatef(c->angle,0,0,1);
-				glColor4f(c->r,c->g,c->b,square_alpha*((float)(8-i)/8.0f));
-				glScalef(2.5,2.5,1.0);
-				render_poly(c->size,c->shadow_tex,square_alpha*((float)(4-i)/4.0f));
+			if(c->yv!=0) {
+				dy=(i*10) * effect_timer;
+				if(c->yv>0) dy*=-1;
 			}
 			glLoadIdentity();
-			glTranslatef(c->x+dx,c->y+dy,0.2);
+			glTranslatef(c->x+dx,c->y+dy,0);
 			glRotatef(c->angle,0,0,1);
-			glColor4f(c->r,c->g,c->b,square_alpha);
-			glScalef(2.5,2.5,1.0);
-			render_poly(c->size,(c->tex==score_tex && powerup_mode==EVIL)?enemy_tex:c->tex,(powerup_mode==INVINC && c->tex==enemy_tex)?1.0f-(0.8f*effect_timer):(i==0)?square_alpha:square_alpha*((float)(4-i)/8.0f));
-		}
+			
+			glScalef(themeinfo.scale,themeinfo.scale,1.0);
+			if(c->tex==-1) {
+				if(c->type<POWERUP) {
+					glBegin(GL_QUADS);
+						glColor4f(limit(c->r+0.4,0,1),limit(c->g+0.4,0,1),limit(c->b+0.4,0,1),(i==0)?square_alpha:square_alpha*((float)(4-i)/8.0f));
+						glVertex3f(-c->size,-c->size,0.1);
+						glColor4f(limit(c->r+0.1,0,1),limit(c->g+0.1,0,1),limit(c->b+0.1,0,1),(i==0)?square_alpha:square_alpha*((float)(4-i)/8.0f));
+						glVertex3f(c->size,-c->size,0.1);
+						glColor4f(limit(c->r,0,1),limit(c->g,0,1),limit(c->b,0,1),(i==0)?square_alpha:square_alpha*((float)(4-i)/8.0f));
+						glVertex3f(c->size,c->size,0.1);
+						glColor4f(limit(c->r+0.1,0,1),limit(c->g+0.1,0,1),limit(c->b+0.1,0,1),(i==0)?square_alpha:square_alpha*((float)(4-i)/8.0f));
+						glVertex3f(-c->size,c->size,0.1);
+					glEnd();
+				} else {
+					glBegin(GL_POLYGON);
+						for(int j =0;j<16;j++){
+								angle = j*2*M_PI/16;
+								x = cos(angle)*c->size;
+								y = sin(angle)*c->size;
+								dx = c->size - x;
+								dy = c->size - y;
+								l = (sqrt((dx*dx)+(dy*dy))/(c->size*4)) * 0.4;
+								glColor4f(c->r+l, c->g+l, c->b+l,(i==0)?square_alpha:square_alpha*((float)(4-i)/8.0f));  
+								glVertex3f(cos(angle)*c->size,sin(angle)*c->size,0.9);
+						}
+					glEnd();
+				}
+			} else {
+				if(c->shadow_tex!=-1) {
+					glLoadIdentity();
+					glTranslatef(c->x+2+dx,c->y+2+dy,0.1);
+					glRotatef(c->angle,0,0,1);
+					glColor4f(c->r,c->g,c->b,square_alpha*((float)(8-i)/8.0f));
+					glScalef(2.5,2.5,1.0);
+					render_poly(c->size,c->shadow_tex,square_alpha*((float)(4-i)/4.0f));
+				}
+				glLoadIdentity();
+				glTranslatef(c->x+dx,c->y+dy,0.2);
+				glRotatef(c->angle,0,0,1);
+				glColor4f(c->r,c->g,c->b,square_alpha);
+				glScalef(2.5,2.5,1.0);
+				render_poly(c->size,(c->tex==score_tex && powerup_mode==EVIL)?enemy_tex:c->tex,(powerup_mode==INVINC && c->tex==enemy_tex)?1.0f-(0.8f*effect_timer):(i==0)?square_alpha:square_alpha*((float)(4-i)/8.0f));
+			}
 		}
 		c=c->next;
 	}
