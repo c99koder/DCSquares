@@ -335,8 +335,8 @@ float gt=0;
 	if(state==0 || state==2) {
 		fade=0.5;
 		if(current_level==NULL) {
-			//current_level=free_play;
-			current_level=level_list_head;
+			current_level=free_play;
+			//current_level=level_list_head;
 		}
 		[NSCursor hide];
 	}
