@@ -8,7 +8,7 @@ Name: {group}\ReadMe; Filename: {app}\readme.rtf
 [Setup]
 AppCopyright=©2005 Sam Steele
 AppName=DCSquares
-AppVerName=1.8
+AppVerName=DCSquares 1.8
 DefaultDirName={pf}\DCSquares
 DefaultGroupName=DCSquares
 ShowLanguageDialog=yes
@@ -27,7 +27,7 @@ MinVersion=4.1.1998,5.0.2195
 InternalCompressLevel=ultra
 OutputBaseFilename=dcsquares-setup
 Compression=lzma/ultra
-Password=dcsqbeta525
+Password=
 [Run]
 Filename: {app}\DCSquares.exe; WorkingDir: {app}; Description: Play DCSquares!; Flags: postinstall
 [Tasks]
