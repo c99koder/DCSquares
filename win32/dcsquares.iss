@@ -67,14 +67,14 @@ Source: ..\data\themes\default\red_speedup.png; DestDir: {app}\themes\default; C
 Source: ..\data\themes\default\red_square.png; DestDir: {app}\themes\default; Components: default
 Source: ..\data\themes\default\theme.ini; DestDir: {app}\themes\default; Components: default
 Source: Release\DCSquares-MFC.exe; DestDir: {app}; DestName: DCSquares.exe; Components: DCSquares
-Source: dlls\vorbisenc.dll; DestDir: {sys}; Tasks: ovcodec; Flags: confirmoverwrite sharedfile
+Source: dlls\vorbisenc.dll; DestDir: {sys}; Tasks: ovcodec; Flags: sharedfile
 Source: dlls\MFC71.dll; DestDir: {app}; Components: DCSquares
 Source: dlls\MFC71ENU.DLL; DestDir: {app}; Components: DCSquares
 Source: dlls\msvcp71.dll; DestDir: {app}; Components: DCSquares
 Source: dlls\msvcr71.dll; DestDir: {app}; Components: DCSquares
-Source: dlls\ogg.dll; DestDir: {sys}; Tasks: ovcodec; Flags: confirmoverwrite sharedfile
-Source: dlls\OggDS.dll; DestDir: {sys}; Tasks: ovcodec; Flags: regserver confirmoverwrite sharedfile
-Source: dlls\vorbis.dll; DestDir: {sys}; Tasks: ovcodec; Flags: confirmoverwrite sharedfile
+Source: dlls\ogg.dll; DestDir: {sys}; Tasks: ovcodec; Flags: sharedfile
+Source: dlls\OggDS.dll; DestDir: {sys}; Tasks: ovcodec; Flags: regserver sharedfile
+Source: dlls\vorbis.dll; DestDir: {sys}; Tasks: ovcodec; Flags: sharedfile
 [Dirs]
 Name: {app}\themes; Components: DCSquares
 Name: {app}\themes\classic; Components: classic_theme
