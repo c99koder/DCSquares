@@ -60,7 +60,7 @@ void dcb_vmu_init() {
                         for (x=0; x<48; x++) {
                                 xi = x / 8;
                                 xb = 0x80 >> (x % 8);
-                                if (squareslogo_xpm[(31-y)*48+(47-x)] == ' ')
+                                if (squareslogo_xpm[(31-y)*48+(47-x)] == '.')
                                         bitmap[y*(48/8)+xi] |= xb;
                         }
         }
