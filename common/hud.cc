@@ -183,6 +183,7 @@ void render_score(float gt) {
 	static float oldgt=gt;
 	static float oldpt=gt;
 	static float oldet=gt;
+	float alpha=1.0f;
 	
 	char tmp[100];
 	char tmp2[100];
@@ -252,23 +253,23 @@ void render_score(float gt) {
 	}
 	
 	sprintf(tmp,"%i",score);
-	center(themeinfo.score_x,themeinfo.score_y,tmp,themeinfo.score_size,1.0);
+	center(themeinfo.score_x,themeinfo.score_y,tmp,themeinfo.score_size,alpha);
 	if(current_level->win_mode & MODE_SQUARES) {
 		sprintf(tmp,"%i/%i%s",squares,current_level->squares,themeinfo.squares_caption);
 	} else {
 		sprintf(tmp,"%i%s",squares,themeinfo.squares_caption);
 	}
-	center(themeinfo.squares_x,themeinfo.squares_y,tmp,themeinfo.squares_size,1.0);
+	center(themeinfo.squares_x,themeinfo.squares_y,tmp,themeinfo.squares_size,alpha);
 	if(combo>4) {
 		sprintf(tmp,"%i%s",combo,themeinfo.combo_caption);
-		center(themeinfo.combo_x,themeinfo.combo_y,tmp,themeinfo.combo_size,1.0);
+		center(themeinfo.combo_x,themeinfo.combo_y,tmp,themeinfo.combo_size,alpha);
 	}
 
 	if(current_level->lose_mode & MODE_TIME) {
-		center(themeinfo.time_x,themeinfo.time_y,format_time(current_level->time - gt),themeinfo.time_size,1.0);
+		center(themeinfo.time_x,themeinfo.time_y,format_time(current_level->time - gt),themeinfo.time_size,alpha);
 	}		
 	if(current_level->win_mode & MODE_TIME) {
-		center(themeinfo.time_x,themeinfo.time_y,format_time(gt),themeinfo.time_size,1.0);
+		center(themeinfo.time_x,themeinfo.time_y,format_time(gt),themeinfo.time_size,alpha);
 	}		
 		
 	if(gt-oldgt>tickval) {
@@ -360,7 +361,11 @@ void render_win(float gametime, float interval) {
 		draw_txt(themeinfo.game_x+40,themeinfo.game_y+160,tmp,float(themeinfo.text_r)/255.0f,float(themeinfo.text_g)/255.0f,float(themeinfo.text_b)/255.0f,1,18);
 	}
 	if(check_win(gametime)==1) center_shad(themeinfo.game_y+themeinfo.game_h-22,"Congratulations!  You have completed this level!",16,1);
+#ifdef DREAMCAST
+	center_shad(themeinfo.game_y+themeinfo.game_h-2,"Press start or click to continue.",16,1);
+#else
 	center_shad(themeinfo.game_y+themeinfo.game_h-2,"Click the mouse to continue.",16,1);
+#endif
 }
 
 int rank=-1;
@@ -387,19 +392,19 @@ void render_highscores() {
 		draw_txt(85-txt_width(tmp),x*22+180,tmp,1,1,1,1,20);
 #endif
 		if(current!=NULL) {
-			draw_txt(80,x*22+180,current->name,(rank==x+1)?1:0.03,(rank==x+1)?1:0.58,1,1,20);
+			draw_txt(80,x*22+180,current->name,(rank==x+1)?1:(float)themeinfo.text_r/255.0f,(rank==x+1)?1:(float)themeinfo.text_g/255.0f,(rank==x+1)?1:(float)themeinfo.text_b/255.0f,1,20);
 			sprintf(tmp,"%i",current->score);
-			draw_txt(280-txt_width(tmp),x*22+180,tmp,(rank==x+1)?1:0.03,(rank==x+1)?1:0.58,1,1,20);
+			draw_txt(280-txt_width(tmp),x*22+180,tmp,(rank==x+1)?1:(float)themeinfo.text_r/255.0f,(rank==x+1)?1:(float)themeinfo.text_g/255.0f,(rank==x+1)?1:(float)themeinfo.text_b/255.0f,1,20);
 			sprintf(tmp,"%i",current->combo);
-			draw_txt(360-txt_width(tmp),x*22+180,tmp,(rank==x+1)?1:0.03,(rank==x+1)?1:0.58,1,1,20);
+			draw_txt(360-txt_width(tmp),x*22+180,tmp,(rank==x+1)?1:(float)themeinfo.text_r/255.0f,(rank==x+1)?1:(float)themeinfo.text_g/255.0f,(rank==x+1)?1:(float)themeinfo.text_b/255.0f,1,20);
 			sprintf(tmp,"%.2f",current->time/1000.0f);
-			draw_txt(490-txt_width(tmp),x*22+180,tmp,(rank==x+1)?1:0.03,(rank==x+1)?1:0.58,1,1,20);
+			draw_txt(490-txt_width(tmp),x*22+180,tmp,(rank==x+1)?1:(float)themeinfo.text_r/255.0f,(rank==x+1)?1:(float)themeinfo.text_g/255.0f,(rank==x+1)?1:(float)themeinfo.text_b/255.0f,1,20);
 			current=current->next;
 		} else {
 			draw_txt(80,x*22+180,"---",0.03,0.58,1,1,20);
-			draw_txt(280-txt_width("0"),x*22+180,"0",0.03,0.58,1,1,20);
-			draw_txt(360-txt_width("0"),x*22+180,"0",0.03,0.58,1,1,20);
-			draw_txt(490-txt_width("0.00"),x*22+180,"0.00",0.03,0.58,1,1,20);
+			draw_txt(280-txt_width("0"),x*22+180,"0",(float)themeinfo.text_r/255.0f,(float)themeinfo.text_g/255.0f,(float)themeinfo.text_b/255.0f,1,20);
+			draw_txt(360-txt_width("0"),x*22+180,"0",(float)themeinfo.text_r/255.0f,(float)themeinfo.text_g/255.0f,(float)themeinfo.text_b/255.0f,1,20);
+			draw_txt(490-txt_width("0.00"),x*22+180,"0.00",(float)themeinfo.text_r/255.0f,(float)themeinfo.text_g/255.0f,(float)themeinfo.text_b/255.0f,1,20);
 		}
 	}
 
@@ -409,7 +414,7 @@ void render_highscores() {
 void high_scores();
 
 void name_entry(unsigned long time) {
-#if 0
+#ifdef DREAMCAST
 	char L1[2]="_";
 	char L2[2]="_";
 	char L3[2]="_";

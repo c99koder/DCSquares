@@ -56,6 +56,15 @@ int minus_tex=12;
 int big_tex=13;
 int shadow_tex=14;
 char dcs_theme[100];
+themeinfo_t themeinfo = {
+	"None",
+	"None",
+	"None",
+	"None",
+	0,0,0,
+	192,0,0,
+	0,0,0
+};
 
 void MessageBox(char *title, char *msg);
 #ifdef OPENAL
@@ -140,93 +149,93 @@ void render_bg_game(int tex, float fade) {
 #ifndef DREAMCAST
 	glTexCoord2f(0,0);
 	glVertex3f(0,0,0.9);
-	glTexCoord2f(24.0f/640.0f,0);
-	glVertex3f(24,0,0.9);
-	glTexCoord2f(24.0f/640.0f,1);
-	glVertex3f(24,480,0.9);
+	glTexCoord2f((float)themeinfo.game_x/640.0f,0);
+	glVertex3f((float)themeinfo.game_x,0,0.9);
+	glTexCoord2f((float)themeinfo.game_x/640.0f,1);
+	glVertex3f((float)themeinfo.game_x,480,0.9);
 	glTexCoord2f(0,1);
 	glVertex3f(0,480,0.9);
 
-	glTexCoord2f(24.0f/640.0f,0);
-	glVertex3f(24,0,0.9);
-	glTexCoord2f((24.0f+497.0f)/640.0f,0);
-	glVertex3f(24+497,0,0.9);
-	glTexCoord2f((24.0f+497.0f)/640.0f,24.0f/480.0f);
-	glVertex3f(24+497,24,0.9);
-	glTexCoord2f(24.0f/640.0f,24.0f/480.0f);
-	glVertex3f(24,24,0.9);
-//497, 433
-	glTexCoord2f((24.0f+497.0f)/640.0f,0);
-	glVertex3f(24+497,0,0.9);
+	glTexCoord2f((float)themeinfo.game_x/640.0f,0);
+	glVertex3f((float)themeinfo.game_x,0,0.9);
+	glTexCoord2f(((float)themeinfo.game_x+(float)themeinfo.game_w)/640.0f,0);
+	glVertex3f((float)themeinfo.game_x+(float)themeinfo.game_w,0,0.9);
+	glTexCoord2f(((float)themeinfo.game_x+(float)themeinfo.game_w)/640.0f,(float)themeinfo.game_y/480.0f);
+	glVertex3f((float)themeinfo.game_x+(float)themeinfo.game_w,(float)themeinfo.game_y,0.9);
+	glTexCoord2f((float)themeinfo.game_x/640.0f,(float)themeinfo.game_y/480.0f);
+	glVertex3f((float)themeinfo.game_x,(float)themeinfo.game_y,0.9);
+
+	glTexCoord2f(((float)themeinfo.game_x+(float)themeinfo.game_w)/640.0f,0);
+	glVertex3f((float)themeinfo.game_x+(float)themeinfo.game_w,0,0.9);
 	glTexCoord2f(1,0);
 	glVertex3f(640,0,0.9);
-	glTexCoord2f(1,((24.0f+433.0f)/480.0f));
-	glVertex3f(640,24+433,0.9);
-	glTexCoord2f((24.0f+497.0f)/640.0f,((24.0f+433.0f)/480.0f));
-	glVertex3f(24+497,24+433,0.9);
+	glTexCoord2f(1,(((float)themeinfo.game_y+(float)themeinfo.game_h)/480.0f));
+	glVertex3f(640,(float)themeinfo.game_y+(float)themeinfo.game_h,0.9);
+	glTexCoord2f(((float)themeinfo.game_x+(float)themeinfo.game_w)/640.0f,(((float)themeinfo.game_y+(float)themeinfo.game_h)/480.0f));
+	glVertex3f((float)themeinfo.game_x+(float)themeinfo.game_w,(float)themeinfo.game_y+(float)themeinfo.game_h,0.9);
 
-	glTexCoord2f(24.0f/640.0f,((24.0f+433.0f)/480.0f));
-	glVertex3f(24,24+433,0.9);
-	glTexCoord2f(1,((24.0f+433.0f)/480.0f));
-	glVertex3f(640,24+433,0.9);
+	glTexCoord2f((float)themeinfo.game_x/640.0f,(((float)themeinfo.game_y+(float)themeinfo.game_h)/480.0f));
+	glVertex3f((float)themeinfo.game_x,(float)themeinfo.game_y+(float)themeinfo.game_h,0.9);
+	glTexCoord2f(1,(((float)themeinfo.game_y+(float)themeinfo.game_h)/480.0f));
+	glVertex3f(640,(float)themeinfo.game_y+(float)themeinfo.game_h,0.9);
 	glTexCoord2f(1,1);
 	glVertex3f(640,480,0.9);
-	glTexCoord2f(24.0f/640.0f,1);
-	glVertex3f(24,480,0.9);
+	glTexCoord2f((float)themeinfo.game_x/640.0f,1);
+	glVertex3f((float)themeinfo.game_x,480,0.9);
 	
-	glTexCoord2f(24.0f/640.0f,24.0f/480.0f);
-	glVertex3f(24,24,0.1);
-	glTexCoord2f((24.0f+497.0f)/640.0f,24.0f/480.0f);
-	glVertex3f(24+497,24,0.1);
-	glTexCoord2f((24.0f+497.0f)/640.0f,(24.0f+433.0f)/480.0f);
-	glVertex3f(24+497,24+433,0.1);
-	glTexCoord2f(24.0f/640.0f,(24.0f+433.0f)/480.0f);
-	glVertex3f(24,24+433,0.1);
+	glTexCoord2f((float)themeinfo.game_x/640.0f,(float)themeinfo.game_y/480.0f);
+	glVertex3f((float)themeinfo.game_x,(float)themeinfo.game_y,0.1);
+	glTexCoord2f(((float)themeinfo.game_x+(float)themeinfo.game_w)/640.0f,(float)themeinfo.game_y/480.0f);
+	glVertex3f((float)themeinfo.game_x+(float)themeinfo.game_w,(float)themeinfo.game_y,0.1);
+	glTexCoord2f(((float)themeinfo.game_x+(float)themeinfo.game_w)/640.0f,((float)themeinfo.game_y+(float)themeinfo.game_h)/480.0f);
+	glVertex3f((float)themeinfo.game_x+(float)themeinfo.game_w,(float)themeinfo.game_y+(float)themeinfo.game_h,0.1);
+	glTexCoord2f((float)themeinfo.game_x/640.0f,((float)themeinfo.game_y+(float)themeinfo.game_h)/480.0f);
+	glVertex3f((float)themeinfo.game_x,(float)themeinfo.game_y+(float)themeinfo.game_h,0.1);
 #else
 	glTexCoord2f(0,1);
 	glVertex3f(0,0,0.9);
-	glTexCoord2f(24.0f/640.0f,1);
-	glVertex3f(24,0,0.9);
-	glTexCoord2f(24.0f/640.0f,0);
-	glVertex3f(24,480,0.9);
+	glTexCoord2f((float)themeinfo.game_x/640.0f,1);
+	glVertex3f((float)themeinfo.game_x,0,0.9);
+	glTexCoord2f((float)themeinfo.game_x/640.0f,0);
+	glVertex3f((float)themeinfo.game_x,480,0.9);
 	glTexCoord2f(0,0);
 	glVertex3f(0,480,0.9);
 
-	glTexCoord2f(24.0f/640.0f,1);
-	glVertex3f(24,0,0.9);
-	glTexCoord2f((24.0f+497.0f)/640.0f,1);
-	glVertex3f(24+497,0,0.9);
-	glTexCoord2f((24.0f+497.0f)/640.0f,1-(40.0f/480.0f));
-	glVertex3f(24+497,40,0.9);
-	glTexCoord2f(24.0f/640.0f,1-(40.0f/480.0f));
-	glVertex3f(24,40,0.9);
-//497, 433
-	glTexCoord2f((24.0f+497.0f)/640.0f,1);
-	glVertex3f(24+497,0,0.9);
+	glTexCoord2f((float)themeinfo.game_x/640.0f,1);
+	glVertex3f((float)themeinfo.game_x,0,0.9);
+	glTexCoord2f(((float)themeinfo.game_x+(float)themeinfo.game_w)/640.0f,1);
+	glVertex3f((float)themeinfo.game_x+(float)themeinfo.game_w,1,0.9);
+	glTexCoord2f(((float)themeinfo.game_x+(float)themeinfo.game_w)/640.0f,1-(float)themeinfo.game_y/480.0f);
+	glVertex3f((float)themeinfo.game_x+(float)themeinfo.game_w,(float)themeinfo.game_y,0.9);
+	glTexCoord2f((float)themeinfo.game_x/640.0f,1-(float)themeinfo.game_y/480.0f);
+	glVertex3f((float)themeinfo.game_x,(float)themeinfo.game_y,0.9);
+
+	glTexCoord2f(((float)themeinfo.game_x+(float)themeinfo.game_w)/640.0f,1);
+	glVertex3f((float)themeinfo.game_x+(float)themeinfo.game_w,0,0.9);
 	glTexCoord2f(1,1);
 	glVertex3f(640,0,0.9);
-	glTexCoord2f(1,1-((24.0f+433.0f)/480.0f));
-	glVertex3f(640,24+433,0.9);
-	glTexCoord2f((24.0f+497.0f)/640.0f,1-((24.0f+433.0f)/480.0f));
-	glVertex3f(24+497,24+433,0.9);
+	glTexCoord2f(1,1-(((float)themeinfo.game_y+(float)themeinfo.game_h)/480.0f));
+	glVertex3f(640,(float)themeinfo.game_y+(float)themeinfo.game_h,0.9);
+	glTexCoord2f(((float)themeinfo.game_x+(float)themeinfo.game_w)/640.0f,1-(((float)themeinfo.game_y+(float)themeinfo.game_h)/480.0f));
+	glVertex3f((float)themeinfo.game_x+(float)themeinfo.game_w,(float)themeinfo.game_y+(float)themeinfo.game_h,0.9);
 
-	glTexCoord2f(24.0f/640.0f,1-((40.0f+401.0f)/480.0f));
-	glVertex3f(24,40+401,0.9);
-	glTexCoord2f(1,1-((24.0f+433.0f)/480.0f));
-	glVertex3f(640,40+401,0.9);
+	glTexCoord2f((float)themeinfo.game_x/640.0f,1-(((float)themeinfo.game_y+(float)themeinfo.game_h)/480.0f));
+	glVertex3f((float)themeinfo.game_x,(float)themeinfo.game_y+(float)themeinfo.game_h,0.9);
+	glTexCoord2f(1,1-(((float)themeinfo.game_y+(float)themeinfo.game_h)/480.0f));
+	glVertex3f(640,(float)themeinfo.game_y+(float)themeinfo.game_h,0.9);
 	glTexCoord2f(1,0);
 	glVertex3f(640,480,0.9);
-	glTexCoord2f(24.0f/640.0f,0);
-	glVertex3f(24,480,0.9);
-
-	glTexCoord2f(24.0f/640.0f,1-(40.0f/480.0f));
-	glVertex3f(24,40,0.1);
-	glTexCoord2f((24.0f+497.0f)/640.0f,1-(40.0f/480.0f));
-	glVertex3f(24+497,40,0.1);
-	glTexCoord2f((24.0f+497.0f)/640.0f,1-((40.0f+401.0f)/480.0f));
-	glVertex3f(24+497,40+401,0.1);
-	glTexCoord2f(24.0f/640.0f,1-((40.0f+401.0f)/480.0f));
-	glVertex3f(24,40+401,0.1);
+	glTexCoord2f((float)themeinfo.game_x/640.0f,0);
+	glVertex3f((float)themeinfo.game_x,480,0.9);
+	
+	glTexCoord2f((float)themeinfo.game_x/640.0f,1-(float)themeinfo.game_y/480.0f);
+	glVertex3f((float)themeinfo.game_x,(float)themeinfo.game_y,0.01);
+	glTexCoord2f(((float)themeinfo.game_x+(float)themeinfo.game_w)/640.0f,1-(float)themeinfo.game_y/480.0f);
+	glVertex3f((float)themeinfo.game_x+(float)themeinfo.game_w,(float)themeinfo.game_y,0.01);
+	glTexCoord2f(((float)themeinfo.game_x+(float)themeinfo.game_w)/640.0f,1-((float)themeinfo.game_y+(float)themeinfo.game_h)/480.0f);
+	glVertex3f((float)themeinfo.game_x+(float)themeinfo.game_w,(float)themeinfo.game_y+(float)themeinfo.game_h,0.01);
+	glTexCoord2f((float)themeinfo.game_x/640.0f,1-((float)themeinfo.game_y+(float)themeinfo.game_h)/480.0f);
+	glVertex3f((float)themeinfo.game_x,(float)themeinfo.game_y+(float)themeinfo.game_h,0.01);
 #endif
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
@@ -253,17 +262,6 @@ void render_poly(int size, int tex, float fade) {
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
 }
-
-
-themeinfo_t themeinfo = {
-	"None",
-	"None",
-	"None",
-	"None",
-	0,0,0,
-	192,0,0,
-	0,0,0
-};
 
 #ifdef DREAMCAST
 sfxhnd_t powerup=-1;
@@ -517,8 +515,8 @@ int load_theme(char *theme, int sfx) {
 	  }
 	}
 	fclose(f);
-	//load_texture(theme_dir("loading"),loading_tex,0);
 #if defined(SDL) || defined(DREAMCAST)
+	load_texture("loading",loading_tex,0);
 	for(float x=0; x<=1; x+=0.01) {
 		if(sys_render_begin()) {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

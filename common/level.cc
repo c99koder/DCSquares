@@ -45,15 +45,19 @@ level_node *create_level(int win_mode,int lose_mode) {
 
 void levels_init() {
 	level_node *tmp;
-	free_play=new level_node;
 	
+	free_play=new level_node;
 	free_play->win_mode=0;
 	free_play->lose_mode=0;
 	free_play->score=0;
 	free_play->time=0;
 	free_play->tickval=1.0f; //1.0
 	free_play->speedval=1.2f; //1.2
-	free_play->scoreval=100; //100	
+	free_play->scoreval=100; //100
+	free_play->power_speed=1;
+	free_play->power_size=1;
+	free_play->power_score=1;
+	free_play->power_evil=1;	
 	free_play->next=NULL;
 	
 	//Level 1:
@@ -94,7 +98,7 @@ void levels_init() {
 	//Score, size, and speed powerups
 	tmp=create_level(MODE_SCORE,0);
 	tmp->score=5000;
-	tmp->time=10;
+	//tmp->time=10;
 	tmp->power_speed=1;
 	tmp->power_size=1;
 	tmp->power_score=1;
@@ -109,7 +113,7 @@ void levels_init() {
 	tmp->tickval=0.6;
 	tmp->scoreval=1000;
 		
-	current_level = level_list_head;
+	current_level = free_play;
 }
 
 int check_win(float gt) {

@@ -33,7 +33,6 @@
 #endif
 #ifdef DREAMCAST
 #include <kos.h>
-#include <lwip/lwip.h>
 #endif
 #include <string.h>
 #include <stdio.h>
@@ -46,6 +45,7 @@
 #include "texture.h"
 #include "options.h"
 #include "text.h"
+#include "theme.h"
 
 #ifdef DREAMCAST
 #include "vmuify.h"
@@ -56,7 +56,8 @@ void center(int x, int y,char *text, int point, float fade);
 void render_bg(int tex, float fade);
 void status(char *text);
 
-extern int title_tex;
+extern int menu_tex;
+extern themeinfo_t themeinfo;
 
 void scan_directory(char *path, char dir[][256], int *count) {
 #ifdef WIN32
@@ -176,7 +177,7 @@ void load_options() {
 	char *val;
 	int oops=0;
 
-	strcpy(gameoptions.theme,"goat");
+	strcpy(gameoptions.theme,"default");
   gameoptions.bgm=1;
   gameoptions.username[0]='\0';
   gameoptions.password[0]='\0';
@@ -481,6 +482,7 @@ void select_options() {
 	int y[] = { 170, 190, 250, 270, 290, 330 };
 	#define OPTIONS_MENU_END 5
 #endif
+	char oldtheme[100];
 	int sel=0;
   int loop=1;
 	int flash=0;
@@ -491,12 +493,19 @@ void select_options() {
 	int themecnt;
 	int t=0;
 	
+	int boxx=themeinfo.game_x+100;
+	int boxy=themeinfo.game_y+150;
+	int boxx1=(themeinfo.game_x+themeinfo.game_w)-100;
+	int boxy1=(themeinfo.game_y+150)+80;
+	
+	strcpy(oldtheme,gameoptions.theme);
+	
 	scan_directory("themes",themes,&themecnt);
 	set_font_size(22);
 	while(loop==1) {
 		if(sys_render_begin()) {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			render_bg(title_tex,1);
+			render_bg(menu_tex,1);
 #ifdef DREAMCAST
 			glKosFinishList();
 #else
@@ -504,18 +513,16 @@ void select_options() {
 			glDisable(GL_DEPTH_TEST);
 #endif
 			glLoadIdentity();
-			transbox(0,0,640,55);
-			transbox(145,127,640-145,335);
-			transbox(40,380,600,422);
-			center(320,48,"Options",38,1);
+			transbox(boxx,boxy,boxx1,boxy1);
+			center((themeinfo.game_x+themeinfo.game_w)/2,themeinfo.game_y+40,"Options",24,1);
 //      sprintf(buf,"oldlmb: %i, lmb: %i",oldlmb,lmb);
 //      draw_txt(10,10,buf,1,1,1,1,16);
-			draw_txt(150,156,"General",1,1,1,1.0,24);
-			draw_txt(170,176,"Theme:",0.8,0.8,0.8,1.0,22);
-			draw_txt(170+txt_width("Theme: "),176,gameoptions.theme,0.9,0.9,0.9,1.0,22);
-			draw_txt(170,196,"Music:",0.8,0.8,0.8,1.0,22);
-			draw_txt(170+txt_width("Music: "),196,gameoptions.bgm?(char *)"On":(char *)"Off",0.9,0.9,0.9,1.0,22);
-			draw_txt(150,232,"SquareNet",1,1,1,1.0,24);
+			draw_txt(boxx+20,boxy+20,"General",1,1,1,1.0,20);
+			draw_txt(boxx+40,boxy+40,"Theme:",0.8,0.8,0.8,1.0,18);
+			draw_txt(boxx+40+txt_width("Theme: "),boxy+40,gameoptions.theme,0.9,0.9,0.9,1.0,18);
+			draw_txt(boxx+40,boxy+60,"Music:",0.8,0.8,0.8,1.0,18);
+			draw_txt(boxx+40+txt_width("Music: "),boxy+60,gameoptions.bgm?(char *)"On":(char *)"Off",0.9,0.9,0.9,1.0,18);
+			/*draw_txt(150,232,"SquareNet",1,1,1,1.0,24);
 			draw_txt(170,256,"Username:",0.8,0.8,0.8,1.0,22);
 			draw_txt(170+txt_width("Username: "),256,gameoptions.username,0.9,0.9,0.9,1.0,22);
 			draw_txt(170,276,"Password:",0.8,0.8,0.8,1.0,22);
@@ -524,11 +531,11 @@ void select_options() {
 			draw_txt(170+txt_width("Internet Scores: "),296,gameoptions.net?(char *)"On":(char *)"Off",0.9,0.9,0.9,1.0,22);
 #ifdef DREAMCAST
 			draw_txt(170,316,"Network Setup",0.8,0.8,0.8,1.0,22);
-#endif
-			draw_txt(170,336,"Return to Menu",0.8,0.8,0.8,1.0,22);
+#endif*/
+			draw_txt(boxx+20,boxy+80,"Return to Menu",0.8,0.8,0.8,1.0,18);
 
-			center(320,402,"Use the mouse to select an option and click",20,1);
-			center(320,422,"to toggle.  Use the keyboard to edit text.",20,1);
+			center_shad(themeinfo.game_y+themeinfo.game_h-22,"Use the mouse to select an option and click",16,1);
+			center_shad(themeinfo.game_y+themeinfo.game_h-2,"to toggle.  Use the keyboard to edit text.",16,1);
 				
 			glDisable(GL_TEXTURE_2D);
 			glColor4f(1,1,1,1);
@@ -620,4 +627,8 @@ glLoadIdentity();
 		//delay(0.05);
 	}
 	write_options();
+	if(strcmp(gameoptions.theme,oldtheme)) {
+		unload_theme();
+		load_theme(gameoptions.theme,1);
+	}
 }

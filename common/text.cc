@@ -20,6 +20,7 @@
 
 #ifdef DREAMCAST
 #include <kos.h>
+#include <kos/dbglog.h>
 #include <tsu/font.h>
 //#include <dcplib/fnt.h>
 #include <GL/gl.h>

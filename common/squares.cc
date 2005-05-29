@@ -187,7 +187,7 @@ void render_squares(float square_alpha) {
 								dy = c->size - y;
 								l = (sqrt((dx*dx)+(dy*dy))/(c->size*4)) * 0.4;
 								glColor4f(c->r+l, c->g+l, c->b+l,(i==0)?square_alpha:square_alpha*((float)(4-i)/8.0f));  
-								glVertex3f(cos(angle)*c->size,sin(angle)*c->size,0.9);
+								glVertex3f(cos(angle)*c->size,sin(angle)*c->size,0.1);
 						}
 					glEnd();
 				}
@@ -221,7 +221,7 @@ void update_squares(float s) {
 	squarelist *o=NULL;
 	int lmb=0;
 	float speedmod=1;
-	static int mx=0,my=0;
+	int mx=320,my=240;
 
 	square_count=0;
 
@@ -239,6 +239,8 @@ void update_squares(float s) {
 		}
 #if defined(SDL) || defined(DREAMCAST)
 		if(c->type<PLAYER_NET) {
+			mx=c->x;
+			my=c->y;
 			read_mouse(&mx,&my,&lmb);
 			switch(poll_game_device(0)) {
 				case MOVE_UP:
