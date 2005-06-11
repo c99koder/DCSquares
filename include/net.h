@@ -11,3 +11,4 @@ void net_update();
 void netplay_init();
 void net_sendpacket(char *packet);
 void process_game_packet(char *buf);
+int lobby_connect(char *host, char *username, char *password);
