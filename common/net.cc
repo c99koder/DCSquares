@@ -35,6 +35,7 @@
 #include <string.h>
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "squares.h"
 #include "http.h"
 #include "net.h"
@@ -46,6 +47,32 @@ int lobbysocket;
 int gamesocket;
 int sendsocket;
 struct squarelist *netplayer;
+
+struct userlist_node *userlist=NULL;
+
+struct userlist_node *get_userlist() {
+	return userlist;
+}
+
+void add_user(char *username) {
+	struct userlist_node *current = new userlist_node;
+	
+	strcpy(current->username,username);
+	current->next=userlist;
+	userlist=current;
+}
+
+int userlist_size() {
+	struct userlist_node *current=userlist;
+	int count=0;
+	
+	while(current!=NULL) {
+		count++;
+		current=current->next;
+	}
+	
+	return count;
+}
 
 void lobby_send(char *packet) {
 	int numbytes;
@@ -76,13 +103,85 @@ int lobby_connect(char *host, char *username, char *password) {
 	
 	printf("incoming: %s\n",msg);
 	
-	lobby_send("0:1:c99koder:02725");
-	r=recv(lobbysocket,msg,128,0);
-	
-	printf("incoming: %s\n",msg);
-		
-	close(lobbysocket);
+	sprintf(msg,"0:1:%s:%s",username,password);
+	lobby_send(msg);
 }	
+
+void lobby_update() {
+	int r;
+	char buf[256];
+	timeval tv;
+	fd_set readfds;
+		
+	tv.tv_sec = 0;
+	tv.tv_usec = 0;
+	
+	FD_ZERO(&readfds);
+	FD_SET(lobbysocket, &readfds);
+
+	select(lobbysocket+1, &readfds, NULL, NULL, &tv);
+	
+	if (FD_ISSET(lobbysocket, &readfds)) {
+		r=recv(lobbysocket,buf,128,0);
+		printf("%s\n",buf);
+		process_packet(buf);
+	}
+}
+
+void lobby_disconnect() {
+	close(lobbysocket);
+}
+
+void process_packet(char *msg) {
+	int chan=atoi(strtok(msg,":"));
+	int msgid=atoi(strtok(NULL,":"));
+	char *data=strtok(NULL,"\0");
+	
+	switch(chan) {
+		case 0: //Channel 0: Server Data
+			process_server_packet(msgid,data);
+			break;
+		case 1: //Channel 1: Chat Data
+			process_chat_packet(msgid,data);
+			break;
+		case 2: //Channel 2: Game Data
+		//process_game_packet(strtok(NULL,"\0"));
+		break;
+	}	
+}		
+
+void process_server_packet(int msgid, char *data) {
+	char *val;
+	char buf[256];
+	
+	switch(msgid) {
+		case 1: //Server text message
+			sprintf(buf,"-- %s\n",data);
+			os_chat_insert_text(buf);
+			break;
+	}
+}
+
+void process_chat_packet(int msgid, char *data) {
+	char *val;
+	char buf[256];
+	
+	switch(msgid) {
+		case 0: //Room info
+			break;
+		case 1: //User chat message
+			val=strtok(data,":");
+			sprintf(buf,"<%s> %s\n",val,strtok(NULL,"\0"));
+			os_chat_insert_text(buf);
+			break;
+		case 2: //User has joined channel
+			add_user(data);
+			sprintf(buf,"*** %s has joined the room",data);
+			os_chat_insert_text(buf);
+			os_chat_reload_users();
+			break;
+	}
+}
 
 #if 0
 void net_sendpacket(char *packet) {
@@ -169,12 +268,7 @@ void net_update(void) {
 		addr_len = sizeof(struct sockaddr);
 		numbytes=recvfrom(gamesocket,buf,128,0,(struct sockaddr *)&their_addr, &addr_len);
 		buf[numbytes] = '\0';
-		val=strtok(buf,":");
-		switch(atoi(val)) {
-		  case 2: //Channel 2: Game Data
-			  process_game_packet(strtok(NULL,"\0"));
-				break;
-		}	
+		process_packet(buf);
   }
 } 
 
