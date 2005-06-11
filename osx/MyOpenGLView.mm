@@ -293,7 +293,6 @@ float gt=0;
 	power=0;
 	powerup_mode=-1;
 	effect_type=-1;
-	lobby_connect("127.0.0.1","c99koder","12345");
 }
 
 - (void) reshape

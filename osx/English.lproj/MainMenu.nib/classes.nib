@@ -5,6 +5,7 @@
             CLASS = ChatController; 
             LANGUAGE = ObjC; 
             OUTLETS = {
+                prefs = Preferences; 
                 tblNames = NSTableView; 
                 txtChat = NSTextView; 
                 txtInput = NSTextField; 
