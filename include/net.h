@@ -16,6 +16,7 @@ void process_server_packet(int msgid, char*data);
 void process_chat_packet(int msgid, char*data);
 int lobby_connect(char *host, char *username, char *password);
 void lobby_update();
+void lobby_disconnect();
 struct userlist_node {
 	char username[50];
 	struct userlist_node *next;

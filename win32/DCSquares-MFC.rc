@@ -90,6 +90,8 @@ BEGIN
         MENUITEM "&Challenge Mode",             ID_GAME_CHALLENGEMODE
         , CHECKED
         MENUITEM "&Free Play",                  ID_GAME_FREEPLAY
+        MENUITEM SEPARATOR
+        MENUITEM "C&onnect to Lobby...",        ID_GAME_CONNECTTOLOBBY
     END
     POPUP "&Help"
     BEGIN
@@ -214,6 +216,20 @@ BEGIN
     CTEXT           "Checking for updates...",IDC_STATUSMSG,27,12,97,8
 END
 
+IDD_CHAT DIALOGEX 0, 0, 361, 210
+STYLE DS_SETFONT | DS_MODALFRAME | DS_SETFOREGROUND | DS_FIXEDSYS | 
+    DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LISTBOX         IDC_USERLIST,258,6,97,179,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_CHATTEXT,6,6,246,180,ES_MULTILINE | ES_AUTOVSCROLL | 
+                    ES_AUTOHSCROLL | ES_READONLY | NOT WS_TABSTOP
+    EDITTEXT        IDC_CHATINPUT,6,192,246,12,ES_AUTOHSCROLL | 
+                    ES_WANTRETURN
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -316,6 +332,14 @@ BEGIN
         RIGHTMARGIN, 124
         TOPMARGIN, 7
         BOTTOMMARGIN, 27
+    END
+
+    IDD_CHAT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 354
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 203
     END
 END
 #endif    // APSTUDIO_INVOKED

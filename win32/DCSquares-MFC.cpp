@@ -8,6 +8,7 @@
 
 #include "UpdateDlg.h"
 #include "HighScoreDlg.h"
+#include "ChatDlg.h"
 #include "GeneralSettingsPage.h"
 #include "SquarenetSettingsPage.h"
 #include "UpdateSettingsPage.h"
@@ -36,6 +37,7 @@ BEGIN_MESSAGE_MAP(CDCSquaresMFCApp, CWinApp)
 	ON_COMMAND(ID_CHECK_UPDATES, OnCheckUpdates)
 	ON_COMMAND(ID_PREFS, OnPrefs)
 	ON_COMMAND(ID_SCORES_HIGHSCORES, OnScoresHighscores)
+	ON_COMMAND(ID_GAME_CONNECTTOLOBBY, OnConnectToLobby)
 END_MESSAGE_MAP()
 
 
@@ -289,4 +291,11 @@ void CDCSquaresMFCApp::OnScoresHighscores()
 	// TODO: Add your command handler code here
 	CHighScoreDlg hs;
 	hs.DoModal();
+}
+
+void CDCSquaresMFCApp::OnConnectToLobby()
+{
+	// TODO: Add your command handler code here
+	CChatDlg c;
+	c.DoModal();
 }

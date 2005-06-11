@@ -1,5 +1,7 @@
 #ifndef WIN32
 #define SOCKET int
+#else
+#define uint32_t unsigned long
 #endif
 typedef void (http_status_callback)(char *msg);
 int net_readline(SOCKET sock, char *buf, int bufsize);

@@ -80,7 +80,7 @@ void lobby_send(char *packet) {
 
   memset(buf,0,128);
 	strcpy(buf,packet);
-	write(lobbysocket,buf,128);
+	send(lobbysocket,buf,128,0);
 }
 
 int lobby_connect(char *host, char *username, char *password) {
@@ -94,7 +94,7 @@ int lobby_connect(char *host, char *username, char *password) {
 	
   sinRemote.sin_family = AF_INET;
   sinRemote.sin_addr.s_addr = resolve((char *)host);
-	if(sinRemote.sin_addr.s_addr==0) return;
+	if(sinRemote.sin_addr.s_addr==0) return -1;
   sinRemote.sin_port = htons(PORT);
   
   connect(lobbysocket, (struct sockaddr*)&sinRemote, sizeof(struct sockaddr_in));
@@ -129,7 +129,11 @@ void lobby_update() {
 }
 
 void lobby_disconnect() {
+#ifdef WIN32
+	closesocket(lobbysocket);
+#else
 	close(lobbysocket);
+#endif
 }
 
 void process_packet(char *msg) {
@@ -156,7 +160,7 @@ void process_server_packet(int msgid, char *data) {
 	
 	switch(msgid) {
 		case 1: //Server text message
-			sprintf(buf,"-- %s\n",data);
+			sprintf(buf,"-- %s",data);
 			os_chat_insert_text(buf);
 			break;
 	}
@@ -171,7 +175,7 @@ void process_chat_packet(int msgid, char *data) {
 			break;
 		case 1: //User chat message
 			val=strtok(data,":");
-			sprintf(buf,"<%s> %s\n",val,strtok(NULL,"\0"));
+			sprintf(buf,"<%s> %s",val,strtok(NULL,"\0"));
 			os_chat_insert_text(buf);
 			break;
 		case 2: //User has joined channel
