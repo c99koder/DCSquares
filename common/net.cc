@@ -74,12 +74,12 @@ int userlist_size() {
 	return count;
 }
 
-void lobby_send(char *packet) {
+void lobby_send(int chan, int msg, char *packet) {
 	int numbytes;
 	char buf[256];
 
   memset(buf,0,128);
-	strcpy(buf,packet);
+	sprintf(buf,"%i:%i:%s",chan,msg,packet);
 	send(lobbysocket,buf,128,0);
 }
 
@@ -103,8 +103,8 @@ int lobby_connect(char *host, char *username, char *password) {
 	
 	printf("incoming: %s\n",msg);
 	
-	sprintf(msg,"0:1:%s:%s",username,password);
-	lobby_send(msg);
+	sprintf(msg,"%s:%s",username,password);
+	lobby_send(0,1,msg);
 }	
 
 void lobby_update() {
