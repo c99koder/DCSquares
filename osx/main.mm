@@ -8,6 +8,7 @@
 #include <stdio.h>
 
 #include "squares.h"
+#include "net.h"
 
 int main(int argc, const char *argv[])
 {

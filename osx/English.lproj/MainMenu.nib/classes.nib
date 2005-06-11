@@ -1,5 +1,17 @@
 {
     IBClasses = (
+        {
+            ACTIONS = {chatSend = id; onChatConnect = id; }; 
+            CLASS = ChatController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                tblNames = NSTableView; 
+                txtChat = NSTextView; 
+                txtInput = NSTextField; 
+                wndChat = NSWindow; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {
             ACTIONS = {onChallengeMode = id; onFreePlay = id; }; 
@@ -47,7 +59,6 @@
             ACTIONS = {onHowToPlay = id; onWebsite = id; }; 
             CLASS = WindowController; 
             LANGUAGE = ObjC; 
-            OUTLETS = {}; 
             SUPERCLASS = NSObject; 
         }
     ); 
