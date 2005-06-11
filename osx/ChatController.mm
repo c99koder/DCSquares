@@ -9,7 +9,9 @@ NSTextView *osTxtChat;
 
 - (IBAction)chatSend:(id)sender
 {
-	os_chat_insert_text("TacoGato\n");
+	lobby_send(1,1,[[txtInput stringValue] cString]);
+	[txtInput setStringValue:@""];
+	[[txtInput window] makeFirstResponder:txtInput];
 }
 
 - (void)updateLobby
@@ -57,6 +59,7 @@ objectValueForTableColumn:(NSTableColumn *)aTableColumn
 
 void os_chat_insert_text(char *text) {
 	[[osTxtChat textStorage] appendAttributedString:[[NSAttributedString alloc] initWithString:[[NSString alloc] initWithCString:text]]];
+	[[osTxtChat textStorage] appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
 }
 
 void os_chat_reload_users() {
