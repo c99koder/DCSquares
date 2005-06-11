@@ -17,6 +17,7 @@ void process_chat_packet(int msgid, char*data);
 int lobby_connect(char *host, char *username, char *password);
 void lobby_update();
 void lobby_disconnect();
+void lobby_send(int chan, int msg, char *text);
 struct userlist_node {
 	char username[50];
 	struct userlist_node *next;
