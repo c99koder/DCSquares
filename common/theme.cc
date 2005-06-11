@@ -551,19 +551,19 @@ int load_theme(char *theme, int sfx) {
 #ifdef OPENAL
 	alGenBuffers(6, buffers);
 	alGenSources(6, sources);
-	alutLoadWAVFile(theme_dir("collect.wav"), &format, &data, &size, &freq, &loop);
+	alutLoadWAVFile((ALbyte *)theme_dir("collect.wav"), &format, &data, &size, &freq, &loop);
   alBufferData(buffers[SND_COLLECT], format, data, size, freq);
   alutUnloadWAV(format, data, size, freq);
 	addSource(SND_COLLECT,AL_FALSE);
-	alutLoadWAVFile(theme_dir("powerup.wav"), &format, &data, &size, &freq, &loop);
+	alutLoadWAVFile((ALbyte *)theme_dir("powerup.wav"), &format, &data, &size, &freq, &loop);
   alBufferData(buffers[SND_POWERUP], format, data, size, freq);
   alutUnloadWAV(format, data, size, freq);
 	addSource(SND_POWERUP,AL_FALSE);
-	alutLoadWAVFile(theme_dir("powerdown.wav"), &format, &data, &size, &freq, &loop);
+	alutLoadWAVFile((ALbyte *)theme_dir("powerdown.wav"), &format, &data, &size, &freq, &loop);
   alBufferData(buffers[SND_POWERDOWN], format, data, size, freq);
   alutUnloadWAV(format, data, size, freq);
 	addSource(SND_POWERDOWN,AL_FALSE);
-	alutLoadWAVFile(theme_dir("gameover.wav"), &format, &data, &size, &freq, &loop);
+	alutLoadWAVFile((ALbyte *)theme_dir("gameover.wav"), &format, &data, &size, &freq, &loop);
   alBufferData(buffers[SND_GAMEOVER], format, data, size, freq);
   alutUnloadWAV(format, data, size, freq);
 	addSource(SND_GAMEOVER,AL_FALSE);

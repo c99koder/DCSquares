@@ -6,33 +6,85 @@
  *  Copyright 2004 __MyCompanyName__. All rights reserved.
  *
  */
-#if 0
-#include "net.h"
-
+#ifdef WIN32
+#include <windows.h>
+#include <winsock.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+#define NET
+#define uint32_t u_long
+#endif
+#ifdef UNIX
+#include<sys/types.h>
+#include<sys/socket.h>
+#include<sys/stat.h>
+#include<netinet/in.h>
+#include<fcntl.h>
+#include <arpa/inet.h>
+#include <netdb.h>
+#include <unistd.h>
+#define SOCKET int
+#define NET
+#endif
 #ifdef DREAMCAST
 #include <kos.h>
 #include <lwip/lwip.h>
-#else
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
+#include <lwip/sockets.h>
+#define SOCKET int
 #endif
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
 #include <string.h>
-#include <sys/time.h>
-
+#include <math.h>
+#include <stdio.h>
 #include "squares.h"
+#include "http.h"
+#include "net.h"
 
 #define PORT 6000
 void debug(char *msg);
 
+int lobbysocket;
 int gamesocket;
 int sendsocket;
 struct squarelist *netplayer;
 
+void lobby_send(char *packet) {
+	int numbytes;
+	char buf[256];
+
+  memset(buf,0,128);
+	strcpy(buf,packet);
+	write(lobbysocket,buf,128);
+}
+
+int lobby_connect(char *host, char *username, char *password) {
+  struct sockaddr_in sinRemote;
+  char msg[300];
+	int r;
+	
+  printf("Connecting to %s...",host);
+	
+  lobbysocket = socket(AF_INET, SOCK_STREAM, IPPROTO_IP);
+	
+  sinRemote.sin_family = AF_INET;
+  sinRemote.sin_addr.s_addr = resolve((char *)host);
+	if(sinRemote.sin_addr.s_addr==0) return;
+  sinRemote.sin_port = htons(PORT);
+  
+  connect(lobbysocket, (struct sockaddr*)&sinRemote, sizeof(struct sockaddr_in));
+	
+	r=recv(lobbysocket,msg,128,0);
+	
+	printf("incoming: %s\n",msg);
+	
+	lobby_send("0:1:c99koder:02725");
+	r=recv(lobbysocket,msg,128,0);
+	
+	printf("incoming: %s\n",msg);
+		
+	close(lobbysocket);
+}	
+
+#if 0
 void net_sendpacket(char *packet) {
 	struct sockaddr_in their_addr; // connector's address information
 	int numbytes;
@@ -76,16 +128,17 @@ void netplay_init() {
 			exit(1);
 	}
 	debug("Hello Debug");
+	//Create the remote network player object
 	netplayer=create_square(40,40,10,PLAYER_NET);
 	netplayer->r=0;
 	netplayer->g=0;
 	netplayer->b=0.8;
 	netplayer->angle=0;
 #ifdef DREAMCAST
-  paused=1;
+  paused=1; //pause the Dreamcast so it waits for the Mac to start the game
 #endif
 #ifdef MACOS
-  net_sendpacket("2:.");
+  net_sendpacket("2:."); //Send the message to the Dreamcast telling it we're ready to play!
 #endif
 }
 
@@ -133,15 +186,15 @@ void process_game_packet(char *buf) {
 	//printf("Data: %s\n",buf);
   strcpy(buf2,buf);
 	val=strtok(buf,",");
-	if(val[0]=='.') 
+	if(val[0]=='.') //Game is ready to start
 		paused=0;
-	if(val[0]=='p') {
+	if(val[0]=='p') { //Network player's current coordinates
 		netplayer->x=atoi(strtok(NULL,","));
 		netplayer->y=atoi(strtok(NULL,","));
 		netplayer->size=atoi(strtok(NULL,","));
 		if(netplayer->size>12 || netplayer->size<0) debug(buf2);
 	}
-	if(val[0]=='c') {
+	if(val[0]=='c') { //Spawn a new square
 		x=atoi(strtok(NULL,","));
 		y=atoi(strtok(NULL,","));
 		size=atoi(strtok(NULL,","));
@@ -154,18 +207,18 @@ void process_game_packet(char *buf) {
 		c->xv=xv;
 		c->yv=yv;
 	}
-	if(val[0]=='g') {
+	if(val[0]=='g') { //Judgement!  Decide whether a remote player is allowed to collect a square by checking if we got to it first
 		c=get_square_by_id(atoi(strtok(NULL,",")));
 		if(c!=NULL) {
-			if(c->tm==0 || atoi(strtok(NULL,","))<c->tm) {
+			if(c->tm==0 || atoi(strtok(NULL,","))<c->tm) { //Remote player got the square first
 				c->deleted=1;
-				net_sendpacket("2:s");
-				give_points(PLAYER_NET);
+				net_sendpacket("2:s"); //Send the acknowledgement
+				give_points(PLAYER_NET); //Update the remote player's score on our screen
 			}
 		}
 	}
-	if(val[0]=='s') {
-		give_points(PLAYER1);
+	if(val[0]=='s') { //Square collection acknowledgement
+		give_points(PLAYER1); //give ourselves some points
 	}
 }
 #endif
