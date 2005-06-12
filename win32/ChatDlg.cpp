@@ -24,6 +24,7 @@ void CChatDlg::DoDataExchange(CDataExchange* pDX)
 	CDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_USERLIST, lstUserList);
 	DDX_Control(pDX, IDC_CHATTEXT, txtChatText);
+	DDX_Control(pDX, IDC_CHATINPUT, txtChatInput);
 }
 
 
@@ -31,6 +32,7 @@ BEGIN_MESSAGE_MAP(CChatDlg, CDialog)
 	ON_WM_CREATE()
 	ON_WM_TIMER()
 	ON_WM_CLOSE()
+	ON_BN_CLICKED(IDC_BTNSEND, OnBtnSend)
 END_MESSAGE_MAP()
 
 
@@ -42,6 +44,7 @@ void os_chat_reload_users() {
 	USES_CONVERSION;
 	struct userlist_node *current=get_userlist();
 
+	os_user_list->ResetContent();
 	while(current!=NULL) {
 		os_user_list->AddString(current->username);
 		current=current->next;
@@ -54,12 +57,8 @@ void os_chat_insert_text(char *text) {
 	os_chat_text->GetWindowText(s);
 	s += text;
 	s += "\r\n";
-	s += text;
-	s += "\r\n";
-	s += text;
-	s += "\r\n";
 	os_chat_text->SetWindowText(s);
-	os_chat_text->LineScroll(10);
+	os_chat_text->LineScroll(os_chat_text->GetLineCount());
 }
 
 int CChatDlg::OnCreate(LPCREATESTRUCT lpCreateStruct)
@@ -88,4 +87,15 @@ void CChatDlg::OnClose()
 	// TODO: Add your message handler code here and/or call default
 	lobby_disconnect();
 	CDialog::OnClose();
+}
+
+void CChatDlg::OnBtnSend()
+{
+
+	// TODO: Add your control notification handler code here
+	CString s;
+	txtChatInput.GetWindowText(s);
+	lobby_send(1,1,(char *)(LPCTSTR)s);
+	txtChatInput.SetWindowText("");
+	txtChatInput.SetFocus();
 }

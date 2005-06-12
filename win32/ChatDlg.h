@@ -25,4 +25,6 @@ public:
 	afx_msg void OnTimer(UINT nIDEvent);
 	CEdit txtChatText;
 	afx_msg void OnClose();
+	afx_msg void OnBtnSend();
+	CEdit txtChatInput;
 };
