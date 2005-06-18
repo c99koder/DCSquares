@@ -30,6 +30,10 @@
 
 #include "theme.h"
 #include "text.h"
+#include "level.h"
+
+void texture_init();
+
 // CDCSquaresMFCApp
 
 BEGIN_MESSAGE_MAP(CDCSquaresMFCApp, CWinApp)
@@ -38,6 +42,7 @@ BEGIN_MESSAGE_MAP(CDCSquaresMFCApp, CWinApp)
 	ON_COMMAND(ID_PREFS, OnPrefs)
 	ON_COMMAND(ID_SCORES_HIGHSCORES, OnScoresHighscores)
 	ON_COMMAND(ID_GAME_CONNECTTOLOBBY, OnConnectToLobby)
+	ON_COMMAND(ID_HELP_HOWTOPLAY, OnHelpHowtoplay)
 END_MESSAGE_MAP()
 
 
@@ -95,13 +100,17 @@ BOOL CDCSquaresMFCApp::InitInstance()
 	if (!pDocTemplate)
 		return FALSE;
 	AddDocTemplate(pDocTemplate);
+
+	m_pMainWnd = pDocTemplate->CreateNewFrame(pDocTemplate->CreateNewDocument(),NULL);
+	
+	//m_pMainWnd->ShowWindow(SW_HIDE);
 	// Parse command line for standard shell commands, DDE, file open
 	CCommandLineInfo cmdInfo;
 	ParseCommandLine(cmdInfo);
 	// Dispatch commands specified on the command line.  Will return FALSE if
 	// app was launched with /RegServer, /Register, /Unregserver or /Unregister.
-	if (!ProcessShellCommand(cmdInfo))
-		return FALSE;
+//	if (!ProcessShellCommand(cmdInfo))
+//		return FALSE;
 
 	LoadSettings();
 	WORD wVersionRequested;
@@ -130,14 +139,17 @@ HRESULT hr;
         DXTRACE_ERR_MSGBOX( TEXT("SetPrimaryBufferFormat"), hr );
         return FALSE;
     }
-	m_pMainWnd->ShowWindow(SW_HIDE);
-	if(strlen(ulGetError())==0 && load_theme((char *)theme.GetString(),sfx)==0) {
+	texture_init();
+	levels_init();
+		
+	if(text_init("Helvetica-Bold.txf",20)==0 && load_theme((char *)theme.GetString(),sfx)==0) {
 		// The one and only window has been initialized, so show and update it
-		m_pMainWnd->ShowWindow(SW_SHOW);
-		m_pMainWnd->UpdateWindow();
+		//m_pMainWnd->UpdateWindow();
+		//m_pMainWnd->RedrawWindow();
 		statusDlg.Create(IDD_STATUS);
 		statusDlg.CenterWindow();
 		updateDlg.autoUpdate();
+		m_pMainWnd->ShowWindow(SW_SHOW);
 	} else {
 		return FALSE;
 	}
@@ -298,4 +310,10 @@ void CDCSquaresMFCApp::OnConnectToLobby()
 	// TODO: Add your command handler code here
 	CChatDlg c;
 	c.DoModal();
+}
+
+void CDCSquaresMFCApp::OnHelpHowtoplay()
+{
+	// TODO: Add your command handler code here
+	CHyperLink::GotoURL("http://dcsquares.c99.org/howtoplay.php",0);
 }

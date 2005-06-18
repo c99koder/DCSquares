@@ -5,7 +5,6 @@
 #define IDD_ABOUTBOX                    100
 #define IDD_SETTINGS_GENERAL            102
 #define IDR_MAINFRAME                   128
-#define IDR_DCSquaresMFCTYPE            129
 #define IDD_UPDATE                      133
 #define IDD_HIGHSCORES                  136
 #define IDD_SETTINGS_SQUARENET          137
@@ -27,7 +26,6 @@
 #define IDC_USERLIST                    1027
 #define IDC_CHATTEXT                    1028
 #define IDC_CHATINPUT                   1029
-#define IDC_BUTTON1                     1030
 #define IDC_BTNSEND                     1030
 #define ID_HELP_HOWTOPLAY               32771
 #define ID_CHECK_UPDATES                32772
@@ -41,7 +39,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        141
+#define _APS_NEXT_RESOURCE_VALUE        142
 #define _APS_NEXT_COMMAND_VALUE         32778
 #define _APS_NEXT_CONTROL_VALUE         1031
 #define _APS_NEXT_SYMED_VALUE           101

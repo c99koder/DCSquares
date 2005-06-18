@@ -38,9 +38,10 @@ BEGIN_MESSAGE_MAP(CDCSquaresMFCView, CView)
 	ON_WM_TIMER()
 	ON_WM_MOUSEMOVE()
 	ON_WM_LBUTTONDOWN()
-	ON_COMMAND(ID_HELP_HOWTOPLAY, OnHelpHowtoplay)
+//	ON_COMMAND(ID_HELP_HOWTOPLAY, OnHelpHowtoplay)
 	ON_COMMAND(ID_GAME_FREEPLAY, OnGameFreeplay)
 	ON_COMMAND(ID_GAME_CHALLENGEMODE, OnGameChallengemode)
+	ON_WM_SHOWWINDOW()
 END_MESSAGE_MAP()
 
 // CDCSquaresMFCView construction/destruction
@@ -62,6 +63,7 @@ extern int title_tex;
 extern int menu_tex;
 float gt = 0;
 float fade = 0;
+float eoe=0;
 
 CDCSquaresMFCView::CDCSquaresMFCView()
 : player(NULL)
@@ -125,7 +127,7 @@ void CDCSquaresMFCView::OnDraw(CDC* /*pDC*/)
 	render_squares((gt<1?(gt*square_alpha):fade<=0?square_alpha:fade*square_alpha));
 	if(state==0) render_title(gt);
 	if(state==1) render_score(gt);
-	if(state==2) render_win(gt,85.0f/1000.0f);
+	if(state==2) render_win(gt,eoe);
 		if(gt<0.5) {
 #ifndef DREAMCAST
 			glEnable(GL_BLEND);
@@ -190,6 +192,7 @@ CDCSquaresMFCDoc* CDCSquaresMFCView::GetDocument() const // non-debug version is
 
 int CDCSquaresMFCView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
+	lpCreateStruct->style &= ~WS_VISIBLE;
 	if (CView::OnCreate(lpCreateStruct) == -1)
 		return -1;
 //return 0;
@@ -206,11 +209,6 @@ int CDCSquaresMFCView::OnCreate(LPCREATESTRUCT lpCreateStruct)
     int i= wglMakeCurrent(m_hgldc,m_hglrc);
 
 	InitGL();
-	texture_init();
-	levels_init();
-	if(text_init("Helvetica-Bold.txf",20)==0) {
-		SetTimer(1000,1000 / 85,NULL);
-	}
 	return 0;
 }
 
@@ -346,6 +344,7 @@ void CDCSquaresMFCView::OnTimer(UINT nIDEvent)
 	ScoresService::CScoresService Scores;
 	float e = ((float)GetTickCount() / 1000.0f);
 	if(state!=2) gt += (e - oe);
+	eoe = (e-oe);
 
 	if(state==0) square_alpha=0.4f;
 	if(state==1) square_alpha=1.0f;
@@ -490,12 +489,6 @@ void CDCSquaresMFCView::OnLButtonDown(UINT nFlags, CPoint point)
 	CView::OnLButtonDown(nFlags, point);
 }
 
-void CDCSquaresMFCView::OnHelpHowtoplay()
-{
-	// TODO: Add your command handler code here
-	CHyperLink::GotoURL("http://dcsquares.c99.org/howtoplay.php",0);
-}
-
 void CDCSquaresMFCView::OnGameFreeplay()
 {
 	theApp.GetMainWnd()->GetMenu()->CheckMenuItem(ID_GAME_FREEPLAY,MF_CHECKED);
@@ -506,4 +499,12 @@ void CDCSquaresMFCView::OnGameChallengemode()
 {
 	theApp.GetMainWnd()->GetMenu()->CheckMenuItem(ID_GAME_FREEPLAY,MF_UNCHECKED);
 	theApp.GetMainWnd()->GetMenu()->CheckMenuItem(ID_GAME_CHALLENGEMODE,MF_CHECKED);
+}
+
+void CDCSquaresMFCView::OnShowWindow(BOOL bShow, UINT nStatus)
+{
+	CView::OnShowWindow(bShow, nStatus);
+
+	// TODO: Add your message handler code here
+	SetTimer(1000,12,NULL);
 }

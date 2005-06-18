@@ -65,7 +65,6 @@ END
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDR_MAINFRAME           ICON                    "res\\icon1.ico"
-IDR_DCSquaresMFCTYPE    ICON                    "res\\DCSquares-MFCDoc.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -84,14 +83,6 @@ BEGIN
     POPUP "&Scores"
     BEGIN
         MENUITEM "&High Scores",                ID_SCORES_HIGHSCORES
-    END
-    POPUP "&Game"
-    BEGIN
-        MENUITEM "&Challenge Mode",             ID_GAME_CHALLENGEMODE
-        , CHECKED
-        MENUITEM "&Free Play",                  ID_GAME_FREEPLAY
-        MENUITEM SEPARATOR
-        MENUITEM "C&onnect to Lobby...",        ID_GAME_CONNECTTOLOBBY
     END
     POPUP "&Help"
     BEGIN
@@ -136,11 +127,13 @@ STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | DS_FIXEDSYS | WS_POPUP |
 CAPTION "About DCSquares"
 FONT 8, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
-    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
-    LTEXT           "DCSquares 1.8",IDC_STATIC,40,10,119,8,SS_NOPREFIX
-    LTEXT           "Copyright (C) 2005 Sam Steele",IDC_STATIC,40,23,119,8
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,21,20,SS_CENTERIMAGE
+    LTEXT           "DCSquares 2.0 (2.0.0)",IDC_STATIC,40,10,119,8,
+                    SS_NOPREFIX
+    LTEXT           "© Copyright 2004-2005 Sam Steele",IDC_STATIC,40,23,119,
+                    8
     DEFPUSHBUTTON   "OK",IDOK,178,7,50,16,WS_GROUP
-    LTEXT           "http://dcsquares.c99.org/",IDC_DCS_URL,40,36,88,8
+    LTEXT           "http://www.dcsquares.com/",IDC_DCS_URL,40,36,88,8
 END
 
 IDD_UPDATE DIALOGEX 0, 0, 270, 165
@@ -213,7 +206,7 @@ EXSTYLE WS_EX_TOPMOST
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,7,7,21,20
-    CTEXT           "Checking for updates...",IDC_STATUSMSG,27,12,97,8
+    CTEXT           "Checking for updates...",IDC_STATUSMSG,30,12,94,8
 END
 
 IDD_CHAT DIALOGEX 0, 0, 361, 210
@@ -237,8 +230,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,8,0,0
- PRODUCTVERSION 1,8,0,0
+ FILEVERSION 2,0,0,0
+ PRODUCTVERSION 2,0,0,0
  FILEFLAGSMASK 0x37L
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -254,13 +247,13 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "Sam Steele"
-            VALUE "FileDescription", "DCSquares 1.8"
-            VALUE "FileVersion", "1.8"
-            VALUE "InternalName", "DCSquares-MFC.exe"
-            VALUE "LegalCopyright", "(C) Sam Steele.  All rights reserved."
-            VALUE "OriginalFilename", "DCSquares-MFC.exe"
+            VALUE "FileDescription", "DCSquares 2.0"
+            VALUE "FileVersion", "2.0.0"
+            VALUE "InternalName", "DCSquares.exe"
+            VALUE "LegalCopyright", "© Copyright 2004-2005 Sam Steele, all rights reserved."
+            VALUE "OriginalFilename", "DCSquares.exe"
             VALUE "ProductName", "DCSquares"
-            VALUE "ProductVersion", "1.8"
+            VALUE "ProductVersion", "2.0.0"
         END
     END
     BLOCK "VarFileInfo"
