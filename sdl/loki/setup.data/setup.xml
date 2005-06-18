@@ -1,0 +1,37 @@
+<?xml version="1.0" standalone="yes"?>
+<install product="DCSquares" desc="DCSquares" version="2.0"
+         path="/usr/local/games"
+         url="http://dcsquares.c99.org"
+	 splashpos="top"
+	 update_url="http://dcsquares.c99.org/updates/updates.txt"
+>
+#  <eula>license.txt</eula>
+  <readme>README</readme>
+
+    <option install="true" required="true">
+        Base Install
+        <help>Required for use</help>
+        <binary arch="x86" libc="glibc-2.1" symlink="dcsquares" icon="icon.xpm">
+            dcsquares
+        </binary>
+        <files>
+	    icon.xpm
+	    Helvetica-Bold.txf
+	    loading.png
+	    readme.rtf
+            themes/default/*
+        </files>
+    </option>
+    <option install="true">
+        Classic theme
+        <files>
+            themes/classic/*
+        </files>
+    </option>
+    <option install="true">
+        909Squares theme
+        <files>
+            themes/909squares/*
+        </files>
+    </option>
+</install>

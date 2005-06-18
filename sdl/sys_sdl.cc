@@ -38,6 +38,8 @@ bool isActive=1;
 /* This is our SDL surface */
 SDL_Surface *surface;
 
+int detect_mouse() { return TRUE; }
+
 bool sys_render_begin() {
   SDL_Event event;
                                                                                 

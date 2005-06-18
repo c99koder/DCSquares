@@ -33,9 +33,6 @@
 #include <kos.h>
 #include <oggvorbis/sndoggvorbis.h>
 #include <dc/sound/sfxmgr.h>
-#include <lwip/lwip.h>
-#include <kosh/kosh.h>
-#include <conio/conio.h>
 
 #include "libmenu.h"
 #endif
@@ -46,6 +43,8 @@
 #include "texture.h"
 #include "sys.h"
 #include "input.h"
+#include "font.h"
+#include "level.h"
 #include <string.h>
 #include <math.h>
 
@@ -99,24 +98,41 @@ extern float power;
 extern float speedval;
 extern int powerup_mode;
 extern int loading_tex;
+int menu_select=0;
+squarelist *player;
+int exitflag=0;
+int paused=0;
+float game_gt;
+extern int bg_tex;
+extern int title_tex;
+extern int menu_tex;
+extern int effect_type;
+extern float effect_timer;
+extern int maxcombo;
+extern struct themeinfo_t themeinfo;
 
 #ifdef SDL
 extern Mix_Music *bgm;
 extern Mix_Music *title;
 #endif
 
-int render_menu(char menu[][20], int size) {
-  int x,y,lmb;
-  int w=0;
+int render_menu(char menu[][20], int size, float gt) {
+  static int x=320,y=240,ox=0,oy=0,lmb,c=-1;
+  int w=0,i;
 	char buf[200];
+	static float tm=0;
+	static float oldgt=gt;
 	
-	static int menu_select=0;
+	float mx=float(themeinfo.game_x + themeinfo.game_w) /2.0f;
+	
+	if(gt < oldgt) oldgt=gt;
+	
 	static int inside_menu=0;
   
   set_font_size(18);
 
-  for(x=0;x<size;x++) {
-    if(txt_width(menu[x])>w) w=txt_width(menu[x]);
+  for(i=0;i<size;i++) {
+    if(txt_width(menu[i])>w) w=txt_width(menu[i]);
   }
   w+=20;
   
@@ -124,52 +140,107 @@ int render_menu(char menu[][20], int size) {
 	glEnable(GL_BLEND);
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_TEXTURE_2D);
-	glColor4f(0.4,0.4,0.4,0.4);
+	glColor4f(0,0,0,0.6);
 	glBegin(GL_QUADS);
-	glVertex3f(320-(w/2),185,0.9);
-	glVertex3f(320-(w/2)+w,185,0.9);
-	glVertex3f(320-(w/2)+w,185+(size*24),0.9);
-	glVertex3f(320-(w/2),185+(size*24),0.9);
+	glVertex3f(mx-(w/2)-4,185-4,0.9);
+	glVertex3f(mx-(w/2)+w+4,185-4,0.9);
+	glVertex3f(mx-(w/2)+w+4,185+(size*24)+4,0.9);
+	glVertex3f(mx-(w/2)-4,185+(size*24)+4,0.9);
 	glEnd();
-	read_mouse(&x,&y,&lmb);
-	if(x<0) x=0;
-	if(x>640) x=640;
-	if(y<0) y=0;
-	if(y>480) y=480;
-	//sprintf(buf,"x: %i, y: %i, (320-(w/2)): %i, (320-(w/2)+w): %i",x,y,(320-(w/2)),(320-(w/2)+w));
-	//draw_txt(20,20,buf,0,0,0,1,16);
-	if(x>(320-(w/2)) && x<(320-(w/2)+w) && y>185 && y< (185+(size*24))) {
-	  menu_select=(y-185)/24;
-		inside_menu=1;
+	glColor4f(0.8,0.8,0.8,0.4);
+	glBegin(GL_QUADS);
+	glVertex3f(mx-(w/2),185,0.91);
+	glVertex3f(mx-(w/2)+w,185,0.91);
+	glVertex3f(mx-(w/2)+w,185+(size*24),0.91);
+	glVertex3f(mx-(w/2),185+(size*24),0.91);
+	glEnd();
+	
+	if(detect_mouse()) {
+		read_mouse(&x,&y,&lmb);
+		
+		if(x<0) x=0;
+		if(x>640) x=640;
+		if(y<0) y=0;
+		if(y>480) y=480;
+		//sprintf(buf,"x: %i, y: %i, (320-(w/2)): %i, (320-(w/2)+w): %i",x,y,(320-(w/2)),(320-(w/2)+w));
+		//draw_txt(20,20,buf,0,0,0,1,16);
+		
+		if((ox!=x || oy != y) && x>(273-(w/2)) && x<(273-(w/2)+w) && y>185 && y< (185+(size*24))) {
+			menu_select=(y-185)/24;
+			inside_menu=1;
+		} else {
+			inside_menu=0;
+		}
+		
+		ox=x;
+		oy=y;
+glLoadIdentity();
+#ifdef DREAMCAST
+  glDisable(GL_TEXTURE_2D);
+  glColor4f(0,0,0,0.8);
+  glBegin(GL_TRIANGLES);
+  glVertex3f(x-2,y-4,0.99);
+  glVertex3f(x+18,y+16,0.99);
+  glVertex3f(x-2,y+24,0.99);
+  glEnd();
+  glColor3f(0,0.6,0.8);
+  glBegin(GL_TRIANGLES);
+  glVertex3f(x,y,1.0);
+  glVertex3f(x+15,y+15,1.0);
+  glVertex3f(x,y+21,1.0);
+  glEnd();
+#endif
 	} else {
-		inside_menu=0;
+		x=320;
+		y=240;
+		lmb=0;
 	}
 	
 		glColor4f(1,1,1,0.7);
 		glBegin(GL_QUADS);
-		glVertex3f(320-(w/2),185+(menu_select*24),0.91);
-		glVertex3f(320-(w/2)+w,185+(menu_select*24),0.91);
-		glVertex3f(320-(w/2)+w,185+((menu_select+1)*24),0.91);
-		glVertex3f(320-(w/2),185+((menu_select+1)*24),0.91);
+		glVertex3f(mx-(w/2),185+(menu_select*24),0.91);
+		glVertex3f(mx-(w/2)+w,185+(menu_select*24),0.91);
+		glVertex3f(mx-(w/2)+w,185+((menu_select+1)*24),0.91);
+		glVertex3f(mx-(w/2),185+((menu_select+1)*24),0.91);
 		glEnd();	
 	glEnable(GL_TEXTURE_2D);
 
-  for(x=0;x<size;x++) {
-    draw_txt(320-(w/2)+10,208+(x*24),menu[x],0,0,0,1,18);
+  for(i=0;i<size;i++) {
+    draw_txt(mx-(w/2)+12,208+(i*24),menu[i],0,0,0,1,18);
+    draw_txt(mx-(w/2)+10,206+(i*24),menu[i],0.8,0.8,0.8,1,18);
   }
 	
-	if(lmb) return menu_select; else return -1;
+	c=poll_game_device(0);
+	if(c==0) {
+		tm=0;
+		oldgt=gt;
+	}
+	if(tm>0) {
+		tm-=(gt-oldgt);
+	} else {
+		if(c!=0) {
+			tm=0.25;
+			//printf("c: %i\n",c);
+			switch(c) {
+				case MOVE_UP:
+					menu_select--;
+					if(menu_select<0) menu_select=0;
+					break;
+				case MOVE_DOWN:
+					menu_select++;
+					if(menu_select>=size) menu_select = size-1;
+					break;
+				case BUTTON_X:
+#ifdef DREAMCAST
+					snakemain();
+#endif
+					break;
+			}
+		}
+	}
+	oldgt=gt;
+	if(lmb || c==FIRE_BTN || c==START_BTN) return menu_select; else return -1;
 }
-
-squarelist *player;
-int exitflag=0;
-int paused=0;
-int gt;
-extern int bg_tex;
-extern int title_tex;
-extern int effect_type;
-extern float effect_timer;
-extern int maxcombo;
 
 void delay(float seconds) {
 #ifdef SDL
@@ -208,9 +279,6 @@ void high_scores() {
 	powerup_mode=-1;
 	effect_type=-1;
 	
-	effect_type=1;
-	effect_timer=1;
-	
 #ifdef SDL
   st = (float)SDL_GetTicks() / 1000.0f;
 	SDL_ShowCursor(SDL_DISABLE);
@@ -224,23 +292,20 @@ void high_scores() {
 	destroy_list();
 	init_genrand(st*1000);
 	
-	//player=create_square((640/2)-4,(480/2)-4,8,PLAYER1);
-	//netplay_init();
-
 	while(1) {
     if(poll_game_device(0)==QUIT_BTN) {
       exitflag=1;
       break;
     }
 		read_mouse(&x,&y,&lmb);
-    if(poll_game_device(0)==START_BTN || lmb!=0 || gt > 3) {
+    if(poll_game_device(0)==START_BTN || lmb!=0 || gt > 5) {
       break;
     }
 	if(paused==0) {
 #ifdef DREAMCAST
     timer_ms_gettime(&s,&ms);
 
-	//update_lcds();
+	  update_lcds();
 		gt=(s+((float)ms/1000.0f))-st;
 #endif
 #ifdef SDL
@@ -254,47 +319,26 @@ void high_scores() {
 		add_squares(gt - ot);
 		update_squares(gt - ot);
 
-		/*if((tick%2==1) && (oldx!=player->x || oldy!=player->y)) {
-		  //sprintf(tmp,"2:p,%i,%i,%i",player->x,player->y,player->size);
-		  //net_sendpacket(tmp);
-			oldx=player->x;
-			oldy=player->y;
-		}*/
-		
 		if(sys_render_begin()) {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			render_bg_game(title_tex,1);
+			render_bg_game(menu_tex,1);
 #ifdef DREAMCAST
 			glKosFinishList();
 #else
 			glEnable(GL_BLEND);
 			glDisable(GL_DEPTH_TEST);
-			//if(debugtxt[0]!='\0') center(100,debugtxt,20,0);
 #endif
-			//render_squares(0.6);
-			glColor4f(0,0,0,0.4);
+			render_squares(0.6);
+			/*glColor4f(0,0,0,0.4);
 			glBegin(GL_QUADS);
 			glVertex3f(24,40,0.11);
 			glVertex3f(24+497,40,0.11);
 			glVertex3f(24+497,40+401,0.11);
 			glVertex3f(24,441,0.11);
-			glEnd();
-			//render_score(gt);
-			//render_title(gt - ot);
+			glEnd();*/
+
 			if(gt>= 0.5) render_highscores();
-			//if(render_menu(menu,4)!=-1) break;
-			//sprintf(tmp,"Score: %i Squares: %i Combo: %i",score,squares,maxcombo);
-			//draw_txt(0,480,tmp,0,0,0,1,16);
-			//c=check_collide(player);
-			/*if(c!=NULL&&c->type>PLAYER_NET) {
-				c->deleted=1;
-				if(c->type==SCORE && powerup_mode!=EVIL) {
-				  c->tm=gt;
-				  //sprintf(tmp,"2:g,%i,%i",c->id,c->tm);
-					//net_sendpacket(tmp);
-					give_points(PLAYER1);
-				}
-			}*/
+
 			if(gt<0.5) {
 #ifndef DREAMCAST
 				glEnable(GL_BLEND);
@@ -317,18 +361,14 @@ void high_scores() {
 #ifdef DIRECTX
     while(timeGetTime() < delayend) {
 			sys_render_begin();
-			//net_update();
 		}
 #endif
-  } else {
-	  //status("Paused");
-		//net_update();
 	}
 	}
 	st+=gt;
 	gt=0;
 	ot=0;
-	//x=player->size;
+
 	while(gt <= 0.49f) {
 #ifdef DREAMCAST
     timer_ms_gettime(&s,&ms);
@@ -340,7 +380,174 @@ void high_scores() {
 #endif
 
 		update_squares(gt-ot);
-		//player->size=x+(200.0f * gt);
+
+		if(sys_render_begin()) {
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			render_bg_game(menu_tex,1);
+#ifdef DREAMCAST
+			glKosFinishList();
+#else
+			glEnable(GL_BLEND);
+			glDisable(GL_DEPTH_TEST);
+#endif
+			/*glColor4f(0,0,0,0.4);
+			glBegin(GL_QUADS);
+			glVertex3f(24,40,0.11);
+			glVertex3f(24+497,40,0.11);
+			glVertex3f(24+497,40+401,0.11);
+			glVertex3f(24,441,0.11);
+			glEnd();*/
+						//render_squares(1.0f-((gt)/2.0f));
+			//render_highscores();
+#ifndef DREAMCAST
+			glEnable(GL_BLEND);
+			glDisable(GL_DEPTH_TEST);
+#endif
+			glDisable(GL_TEXTURE_2D);
+			glLoadIdentity();
+			glColor4f(0.8,0.8,0.8,(gt/0.5));
+			glBegin(GL_QUADS);
+			glVertex3f(0,0,0.9);
+			glVertex3f(640,0,0.9);
+			glVertex3f(640,480,0.9);
+			glVertex3f(0,480,0.9);
+			glEnd();
+			sys_render_finish();
+		}
+
+		ot=gt;
+	}
+
+	destroy_list();
+}
+
+void level_stats() {
+#ifdef DREAMCAST
+  uint32 s,ms,tm;
+  float st=0,gt=0,ot=0;
+#endif
+#ifdef SDL
+  float st=0,gt=0,ot=0;
+#endif
+#ifdef DIRECTX
+  DWORD delayend;
+#endif
+	squarelist *c;
+	int max=0,size=6;
+
+	char tmp[256];
+	char tmp2[30];
+	int seed,x,y,lmb;
+  int oldx=-1,oldy=-1;
+	
+	tickval=1.0f; //1.0
+	speedval=1.2f; //1.2
+	scoreval=100; //100
+	power=0;
+	powerup_mode=-1;
+	effect_type=-1;
+
+#ifdef SDL
+  st = (float)SDL_GetTicks() / 1000.0f;
+	SDL_ShowCursor(SDL_DISABLE);
+	Mix_VolumeMusic(MIX_MAX_VOLUME);
+#endif
+#ifdef DREAMCAST
+
+	timer_ms_gettime(&s,&ms);
+	st=s+((float)ms/1000.0f);
+#endif
+	destroy_list();
+	init_genrand(st*1000);
+	
+	while(1) {
+    if(poll_game_device(0)==QUIT_BTN) {
+      exitflag=1;
+      break;
+    }
+		read_mouse(&x,&y,&lmb);
+    if(poll_game_device(0)==START_BTN || lmb!=0) {
+      break;
+    }
+	if(paused==0) {
+#ifdef DREAMCAST
+    timer_ms_gettime(&s,&ms);
+
+	  update_lcds();
+		gt=(s+((float)ms/1000.0f))-st;
+#endif
+#ifdef SDL
+		gt=((float)SDL_GetTicks()/1000.0f)-st;
+#endif
+#ifdef DIRECTX
+					while(ShowCursor(FALSE)>=0);
+  DWORD delayend=timeGetTime()+30;
+#endif
+	
+		add_squares(gt - ot);
+		update_squares(gt - ot);
+
+		if(sys_render_begin()) {
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			render_bg_game(menu_tex,1.0);
+#ifdef DREAMCAST
+			glKosFinishList();
+#else
+			glEnable(GL_BLEND);
+			glDisable(GL_DEPTH_TEST);
+#endif
+			render_squares(0.6);
+/*			glColor4f(0,0,0,0.4);
+			glBegin(GL_QUADS);
+			glVertex3f(24,40,0.11);
+			glVertex3f(24+497,40,0.11);
+			glVertex3f(24+497,40+401,0.11);
+			glVertex3f(24,441,0.11);
+			glEnd();*/
+
+			if(gt>= 0.5) render_win(game_gt,(gt-ot));
+
+			if(gt<0.5) {
+#ifndef DREAMCAST
+				glEnable(GL_BLEND);
+				glDisable(GL_DEPTH_TEST);
+#endif
+				glDisable(GL_TEXTURE_2D);
+				glColor4f(0.8,0.8,0.8,1-(gt/0.5));
+				glBegin(GL_QUADS);
+				glVertex3f(0,0,0.9);
+				glVertex3f(640,0,0.9);
+				glVertex3f(640,480,0.9);
+				glVertex3f(0,480,0.9);
+				glEnd();
+			}
+			sys_render_finish();
+		}
+
+   	ot = gt;
+
+#ifdef DIRECTX
+    while(timeGetTime() < delayend) {
+			sys_render_begin();
+		}
+#endif
+	}
+	}
+	st+=gt;
+	gt=0;
+	ot=0;
+
+	while(gt <= 0.49f) {
+#ifdef DREAMCAST
+    timer_ms_gettime(&s,&ms);
+
+		gt=(s+((float)ms/1000.0f))-st;
+#endif
+#ifdef SDL
+		gt=((float)SDL_GetTicks()/1000.0f)-st;
+#endif
+
+		update_squares(gt-ot);
 
 		if(sys_render_begin()) {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -350,7 +557,6 @@ void high_scores() {
 #else
 			glEnable(GL_BLEND);
 			glDisable(GL_DEPTH_TEST);
-			//if(debugtxt[0]!='\0') center(100,debugtxt,20,0);
 #endif
 			glColor4f(0,0,0,0.4);
 			glBegin(GL_QUADS);
@@ -397,7 +603,7 @@ void title_screen() {
 	squarelist *c;
 	int max=0,size=6;
 
-	char menu[][20] = { "Challenge Mode","Free Play","Options","Quit" };
+	char menu[][20] = { "Free Play","Challenge Mode","Highscores","Options","Quit" };
 
 	char tmp[256];
 	char tmp2[30];
@@ -410,10 +616,28 @@ void title_screen() {
 	power=0;
 	powerup_mode=-1;
 	effect_type=-1;
+	menu_select=0;
+	
+	if(gameoptions.bgm) {
+#ifdef DREAMCAST
+    printf("Loading bgdim_loop.ogg\n");
+		sndoggvorbis_stop();
+		sndoggvorbis_start(theme_dir("bgdim_loop.ogg"),1);
+#endif
+#ifdef SDL
+	  Mix_PlayMusic(title,-1);
+#endif
+#ifdef DIRECTX
+    stop_bgm();
+    play_bgm(A2W(theme_dir("bgdim_loop.ogg")));
+#endif
+	}
+#ifdef SDL
+	while(SDL_ShowCursor(SDL_ENABLE)<1);
+#endif
 	
 #ifdef SDL
   st = (float)SDL_GetTicks() / 1000.0f;
-	SDL_ShowCursor(SDL_DISABLE);
 	Mix_VolumeMusic(MIX_MAX_VOLUME);
 #endif
 #ifdef DREAMCAST
@@ -428,95 +652,55 @@ void title_screen() {
 	//netplay_init();
 
 	while(1) {
-    if(poll_game_device(0)==QUIT_BTN) {
-      exitflag=1;
-      break;
-    }
-		read_mouse(&x,&y,&lmb);
-    if(poll_game_device(0)==START_BTN || lmb!=0) {
-      break;
-    }
-	if(paused==0) {
-#ifdef DREAMCAST
-    timer_ms_gettime(&s,&ms);
+		if(paused==0) {
+	#ifdef DREAMCAST
+			timer_ms_gettime(&s,&ms);
 
-	  update_lcds();
-		gt=(s+((float)ms/1000.0f))-st;
-#endif
-#ifdef SDL
-		gt=((float)SDL_GetTicks()/1000.0f)-st;
-#endif
-#ifdef DIRECTX
-					while(ShowCursor(FALSE)>=0);
-  DWORD delayend=timeGetTime()+30;
-#endif
-	
-		add_squares(gt - ot);
-		update_squares(gt - ot);
+			update_lcds();
+			gt=(s+((float)ms/1000.0f))-st;
+	#endif
+	#ifdef SDL
+			gt=((float)SDL_GetTicks()/1000.0f)-st;
+	#endif
+			if((gt-ot) >= (1.0f / 120.0f)) {
+				add_squares(gt - ot);
+				update_squares(gt - ot);
 
-		/*if((tick%2==1) && (oldx!=player->x || oldy!=player->y)) {
-		  //sprintf(tmp,"2:p,%i,%i,%i",player->x,player->y,player->size);
-		  //net_sendpacket(tmp);
-			oldx=player->x;
-			oldy=player->y;
-		}*/
-		
-		if(sys_render_begin()) {
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			render_bg_game(title_tex,1);
-#ifdef DREAMCAST
-			glKosFinishList();
-#else
-			glEnable(GL_BLEND);
-			glDisable(GL_DEPTH_TEST);
-			//if(debugtxt[0]!='\0') center(100,debugtxt,20,0);
-#endif
-			render_squares(0.6);
-			//render_score(gt);
-			render_title(gt - ot);
-			//render_highscores();
-			//if(render_menu(menu,4)!=-1) break;
-			//sprintf(tmp,"Score: %i Squares: %i Combo: %i",score,squares,maxcombo);
-			//draw_txt(0,480,tmp,0,0,0,1,16);
-			//c=check_collide(player);
-			/*if(c!=NULL&&c->type>PLAYER_NET) {
-				c->deleted=1;
-				if(c->type==SCORE && powerup_mode!=EVIL) {
-				  c->tm=gt;
-				  //sprintf(tmp,"2:g,%i,%i",c->id,c->tm);
-					//net_sendpacket(tmp);
-					give_points(PLAYER1);
+				if(sys_render_begin()) {
+					glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+					render_bg_game(title_tex,1);
+		#ifdef DREAMCAST
+					glKosFinishList();
+		#else
+					glEnable(GL_BLEND);
+					glDisable(GL_DEPTH_TEST);
+		#endif
+					render_squares(0.6);
+					render_title(gt - ot);
+					if(render_menu(menu,5,gt)!=-1) break;
+					if(gt<0.5) {
+		#ifndef DREAMCAST
+						glEnable(GL_BLEND);
+						glDisable(GL_DEPTH_TEST);
+		#endif
+						glDisable(GL_TEXTURE_2D);
+						glColor4f(0.8,0.8,0.8,1-(gt/0.5));
+						glBegin(GL_QUADS);
+						glVertex3f(0,0,0.9);
+						glVertex3f(640,0,0.9);
+						glVertex3f(640,480,0.9);
+						glVertex3f(0,480,0.9);
+						glEnd();
+					}
+					sys_render_finish();
 				}
-			}*/
-			if(gt<0.5) {
-#ifndef DREAMCAST
-				glEnable(GL_BLEND);
-				glDisable(GL_DEPTH_TEST);
-#endif
-				glDisable(GL_TEXTURE_2D);
-				glColor4f(0.8,0.8,0.8,1-(gt/0.5));
-				glBegin(GL_QUADS);
-				glVertex3f(0,0,0.9);
-				glVertex3f(640,0,0.9);
-				glVertex3f(640,480,0.9);
-				glVertex3f(0,480,0.9);
-				glEnd();
+
+				ot = gt;
 			}
-			sys_render_finish();
-		}
-
-   	ot = gt;
-
-#ifdef DIRECTX
-    while(timeGetTime() < delayend) {
-			sys_render_begin();
+		} else {
+			//status("Paused");
 			//net_update();
 		}
-#endif
-  } else {
-	  //status("Paused");
-		//net_update();
-	}
 	}
 	st+=gt;
 	gt=0;
@@ -593,6 +777,25 @@ void play_game() {
 	power=0;
 	powerup_mode=-1;
 
+	if(gameoptions.bgm) {
+#ifdef DREAMCAST
+    printf("Loading bg_loop.ogg\n");
+		sndoggvorbis_stop();
+		sndoggvorbis_start(theme_dir("bg_loop.ogg"),1);
+#endif
+#ifdef SDL
+	  Mix_PlayMusic(bgm,-1);
+#endif
+#ifdef DIRECTX
+    stop_bgm();
+    play_bgm(A2W(theme_dir("bg_loop.ogg")));
+#endif
+	}
+#ifdef SDL
+	while(SDL_ShowCursor(SDL_DISABLE)>0);
+#endif
+
+
 #ifdef SDL
   st = (float)SDL_GetTicks() / 1000.0f;
 	SDL_ShowCursor(SDL_DISABLE);
@@ -603,14 +806,10 @@ void play_game() {
 #endif
 	destroy_list();
 	
-	player=create_square((640/2)-4,(480/2)-4,8,PLAYER1);
+	player=create_square((640/2)-4,(480/2)-4,6,PLAYER1);
 	//netplay_init();
 
 	while(1) {
-    if(poll_game_device(0)==QUIT_BTN) {
-      exitflag=1;
-      break;
-    }
 	if(paused==0) {
 #ifdef DREAMCAST
 		update_lcds();
@@ -626,7 +825,7 @@ void play_game() {
   DWORD delayend=timeGetTime()+30;
 #endif
 	
-	//if((gt-ot)>(1.0f / 60.0f)) {
+	if((gt-ot)>(1.0f / 120.0f)) {
 		if(gt>1.0f) add_squares(gt - ot);
 		update_squares(gt - ot);
 
@@ -649,12 +848,13 @@ void play_game() {
 			//if(debugtxt[0]!='\0') center(100,debugtxt,20,0);
 #endif
 			render_squares(gt<1?(gt):1.0);
-			render_score(gt);
+			if(gt>0.4) render_score(gt);
 
 			c=check_collide(player);
 			if(c!=NULL && ((c->type == ENEMY && powerup_mode!=INVINC) || (c->type == SCORE && powerup_mode==EVIL))) {
 				break;
 			}
+			if(check_win(gt) != 0) break;
 			/*if(c!=NULL&&c->type>PLAYER_NET) {
 				c->deleted=1;
 				if(c->type==SCORE && powerup_mode!=EVIL) {
@@ -690,14 +890,14 @@ void play_game() {
 			sys_render_finish();
 		}
 		ot = gt;
-	//}
+	}
   } else {
 	  //status("Paused");
 		//net_update();
 	}
 	}
 	if(combo>maxcombo) maxcombo=combo;
-	name_entry(gt*1000);
+	game_gt=gt;
 	
 	st+=gt;
 	gt=0;
@@ -732,7 +932,7 @@ void play_game() {
 			//if(debugtxt[0]!='\0') center(100,debugtxt,20,0);
 #endif
 			render_squares(1.0f-((gt)/2.0f));
-			render_score(gt);
+			//render_score(gt);
 #ifndef DREAMCAST
 			glEnable(GL_BLEND);
 			glDisable(GL_DEPTH_TEST);
@@ -845,10 +1045,11 @@ int /*main*/WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 	//set_status_callback(callback);
 	c99_mouse_init();
 	texture_init();
+	levels_init();
 #ifdef DREAMCAST
 	text_init("helvetica_dc.txf",40);
 #else
-	text_init("helvetica-bold.txf",40);
+	text_init("Helvetica-Bold.txf",40);
 #endif
 	load_options();
   write_options();
@@ -857,10 +1058,6 @@ int /*main*/WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
   set_show_cursor(0);
 	set_echo(0);
 	set_keyblock(0);
-	for(int x=0; x<2; x++) status("Starting Network");
-	//net_init();
-	//lwip_kos_init();
-	for(int x=0; x<2; x++) status("Loading");
 	text_set_z(1);
 #endif
 	glDisable(GL_TEXTURE_2D);
@@ -876,122 +1073,48 @@ int /*main*/WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 	//status("Checking for updates");
 	//check_updates();
 #endif
+#ifdef DREAMCAST
+  load_font("hybrid.fnt");
+#endif
 
 //name_entry();
 
 while(exitflag==0) {
-	if(gameoptions.bgm) {
-#ifdef DREAMCAST
-    printf("Loading bgdim_loop.ogg\n");
-		sndoggvorbis_stop();
-		sndoggvorbis_start(theme_dir("bgdim_loop.ogg"),1);
-#endif
-#ifdef SDL
-	  Mix_PlayMusic(title,-1);
-#endif
-#ifdef DIRECTX
-    stop_bgm();
-    play_bgm(A2W(theme_dir("bgdim_loop.ogg")));
-#endif
-	}
-#ifdef SDL
-	SDL_ShowCursor(SDL_ENABLE);
-#endif
 	title_screen();
 	if(exitflag==0) {
-	if(gameoptions.bgm) {
-#ifdef DREAMCAST
-    printf("Loading bg_loop.ogg\n");
-		sndoggvorbis_stop();
-		sndoggvorbis_start(theme_dir("bg_loop.ogg"),1);
-#endif
-#ifdef SDL
-	  Mix_PlayMusic(bgm,-1);
-#endif
-#ifdef DIRECTX
-    stop_bgm();
-    play_bgm(A2W(theme_dir("bg_loop.ogg")));
-#endif
-	}
-#ifdef SDL
-	SDL_ShowCursor(SDL_DISABLE);
-#endif
-  play_game();
-	}
-	if(exitflag==0) {
-		high_scores();
+		switch(menu_select)
+		{
+			case 0:
+				current_level = free_play;
+				play_game();
+				level_stats();
+				name_entry(game_gt*1000);
+				break;
+			case 1:
+				current_level = level_list_head;
+				while(current_level!=NULL) {
+					play_game();
+					level_stats();
+					if(check_win(game_gt) == 1) {
+						current_level=current_level->next;
+					} else {
+						current_level=NULL;
+					}	
+				}
+				current_level=free_play;
+				break;
+			case 2:
+				high_scores();
+				break;
+			case 3:
+				select_options();
+				break;
+			case 4:
+				exitflag=1;
+				break;
+		}
 	}
 }
-/*	do {
-    title_screen();
-    if(menu_select==3) break;
-		if(menu_select==2) {
-		  select_options();
-	#ifdef DREAMCAST
-			sndoggvorbis_stop();
-	#endif
-			unload_theme();
-			load_theme(gameoptions.theme);
-	#ifdef DREAMCAST
-			if(gameoptions.bgm) sndoggvorbis_start(theme_dir("bgdim_loop.ogg"),1);
-			text_set_z(1);
-	#endif
-	#ifdef SDL
-		if(gameoptions.bgm) Mix_PlayMusic(title,-1);
-	#endif
-	#ifdef DIRECTX
-			stop_bgm();
-			if(gameoptions.bgm) play_bgm(A2W(theme_dir("bgdim_loop.ogg")));
-	#endif
-		}
-		if(menu_select==1) {
-		  high_scores("");
-		}
-		if(menu_select==0) {
-			if(gameoptions.bgm) {
-			printf("Loading bg_loop.ogg\n");
-	#ifdef DREAMCAST
-			sndoggvorbis_stop();
-			sndoggvorbis_start(theme_dir("bg_loop.ogg"),1);
-			text_set_z(1);
-	#endif
-	#ifdef SDL
-			SDL_ShowCursor(SDL_DISABLE);
-		Mix_PlayMusic(bgm,-1);
-	#endif
-	#ifdef DIRECTX
-			stop_bgm();
-			play_bgm(A2W(theme_dir("bg_loop.ogg")));
-	#endif
-		}
-			play_game();
-#ifdef DREAMCAST
-		text_set_z(2);
-#endif
-			if(gameoptions.bgm) {
-    printf("Loading bgdim_loop.ogg\n");
-#ifdef DREAMCAST
-		sndoggvorbis_stop();
-		if(gameoptions.bgm) sndoggvorbis_start(theme_dir("bgdim_loop.ogg"),1);
-#endif
-#ifdef SDL
-  	SDL_ShowCursor(SDL_ENABLE);
-	  if(gameoptions.bgm) Mix_PlayMusic(title,-1);
-#endif
-#ifdef DIRECTX
-	while(ShowCursor(TRUE)<0);
-    stop_bgm();
-    if(gameoptions.bgm) play_bgm(A2W(theme_dir("bgdim_loop.ogg")));
-#endif
-		}
-		}
-#ifdef DREAMCAST
-	} while(1);
-	sndoggvorbis_stop();
-#else
-	} while(exitflag==0);
-#endif
-*/
 	glDisable(GL_TEXTURE_2D);
 	glLoadIdentity();
 	
