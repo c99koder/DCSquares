@@ -124,12 +124,12 @@ float gt=0;
 		if(fade<=0) {
 			if(state==0 || state==2) {
 				if(state==0) {
-					if([mnuChallengeMode state] == NSOnState) {
+					/*if([mnuChallengeMode state] == NSOnState) {
 						current_level=level_list_head;
 					}
-					if([mnuFreePlay state] == NSOnState) {
+					if([mnuFreePlay state] == NSOnState) {*/
 						current_level=free_play;
-					}
+					//}
 					state=1;
 				} else {
 					if(check_win(gt) == 1) {

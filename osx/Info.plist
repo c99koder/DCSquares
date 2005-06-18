@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>DCSquares</string>
 	<key>CFBundleGetInfoString</key>
-	<string>DCSquares 1.6</string>
+	<string>2.0.0</string>
 	<key>CFBundleIconFile</key>
 	<string>icon.icns</string>
 	<key>CFBundleIdentifier</key>
@@ -19,13 +19,13 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>DCSquares</string>
+	<string>Version 2.0</string>
 	<key>CFBundleSignature</key>
 	<string>DCSQ</string>
 	<key>CFBundleVersion</key>
-	<string>1.6</string>
+	<string>2.0.0</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright 2005 Sam Steele.  All rights reserved.</string>
+	<string>© Copyright 2004-2005 Sam Steele, all rights reserved.</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>

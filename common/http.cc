@@ -117,7 +117,7 @@ uint32_t resolve(char *name) {
 }
 #endif
 #ifdef UNIX
-uint32_t resolve(char *name) {
+long unsigned int resolve(char *name) {
   char tmp[200];
   struct hostent *h=gethostbyname(name);
   if(h==NULL) {
