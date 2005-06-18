@@ -28,10 +28,4 @@
             themes/classic/*
         </files>
     </option>
-    <option install="true">
-        909Squares theme
-        <files>
-            themes/909squares/*
-        </files>
-    </option>
 </install>

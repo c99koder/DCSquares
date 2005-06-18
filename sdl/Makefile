@@ -9,4 +9,5 @@ squares: ${OBJS}
 	cp squares loki/bin/Linux/x86/glibc-2.1/dcsquares
 clean:
 	rm -rf ${OBJS} squares
-
+package:
+	~/loki_setup/makeself/makeself.sh --follow loki dcsquares-2.0-linux.run dcsquares ./setup.sh
