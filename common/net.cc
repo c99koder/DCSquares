@@ -123,7 +123,7 @@ void lobby_update() {
 	
 	if (FD_ISSET(lobbysocket, &readfds)) {
 		r=recv(lobbysocket,buf,128,0);
-		printf("%s\n",buf);
+		//printf("%s\n",buf);
 		process_packet(buf);
 	}
 }
@@ -172,6 +172,13 @@ void process_chat_packet(int msgid, char *data) {
 	
 	switch(msgid) {
 		case 0: //Room info
+			val=strtok(data,":");
+			switch(val[0]) {
+				case 'U': //User
+					add_user(strtok(NULL,"\0"));
+					os_chat_reload_users();
+					break;
+			}
 			break;
 		case 1: //User chat message
 			val=strtok(data,":");

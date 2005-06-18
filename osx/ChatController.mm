@@ -60,6 +60,7 @@ objectValueForTableColumn:(NSTableColumn *)aTableColumn
 void os_chat_insert_text(char *text) {
 	[[osTxtChat textStorage] appendAttributedString:[[NSAttributedString alloc] initWithString:[[NSString alloc] initWithCString:text]]];
 	[[osTxtChat textStorage] appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
+	[osTxtChat scrollLineDown:nil];
 }
 
 void os_chat_reload_users() {
