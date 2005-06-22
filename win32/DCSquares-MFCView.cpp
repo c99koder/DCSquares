@@ -15,6 +15,7 @@
 #include "game.h"
 #include "score.h"
 #include "level.h"
+#include "rand.h"
 #include "DCSquares-MFC.h"
 #include "hyperlink.h"
 #include "DCSquares-MFCDoc.h"
@@ -395,6 +396,17 @@ void CDCSquaresMFCView::OnTimer(UINT nIDEvent)
 						theApp.statusDlg.UpdateWindow();
 						Scores.submitScore(theApp.username.AllocSysString(),theApp.password.AllocSysString(),score,maxcombo,gt,L"PC",&x);
 						theApp.statusDlg.ShowWindow(SW_HIDE);
+						highcode[0]='\0';
+					} else {
+						int cnt=0;
+						do {
+							encrypt(genrand_int32()%26,(unsigned char *)build_code(score,squares,maxcombo,0),(unsigned char *)highcode);
+							cnt++;
+							if(cnt>20) {
+								highcode[0]='\0';
+								break;
+							}
+						} while(invalid_code(highcode));
 					}
 				}
 				destroy_list();

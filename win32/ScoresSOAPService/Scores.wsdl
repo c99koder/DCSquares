@@ -113,7 +113,7 @@
   </binding>
   <service name="ScoresService">
     <port name="ScoresPort" binding="s0:ScoresBinding">
-      <soap:address location="http://dcsquares.c99.org/2.0/SOAP/scores.php" />
+      <soap:address location="http://www.dcsquares.c99.org/SOAP/scores.php" />
     </port>
   </service>
 </definitions>

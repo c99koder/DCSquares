@@ -4,24 +4,25 @@ Name: default; Description: Default theme; Flags: fixed; Types: custom compact f
 Name: classic_theme; Description: Classic theme; Types: full
 [Icons]
 Name: {group}\DCSquares; Filename: {app}\DCSquares.exe; WorkingDir: {app}; IconFilename: {app}\DCSquares.exe; IconIndex: 0
-Name: {group}\ReadMe; Filename: {app}\readme.rtf
+Name: {group}\{cm:UninstallProgram, DCSquares}; Filename: {uninstallexe}
+Name: {group}\DCSquares Online; Filename: {app}\DCSquares.url
 [Setup]
 AppCopyright=©2005 Sam Steele
 AppName=DCSquares
-AppVerName=DCSquares 1.8
+AppVerName=DCSquares 2.0
 DefaultDirName={pf}\DCSquares
 DefaultGroupName=DCSquares
 ShowLanguageDialog=yes
 AppPublisher=Sam Steele
-AppPublisherURL=http://dcsquares.c99.org/2.0/
+AppPublisherURL=http://dcsquares.c99.org/
 AppVersion=1.8
 AppID={{2759251C-66AE-4578-84F4-8AD0560AC2E4}
 UninstallDisplayIcon={app}\DCSquares.exe
 UninstallDisplayName=DCSquares
-WizardSmallImageFile=C:\DCSquares\icon.bmp
-VersionInfoVersion=1.8.5.25
+WizardSmallImageFile=C:\Documents and Settings\Sam\Desktop\DCSquares\icon.bmp
+VersionInfoVersion=2.0.0.0
 VersionInfoCompany=Sam Steele
-VersionInfoTextVersion=DCSquares 1.8
+VersionInfoTextVersion=DCSquares 2.0
 InfoBeforeFile=
 MinVersion=4.1.1998,5.0.2195
 InternalCompressLevel=ultra
@@ -79,3 +80,7 @@ Source: dlls\vorbis.dll; DestDir: {sys}; Tasks: ovcodec; Flags: sharedfile
 Name: {app}\themes; Components: DCSquares
 Name: {app}\themes\classic; Components: classic_theme
 Name: {app}\themes\default; Components: default
+[INI]
+Filename: {app}\DCSquares.url; Section: InternetShortcut; Key: URL; String: http://dcsquares.c99.org/
+[UninstallDelete]
+Type: files; Name: {app}\DCSquares.url

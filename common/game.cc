@@ -24,7 +24,7 @@ void add_squares(float st) {
 
 	oldgt=gt;
 
-	if(genrand_int32()%6==0) max=4; else max=2;
+	if(genrand_int32()%8==0) max=4; else max=2;
 	//max=4;
 	size=6+(genrand_int32()%4);
 

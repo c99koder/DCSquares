@@ -274,36 +274,36 @@ char *build_code(int score, int squares, int combo, int level) {
 	static unsigned char tmp2[40];
 	int x,check=0;
 	
-	encode(score,5,tmp);
-	strcpy(tmp2,tmp);
-	encode(squares,1,tmp);
-	strcat(tmp2,tmp);
-	encode(combo,1,tmp);
-	strcat(tmp2,tmp);
-	encode(level,1,tmp);
-	strcat(tmp2,tmp);
+	encode(score,5,(char *)tmp);
+	strcpy((char*)tmp2,(char *)tmp);
+	encode(squares,1,(char *)tmp);
+	strcat((char *)tmp2,(char *)tmp);
+	encode(combo,1,(char *)tmp);
+	strcat((char *)tmp2,(char *)tmp);
+	encode(level,1,(char *)tmp);
+	strcat((char *)tmp2,(char *)tmp);
 	
 #ifdef MACOS
-  strcat(tmp2,"@");
+  strcat((char *)tmp2,"@");
 #endif  
 #ifdef WIN32
-  strcat(tmp2,"A");
+  strcat((char *)tmp2,"A");
 #endif  
 #ifdef DREAMCAST
-  strcat(tmp2,"B");
+  strcat((char *)tmp2,"B");
 #endif  
 #ifdef LINUX
-	strcat(tmp2,"C");
+	strcat((char *)tmp2,"C");
 #endif
 	
-	for(x=0;x<strlen(tmp2);x++) {
+	for(x=0;x<strlen((char *)tmp2);x++) {
 		check += tmp2[x]-'?';
 	}
 	check %= 22;
 	tmp2[x]=check + 'C';
 	tmp2[x+1]='\0';
 	
-	return tmp2;
+	return (char *)tmp2;
 }
 
 void urlencode(char *c, char *buf) {

@@ -376,7 +376,7 @@
 		</Filter>
 		<Filter
 			Name="ScoresSOAPService"
-			UniqueIdentifier="http://dcsquares.c99.org/2.0/SOAP/scores.php?wsdl">
+			UniqueIdentifier="http://www.dcsquares.c99.org/SOAP/scores.php?wsdl">
 			<File
 				RelativePath=".\ScoresSOAPService\results.discomap">
 			</File>
