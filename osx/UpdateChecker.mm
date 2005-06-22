@@ -18,17 +18,16 @@ void status(char *text);
 	char ct[100];
 	int len=0;
 	FILE *f;
-return;
+
 	status("Checking for updates");
-	http_get_file("/tmp/DCS_LATEST","dcsquares.c99.org",80,"/updates/LATEST-OSX",ct,&len);
+	http_get_file("/tmp/DCS_LATEST","www.dcsquares.c99.org",80,"/updates/LATEST-OSX",ct,&len);
 	f=fopen("/tmp/DCS_LATEST","r");
 	if(!f) return;
 	[[NSUserDefaults standardUserDefaults] setValue:[NSDate date] forKey:@"lastUpdate"];
 
 	fgets(ct,100,f);
-	//printf("%s\n",ct);
-	if(strcmp("1.4\n",ct)) {
-		http_get_file("/tmp/DCS_CHANGES","dcsquares.c99.org",80,"/updates/CHANGES-OSX",ct,&len);
+	if(strcmp("2.0.0\n",ct)) {
+		http_get_file("/tmp/DCS_CHANGES","www.dcsquares.c99.org",80,"/updates/CHANGES-OSX",ct,&len);
 		[updateTxt readRTFDFromFile:@"/tmp/DCS_CHANGES"];
 		[updateWin center];
 		[updateWin makeKeyAndOrderFront:updateWin];

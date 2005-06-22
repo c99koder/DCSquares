@@ -328,9 +328,9 @@ void render_win(float gametime, float interval) {
 	if(combo > maxcombo) maxcombo = combo;
 	
 	if(check_win(gt)==1) {
-		center_shad(themeinfo.game_y+40,"Level Complete",24,1);
+		center_shad_rgb(themeinfo.game_y+40,"Level Complete",24,1,1,1,1);
 	} else {
-		center_shad(themeinfo.game_y+40,"Game Over",24,1);
+		center_shad_rgb(themeinfo.game_y+40,"Game Over",24,1,1,1,1);
 	}
 	if(gt>0.5) {
 		sprintf(tmp,"Squares: %i",squares);
@@ -360,11 +360,20 @@ void render_win(float gametime, float interval) {
 		}
 		draw_txt(themeinfo.game_x+40,themeinfo.game_y+160,tmp,float(themeinfo.text_r)/255.0f,float(themeinfo.text_g)/255.0f,float(themeinfo.text_b)/255.0f,1,18);
 	}
+	
+	if(highcode[0]!='\0') {
+		center_shad(themeinfo.game_y+200,"Your code for this score is:",18,1);
+		center_shad_rgb(themeinfo.game_y+220,highcode,18,1,1,1,1);
+		center_shad(themeinfo.game_y+240,"You can enter this code on the web",18,1);
+		center_shad(themeinfo.game_y+260,"at http://dcsquares.c99.org/ to",18,1);
+		center_shad(themeinfo.game_y+280,"compete against players worldwide!",18,1);	
+	}
+	
 	if(check_win(gametime)==1) center_shad(themeinfo.game_y+themeinfo.game_h-22,"Congratulations!  You have completed this level!",16,1);
 #ifdef DREAMCAST
-	center_shad(themeinfo.game_y+themeinfo.game_h-2,"Press start or click to continue.",16,1);
+	center_shad_rgb(themeinfo.game_y+themeinfo.game_h-2,"Press start or click to continue.",16,1,1,1,1);
 #else
-	center_shad(themeinfo.game_y+themeinfo.game_h-2,"Click the mouse to continue.",16,1);
+	center_shad_rgb(themeinfo.game_y+themeinfo.game_h-2,"Click the mouse to continue.",16,1,1,1,1);
 #endif
 }
 

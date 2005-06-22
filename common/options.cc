@@ -215,7 +215,7 @@ void load_options() {
 	  p=NULL;
 	  strtok(buf,"=");
 	  val=strtok(NULL,"\n");
-		printf("%s=%s\n",buf,val);
+		//printf("%s=%s\n",buf,val);
 		if(!strcmp(buf,"net")) {
 			p=NULL;
 			gameoptions.net=atoi(val);

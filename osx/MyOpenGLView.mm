@@ -22,6 +22,7 @@
 #include "score.h"
 #include "level.h"
 #include "net.h"
+#include "rand.h"
 
 #ifdef OPENAL
 extern ALuint buffers[6];
@@ -50,6 +51,8 @@ extern int title_tex;
 extern int menu_tex;
 NSWindow *gamewindow;
 float gt=0;
+
+void status(char *msg);
 
 @implementation MyOpenGLView
 /* This is the preferred way to determine events */
@@ -118,6 +121,7 @@ float gt=0;
 {
 	squarelist *c;
 	int play=0;
+	char tmp[100];
 
 	if(fade>0) {
 		fade -= [timer timeInterval];
@@ -161,9 +165,22 @@ float gt=0;
 				} else {
 					state=2;
 					if([prefs getAutoSubmit] && strlen([prefs getUsername])>0 && strlen([prefs getPassword])>0) {
+						status("Submitting score");
 						[ScoresService submitScore:[NSString stringWithCString:[prefs getUsername]] 
 						in_password:[NSString stringWithCString:[prefs getPassword]] 
 						in_score:score in_combo:maxcombo in_time:gt in_platform:@"Mac"];
+						status(NULL);
+						highcode[0]='\0';
+					} else {
+						int cnt=0;
+						do {
+							encrypt(genrand_int32()%26,build_code(score,squares,maxcombo,0),highcode);
+							cnt++;
+							if(cnt>20) {
+								highcode[0]='\0';
+								break;
+							}
+						} while(invalid_code(highcode));
 					}
 				}
 				destroy_list();

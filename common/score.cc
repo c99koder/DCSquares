@@ -235,54 +235,75 @@ int invalid_code(char *text) {
   return 0;
 }
 
-void encode(int score, char *text) {
+void encode(int score, int size, char *text) {
   char tmp[30]="";
-  char sig[4]="DCS";
   int val;
-  //printf("%i\n",score);
-  for(int x=0;x<5;x++) {
-	text[(x*2)]=sig[x%3];
-	val=(int)(score/pow(22,5-x));
-    text[(x*2)+1]=(val+'C');
-	//printf("%i/%i=%i\n",score,(int)pow(22,4-x),val);
-	score-=val*(int)pow(22,5-x);
+
+  for(int x=0;x<size;x++) {
+		val=(int)(score/pow(22,size-x));
+    text[x]=(val+'C');
+		score-=val*(int)pow(22,size-x);
   }
-  text[(5*2)]=sig[5%3];
-  text[(5*2)+1]=(score)+'C';
-  //printf("%i\n",score);
-  text[12]='\0';
-  //printf("%s\n",text);
-#ifdef MACOS
-  strcat(text,"B@");
-#endif  
-#ifdef WIN32
-  strcat(text,"BA");
-#endif  
-#ifdef DREAMCAST
-  strcat(text,"BB");
-#endif  
-#ifdef LINUX
-	strcat(text,"BC");
-#endif
-  text[14]='\0';
-  //printf("%s\n",text);
+	
+  text[x]=(score)+'C';
+	text[x+1] = '\0';
 }
 
 void encrypt(int seed, unsigned char *text, unsigned char *out) {
 	int new_seed=0;
-	int x;
-	strcpy((char *)out,(char *)text);
-	for(x=0;x<strlen((char *)out);x++) {
-		//printf("%c\n",out[x]);
-		out[x]-='?';
+	int x=0,y=0;
+
+	out[x++]=seed+'A';
+	for(y=0;y<strlen((char *)text);y++) {
+		out[x]=text[y] - '?';
 		new_seed=out[x];
 		out[x]+=seed;
 		out[x]%=27;
-		seed=out[x];//new_seed;
+		seed=new_seed;
 		out[x]+='?';
+		if(x==4 || x == 10) {
+			out[++x] = '-';
+		}
+		x++;
 	}
 	out[x]='\0';
-	//printf("%s\n",out);
+}
+
+char *build_code(int score, int squares, int combo, int level) {
+	unsigned char tmp[10];
+	static unsigned char tmp2[40];
+	int x,check=0;
+	
+	encode(score,5,tmp);
+	strcpy(tmp2,tmp);
+	encode(squares,1,tmp);
+	strcat(tmp2,tmp);
+	encode(combo,1,tmp);
+	strcat(tmp2,tmp);
+	encode(level,1,tmp);
+	strcat(tmp2,tmp);
+	
+#ifdef MACOS
+  strcat(tmp2,"@");
+#endif  
+#ifdef WIN32
+  strcat(tmp2,"A");
+#endif  
+#ifdef DREAMCAST
+  strcat(tmp2,"B");
+#endif  
+#ifdef LINUX
+	strcat(tmp2,"C");
+#endif
+	
+	for(x=0;x<strlen(tmp2);x++) {
+		check += tmp2[x]-'?';
+	}
+	check %= 22;
+	tmp2[x]=check + 'C';
+	tmp2[x+1]='\0';
+	
+	return tmp2;
 }
 
 void urlencode(char *c, char *buf) {
