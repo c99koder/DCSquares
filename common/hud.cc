@@ -267,8 +267,8 @@ void render_score(float gt) {
 
 	if(current_level->lose_mode & MODE_TIME) {
 		center(themeinfo.time_x,themeinfo.time_y,format_time(current_level->time - gt),themeinfo.time_size,alpha);
-	}		
-	if(current_level->win_mode & MODE_TIME) {
+	}	else {	
+	//if(current_level->win_mode & MODE_TIME) {
 		center(themeinfo.time_x,themeinfo.time_y,format_time(gt),themeinfo.time_size,alpha);
 	}		
 		
@@ -284,12 +284,12 @@ void render_title(float gt) {
 	static float bstep=-0.01f;
 	static float st=0;
 
-	if(highcode[0]!='\0') {
+	/*if(highcode[0]!='\0') {
 		sprintf(tmp,"%i",highscore);
 		center_shad(100,tmp,20,1);
 		sprintf(tmp,"%s",highcode);
 		center_shad(120,tmp,16,1);
-	}
+	}*/
 #if !defined(SDL) && !defined(DREAMCAST)
 	center_shad_rgb(310,"Click to Begin",20,alpha,1,1,1);
 #endif
