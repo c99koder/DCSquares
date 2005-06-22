@@ -3,12 +3,16 @@
 
 #include <stdio.h>
 
+void status(char *msg);
+
 @implementation ScoreController
 
 - (IBAction)getScores:(id)sender
 {
 		unsigned int index;
+		status("Retrieving scores");
     scores = (NSArray*)[ScoresService getScores:@"" in_endDate:@"" in_count:@"15"];
+		status(NULL);
 		//printf("Read %i records\n",[scores count]);
 		for(index =0; index< [scores count]; index++){
 			scoreInfo = (NSDictionary*)[scores objectAtIndex:index];

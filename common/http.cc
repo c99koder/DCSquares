@@ -35,16 +35,16 @@ using namespace std;
 #include "http.h"
 
 #ifdef DREAMCAST
-#define USER_AGENT "DCSquares/1.4 (Dreamcast)"
+#define USER_AGENT "DCSquares/2.0.0 (Dreamcast)"
 #endif
 #ifdef LINUX
-#define USER_AGENT "DCSquares/1.4 (Linux)"
+#define USER_AGENT "DCSquares/2.0.0 (Linux)"
 #endif
 #ifdef WIN32
-#define USER_AGENT "DCSquares/1.4 (Windows)"
+#define USER_AGENT "DCSquares/2.0.0 (Windows)"
 #endif
 #ifdef MACOS
-#define USER_AGENT "DCSquares/1.4 (Macintosh)"
+#define USER_AGENT "DCSquares/2.0.0 (Macintosh)"
 #endif
 
 void (*status_callback)(char *)=NULL;
