@@ -4,7 +4,7 @@ all:squares.bin
 
 include $(KOS_BASE)/Makefile.rules
 
-KOS_CFLAGS += -I../include -g  -Iinclude -DDREAMCAST -DOPENGL -DNET
+KOS_CFLAGS += -I../include -g  -Iinclude -DDREAMCAST -DOPENGL
 
 squares.bin: ${OBJS}
 	kos-c++ $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -g -o squares.elf \

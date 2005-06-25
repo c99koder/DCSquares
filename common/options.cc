@@ -474,15 +474,23 @@ glLoadIdentity();
 #endif
 
 void select_options() {
+#ifdef DREAMCAST
+  uint32 s,ms,tm;
+  float st=0,gt=0,ot=0;
+#endif
+#ifdef SDL
+  float st=0,gt=0,ot=0;
+#endif	
 	set_font_size(16);
 	int boxx=themeinfo.game_x+100;
-	int boxy=themeinfo.game_y+150;
 	int boxx1=(themeinfo.game_x+themeinfo.game_w)-100;
 #ifdef DREAMCAST
-	int boxy1=(themeinfo.game_y+150)+80;
+	int boxy=themeinfo.game_y+150;
+	int boxy1=(themeinfo.game_y+150)+100;
 	int y[] = { boxy+40, boxy+60, boxy+100 };
 	#define OPTIONS_MENU_END 2
 #else
+	int boxy=themeinfo.game_y+120;
 	int boxy1=(themeinfo.game_y+150)+180;
 	int y[] = { boxy+40, boxy+60, boxy+100, boxy+120, boxy+140, boxy+180 };
 	#define OPTIONS_MENU_END 5
@@ -491,18 +499,35 @@ void select_options() {
 	int sel=0;
   int loop=1;
 	int flash=0;
-	int rot=0;
+	float rot=0;
 	int x,mx=0,my=0,lmb=0,oldlmb=1;
   char buf[256];
 	char themes[100][256];
 	int themecnt;
 	int t=0;
+	int pgd=0,opgd=0;
 	
 	strcpy(oldtheme,gameoptions.theme);
 	
 	scan_directory("themes",themes,&themecnt);
 	set_font_size(22);
+#ifdef SDL
+  st = (float)SDL_GetTicks() / 1000.0f;
+#endif
+#ifdef DREAMCAST
+	timer_ms_gettime(&s,&ms);
+	st=s+((float)ms/1000.0f);
+#endif	
 	while(loop==1) {
+#ifdef DREAMCAST
+    timer_ms_gettime(&s,&ms);
+		
+	  //update_lcds();
+		gt=(s+((float)ms/1000.0f))-st;
+#endif
+#ifdef SDL
+		gt=((float)SDL_GetTicks()/1000.0f)-st;
+#endif		
 		if(sys_render_begin()) {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			render_bg(menu_tex,1);
@@ -547,6 +572,7 @@ void select_options() {
 			glVertex3f(6,6,0);
 			glVertex3f(-6,6,0);
 			glEnd();
+#ifndef DREAMCAST
 			if(flash && (sel==2 || sel==3)) {
 				set_font_size(18);
 				glLoadIdentity();
@@ -559,8 +585,9 @@ void select_options() {
 				glVertex3f(0,8,0);
 				glEnd();
 			}
+#endif
 #ifdef DREAMCAST
-glLoadIdentity();
+	glLoadIdentity();
   glDisable(GL_TEXTURE_2D);
   glColor4f(0,0,0,0.8);
   glBegin(GL_TRIANGLES);
@@ -587,8 +614,12 @@ glLoadIdentity();
 		for(x=0;x<=OPTIONS_MENU_END;x++) {
 		  if(my>y[x]-14 && my<y[x]+6) sel=x;
 		}
-		if(rot%2==0) {
-			switch(poll_game_device(0)) {
+		
+		pgd=poll_game_device(0);
+		
+		if((int)rot%45==0 || pgd != opgd) {
+			opgd=pgd;
+			switch(pgd) {
 				case MOVE_DOWN:
 					sel++;
 					if(sel>OPTIONS_MENU_END) sel=OPTIONS_MENU_END;
@@ -621,10 +652,10 @@ glLoadIdentity();
 			line_input(gameoptions.username);
 		}
 		if(sel==3) line_input(gameoptions.password);
-		rot+=2;
+		rot+=(gt-ot)*360;
 		if(rot>=360) rot=0;
-		if(rot%90==0) {flash++; flash%=2; }
-		//delay(0.05);
+		if((int)rot%180==0) {flash++; flash%=2; }
+		ot=gt;
 	}
 	do {
 		if(sys_render_begin()) {

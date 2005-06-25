@@ -25,28 +25,28 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
-#endif
-#include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+#endif
 #ifdef DREAMCAST
 #include <kos.h>
 #include <oggvorbis/sndoggvorbis.h>
 #include <dc/sound/sfxmgr.h>
 
 #include "libmenu.h"
+int snakemain();
 #endif
 #ifndef WIN32
 #include <sys/time.h>
 #endif
-#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
 #include "texture.h"
 #include "sys.h"
 #include "input.h"
 #include "font.h"
 #include "level.h"
-#include <string.h>
-#include <math.h>
 
 #include "text.h"
 #include "squares.h"

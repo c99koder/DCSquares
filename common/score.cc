@@ -53,9 +53,12 @@ score_table_t * tab=NULL;
 #include "http.h"
 #include "options.h"
 
+struct score_list_node *score_list_head=NULL;
+
+#if defined(SDL) || defined(DREAMCAST) 
+
 void status(char *msg);
 extern gameoptions_t gameoptions;
-struct score_list_node *score_list_head=NULL;
 
 void save_scores() {
 	struct score_list_node *current=score_list_head;
@@ -132,7 +135,10 @@ void score_list_init() {
   strcat(buf,"\\squares-scores.ini");
   printf("%s\n",buf);
 #endif
-	if(gameoptions.net) http_get_file(buf,"dcsquares.c99.org",80,"/scores_raw.php",ct,&len);
+	if(gameoptions.net) {
+		status("Downloading high score list");
+		http_get_file(buf,"dcsquares.c99.org",80,"/scores_raw.php",ct,&len);
+	}
   f=fopen(buf,"rb");
 	if(f) {
 		for(int x=0; x< 10; x++) {
@@ -231,6 +237,8 @@ void score_list_insert(char *name, uint32 score,uint32 combo,uint32 time,uint32 
 		prev->next=scorenode;
 	}
 }
+
+#endif
 
 char highcode[20]="";
 int highscore=1000;
@@ -333,6 +341,7 @@ void urlencode(char *c, char *buf) {
 }
 
 void submit_code(char *s, char *username, char *password) {
+#ifdef NET
   char buf[512];
 	char ct[20];
 	int len;
@@ -358,7 +367,6 @@ void submit_code(char *s, char *username, char *password) {
 #endif
 	sprintf(buf,"/score_post_raw.php?username=%s&password=%s&s=%s",u,p,s);
 #ifdef UNIX
-	status(buf);
 	http_get_file("/tmp/post.tmp","dcsquares.c99.org",80,buf,ct,&len);
 	f=fopen("/tmp/post.tmp","rb");
 #else 
@@ -395,4 +403,5 @@ void submit_code(char *s, char *username, char *password) {
 #ifdef DREAMCAST
     fs_chdir(cwd);
 #endif	
+#endif
 }
