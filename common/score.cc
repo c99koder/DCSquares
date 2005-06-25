@@ -357,9 +357,13 @@ void submit_code(char *s, char *username, char *password) {
 	status(buf);
 #endif
 	sprintf(buf,"/score_post_raw.php?username=%s&password=%s&s=%s",u,p,s);
+#ifdef UNIX
+	http_get_file("/tmp/post.tmp","dcsquares.c99.org",80,buf,ct,&len);
+	f=fopen("/tmp/post.tmp","rb");
+#else 
 	http_get_file("post.tmp","dcsquares.c99.org",80,buf,ct,&len);
-	
 	f=fopen("post.tmp","rb");
+#endif
 	if(!f) {
 		sprintf(buf,"Unable to connect to server");
 	} else {
