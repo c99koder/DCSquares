@@ -51,6 +51,9 @@ score_table_t * tab=NULL;
 #include "text.h"
 #include "score.h"
 #include "http.h"
+#include "options.h"
+
+void status(char *msg);
 
 struct score_list_node *score_list_head=NULL;
 
@@ -117,6 +120,8 @@ void score_list_init() {
 	FILE *f;
 	char buf[200];
 	char name[32];
+	char ct[40];
+	int len=0;
 	uint32 score,time,combo,level;
 
 #ifdef UNIX
