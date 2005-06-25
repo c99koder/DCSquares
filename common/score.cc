@@ -54,7 +54,7 @@ score_table_t * tab=NULL;
 #include "options.h"
 
 void status(char *msg);
-
+extern gameoptions_t gameoptions;
 struct score_list_node *score_list_head=NULL;
 
 void save_scores() {
