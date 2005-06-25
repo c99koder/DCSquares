@@ -539,7 +539,7 @@ void select_options() {
 				
 			glDisable(GL_TEXTURE_2D);
 			glColor4f(1,1,1,1);
-			glTranslatef(boxx+8,y[sel]-6,0.8);
+			glTranslatef(boxx+28,y[sel]-10,0.8);
 			glRotatef(rot,0,0,1);
 			glBegin(GL_QUADS);
 			glVertex3f(-6,-6,0);
@@ -628,7 +628,7 @@ glLoadIdentity();
 	}
 	do {
 		read_mouse(&mx,&my,&lmb);
-	} while(lmb!=0);
+	} while(lmb);
 	write_options();
 	if(strcmp(gameoptions.theme,oldtheme)) {
 		unload_theme();
