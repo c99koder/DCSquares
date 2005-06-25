@@ -1088,19 +1088,21 @@ while(exitflag==0) {
 			case 0:
 				current_level = free_play;
 				play_game();
-				cnt=0;
-				do {
-					encrypt(genrand_int32()%26,(unsigned char *)build_code(score,squares,maxcombo,0),(unsigned char *)highcode);
-					cnt++;
-					if(cnt>20) {
+				if(score>1000) {
+					cnt=0;
+					do {
+						encrypt(genrand_int32()%26,(unsigned char *)build_code(score,squares,maxcombo,0),(unsigned char *)highcode);
+						cnt++;
+						if(cnt>20) {
+							highcode[0]='\0';
+							break;
+						}
+						printf("%s\n",highcode);
+					} while(invalid_code(highcode));		
+					if(highcode[0]!='\0' && gameoptions.net && gameoptions.username[0]!='\0' && gameoptions.password[0]!='\0') {
+						submit_code(highcode,gameoptions.username,gameoptions.password);
 						highcode[0]='\0';
-						break;
 					}
-					printf("%s\n",highcode);
-				} while(invalid_code(highcode));		
-				if(gameoptions.net && gameoptions.username[0]!='\0' && gameoptions.password[0]!='\0') {
-					submit_code(highcode,gameoptions.username,gameoptions.password);
-					highcode[0]='\0';
 				}
 				level_stats();
 				//name_entry(game_gt*1000);
