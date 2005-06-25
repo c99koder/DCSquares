@@ -389,8 +389,8 @@ void render_highscores() {
 	set_font_size(20);	
 	
 	draw_txt(85,180-28,"Name",1,1,1,1,20);
-	draw_txt(280-(txt_width("999999")/2)-(txt_width("Score")/2),180-28,"Score",1,1,1,1,20);
-	draw_txt(360-(txt_width("99")/2)-(txt_width("Combo")/2),180-28,"Combo",1,1,1,1,20);
+	draw_txt(300-(txt_width("999999")/2)-(txt_width("Score")/2),180-28,"Score",1,1,1,1,20);
+	draw_txt(380-(txt_width("99")/2)-(txt_width("Combo")/2),180-28,"Combo",1,1,1,1,20);
 	draw_txt(490-(txt_width("999.99")/2)-(txt_width("Time")/2),180-28,"Time",1,1,1,1,20);
 	
 	for(x=0; x<10; x++) {
@@ -401,13 +401,13 @@ void render_highscores() {
 		draw_txt(85-txt_width(tmp),x*22+180,tmp,1,1,1,1,20);
 #endif
 		if(current!=NULL) {
-			draw_txt(80,x*22+180,current->name,(rank==x+1)?1:(float)themeinfo.text_r/255.0f,(rank==x+1)?1:(float)themeinfo.text_g/255.0f,(rank==x+1)?1:(float)themeinfo.text_b/255.0f,1,20);
+			draw_txt(80,x*22+180,current->name,(rank==x+1)?1:(float)themeinfo.text_r/255.0f,(rank==x+1)?1:(float)themeinfo.text_g/255.0f,(rank==x+1)?1:(float)themeinfo.text_b/255.0f,1,18);
 			sprintf(tmp,"%i",current->score);
-			draw_txt(280-txt_width(tmp),x*22+180,tmp,(rank==x+1)?1:(float)themeinfo.text_r/255.0f,(rank==x+1)?1:(float)themeinfo.text_g/255.0f,(rank==x+1)?1:(float)themeinfo.text_b/255.0f,1,20);
+			draw_txt(280-txt_width(tmp),x*22+180,tmp,(rank==x+1)?1:(float)themeinfo.text_r/255.0f,(rank==x+1)?1:(float)themeinfo.text_g/255.0f,(rank==x+1)?1:(float)themeinfo.text_b/255.0f,1,18);
 			sprintf(tmp,"%i",current->combo);
-			draw_txt(360-txt_width(tmp),x*22+180,tmp,(rank==x+1)?1:(float)themeinfo.text_r/255.0f,(rank==x+1)?1:(float)themeinfo.text_g/255.0f,(rank==x+1)?1:(float)themeinfo.text_b/255.0f,1,20);
+			draw_txt(360-txt_width(tmp),x*22+180,tmp,(rank==x+1)?1:(float)themeinfo.text_r/255.0f,(rank==x+1)?1:(float)themeinfo.text_g/255.0f,(rank==x+1)?1:(float)themeinfo.text_b/255.0f,1,18);
 			sprintf(tmp,"%.2f",current->time/1000.0f);
-			draw_txt(490-txt_width(tmp),x*22+180,tmp,(rank==x+1)?1:(float)themeinfo.text_r/255.0f,(rank==x+1)?1:(float)themeinfo.text_g/255.0f,(rank==x+1)?1:(float)themeinfo.text_b/255.0f,1,20);
+			draw_txt(490-txt_width(tmp),x*22+180,tmp,(rank==x+1)?1:(float)themeinfo.text_r/255.0f,(rank==x+1)?1:(float)themeinfo.text_g/255.0f,(rank==x+1)?1:(float)themeinfo.text_b/255.0f,1,18);
 			current=current->next;
 		} else {
 			draw_txt(80,x*22+180,"---",0.03,0.58,1,1,20);
