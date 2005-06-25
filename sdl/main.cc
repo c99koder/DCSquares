@@ -677,7 +677,7 @@ void title_screen() {
 		#endif
 					render_squares(0.6);
 					render_title(gt - ot);
-					if(render_menu(menu,5,gt)!=-1) break;
+					if(render_menu(menu,4,gt)!=-1) break;
 					if(gt<0.5) {
 		#ifndef DREAMCAST
 						glEnable(GL_BLEND);
