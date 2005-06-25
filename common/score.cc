@@ -237,9 +237,9 @@ int invalid_code(char *text) {
 
 void encode(int score, int size, char *text) {
   char tmp[30]="";
-  int val;
+  int val,x;
 
-  for(int x=0;x<size;x++) {
+  for(x=0;x<size;x++) {
 		val=(int)(score/pow(22,size-x));
     text[x]=(val+'C');
 		score-=val*(int)pow(22,size-x);
