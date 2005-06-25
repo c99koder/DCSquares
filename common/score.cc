@@ -387,7 +387,9 @@ void submit_code(char *s, char *username, char *password) {
 	if(buf[0]!='\0') {
 		MessageBox("Unable to submit score",buf);
 	}
-
+#endif
+#ifdef LINUX
+	status(buf);
 #endif
 #ifdef DREAMCAST
     fs_chdir(cwd);
