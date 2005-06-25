@@ -1097,7 +1097,11 @@ while(exitflag==0) {
 						break;
 					}
 					printf("%s\n",highcode);
-				} while(invalid_code(highcode));				
+				} while(invalid_code(highcode));		
+				if(gameoptions.net && gameoptions.username[0]!='\0' && gameoptions.password[0]!='\0') {
+					submit_code(highcode,gameoptions.username,gameoptions.password);
+					highcode[0]='\0';
+				}
 				level_stats();
 				//name_entry(game_gt*1000);
 				break;

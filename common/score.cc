@@ -132,12 +132,13 @@ void score_list_init() {
   strcat(buf,"\\squares-scores.ini");
   printf("%s\n",buf);
 #endif
-	if(gameoptions.net) http_get_file(buf,"dcsquares.c99.org",80,"/scores_raw.new.php",ct,&len);
+	if(gameoptions.net) http_get_file(buf,"dcsquares.c99.org",80,"/scores_raw.php",ct,&len);
   f=fopen(buf,"rb");
 	if(f) {
 		for(int x=0; x< 10; x++) {
 			fgets(buf,200,f);
 			strncpy(name,buf,12);
+			name[12]='\0';
 			if(name[strlen(name)-1]=='\n') {
 				name[strlen(name)-1]='\0';
 			}
