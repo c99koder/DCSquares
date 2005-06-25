@@ -603,7 +603,7 @@ void title_screen() {
 	squarelist *c;
 	int max=0,size=6;
 
-	char menu[][20] = { "Free Play","Challenge Mode","Highscores","Options","Quit" };
+	char menu[][20] = { "New Game","Highscores","Options","Quit" };
 
 	char tmp[256];
 	char tmp2[30];
@@ -1090,7 +1090,7 @@ while(exitflag==0) {
 				level_stats();
 				name_entry(game_gt*1000);
 				break;
-			case 1:
+			/*case 1:
 				current_level = level_list_head;
 				while(current_level!=NULL) {
 					play_game();
@@ -1102,14 +1102,14 @@ while(exitflag==0) {
 					}	
 				}
 				current_level=free_play;
-				break;
-			case 2:
+				break;*/
+			case 1:
 				high_scores();
 				break;
-			case 3:
+			case 2:
 				select_options();
 				break;
-			case 4:
+			case 3:
 				exitflag=1;
 				break;
 		}
