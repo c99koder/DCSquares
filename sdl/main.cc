@@ -110,6 +110,7 @@ extern int effect_type;
 extern float effect_timer;
 extern int maxcombo;
 extern struct themeinfo_t themeinfo;
+extern char highcode[20];
 
 #ifdef SDL
 extern Mix_Music *bgm;
@@ -985,7 +986,7 @@ int /*main*/WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 {
 	char text[200];
 	char text2[200];
-	int len;
+	int len,cnt=0;
 	c99_sys_init("DCSquares");
 #ifdef SDL
 	SDL_ShowCursor(SDL_ENABLE);
@@ -1087,6 +1088,7 @@ while(exitflag==0) {
 			case 0:
 				current_level = free_play;
 				play_game();
+				cnt=0;
 				do {
 					encrypt(genrand_int32()%26,build_code(score,squares,maxcombo,0),highcode);
 					cnt++;
