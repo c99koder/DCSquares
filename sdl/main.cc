@@ -1090,7 +1090,7 @@ while(exitflag==0) {
 				play_game();
 				cnt=0;
 				do {
-					encrypt(genrand_int32()%26,build_code(score,squares,maxcombo,0),highcode);
+					encrypt(genrand_int32()%26,(unsigned char *)build_code(score,squares,maxcombo,0),(unsigned char *)highcode);
 					cnt++;
 					if(cnt>20) {
 						highcode[0]='\0';
