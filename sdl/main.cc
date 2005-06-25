@@ -1094,7 +1094,7 @@ while(exitflag==0) {
 						encrypt(genrand_int32()%26,(unsigned char *)build_code(score,squares,maxcombo,0),(unsigned char *)highcode);
 						cnt++;
 						if(cnt>20) {
-							highcode[0]='\0';
+							//highcode[0]='\0';
 							break;
 						}
 						//printf("%s\n",highcode);
