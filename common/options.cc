@@ -550,8 +550,8 @@ void select_options() {
 			if(flash && (sel==2 || sel==3)) {
 				set_font_size(18);
 				glLoadIdentity();
-				if(sel==2) glTranslatef(boxx+40+txt_width("Username: ")+txt_width(gameoptions.username),y[sel]-8,0.8);
-				if(sel==3) glTranslatef(boxx+40+txt_width("Password: ")+txt_width(gameoptions.password),y[sel]-8,0.8);
+				if(sel==2) glTranslatef(boxx+40+txt_width("Username: ")+txt_width(gameoptions.username),y[sel]-10,0.8);
+				if(sel==3) glTranslatef(boxx+40+txt_width("Password: ")+txt_width(gameoptions.password),y[sel]-10,0.8);
 				glBegin(GL_QUADS);
 				glVertex3f(0,-8,0);
 				glVertex3f(12,-8,0);
@@ -627,7 +627,10 @@ glLoadIdentity();
 		//delay(0.05);
 	}
 	do {
-		read_mouse(&mx,&my,&lmb);
+		if(sys_render_begin()) {
+			read_mouse(&mx,&my,&lmb);
+			sys_render_finish();
+		}
 	} while(lmb);
 	write_options();
 	if(strcmp(gameoptions.theme,oldtheme)) {

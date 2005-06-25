@@ -1087,8 +1087,16 @@ while(exitflag==0) {
 			case 0:
 				current_level = free_play;
 				play_game();
+				do {
+					encrypt(genrand_int32()%26,build_code(score,squares,maxcombo,0),highcode);
+					cnt++;
+					if(cnt>20) {
+						highcode[0]='\0';
+						break;
+					}
+				} while(invalid_code(highcode));				
 				level_stats();
-				name_entry(game_gt*1000);
+				//name_entry(game_gt*1000);
 				break;
 			/*case 1:
 				current_level = level_list_head;
