@@ -358,6 +358,7 @@ void submit_code(char *s, char *username, char *password) {
 #endif
 	sprintf(buf,"/score_post_raw.php?username=%s&password=%s&s=%s",u,p,s);
 #ifdef UNIX
+	status(buf);
 	http_get_file("/tmp/post.tmp","dcsquares.c99.org",80,buf,ct,&len);
 	f=fopen("/tmp/post.tmp","rb");
 #else 
