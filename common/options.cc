@@ -475,11 +475,16 @@ glLoadIdentity();
 
 void select_options() {
 	set_font_size(16);
+	int boxx=themeinfo.game_x+100;
+	int boxy=themeinfo.game_y+150;
+	int boxx1=(themeinfo.game_x+themeinfo.game_w)-100;
 #ifdef DREAMCAST
-	int y[] = { 170, 190, 250, 270, 290, 310, 330 };
-	#define OPTIONS_MENU_END 6
+	int boxy1=(themeinfo.game_y+150)+80;
+	int y[] = { boxy+40, boxy+60, boxy+80 };
+	#define OPTIONS_MENU_END 2
 #else
-	int y[] = { 170, 190, 250, 270, 290, 330 };
+	int boxy1=(themeinfo.game_y+150)+160;
+	int y[] = { boxy+40, boxy+60, boxy+100, boxy+120, boxy+140, boxy+160 };
 	#define OPTIONS_MENU_END 5
 #endif
 	char oldtheme[100];
@@ -492,11 +497,6 @@ void select_options() {
 	char themes[100][256];
 	int themecnt;
 	int t=0;
-	
-	int boxx=themeinfo.game_x+100;
-	int boxy=themeinfo.game_y+150;
-	int boxx1=(themeinfo.game_x+themeinfo.game_w)-100;
-	int boxy1=(themeinfo.game_y+150)+80;
 	
 	strcpy(oldtheme,gameoptions.theme);
 	
@@ -522,18 +522,18 @@ void select_options() {
 			draw_txt(boxx+40+txt_width("Theme: "),boxy+40,gameoptions.theme,0.9,0.9,0.9,1.0,18);
 			draw_txt(boxx+40,boxy+60,"Music:",0.8,0.8,0.8,1.0,18);
 			draw_txt(boxx+40+txt_width("Music: "),boxy+60,gameoptions.bgm?(char *)"On":(char *)"Off",0.9,0.9,0.9,1.0,18);
-			/*draw_txt(150,232,"SquareNet",1,1,1,1.0,24);
-			draw_txt(170,256,"Username:",0.8,0.8,0.8,1.0,22);
-			draw_txt(170+txt_width("Username: "),256,gameoptions.username,0.9,0.9,0.9,1.0,22);
-			draw_txt(170,276,"Password:",0.8,0.8,0.8,1.0,22);
-			draw_txt(170+txt_width("Password: "),276,gameoptions.password,0.9,0.9,0.9,1.0,22);
-			draw_txt(170,296,"Internet Scores:",0.8,0.8,0.8,1.0,22);
-			draw_txt(170+txt_width("Internet Scores: "),296,gameoptions.net?(char *)"On":(char *)"Off",0.9,0.9,0.9,1.0,22);
-#ifdef DREAMCAST
-			draw_txt(170,316,"Network Setup",0.8,0.8,0.8,1.0,22);
-#endif*/
+#ifndef DREAMCAST
+			draw_txt(boxx+20,boxy+80,"DCSquares Online",1,1,1,1.0,20);
+			draw_txt(boxx+40,boxy+100,"Username:",0.8,0.8,0.8,1.0,18);
+			draw_txt(boxx+40+txt_width("Username: "),boxy+100,gameoptions.username,0.9,0.9,0.9,1.0,18);
+			draw_txt(boxx+40,boxy+120,"Password:",0.8,0.8,0.8,1.0,18);
+			draw_txt(boxx+40+txt_width("Password: "),boxy+120,gameoptions.password,0.9,0.9,0.9,1.0,18);
+			draw_txt(boxx+40,boxy+140,"Internet Scores:",0.8,0.8,0.8,1.0,18);
+			draw_txt(boxx+40+txt_width("Internet Scores: "),boxy+140,gameoptions.net?(char *)"On":(char *)"Off",0.9,0.9,0.9,1.0,18);
+			draw_txt(boxx+20,boxy+160,"Return to Menu",0.8,0.8,0.8,1.0,18);
+#else 
 			draw_txt(boxx+20,boxy+80,"Return to Menu",0.8,0.8,0.8,1.0,18);
-
+#endif
 			center_shad(themeinfo.game_y+themeinfo.game_h-22,"Use the mouse to select an option and click",16,1);
 			center_shad(themeinfo.game_y+themeinfo.game_h-2,"to toggle.  Use the keyboard to edit text.",16,1);
 				
@@ -550,8 +550,8 @@ void select_options() {
 			if(flash && (sel==2 || sel==3)) {
 				set_font_size(22);
 				glLoadIdentity();
-				if(sel==2) glTranslatef(170+txt_width("Username: ")+txt_width(gameoptions.username),y[sel]-8,0.8);
-				if(sel==3) glTranslatef(170+txt_width("Password: ")+txt_width(gameoptions.password),y[sel]-8,0.8);
+				if(sel==2) glTranslatef(boxx+40+txt_width("Username: ")+txt_width(gameoptions.username),y[sel]-8,0.8);
+				if(sel==3) glTranslatef(boxx+40+txt_width("Password: ")+txt_width(gameoptions.password),y[sel]-8,0.8);
 				glBegin(GL_QUADS);
 				glVertex3f(0,-8,0);
 				glVertex3f(12,-8,0);
@@ -621,7 +621,7 @@ glLoadIdentity();
 			line_input(gameoptions.username);
 		}
 		if(sel==3) line_input(gameoptions.password);
-		rot+=15;
+		rot+=2;
 		if(rot>=360) rot=0;
 		if(rot%90==0) {flash++; flash%=2; }
 		//delay(0.05);

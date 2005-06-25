@@ -466,6 +466,7 @@ int load_theme(char *theme, int sfx) {
 		}
 	  if(!strcmp(buf,"scale")) {
 	    themeinfo.scale=atof(val);
+			if(themeinfo.scale < 1) themeinfo.scale=1;
 	  }
 	  if(!strcmp(buf,"good_r")) {
 	    themeinfo.good_r=atoi(val);
