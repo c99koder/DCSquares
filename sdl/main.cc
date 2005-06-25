@@ -1042,7 +1042,6 @@ int /*main*/WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 	goat_init();
 	if(goat_50hz()) vid_set_mode(DM_640x480_PAL_IL,PM_RGB565);
 #endif
-	score_list_init();
 	//set_status_callback(callback);
 	c99_mouse_init();
 	texture_init();
@@ -1054,6 +1053,7 @@ int /*main*/WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 #endif
 	load_options();
   write_options();
+	score_list_init();
 	load_theme(gameoptions.theme,0);
 #ifdef DREAMCAST
   set_show_cursor(0);
@@ -1096,6 +1096,7 @@ while(exitflag==0) {
 						highcode[0]='\0';
 						break;
 					}
+					printf("%s\n",highcode);
 				} while(invalid_code(highcode));				
 				level_stats();
 				//name_entry(game_gt*1000);

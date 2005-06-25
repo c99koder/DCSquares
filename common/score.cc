@@ -116,7 +116,7 @@ void score_list_init() {
 #ifndef DREAMCAST
 	FILE *f;
 	char buf[200];
-	char name[8];
+	char name[32];
 	uint32 score,time,combo,level;
 
 #ifdef UNIX
@@ -127,11 +127,12 @@ void score_list_init() {
   strcat(buf,"\\squares-scores.ini");
   printf("%s\n",buf);
 #endif
+	if(gameoptions.net) http_get_file(buf,"dcsquares.c99.org",80,"/scores_raw.new.php",ct,&len);
   f=fopen(buf,"rb");
 	if(f) {
 		for(int x=0; x< 10; x++) {
 			fgets(buf,200,f);
-			strncpy(name,buf,8);
+			strncpy(name,buf,32);
 			if(name[strlen(name)-1]=='\n') {
 				name[strlen(name)-1]='\0';
 			}
@@ -347,10 +348,10 @@ void submit_code(char *s, char *username, char *password) {
 	theApp.statusDlg.ShowWindow(SW_SHOW);
 	theApp.statusDlg.UpdateWindow();
 #else
-	//status(buf);
+	status(buf);
 #endif
 	sprintf(buf,"/score_post_raw.php?username=%s&password=%s&s=%s",u,p,s);
-	//http_get_file("post.tmp","dcsquares.c99.org",80,buf,ct,&len);
+	http_get_file("post.tmp","dcsquares.c99.org",80,buf,ct,&len);
 	
 	f=fopen("post.tmp","rb");
 	if(!f) {

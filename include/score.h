@@ -3,7 +3,7 @@
 #endif
 
 struct score_list_node {
-	char name[8];
+	char name[32];
 	uint32 score;
 	uint32 combo;
 	uint32 time;
