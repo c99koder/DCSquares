@@ -1100,7 +1100,7 @@ while(exitflag==0) {
 						//printf("%s\n",highcode);
 					} while(invalid_code(highcode));		
 					if(highcode[0]!='\0' && gameoptions.net && gameoptions.username[0]!='\0' && gameoptions.password[0]!='\0') {
-						submit_code(highcode,gameoptions.username,gameoptions.password);
+						submit_code(highcode,gameoptions.username,gameoptions.password,game_gt);
 						highcode[0]='\0';
 					}
 				}

@@ -14,7 +14,7 @@ struct score_list_node {
 void encode(int score, int size, char *text);
 void encrypt(int seed, unsigned char *text, unsigned char *out);
 char *build_code(int score, int squares, int combo, int level);
-void submit_code(char *s, char *username, char *password);
+void submit_code(char *s, char *username, char *password, float time);
 int invalid_code(char *text);
 
 void score_list_init();

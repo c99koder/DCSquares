@@ -340,7 +340,7 @@ void urlencode(char *c, char *buf) {
 	}
 }
 
-void submit_code(char *s, char *username, char *password) {
+void submit_code(char *s, char *username, char *password, float gt) {
 #ifdef NET
   char buf[512];
 	char ct[20];
@@ -365,7 +365,7 @@ void submit_code(char *s, char *username, char *password) {
 #else
 	status(buf);
 #endif
-	sprintf(buf,"/score_post_raw.php?username=%s&password=%s&s=%s",u,p,s);
+	sprintf(buf,"/score_post_raw.php?username=%s&password=%s&s=%s&time=%f",u,p,s,gt);
 #ifdef UNIX
 	http_get_file("/tmp/post.tmp","dcsquares.c99.org",80,buf,ct,&len);
 	f=fopen("/tmp/post.tmp","rb");
