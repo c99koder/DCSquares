@@ -137,7 +137,7 @@ void score_list_init() {
 	if(f) {
 		for(int x=0; x< 10; x++) {
 			fgets(buf,200,f);
-			strncpy(name,buf,32);
+			strncpy(name,buf,16);
 			if(name[strlen(name)-1]=='\n') {
 				name[strlen(name)-1]='\0';
 			}
