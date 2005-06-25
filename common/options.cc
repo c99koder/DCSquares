@@ -491,7 +491,7 @@ void select_options() {
 	#define OPTIONS_MENU_END 2
 #else
 	int boxy=themeinfo.game_y+120;
-	int boxy1=(themeinfo.game_y+150)+180;
+	int boxy1=(themeinfo.game_y+120)+180;
 	int y[] = { boxy+40, boxy+60, boxy+100, boxy+120, boxy+140, boxy+180 };
 	#define OPTIONS_MENU_END 5
 #endif
