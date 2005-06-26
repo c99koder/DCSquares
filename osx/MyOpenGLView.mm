@@ -168,7 +168,7 @@ void status(char *msg);
 						status("Submitting score");
 						[ScoresService submitScore:[NSString stringWithCString:[prefs getUsername]] 
 						in_password:[NSString stringWithCString:[prefs getPassword]] 
-						in_score:score in_combo:maxcombo in_time:gt in_platform:@"Mac"];
+															in_score:score in_combo:maxcombo in_time:gt in_platform:@"Mac" in_squares:squares];
 						status(NULL);
 						highcode[0]='\0';
 					} else {

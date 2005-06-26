@@ -48,7 +48,7 @@
  * Documentation:  <no documentation>
  */
 @implementation submitScore
-- (void) setParameters:(NSString*) in_username in_password:(NSString*) in_password in_score:(SInt32) in_score in_combo:(SInt32) in_combo in_time:(double) in_time in_platform:(NSString*) in_platform
+- (void) setParameters:(NSString*) in_username in_password:(NSString*) in_password in_score:(SInt32) in_score in_combo:(SInt32) in_combo in_time:(double) in_time in_platform:(NSString*) in_platform in_squares:(SInt32) in_squares
 {
     id _paramValues[] = {    
         in_username,        
@@ -56,7 +56,8 @@
         [NSNumber numberWithInt: in_score],        
         [NSNumber numberWithInt: in_combo],        
         [NSNumber numberWithDouble: in_time],        
-        in_platform,        
+        in_platform,       
+				[NSNumber numberWithInt: in_squares],
     };    
     NSString* _paramNames[] = {    
         @"username",        
@@ -64,9 +65,10 @@
         @"score",        
         @"combo",        
         @"time",        
-        @"platform",        
+        @"platform",
+				@"squares",
     };    
-    [super setParameters:6 values: _paramValues names: _paramNames];    
+    [super setParameters:7 values: _paramValues names: _paramNames];    
 }
 
 - (id) resultValue
@@ -77,7 +79,7 @@
 - (WSMethodInvocationRef) genCreateInvocationRef
 {
     return [self createInvocationRef    
-               /*endpoint*/: @"http://www.dcsquares.c99.org/SOAP/scores.php"            
+               /*endpoint*/: @"http://internal.dcsquares.c99.org/SOAP/scores.php"            
                  methodName: @"submitScore"            
                  protocol: (NSString*) kWSSOAP2001Protocol            
                       style: (NSString*) kWSSOAPStyleRPC            
@@ -117,7 +119,7 @@
 - (WSMethodInvocationRef) genCreateInvocationRef
 {
     return [self createInvocationRef    
-               /*endpoint*/: @"http://www.dcsquares.c99.org/SOAP/scores.php"            
+               /*endpoint*/: @"http://internal.dcsquares.c99.org/SOAP/scores.php"            
                  methodName: @"getScores"            
                  protocol: (NSString*) kWSSOAP2001Protocol            
                       style: (NSString*) kWSSOAPStyleRPC            
@@ -190,11 +192,11 @@
 }
 
 
-+ (id) submitScore:(NSString*) in_username in_password:(NSString*) in_password in_score:(SInt32) in_score in_combo:(SInt32) in_combo in_time:(double) in_time in_platform:(NSString*) in_platform
++ (id) submitScore:(NSString*) in_username in_password:(NSString*) in_password in_score:(SInt32) in_score in_combo:(SInt32) in_combo in_time:(double) in_time in_platform:(NSString*) in_platform in_squares:(SInt32) in_squares
 {
     id result = NULL;    
     submitScore* _invocation = [[submitScore alloc] init];    
-    [_invocation setParameters: in_username in_password:in_password in_score:in_score in_combo:in_combo in_time:in_time in_platform:in_platform];    
+    [_invocation setParameters: in_username in_password:in_password in_score:in_score in_combo:in_combo in_time:in_time in_platform:in_platform in_squares:in_squares];    
     result = [[_invocation resultValue] retain];    
     [_invocation release];    
     return result;    

@@ -40,7 +40,7 @@
 @interface submitScore : WSGeneratedObj
 
 // update the parameter list for the invocation.
-- (void) setParameters:(NSString*) in_username in_password:(NSString*) in_password in_score:(SInt32) in_score in_combo:(SInt32) in_combo in_time:(double) in_time in_platform:(NSString*) in_platform;
+- (void) setParameters:(NSString*) in_username in_password:(NSString*) in_password in_score:(SInt32) in_score in_combo:(SInt32) in_combo in_time:(double) in_time in_platform:(NSString*) in_platform in_squares:(SInt32) in_squares;
 
 // result returns an id from the reply dictionary as specified by the WSDL.
 - (id) resultValue;
@@ -87,7 +87,7 @@
 
 + (id) getRank:(SInt32) in_userID;
 + (id) getHighScore:(SInt32) in_userID;
-+ (id) submitScore:(NSString*) in_username in_password:(NSString*) in_password in_score:(SInt32) in_score in_combo:(SInt32) in_combo in_time:(double) in_time in_platform:(NSString*) in_platform;
++ (id) submitScore:(NSString*) in_username in_password:(NSString*) in_password in_score:(SInt32) in_score in_combo:(SInt32) in_combo in_time:(double) in_time in_platform:(NSString*) in_platform in_squares:(SInt32) in_squares;
 + (id) getScores:(NSString*) in_startDate in_endDate:(NSString*) in_endDate in_count:(NSString*) in_count;
 
 @end;
