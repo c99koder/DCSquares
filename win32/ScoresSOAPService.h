@@ -2,7 +2,7 @@
 // sproxy.exe generated file
 // do not modify this file
 //
-// Created: 06/22/2005@15:15:42
+// Created: 06/26/2005@15:05:10
 //
 
 #pragma once
@@ -81,7 +81,7 @@ public:
 	}
 
 	CScoresServiceT(ISAXXMLReader *pReader = NULL)
-		:TClient(_T("http://www.dcsquares.c99.org/SOAP/scores.php"))
+		:TClient(_T("http://dcsquares.c99.org/SOAP/scores.php"))
 	{
 		SetClient(true);
 		SetReader(pReader);

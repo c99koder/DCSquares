@@ -55,7 +55,7 @@ void CUpdateDlg::checkUpdates(void)
 	unlink("DCS_LATEST");
 	printf("%s\n",ct);
 	theApp.statusDlg.ShowWindow(SW_HIDE);
-	if(strcmp("1.4\n",ct)) {
+	if(strcmp("2.0.0\n",ct)) {
 		http_get_file("DCS_CHANGES","dcsquares.c99.org",80,"/updates/CHANGES-WIN.rtf",ct,&len);
 		fileUpdate.Open("DCS_CHANGES",CFile::modeRead);
 		buf=(char *)malloc(fileUpdate.GetLength()+2);
