@@ -65,12 +65,12 @@ void center(int x, int y,char *text, int point, float fade) {
 
 void center_shad_rgb(int y,char *text, int point, float fade, float r, float g, float b) {
 	set_font_size(point);
-	draw_txt((themeinfo.game_x+(themeinfo.game_w/2))-(txt_width(text)/2)+1,y+1,text,0,0,0,fade*0.2,point);
+	draw_txt((themeinfo.game_x+(themeinfo.game_w/2))-(txt_width(text)/2)+1,y+1,text,0,0,0,fade*0.6,point);
 	draw_txt((themeinfo.game_x+(themeinfo.game_w/2))-(txt_width(text)/2)-1,y-1,text,r,g,b,fade,point);
 }
 void center_shad(int y,char *text, int point, float fade) {
 	set_font_size(point);
-	draw_txt((themeinfo.game_x+(themeinfo.game_w/2))-(txt_width(text)/2)+1,y+1,text,0,0,0,fade*0.2,point);
+	draw_txt((themeinfo.game_x+(themeinfo.game_w/2))-(txt_width(text)/2)+1,y+1,text,0,0,0,fade*0.6,point);
 	draw_txt((themeinfo.game_x+(themeinfo.game_w/2))-(txt_width(text)/2)-1,y-1,text,(float)themeinfo.text_r / 255.0f,(float)themeinfo.text_g / 255.0f,(float)themeinfo.text_b / 255.0f,fade,point);
 }
 void draw_txt(int x, int y, char *text, float r, float g, float b, float a, int point) {

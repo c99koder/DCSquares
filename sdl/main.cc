@@ -231,10 +231,8 @@ glLoadIdentity();
 					menu_select++;
 					if(menu_select>=size) menu_select = size-1;
 					break;
-				case BUTTON_X:
-#ifdef DREAMCAST
-					snakemain();
-#endif
+				case QUIT_BTN:
+					//exit(0);
 					break;
 			}
 		}
@@ -490,7 +488,7 @@ void level_stats() {
 
 		if(sys_render_begin()) {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			render_bg_game(menu_tex,1.0);
+			render_bg_game(menu_tex,0.8);
 #ifdef DREAMCAST
 			glKosFinishList();
 #else
@@ -560,12 +558,7 @@ void level_stats() {
 			glDisable(GL_DEPTH_TEST);
 #endif
 			glColor4f(0,0,0,0.4);
-			glBegin(GL_QUADS);
-			glVertex3f(24,40,0.11);
-			glVertex3f(24+497,40,0.11);
-			glVertex3f(24+497,40+401,0.11);
-			glVertex3f(24,441,0.11);
-			glEnd();
+
 						//render_squares(1.0f-((gt)/2.0f));
 			//render_highscores();
 #ifndef DREAMCAST
@@ -604,7 +597,8 @@ void title_screen() {
 	squarelist *c;
 	int max=0,size=6;
 
-	char menu[][20] = { "New Game","Highscores","Options","Quit" };
+	char menu[][20] = { "New Game","Highscores","Options" };
+	char menu2[][20] = { "New Game","Highscores","Options","SnakeGame" };
 
 	char tmp[256];
 	char tmp2[30];
@@ -678,7 +672,11 @@ void title_screen() {
 		#endif
 					render_squares(0.6);
 					render_title(gt - ot);
-					if(render_menu(menu,4,gt)!=-1) break;
+					if(gameoptions.playcount < 25) {
+						if(render_menu(menu,3,gt)!=-1) break;
+					} else {
+						if(render_menu(menu2,4,gt)!=-1) break;
+					}
 					if(gt<0.5) {
 		#ifndef DREAMCAST
 						glEnable(GL_BLEND);
@@ -1033,14 +1031,16 @@ int /*main*/WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 #endif
 #ifdef DREAMCAST
   //arch_set_exit_path(ARCH_EXIT_MENU);
-  fs_chdir("/rd");
+  fs_chdir("/cd");
 	//printf("Anti-crash!\n");
 	debugtxt[0]='\0';
 
 	dcb_vmu_init();
 	sndoggvorbis_init();
+#ifdef GOAT
 	goat_init();
 	if(goat_50hz()) vid_set_mode(DM_640x480_PAL_IL,PM_RGB565);
+#endif
 #endif
 	//set_status_callback(callback);
 	c99_mouse_init();
@@ -1075,7 +1075,7 @@ int /*main*/WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 	//check_updates();
 #endif
 #ifdef DREAMCAST
-  load_font("hybrid.fnt");
+  load_font("/rd/hybrid.fnt");
 #endif
 
 //name_entry();
@@ -1087,6 +1087,7 @@ while(exitflag==0) {
 		{
 			case 0:
 				current_level = free_play;
+				gameoptions.playcount++;
 				play_game();
 				if(score>1000) {
 					cnt=0;
@@ -1105,7 +1106,8 @@ while(exitflag==0) {
 					}
 				}
 				level_stats();
-				//name_entry(game_gt*1000);
+				name_entry(game_gt*1000);
+				write_options();
 				break;
 			/*case 1:
 				current_level = level_list_head;
@@ -1127,7 +1129,7 @@ while(exitflag==0) {
 				select_options();
 				break;
 			case 3:
-				exitflag=1;
+				snakemain();
 				break;
 		}
 	}
@@ -1150,13 +1152,14 @@ while(exitflag==0) {
 		delay(0.01);
 	}
 	save_scores();
+	write_options();
 #ifdef DIRECTX
   stop_bgm();
 #endif
 #ifdef SDL
   SDL_Quit();
 #endif
-#ifdef DREAMCAST
+#ifdef GOAT
 	goat_exit();
 #endif
 	//c99_sys_shutdown();

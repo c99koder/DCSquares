@@ -39,9 +39,11 @@ void status(char *text);
 #endif
 #ifdef DREAMCAST
 #include <kos.h>
-
+#include "vmuify.h"
+#ifdef GOAT
 #include "libmenu.h"
 score_table_t * tab=NULL;
+#endif
 #endif
 #include <string.h>
 #include <stdlib.h>
@@ -63,7 +65,7 @@ extern gameoptions_t gameoptions;
 void save_scores() {
 	struct score_list_node *current=score_list_head;
 	
-#ifdef DREAMCAST
+#ifdef GOAT
 	for(int x=0; x<10; x++) {
 		if(current!=NULL) {
 			strcpy(tab->entries[x].name,current->name);
@@ -94,6 +96,9 @@ void save_scores() {
   strcat(buf,"\\squares-scores.ini");
   printf("%s\n",buf);
 #endif
+#ifdef DREAMCAST
+	strcpy(buf,"/ram/scores.ds2");
+#endif
 	f=fopen(buf,"wb");
 	if(f) {
 		for(int x=0; x<10; x++) {
@@ -113,13 +118,16 @@ void save_scores() {
 			}
 		}
 		fclose(f);
-	}
+#ifdef DREAMCAST
+		vmuify("/ram/scores.ds2","/vmu/a1/scores.ds2","scores.ds2","DCSquares Scores");
+#endif
+	}	
 #endif
 }
 
 void score_list_init() {
 	score_list_head=NULL;
-#ifndef DREAMCAST
+#ifndef GOAT
 	FILE *f;
 	char buf[200];
 	char name[32];
@@ -135,12 +143,19 @@ void score_list_init() {
   strcat(buf,"\\squares-scores.ini");
   printf("%s\n",buf);
 #endif
+#ifdef DREAMCAST
+	strcpy(buf,"/vmu/a1/scores.ds2");
+#else
 	if(gameoptions.net) {
 		status("Downloading high score list");
 		http_get_file(buf,"dcsquares.c99.org",80,"/scores_raw.php",ct,&len);
 	}
+#endif
   f=fopen(buf,"rb");
 	if(f) {
+#ifdef DREAMCAST
+		fseek(f,128+512,SEEK_SET);
+#endif
 		for(int x=0; x< 10; x++) {
 			fgets(buf,200,f);
 			strncpy(name,buf,12);
@@ -156,12 +171,13 @@ void score_list_init() {
 			time=atoi(buf);
 			fgets(buf,200,f);
 			level=atoi(buf);
-			if(score>0) score_list_insert(name,score,combo,time,level);
+			if(score>0) {
+				score_list_insert(name,score,combo,time,level);
+			}
 		}
 		fclose(f);
 	}
-#endif
-#ifdef DREAMCAST
+#else
 	tab = goat_load_score_table(0);
 
 	if (!tab) {
@@ -215,6 +231,8 @@ void score_list_insert(char *name, uint32 score,uint32 combo,uint32 time,uint32 
 	struct score_list_node *prev=NULL;
 	struct score_list_node *scorenode=new score_list_node;
 	
+	if(score<0) return;
+	
 	strcpy(scorenode->name,name);
 	scorenode->score=score;
 	scorenode->combo=combo;
@@ -260,7 +278,7 @@ void encode(int score, int size, char *text) {
 		score-=val*(int)pow(22,size-x);
   }
 	
-  text[x]=(score)+'C';
+  text[x]=(score)+'A';
 	text[x+1] = '\0';
 }
 
@@ -270,12 +288,12 @@ void encrypt(int seed, unsigned char *text, unsigned char *out) {
 
 	out[x++]=seed+'A';
 	for(y=0;y<strlen((char *)text);y++) {
-		out[x]=text[y] - '?';
+		out[x]=text[y] - 'A';
 		new_seed=out[x];
 		out[x]+=seed;
-		out[x]%=27;
+		out[x]%=26;
 		seed=new_seed;
-		out[x]+='?';
+		out[x]+='A';
 		if(x==4 || x == 10) {
 			out[++x] = '-';
 		}

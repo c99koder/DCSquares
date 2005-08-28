@@ -251,7 +251,7 @@ floaded:
   	if(pos>max_pos) { max_pos=pos; }
 	  strcpy(textures[pos].filename,fn3);
     textures[pos].txr=texture_ram[pos];
-		//printf("Loading %s (%i x %i)...\n",fn3,textures[pos].xsize,textures[pos].ysize);
+		printf("Loading %s (%i x %i)...\n",fn3,textures[pos].xsize,textures[pos].ysize);
 		// Typical Texture Generation Using Data From The Bitmap
 		glBindTexture(GL_TEXTURE_2D, textures[pos].txr);
 #ifdef WIN32

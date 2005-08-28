@@ -33,6 +33,7 @@
 #endif
 #ifdef DREAMCAST
 #include <kos.h>
+#include <oggvorbis/sndoggvorbis.h>
 #endif
 #include <string.h>
 #include <stdio.h>
@@ -149,6 +150,7 @@ char fn[256];
 sprintf(fn,"%s/.dcsquares",getenv("HOME"));
 #endif
 #ifdef DREAMCAST
+unlink("/vmu/a1/squares2.ini");
 sprintf(fn,"/ram/squares.ini");
 #endif
 #ifdef WIN32
@@ -164,9 +166,10 @@ fprintf(fd,"username=%s\n",gameoptions.username);
 fprintf(fd,"password=%s\n",gameoptions.password);
 fprintf(fd,"net=%i\n",gameoptions.net);
 fprintf(fd,"music=%i\n",gameoptions.bgm);
+fprintf(fd,"playcount=%i\n",gameoptions.playcount);
 fclose(fd);
 #ifdef DREAMCAST
-vmuify("/ram/squares.ini","/vmu/a1/squares2.ini","squares2.ini");
+vmuify("/ram/squares.ini","/vmu/a1/squares2.ini","squares2.ini","DCSquares Settings");
 #endif
 }
 
@@ -179,6 +182,7 @@ void load_options() {
 
 	strcpy(gameoptions.theme,"default");
   gameoptions.bgm=1;
+	gameoptions.playcount=0;
   gameoptions.username[0]='\0';
   gameoptions.password[0]='\0';
 #ifdef DREAMCAST
@@ -219,6 +223,10 @@ void load_options() {
 		if(!strcmp(buf,"net")) {
 			p=NULL;
 			gameoptions.net=atoi(val);
+		}
+		if(!strcmp(buf,"playcount")) {
+			p=NULL;
+			gameoptions.playcount=atoi(val);
 		}
 		if(!strcmp(buf,"music")) {
 			p=NULL;
@@ -664,8 +672,10 @@ void select_options() {
 		}
 	} while(lmb);
 	write_options();
+	if(gameoptions.bgm==0) sndoggvorbis_stop();
 	if(strcmp(gameoptions.theme,oldtheme)) {
 		unload_theme();
+		sndoggvorbis_stop();
 		load_theme(gameoptions.theme,1);
 	}
 }

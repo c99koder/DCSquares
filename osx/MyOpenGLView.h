@@ -9,7 +9,6 @@
     IBOutlet Preferences *prefs;
     IBOutlet UpdateChecker *updates;
 		NSTimer *timer;
-		int state;
 		int mousex,mousey;
 }
 - (IBAction)onChallengeMode:(id)sender;

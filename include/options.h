@@ -11,6 +11,7 @@ struct gameoptions_t {
   char theme[100];
   char username[100];
   char password[100];
+  unsigned int playcount;
   bool bgm;
 	bool net;
 };

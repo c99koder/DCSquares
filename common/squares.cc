@@ -47,7 +47,7 @@ extern CSound *gameover;
 #ifdef DREAMCAST
 #include <dcplib/sg.h>
 #else
-#include "sg.h"
+#include <sg.h>
 #endif
 
 #ifdef SDL

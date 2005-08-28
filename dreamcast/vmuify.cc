@@ -1,7 +1,7 @@
 #include <kos.h>
 extern unsigned char icon_data[];
 
-void vmuify(char *filename_in, char *filename_out, char *filename) {
+void vmuify(char *filename_in, char *filename_out, char *shortname, char *longname) {
   int fd,pkg_size;
   uint8 *buf;
   uint8 *pkg_out;
@@ -12,9 +12,10 @@ void vmuify(char *filename_in, char *filename_out, char *filename) {
   buf=(uint8 *)malloc(fs_total(fd));
   fs_read(fd,buf,fs_total(fd));
   printf("Read %i bytes\n",fs_total(fd));
+  buf[fs_total(fd)]='\0';
  
-  strcpy(pkg.desc_short, filename);
-  strcpy(pkg.desc_long, "DCSquares Settings");
+  strcpy(pkg.desc_short, shortname);
+  strcpy(pkg.desc_long, longname);
   strcpy(pkg.app_id, "DCSQ");
   pkg.icon_cnt = 1;
   pkg.icon_anim_speed = 1;

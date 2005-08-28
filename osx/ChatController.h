@@ -12,5 +12,6 @@
 		NSTimer *timer;
 }
 - (IBAction)chatSend:(id)sender;
+- (IBAction)onStartGame:(id)sender;
 - (IBAction)onChatConnect:(id)sender;
 @end

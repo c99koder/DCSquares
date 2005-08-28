@@ -294,7 +294,7 @@ void render_title(float gt) {
 	center_shad_rgb(310,"Click to Begin",20,alpha,1,1,1);
 #endif
 	set_font_size(12);
-	draw_txt(640-txt_width("Version 2.0.0"),480,"Version 2.0.0",0,0,0,1,12);
+	draw_txt(640-txt_width("Version 2.0.1"),480,"Version 2.0.1",0,0,0,1,12);
 	set_font_size(16);
 	center_shad(355,"Programming: Sam Steele",18,1);
 	sprintf(tmp,"Artwork: %s",themeinfo.bg_auth);
@@ -363,7 +363,7 @@ void render_win(float gametime, float interval) {
 	
 	if(highcode[0]!='\0') {
 		center_shad(themeinfo.game_y+200,"Your code for this score is:",18,1);
-		center_shad_rgb(themeinfo.game_y+220,highcode,18,1,1,1,1);
+		center_shad_rgb(themeinfo.game_y+222,highcode,20,1,1,1,1);
 		center_shad(themeinfo.game_y+240,"You can enter this code on the web",18,1);
 		center_shad(themeinfo.game_y+260,"at http://dcsquares.c99.org/ to",18,1);
 		center_shad(themeinfo.game_y+280,"compete against players worldwide!",18,1);	
@@ -410,10 +410,10 @@ void render_highscores() {
 			draw_txt(490-txt_width(tmp),x*22+180,tmp,(rank==x+1)?1:(float)themeinfo.text_r/255.0f,(rank==x+1)?1:(float)themeinfo.text_g/255.0f,(rank==x+1)?1:(float)themeinfo.text_b/255.0f,1,18);
 			current=current->next;
 		} else {
-			draw_txt(80,x*22+180,"---",0.03,0.58,1,1,20);
-			draw_txt(280-txt_width("0"),x*22+180,"0",(float)themeinfo.text_r/255.0f,(float)themeinfo.text_g/255.0f,(float)themeinfo.text_b/255.0f,1,20);
-			draw_txt(360-txt_width("0"),x*22+180,"0",(float)themeinfo.text_r/255.0f,(float)themeinfo.text_g/255.0f,(float)themeinfo.text_b/255.0f,1,20);
-			draw_txt(490-txt_width("0.00"),x*22+180,"0.00",(float)themeinfo.text_r/255.0f,(float)themeinfo.text_g/255.0f,(float)themeinfo.text_b/255.0f,1,20);
+			draw_txt(80,x*22+180,"---",(float)themeinfo.text_r/255.0f,(float)themeinfo.text_g/255.0f,(float)themeinfo.text_b/255.0f,1,18);
+			draw_txt(300-txt_width("0"),x*22+180,"0",(float)themeinfo.text_r/255.0f,(float)themeinfo.text_g/255.0f,(float)themeinfo.text_b/255.0f,1,18);
+			draw_txt(380-txt_width("0"),x*22+180,"0",(float)themeinfo.text_r/255.0f,(float)themeinfo.text_g/255.0f,(float)themeinfo.text_b/255.0f,1,18);
+			draw_txt(490-txt_width("0.00"),x*22+180,"0.00",(float)themeinfo.text_r/255.0f,(float)themeinfo.text_g/255.0f,(float)themeinfo.text_b/255.0f,1,18);
 		}
 	}
 
@@ -428,14 +428,18 @@ void name_entry(unsigned long time) {
 	char L2[2]="_";
 	char L3[2]="_";
 	static char name[4]="   ";
-	int pos=0,loop=1,x,ox;
+	int pos=0,loop=1,x,ox,sx;
 	float r,g,b;
 	char buf[100];
+	
+	set_font_size(28);
+	
+	sx=themeinfo.game_x + (themeinfo.game_w/2) - ((120+txt_width("_"))/2);
 	
 	power=0;
 	
 	rank=score_list_rank(score);
-	if(rank>10) return;
+	if(rank>10 || score < 1000) return;
 	
 	while(loop==1) {
 		x=poll_game_device(0);
@@ -482,7 +486,7 @@ void name_entry(unsigned long time) {
 		
 		if(sys_render_begin()) {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			render_bg(bg_tex,1);
+			render_bg(bg_tex,0.8);
 #ifdef DREAMCAST
 			glKosFinishList();
 #else
@@ -490,29 +494,23 @@ void name_entry(unsigned long time) {
 			glDisable(GL_DEPTH_TEST);
 #endif
 			glColor4f(0,0,0,0.4);
-			glBegin(GL_QUADS);
-			glVertex3f(24,40,0.11);
-			glVertex3f(24+497,40,0.11);
-			glVertex3f(24+497,40+401,0.11);
-			glVertex3f(24,441,0.11);
-			glEnd();
-			render_score(0);
+			//render_score(0);
 			center_shad_rgb(100,"Name Entry",28,1,1,1,1);
-			set_font_size(18);	
+			set_font_size(28);	
 
 			sprintf(buf,"Congratulations!  Your score is rank #%i!",rank);
 			center_shad_rgb(178,buf,18,1,1,1,1);
 			center_shad_rgb(200,"Please enter your initials below:",18,1,1,1,1);
 
-			draw_txt(200,300,"_",(pos==0)?1:0.03,(pos==0)?1:0.58,1,1,28);
-			draw_txt(260,300,"_",(pos==1)?1:0.03,(pos==1)?1:0.58,1,1,28);
-			draw_txt(320,300,"_",(pos==2)?1:0.03,(pos==2)?1:0.58,1,1,28);
-			draw_txt(206,300,"_",(pos==0)?1:0.03,(pos==0)?1:0.58,1,1,28);
-			draw_txt(266,300,"_",(pos==1)?1:0.03,(pos==1)?1:0.58,1,1,28);
-			draw_txt(326,300,"_",(pos==2)?1:0.03,(pos==2)?1:0.58,1,1,28);
-			draw_txt(200,300,L1,(pos==0)?1:0.03,(pos==0)?1:0.58,1,1,28);
-			draw_txt(260,300,L2,(pos==1)?1:0.03,(pos==1)?1:0.58,1,1,28);
-			draw_txt(320,300,L3,(pos==2)?1:0.03,(pos==2)?1:0.58,1,1,28);
+			draw_txt(sx,300,"_",(pos==0)?1:(float)themeinfo.text_r/255.0f,(pos==0)?1:(float)themeinfo.text_g/255.0f,(pos==0)?1:(float)themeinfo.text_b/255.0f,1,28);
+			draw_txt(sx+60,300,"_",(pos==1)?1:(float)themeinfo.text_r/255.0f,(pos==1)?1:(float)themeinfo.text_g/255.0f,(pos==1)?1:(float)themeinfo.text_b/255.0f,1,28);
+			draw_txt(sx+120,300,"_",(pos==2)?1:(float)themeinfo.text_r/255.0f,(pos==2)?1:(float)themeinfo.text_g/255.0f,(pos==2)?1:(float)themeinfo.text_b/255.0f,1,28);
+			draw_txt(sx+6,300,"_",(pos==0)?1:(float)themeinfo.text_r/255.0f,(pos==0)?1:(float)themeinfo.text_g/255.0f,(pos==0)?1:(float)themeinfo.text_b/255.0f,1,28);
+			draw_txt(sx+66,300,"_",(pos==1)?1:(float)themeinfo.text_r/255.0f,(pos==1)?1:(float)themeinfo.text_g/255.0f,(pos==1)?1:(float)themeinfo.text_b/255.0f,1,28);
+			draw_txt(sx+126,300,"_",(pos==2)?1:(float)themeinfo.text_r/255.0f,(pos==2)?1:(float)themeinfo.text_g/255.0f,(pos==2)?1:(float)themeinfo.text_b/255.0f,1,28);
+			draw_txt(sx,300,L1,(pos==0)?1:(float)themeinfo.text_r/255.0f,(pos==0)?1:(float)themeinfo.text_g/255.0f,(pos==0)?1:(float)themeinfo.text_b/255.0f,1,28);
+			draw_txt(sx+60,300,L2,(pos==1)?1:(float)themeinfo.text_r/255.0f,(pos==1)?1:(float)themeinfo.text_g/255.0f,(pos==1)?1:(float)themeinfo.text_b/255.0f,1,28);
+			draw_txt(sx+120,300,L3,(pos==2)?1:(float)themeinfo.text_r/255.0f,(pos==2)?1:(float)themeinfo.text_g/255.0f,(pos==2)?1:(float)themeinfo.text_b/255.0f,1,28);
 
 			center_shad_rgb(380,"Use up and down to select a letter.",16,1,1,1,1);
 			center_shad_rgb(400,"Use left and right to move.",16,1,1,1,1);

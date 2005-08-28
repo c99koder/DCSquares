@@ -33,6 +33,7 @@ ALCcontext *ctx = NULL;
 float square_alpha=1.0;
 float fade=0;
 squarelist *player=NULL;
+int paused=0;
 extern int combo;
 extern int maxcombo;
 extern int score;
@@ -49,6 +50,7 @@ extern char highcode[20];
 extern int bg_tex;
 extern int title_tex;
 extern int menu_tex;
+int state=0;
 NSWindow *gamewindow;
 float gt=0;
 
@@ -174,7 +176,7 @@ void status(char *msg);
 					} else {
 						int cnt=0;
 						do {
-							encrypt(genrand_int32()%26,build_code(score,squares,maxcombo,0),highcode);
+							encrypt(genrand_int32()%26,(unsigned char *)build_code(score,squares,maxcombo,0),(unsigned char *)highcode);
 							cnt++;
 							if(cnt>20) {
 								highcode[0]='\0';
@@ -207,7 +209,8 @@ void status(char *msg);
 		}
 	}
 
-	if(gt>1) add_squares([timer timeInterval]);
+	if(gt>1 && current_level->net==0) add_squares([timer timeInterval]);
+	//if(current_level->net==1) lobby_update();
 	update_squares([timer timeInterval]);
 #ifdef OPENAL
 	if([prefs getBgm]) {

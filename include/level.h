@@ -16,6 +16,7 @@ struct level_node {
 	int score;
 	int time;
 	int squares;
+	bool net;
 	bool power_speed;
 	bool power_size;
 	bool power_score;

@@ -4,12 +4,13 @@
 
 NSTableView *osTblNames;
 NSTextView *osTxtChat;
+NSWindow *osChatWindow;
 
 @implementation ChatController
 
 - (IBAction)chatSend:(id)sender
 {
-	lobby_send(1,1,[[txtInput stringValue] cString]);
+	lobby_send(1,1,(char *)[[txtInput stringValue] cString]);
 	[txtInput setStringValue:@""];
 	[[txtInput window] makeFirstResponder:txtInput];
 }
@@ -19,11 +20,17 @@ NSTextView *osTxtChat;
 	lobby_update();
 }
 
+- (IBAction)onStartGame:(id)sender
+{
+	lobby_send(2,1,"");
+}
+
 - (IBAction)onChatConnect:(id)sender
 {	
 	[wndChat makeKeyAndOrderFront:nil];
 	osTblNames = tblNames;
 	osTxtChat = txtChat;
+	osChatWindow = wndChat;
 	lobby_connect("192.168.11.101",[prefs getUsername],[prefs getPassword]);
 	timer = [[NSTimer
 		scheduledTimerWithTimeInterval: (1.0f / 10.0f)
@@ -65,4 +72,12 @@ void os_chat_insert_text(char *text) {
 
 void os_chat_reload_users() {
 	[osTblNames reloadData];
+}
+
+void os_chat_show(bool mode) {
+	if(mode) {
+		[osChatWindow makeKeyAndOrderFront:nil];
+	} else {
+		//[osChatWindow hide:nil];
+	}
 }
