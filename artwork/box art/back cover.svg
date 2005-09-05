@@ -14,7 +14,7 @@
    id="svg2064"
    sodipodi:version="0.32"
    inkscape:version="0.42"
-   sodipodi:docbase="/Users/sam/Desktop"
+   sodipodi:docbase="/Users/sam/DCSquares/artwork/box art"
    sodipodi:docname="back cover.svg"
    inkscape:export-filename="/Users/sam/Sites/back.png"
    inkscape:export-xdpi="100.00000"
@@ -41,8 +41,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="0"
      inkscape:zoom="1.3062462"
-     inkscape:cx="728.28767"
-     inkscape:cy="104.28221"
+     inkscape:cx="489.21577"
+     inkscape:cy="471.74739"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -86,10 +86,9 @@
            y="584.02460"
            style="font-size:8.0000000px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125.00000%;writing-mode:lr-tb;text-anchor:start;font-family:Bitstream Vera Sans" /></flowRegion><flowPara
          id="flowPara2300">©2005 Sam Steele.  All Rights Reserved.  Windows is a registered trademark of Microsoft Corp.  Macintosh and Mac OS X are registered trademarks of Apple Computer, Corp.  Sega, Dreamcast, and VMU are registered trademarks of Sega Enterprises, Ltd.  Not produced by or under license from Sega Enterprises, Ltd.  For more information, please visit http://dcsquares.c99.org/.</flowPara></flowRoot>    <g
-       id="g1897"
-       transform="translate(-6.499992,0.000000)">
+       id="g1820">
       <g
-         transform="matrix(1.463415,0.000000,0.000000,1.463415,-252.4392,-314.3415)"
+         transform="matrix(1.463415,0.000000,0.000000,1.463415,-258.9392,-314.3415)"
          id="g3281">
         <rect
            style="fill:#000000;fill-opacity:0.63291138;stroke:none;stroke-width:1.2277200;stroke-miterlimit:4.0000000;stroke-dasharray:none;stroke-opacity:1.0000000"
@@ -108,23 +107,22 @@
            y="305.00000" />
       </g>
       <g
-         transform="matrix(1.463415,0.000000,0.000000,1.463415,59.87795,-116.7805)"
-         id="g3271">
+         id="g1816">
         <rect
-           y="175.21429"
-           x="275.23267"
-           height="118.78571"
-           width="158.76733"
+           y="139.63072"
+           x="456.15756"
+           height="173.83279"
+           width="232.34250"
            id="rect3263"
            style="fill:#000000;fill-opacity:0.63291138;stroke:none;stroke-width:1.2277200;stroke-miterlimit:4.0000000;stroke-dasharray:none;stroke-opacity:1.0000000" />
         <image
            id="image2472"
-           height="120.00000"
-           width="160.00000"
+           height="175.60980"
+           width="234.14639"
            sodipodi:absref="/Users/sam/Desktop/2.png"
            xlink:href="2.png"
-           x="270.00000"
-           y="170.00000" />
+           x="448.50000"
+           y="132.00005" />
       </g>
     </g>
     <g
