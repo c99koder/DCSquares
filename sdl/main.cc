@@ -89,17 +89,18 @@ void update_lcds();
 }
 #endif
 
-extern int combo;
-extern int score;
-extern int squares;
+extern int combo[MAX_PLAYERS];
+extern int score[MAX_PLAYERS];
+extern int squares[MAX_PLAYERS];
 extern int scoreval;
 extern float tickval;
 extern float power;
 extern float speedval;
+extern int totalsquares;
 extern int powerup_mode;
 extern int loading_tex;
 int menu_select=0;
-squarelist *player;
+squarelist *player[MAX_PLAYERS];
 int exitflag=0;
 int paused=0;
 float game_gt;
@@ -108,7 +109,7 @@ extern int title_tex;
 extern int menu_tex;
 extern int effect_type;
 extern float effect_timer;
-extern int maxcombo;
+extern int maxcombo[MAX_PLAYERS];
 extern struct themeinfo_t themeinfo;
 extern char highcode[20];
 
@@ -157,7 +158,7 @@ int render_menu(char menu[][20], int size, float gt) {
 	glEnd();
 	
 	if(detect_mouse()) {
-		read_mouse(&x,&y,&lmb);
+		read_mouse(0,&x,&y,&lmb);
 		
 		if(x<0) x=0;
 		if(x>640) x=640;
@@ -232,7 +233,7 @@ glLoadIdentity();
 					if(menu_select>=size) menu_select = size-1;
 					break;
 				case QUIT_BTN:
-					//exit(0);
+					exit(0);
 					break;
 			}
 		}
@@ -296,7 +297,7 @@ void high_scores() {
       exitflag=1;
       break;
     }
-		read_mouse(&x,&y,&lmb);
+		read_mouse(0,&x,&y,&lmb);
     if(poll_game_device(0)==START_BTN || lmb!=0 || gt > 5) {
       break;
     }
@@ -464,7 +465,7 @@ void level_stats() {
       exitflag=1;
       break;
     }
-		read_mouse(&x,&y,&lmb);
+		read_mouse(0,&x,&y,&lmb);
     if(poll_game_device(0)==START_BTN || lmb!=0) {
       break;
     }
@@ -763,18 +764,15 @@ void play_game() {
 
 	char tmp[256];
 	char tmp2[30];
-	int seed,x;
-  int oldx=-1,oldy=-1;
+	int seed,x,loop=1;
+  int oldx[MAX_PLAYERS],oldy[MAX_PLAYERS];
 	
 	tickval=1.0f; //1.0
 	speedval=1.2f; //1.2
 	scoreval=100; //100
-	score=0;
-	combo=0;
-	squares=0;
-	maxcombo=0;
 	power=0;
 	powerup_mode=-1;
+	totalsquares=0;
 
 	if(gameoptions.bgm) {
 #ifdef DREAMCAST
@@ -805,10 +803,18 @@ void play_game() {
 #endif
 	destroy_list();
 	
-	player=create_square((640/2)-4,(480/2)-4,6,PLAYER1);
+	for(int p=0; p<current_level->players; p++) {
+		player[p]=create_square(((640/(current_level->players+1))*(p+1))-4,(480/2)-4,6,p);
+		score[p]=0;
+		combo[p]=0;
+		squares[p]=0;
+		maxcombo[p]=0;
+		oldx[p]=-1;
+		oldy[p]=-1;
+	}
 	//netplay_init();
 
-	while(1) {
+	while(loop==1) {
 	if(paused==0) {
 #ifdef DREAMCAST
 		update_lcds();
@@ -849,11 +855,23 @@ void play_game() {
 			render_squares(gt<1?(gt):1.0);
 			if(gt>0.4) render_score(gt);
 
-			c=check_collide(player);
-			if(c!=NULL && ((c->type == ENEMY && powerup_mode!=INVINC) || (c->type == SCORE && powerup_mode==EVIL))) {
-				break;
+			for(int p=0; p< current_level->players; p++) {
+				c=check_collide(player[p]);
+				if(c!=NULL && ((c->type == ENEMY && powerup_mode!=INVINC) || (c->type == SCORE && powerup_mode==EVIL))) {
+					if(current_level->lose_mode & MODE_ENEMY) {
+						loop=0;
+					} else {
+						if(current_level->win_mode & MODE_SCORE) {
+							score[p]-=100;
+						}
+						if(current_level->win_mode & MODE_SQUARES) {
+							squares[p]-=10;
+							if(squares[p]<0) squares[p]=0;
+						}
+					}
+				}
+				if(check_win(gt,p) != 0) loop=0;
 			}
-			if(check_win(gt) != 0) break;
 			/*if(c!=NULL&&c->type>PLAYER_NET) {
 				c->deleted=1;
 				if(c->type==SCORE && powerup_mode!=EVIL) {
@@ -895,15 +913,21 @@ void play_game() {
 		//net_update();
 	}
 	}
-	if(combo>maxcombo) maxcombo=combo;
+	for(int p=0; p<current_level->players; p++) {
+		if(combo[p]>maxcombo[p]) maxcombo[p]=combo[p];
+	}
 	game_gt=gt;
 	
 	st+=gt;
 	gt=0;
 	ot=0;
-	x=player->size;
-	oldx=player->x;
-	oldy=player->y;
+	x=player[0]->size;
+
+	for(int p=0; p<current_level->players; p++) {
+		oldx[p]=player[p]->x;
+		oldy[p]=player[p]->y;
+	}
+	
 	while(gt <= 0.9f) {
 #ifdef DREAMCAST
     timer_ms_gettime(&s,&ms);
@@ -915,9 +939,11 @@ void play_game() {
 #endif
 
 		update_squares(gt-ot);
-		player->size=x+(200.0f * gt);
-		player->x=oldx;
-		player->y=oldy;
+		for(int p=0; p<current_level->players; p++) {
+			player[p]->size=x+(200.0f * gt);
+			player[p]->x=oldx[p];
+			player[p]->y=oldy[p];
+		}
 
 		if(sys_render_begin()) {
 			frames++;
@@ -1031,7 +1057,7 @@ int /*main*/WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 #endif
 #ifdef DREAMCAST
   //arch_set_exit_path(ARCH_EXIT_MENU);
-  fs_chdir("/cd");
+  fs_chdir("/rd");
 	//printf("Anti-crash!\n");
 	debugtxt[0]='\0';
 
@@ -1086,13 +1112,18 @@ while(exitflag==0) {
 		switch(menu_select)
 		{
 			case 0:
-				current_level = free_play;
+				current_level = multi_play;//free_play;
+				if(current_level->win_mode == MODE_SQUARES) {
+					current_level->win_mode = MODE_SCORE;
+				} else {
+					current_level->win_mode = MODE_SQUARES;
+				}
 				gameoptions.playcount++;
 				play_game();
-				if(score>1000) {
+				if(current_level->players==1 && score[0]>1000) {
 					cnt=0;
 					do {
-						encrypt(genrand_int32()%26,(unsigned char *)build_code(score,squares,maxcombo,0),(unsigned char *)highcode);
+						encrypt(genrand_int32()%26,(unsigned char *)build_code(score[0],squares[0],maxcombo[0],0),(unsigned char *)highcode);
 						cnt++;
 						if(cnt>20) {
 							//highcode[0]='\0';
@@ -1106,7 +1137,7 @@ while(exitflag==0) {
 					}
 				}
 				level_stats();
-				name_entry(game_gt*1000);
+				//name_entry(game_gt*1000);
 				write_options();
 				break;
 			/*case 1:

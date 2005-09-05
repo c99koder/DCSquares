@@ -32,13 +32,14 @@ ALCcontext *ctx = NULL;
 #endif
 float square_alpha=1.0;
 float fade=0;
-squarelist *player=NULL;
+squarelist *player[MAX_PLAYERS];
 int paused=0;
-extern int combo;
-extern int maxcombo;
-extern int score;
+extern int combo[MAX_PLAYERS];
+extern int maxcombo[MAX_PLAYERS];
+extern int score[MAX_PLAYERS];
 extern int highscore;
-extern int squares;
+extern int squares[MAX_PLAYERS];
+extern int totalsquares;
 extern int scoreval;
 extern float tickval;
 extern float power;
@@ -133,20 +134,24 @@ void status(char *msg);
 					/*if([mnuChallengeMode state] == NSOnState) {
 						current_level=level_list_head;
 					}
-					if([mnuFreePlay state] == NSOnState) {*/
+					if([mnuFreePlay state] == NSOnState) {
 						current_level=free_play;
-					//}
+					}*/
+					current_level=multi_play;
 					state=1;
 				} else {
-					if(check_win(gt) == 1) {
-						state=1;
-						if(current_level->next!=NULL) {
-							current_level=current_level->next;
+					for(int p=0; p<current_level->players; p++) {
+						if(check_win(gt,p) == 1) {
+							state=1;
+							if(current_level->next!=NULL) {
+								current_level=current_level->next;
+							} else {
+								state=0;
+							}
+							break;
 						} else {
 							state=0;
 						}
-					} else {
-						state=0;
 					}
 					if(state==0) {
 						[NSCursor unhide];
@@ -157,26 +162,27 @@ void status(char *msg);
 	#ifdef OPENAL
 					alSourceStop( sources[SND_TITLE] );
 	#endif
-					player=create_square(mousex,mousey,6,PLAYER1);
+					for(int p=0; p<current_level->players; p++) {
+						player[p]=create_square(mousex,mousey,6,p);
+					}
 					square_alpha=1.0;
 				}
 			} else if(state==1) {
-				if(combo > maxcombo) maxcombo = combo;
-				if(check_win(gt) == 1) {
-					state=2;
-				} else {
-					state=2;
+				for(int p=0; p<current_level->players; p++) {
+					if(combo[p] > maxcombo[p]) maxcombo[p] = combo[p];
+				}
+				if(check_win(gt,0) != 1 && current_level->players==1) {
 					if([prefs getAutoSubmit] && strlen([prefs getUsername])>0 && strlen([prefs getPassword])>0) {
 						status("Submitting score");
 						[ScoresService submitScore:[NSString stringWithCString:[prefs getUsername]] 
 						in_password:[NSString stringWithCString:[prefs getPassword]] 
-															in_score:score in_combo:maxcombo in_time:gt in_platform:@"Mac" in_squares:squares];
+															in_score:score[0] in_combo:maxcombo[0] in_time:gt in_platform:@"Mac" in_squares:squares[0]];
 						status(NULL);
 						highcode[0]='\0';
 					} else {
 						int cnt=0;
 						do {
-							encrypt(genrand_int32()%26,(unsigned char *)build_code(score,squares,maxcombo,0),(unsigned char *)highcode);
+							encrypt(genrand_int32()%26,(unsigned char *)build_code(score[0],squares[0],maxcombo[0],0),(unsigned char *)highcode);
 							cnt++;
 							if(cnt>20) {
 								highcode[0]='\0';
@@ -186,21 +192,27 @@ void status(char *msg);
 					}
 				}
 				destroy_list();
-				player=NULL;
+				for(int p=0; p<current_level->players;p++) {
+					player[p]=NULL;
+				}
 #ifdef OPENAL
 				alSourceStop(sources[SND_BGM]);
 #endif
 				[NSCursor unhide];
 				square_alpha=0.4;
+				state=2;
 			}
 			if(state != 2) {
 				tickval=current_level->tickval; //1.0
 				speedval=current_level->speedval; //1.2
 				scoreval=current_level->scoreval; //100
-				score=0;
-				combo=0;
-				squares=0;
-				maxcombo=0;
+				totalsquares=0;
+				for(int p=0; p<current_level->players;p++) {
+					score[p]=0;
+					combo[p]=0;
+					squares[p]=0;
+					maxcombo[p]=0;
+				}
 				gt=0;
 			}
 			power=0;
@@ -224,53 +236,52 @@ void status(char *msg);
 		//[updates autoUpdate];
 	}
 	if(state==1 && fade<=0) {
-		c=check_collide(player);
-		if(c!=NULL) {
-			switch(c->type) {
-				case SCORE:
-			  case ENEMY:
-					if(c->type==SCORE&&powerup_mode!=EVIL) {
-#ifdef OPENAL
-						if([prefs getSfx]) alSourcePlay( sources[SND_COLLECT] );
-#endif
+		for(int p=0; p<current_level->players; p++) {
+			c=check_collide(player[p]);
+			if(c!=NULL) {
+				switch(c->type) {
+					case SCORE:
+					case ENEMY:
+						if(c->type==SCORE&&powerup_mode!=EVIL) {
+	#ifdef OPENAL
+							if([prefs getSfx]) alSourcePlay( sources[SND_COLLECT] );
+	#endif
+							break;
+						}
+						if(powerup_mode==INVINC) break;
+	#ifdef OPENAL
+						if([prefs getSfx]) alSourcePlay( sources[SND_GAMEOVER] );
+	#endif
+						fade=1.0;
 						break;
-					}
-					if(powerup_mode==INVINC) break;
-#ifdef OPENAL
-					if([prefs getSfx]) alSourcePlay( sources[SND_GAMEOVER] );
-#endif
-					fade=1.0;
-					break;
-				case 10:
-				case 11:
-				case 12:
-				case 13:
-#ifdef OPENAL
-					if([prefs getSfx]) alSourcePlay( sources[SND_POWERUP] );
-#endif
-					break;
-				case 14:
-				case 15:
-				case 16:
-				case 17:
-#ifdef OPENAL
-					if([prefs getSfx]) alSourcePlay( sources[SND_POWERDOWN] );
-#endif
-					break;
-				default:
-#ifdef OPENAL
-					if([prefs getSfx]) alSourcePlay( sources[SND_COLLECT] );
-#endif
-					break;
+					case 10:
+					case 11:
+					case 12:
+					case 13:
+	#ifdef OPENAL
+						if([prefs getSfx]) alSourcePlay( sources[SND_POWERUP] );
+	#endif
+						break;
+					case 14:
+					case 15:
+					case 16:
+					case 17:
+	#ifdef OPENAL
+						if([prefs getSfx]) alSourcePlay( sources[SND_POWERDOWN] );
+	#endif
+						break;
+					default:
+	#ifdef OPENAL
+						if([prefs getSfx]) alSourcePlay( sources[SND_COLLECT] );
+	#endif
+						break;
+				}
 			}
 		}
-		switch(check_win(gt)) {
-			case 1: //win
+		for(int p=0; p<current_level->players; p++) {
+			if(check_win(gt,p)!=0) {
 				fade=1.0;
-				break;
-			case -1: //lose
-				fade=1.0;
-				break;
+			}
 		}
 	}
 	[self setNeedsDisplay:YES];
@@ -337,9 +348,9 @@ void status(char *msg);
 	mousey=480-(int)[theEvent locationInWindow].y;
 		
 	if((mousex >= 0) && (mousex < 640) && (mousey >= 0) && (mousey < 480)) {
-		if(player!=NULL && fade<=0) {
-			player->x=mousex;
-			player->y=mousey;
+		if(player[1]!=NULL && fade<=0) {
+			player[1]->x=mousex;
+			player[1]->y=mousey;
 		}
 	}
 }
@@ -360,10 +371,6 @@ void status(char *msg);
 {
 	if(state==0 || state==2) {
 		fade=0.5;
-		if(current_level==NULL) {
-			current_level=free_play;
-			//current_level=level_list_head;
-		}
 		[NSCursor hide];
 	}
 }
@@ -427,7 +434,9 @@ void status(char *msg);
 			glEnd();
 			
 			if(state==1) {
-				player->size+=2;
+				for(int p=0; p<current_level->players; p++) {
+					player[p]->size+=2;
+				}
 			}
 		}
 		[[self openGLContext] flushBuffer];

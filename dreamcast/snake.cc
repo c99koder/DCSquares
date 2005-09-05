@@ -12,6 +12,7 @@
 #include "font.h"
 #include "screen.h"
 #include "input.h"
+#include "squares.h"
 #include "theme.h"
 #include <time.h>
 #include <stdlib.h>

@@ -19,11 +19,11 @@ struct themeinfo_t {
 	char speedup[40];
 	char evil[40];
 	char enemy[40];
-	int score_x, score_y, score_size;
+	int score_x[MAX_PLAYERS], score_y[MAX_PLAYERS], score_size;
 	char squares_caption[40];
-	int squares_x, squares_y, squares_size;
+	int squares_x[MAX_PLAYERS], squares_y[MAX_PLAYERS], squares_size;
 	char combo_caption[40];
-	int combo_x,combo_y,combo_size;
+	int combo_x[MAX_PLAYERS],combo_y[MAX_PLAYERS],combo_size;
 	int time_x,time_y,time_size;
 };
 

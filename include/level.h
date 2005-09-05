@@ -9,6 +9,7 @@
 #define MODE_SCORE 1
 #define MODE_TIME 2
 #define MODE_SQUARES 4
+#define MODE_ENEMY 8
 	
 struct level_node {
 	int win_mode;
@@ -24,6 +25,7 @@ struct level_node {
 	float tickval;
 	float speedval;
 	float scoreval;
+	int players;
 	struct level_node *next;
 };
 
@@ -31,8 +33,9 @@ struct level_node {
 extern level_node *current_level;
 extern level_node *level_list_head;
 extern level_node *free_play;
+extern level_node *multi_play;
 #endif
 
 level_node *create_level(int win_mode, int lose_mode);
 void levels_init();
-int check_win(float gt);
+int check_win(float gt, int p);

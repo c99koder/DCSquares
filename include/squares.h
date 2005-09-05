@@ -14,6 +14,8 @@ extern "C"
 {
 #endif
 
+#define MAX_PLAYERS 4
+	
 #define PLAYER1 0
 #define PLAYER2 1
 #define PLAYER3 2

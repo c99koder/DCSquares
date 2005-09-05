@@ -12,7 +12,7 @@ int kbhit();
 void push_key(char key);
 char pop_key();
 void c99_mouse_init();
-void read_mouse(int *x, int *y, int *lmb);
+void read_mouse(int num, int *x, int *y, int *lmb);
 int detect_mouse();
 #define MOVE_UP 1
 #define MOVE_DOWN 2

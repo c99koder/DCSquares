@@ -6,6 +6,7 @@
 #include <sys/stat.h>
 
 #import "Preferences.h"
+#include "squares.h"
 #include "theme.h"
 
 #ifdef OPENAL

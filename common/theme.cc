@@ -34,6 +34,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "squares.h"
 #include "theme.h"
 #include "texture.h"
 #if defined(DREAMCAST) || defined(SDL)
@@ -321,6 +322,7 @@ int load_theme(char *theme, int sfx) {
 #endif
     FILE *f;
 	char buf[200];
+	char buf2[200];
 	char *p=NULL;
 	char *val;
 
@@ -345,16 +347,16 @@ int load_theme(char *theme, int sfx) {
 	themeinfo.speedup[0]='\0';
 	themeinfo.evil[0]='\0';
 	themeinfo.enemy[0]='\0';
-	themeinfo.score_x=320;
-	themeinfo.score_y=240;
+	themeinfo.score_x[0]=320;
+	themeinfo.score_y[0]=240;
 	themeinfo.score_size=26;
 	strcpy(themeinfo.squares_caption," squares");
-	themeinfo.squares_x=320;
-	themeinfo.squares_y=260;
+	themeinfo.squares_x[0]=320;
+	themeinfo.squares_y[0]=260;
 	themeinfo.squares_size=20;
 	strcpy(themeinfo.combo_caption," combo");
-	themeinfo.combo_x=320;
-	themeinfo.combo_y=280;
+	themeinfo.combo_x[0]=320;
+	themeinfo.combo_y[0]=280;
 	themeinfo.combo_size=16;
 	themeinfo.time_x=320;
 	themeinfo.time_y=300;
@@ -393,19 +395,19 @@ int load_theme(char *theme, int sfx) {
 			p=themeinfo.squares_caption;
 		}
 	  if(!strcmp(buf,"squares_x")) {
-	    themeinfo.squares_x=atoi(val);
+	    themeinfo.squares_x[0]=atoi(val);
 	  }
 	  if(!strcmp(buf,"squares_y")) {
-	    themeinfo.squares_y=atoi(val);
+	    themeinfo.squares_y[0]=atoi(val);
 	  }
 	  if(!strcmp(buf,"squares_size")) {
 	    themeinfo.squares_size=atoi(val);
 	  }
 	  if(!strcmp(buf,"score_x")) {
-	    themeinfo.score_x=atoi(val);
+	    themeinfo.score_x[0]=atoi(val);
 	  }
 	  if(!strcmp(buf,"score_y")) {
-	    themeinfo.score_y=atoi(val);
+	    themeinfo.score_y[0]=atoi(val);
 	  }
 	  if(!strcmp(buf,"score_size")) {
 	    themeinfo.score_size=atoi(val);
@@ -414,10 +416,10 @@ int load_theme(char *theme, int sfx) {
 			p=themeinfo.combo_caption;
 		}
 	  if(!strcmp(buf,"combo_x")) {
-	    themeinfo.combo_x=atoi(val);
+	    themeinfo.combo_x[0]=atoi(val);
 	  }
 	  if(!strcmp(buf,"combo_y")) {
-	    themeinfo.combo_y=atoi(val);
+	    themeinfo.combo_y[0]=atoi(val);
 	  }
 	  if(!strcmp(buf,"combo_size")) {
 	    themeinfo.combo_size=atoi(val);
@@ -467,6 +469,7 @@ int load_theme(char *theme, int sfx) {
 	  if(!strcmp(buf,"scale")) {
 	    themeinfo.scale=atof(val);
 			if(themeinfo.scale < 1) themeinfo.scale=1;
+			printf("Scale: %f\n",themeinfo.scale);
 	  }
 	  if(!strcmp(buf,"good_r")) {
 	    themeinfo.good_r=atoi(val);
@@ -507,6 +510,32 @@ int load_theme(char *theme, int sfx) {
 	  if(!strcmp(buf,"game_h")) {
 	    themeinfo.game_h=atoi(val);
 	  }		
+		for(int i=0; i<MAX_PLAYERS; i++) {
+			sprintf(buf2,"squares_x%i",i);
+			if(!strcmp(buf,buf2)) {
+				themeinfo.squares_x[i]=atoi(val);
+			}
+			sprintf(buf2,"squares_y%i",i);
+			if(!strcmp(buf,buf2)) {
+				themeinfo.squares_y[i]=atoi(val);
+			}
+			sprintf(buf2,"score_x%i",i);
+			if(!strcmp(buf,buf2)) {
+				themeinfo.score_x[i]=atoi(val);
+			}
+			sprintf(buf2,"score_y%i",i);
+			if(!strcmp(buf,buf2)) {
+				themeinfo.score_y[i]=atoi(val);
+			}
+			sprintf(buf2,"combo_x%i",i);
+			if(!strcmp(buf,buf2)) {
+				themeinfo.combo_x[i]=atoi(val);
+			}
+			sprintf(buf2,"combo_y%i",i);
+			if(!strcmp(buf,buf2)) {
+				themeinfo.combo_y[i]=atoi(val);
+			}
+		}
 	  if(p!=NULL) {
 			if(val==NULL) {
 				p[0]='\0';

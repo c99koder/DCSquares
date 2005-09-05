@@ -39,6 +39,7 @@
 void MessageBox(char *title, char *msg);
 #endif
 
+#include "squares.h"
 #include "theme.h"
 #include "text.h"
 #ifndef DREAMCAST

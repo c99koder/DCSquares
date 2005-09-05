@@ -71,10 +71,10 @@ int powerup_mode=-1;
 int dcs_sfx=1;
 
 extern float power;
-extern int score,score_tex,enemy_tex;
+extern int score[MAX_PLAYERS],score_tex,enemy_tex;
 
-extern int combo;
-extern int maxcombo;
+extern int combo[MAX_PLAYERS];
+extern int maxcombo[MAX_PLAYERS];
 extern themeinfo_t themeinfo;
 extern int score_tex;
 extern int enemy_tex;
@@ -101,8 +101,12 @@ extern int effect_type;
 void render_squares(float square_alpha) {
 	squarelist *c=squarehead;
 	float angle,x,y,dx,dy,l,i;
-	
-	glViewport(themeinfo.game_x,themeinfo.game_y,themeinfo.game_w,themeinfo.game_h);
+
+//#ifdef MACOS
+	glViewport(themeinfo.game_x,480-(themeinfo.game_y+themeinfo.game_h),themeinfo.game_w,themeinfo.game_h);
+//#else
+//	glViewport(themeinfo.game_x,themeinfo.game_y,themeinfo.game_w,themeinfo.game_h);
+//#endif
 	glEnable(GL_BLEND);
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_TEXTURE_2D);
@@ -197,14 +201,14 @@ void render_squares(float square_alpha) {
 					glTranslatef(c->x+2+dx,c->y+2+dy,0.1);
 					glRotatef(c->angle,0,0,1);
 					glColor4f(c->r,c->g,c->b,square_alpha*((float)(8-i)/8.0f));
-					glScalef(2.5,2.5,1.0);
+					glScalef(themeinfo.scale,themeinfo.scale,1.0);
 					render_poly(c->size,c->shadow_tex,square_alpha*((float)(4-i)/4.0f));
 				}
 				glLoadIdentity();
 				glTranslatef(c->x+dx,c->y+dy,0.2);
 				glRotatef(c->angle,0,0,1);
 				glColor4f(c->r,c->g,c->b,square_alpha);
-				glScalef(2.5,2.5,1.0);
+				glScalef(themeinfo.scale,themeinfo.scale,1.0);
 				render_poly(c->size,(c->tex==score_tex && powerup_mode==EVIL)?enemy_tex:c->tex,(powerup_mode==INVINC && c->tex==enemy_tex)?1.0f-(0.8f*effect_timer):(i==0)?square_alpha:square_alpha*((float)(4-i)/8.0f));
 			}
 		}
@@ -241,8 +245,8 @@ void update_squares(float s) {
 		if(c->type<PLAYER_NET) {
 			mx=c->x;
 			my=c->y;
-			read_mouse(&mx,&my,&lmb);
-			switch(poll_game_device(0)) {
+			read_mouse(c->type,&mx,&my,&lmb);
+			switch(poll_game_device(c->type)) {
 				case MOVE_UP:
 					my-=8;
 					break;
@@ -268,8 +272,10 @@ void update_squares(float s) {
 			if(c->x<0-c->size || c->x>640+c->size || c->y < 0-c->size || c->y > 480+c->size) {
 				c->deleted=1;
         if(c->type==SCORE) {
-					if(combo > maxcombo) maxcombo=combo;
-					combo=0;
+					for(int p=0; p<current_level->players; p++) {
+						if(combo[p] > maxcombo[p]) maxcombo[p]=combo[p];
+						combo[p]=0;
+					}
 				}
 			}
 		}
@@ -346,7 +352,7 @@ squarelist *check_collide(squarelist *player) {
 #endif
 						powerup_mode=c->type-10;
 						power=5;
-						if(powerup_mode==PLUS1000) score+=1000;
+						if(powerup_mode==PLUS1000) score[player->type]+=1000;
 						if(powerup_mode==MINISQUARE) player->size=6;
 						if(powerup_mode==SLOWMO) {
 #ifdef SDL
@@ -369,12 +375,12 @@ squarelist *check_collide(squarelist *player) {
 #endif
 
 						powerup_mode=c->type-10;
-						if(powerup_mode==MINUS1000) score-=1000;
+						if(powerup_mode==MINUS1000) score[player->type]-=1000;
 						if(powerup_mode==BIGSQUARE) player->size=12;
 						power=5;
 					}
+					return c;
 				}
-				return c;
 			}
 		}
 		c=c->next;

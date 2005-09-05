@@ -46,6 +46,7 @@
 #include "texture.h"
 #include "options.h"
 #include "text.h"
+#include "squares.h"
 #include "theme.h"
 
 #ifdef DREAMCAST
@@ -432,7 +433,7 @@ glLoadIdentity();
 			sys_render_finish();			
 		}
 		
-		read_mouse(&mx,&my,&lmb);
+		read_mouse(0,&mx,&my,&lmb);
 		if(mx<0) mx=0;
 		if(mx>640) mx=640;
 		if(my<0) my=0;
@@ -614,7 +615,7 @@ void select_options() {
 			sys_render_finish();			
 		}
 		
-		read_mouse(&mx,&my,&lmb);
+		read_mouse(0,&mx,&my,&lmb);
 		if(mx<0) mx=0;
 		if(mx>640) mx=640;
 		if(my<0) my=0;
@@ -667,7 +668,7 @@ void select_options() {
 	}
 	do {
 		if(sys_render_begin()) {
-			read_mouse(&mx,&my,&lmb);
+			read_mouse(0,&mx,&my,&lmb);
 			sys_render_finish();
 		}
 	} while(lmb);
