@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="340.00000pt"
+   height="340pt"
+   id="svg1408"
+   sodipodi:version="0.32"
+   inkscape:version="0.42"
+   sodipodi:docbase="/Users/sam/Desktop"
+   sodipodi:docname="cd.svg"
+   inkscape:export-filename="/Users/sam/Sites/cd.png"
+   inkscape:export-xdpi="120.00000"
+   inkscape:export-ydpi="120.00000">
+  <defs
+     id="defs1410" />
+  <sodipodi:namedview
+     pagecolor="#dddddd"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0000000"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4928528"
+     inkscape:cx="210.00000"
+     inkscape:cy="236.95298"
+     inkscape:document-units="pt"
+     inkscape:current-layer="layer1"
+     id="namedview1412"
+     showgrid="true"
+     inkscape:grid-bbox="true"
+     inkscape:window-width="1024"
+     inkscape:window-height="669"
+     inkscape:window-x="0"
+     inkscape:window-y="22" />
+  <metadata
+     id="metadata1414">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <image
+       id="image1515"
+       height="425.00000"
+       width="425.00000"
+       sodipodi:absref="/Users/sam/Desktop/bluebg.png"
+       xlink:href="bluebg.png"
+       x="0.0000000"
+       y="2.1316282e-14" />
+    <rect
+       style="opacity:1.0000000;fill:#000000;fill-opacity:0.45490196;stroke:none;stroke-width:2.5000000;stroke-linejoin:miter;stroke-miterlimit:4.0000000;stroke-dasharray:none;stroke-opacity:1.0000000"
+       id="rect2545"
+       width="435.25708"
+       height="31.250000"
+       x="-6.2500000"
+       y="196.87500" />
+    <image
+       id="image1457"
+       height="425.00000"
+       width="425.00000"
+       sodipodi:absref="/Users/sam/Desktop/Blank CD Label.rar Folder/Blank CD Label.png"
+       xlink:href="Blank CD Label.rar Folder/Blank CD Label.png"
+       x="0.0000000"
+       y="0.0000000" />
+    <text
+       xml:space="preserve"
+       style="font-size:12.000000px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125.00000%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans"
+       x="317.69141"
+       y="216.97363"
+       id="text2493"
+       sodipodi:linespacing="125.00000%"><tspan
+         sodipodi:role="line"
+         id="tspan2495"
+         x="317.69141"
+         y="216.97363">Version 2.0.1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:12.000000px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125.00000%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans"
+       x="10.841797"
+       y="216.97363"
+       id="text2547"
+       sodipodi:linespacing="125.00000%"><tspan
+         sodipodi:role="line"
+         id="tspan2549"
+         x="10.841797"
+         y="216.97363">©2005 Sam Steele</tspan></text>
+    <image
+       id="image1584"
+       height="50.000000"
+       width="183.33333"
+       sodipodi:absref="/Users/sam/Desktop/dcsquares-title.png"
+       xlink:href="dcsquares-title.png"
+       x="130.41667"
+       y="54.000000" />
+  </g>
+</svg>

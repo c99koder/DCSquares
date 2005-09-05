@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="428.75000px"
+   height="425.00000px"
+   id="svg3419"
+   sodipodi:version="0.32"
+   inkscape:version="0.42"
+   sodipodi:docbase="/Users/sam/Desktop"
+   sodipodi:docname="front cover.svg"
+   inkscape:export-filename="/Users/sam/Sites/front.png"
+   inkscape:export-xdpi="100.00000"
+   inkscape:export-ydpi="100.00000">
+  <defs
+     id="defs3421" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.80000000"
+     inkscape:cx="300.44837"
+     inkscape:cy="175.80396"
+     inkscape:document-units="pt"
+     inkscape:current-layer="layer1"
+     id="namedview3423"
+     inkscape:window-width="688"
+     inkscape:window-height="509"
+     inkscape:window-x="204"
+     inkscape:window-y="65" />
+  <metadata
+     id="metadata3425">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <image
+       id="image3501"
+       height="425.00000"
+       width="428.75000"
+       sodipodi:absref="/Users/sam/Desktop/DCcover.png"
+       xlink:href="DCcover.png"
+       x="0.0000000"
+       y="0.0000000" />
+    <image
+       id="image3669"
+       height="66.000000"
+       width="242.00000"
+       sodipodi:absref="/Users/sam/Desktop/dcsquares-title.png"
+       xlink:href="dcsquares-title.png"
+       x="103.37500"
+       y="78.250000" />
+    <g
+       id="g1540"
+       transform="translate(1.426636,0.803955)">
+      <image
+         y="144.69604"
+         x="144.69836"
+         xlink:href="/Users/sam/DCSquares/data/themes/default/red_square.png"
+         sodipodi:absref="/Users/sam/DCSquares/data/themes/default/red_square.png"
+         width="97.750000"
+         height="97.750000"
+         id="image1537" />
+      <image
+         y="180.94604"
+         x="183.44836"
+         xlink:href="/Users/sam/DCSquares/data/themes/default/green_square.png"
+         sodipodi:absref="/Users/sam/DCSquares/data/themes/default/green_square.png"
+         width="97.750000"
+         height="97.750000"
+         id="image1497" />
+    </g>
+  </g>
+</svg>

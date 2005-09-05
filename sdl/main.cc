@@ -1104,8 +1104,6 @@ int /*main*/WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
   load_font("/rd/hybrid.fnt");
 #endif
 
-//name_entry();
-
 while(exitflag==0) {
 	title_screen();
 	if(exitflag==0) {

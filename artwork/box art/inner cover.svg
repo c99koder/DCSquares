@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="832.00000px"
+   height="650.00000px"
+   id="svg2064"
+   sodipodi:version="0.32"
+   inkscape:version="0.42"
+   sodipodi:docbase="/Users/sam/Desktop"
+   sodipodi:docname="inner cover.svg"
+   inkscape:export-filename="/Users/sam/Sites/inner.png"
+   inkscape:export-xdpi="100.00000"
+   inkscape:export-ydpi="100.00000">
+  <defs
+     id="defs2066">
+    <linearGradient
+       id="linearGradient3243">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop3245" />
+      <stop
+         style="stop-color:#000000;stop-opacity:0;"
+         offset="1"
+         id="stop3247" />
+    </linearGradient>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="1.0000000"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="0"
+     inkscape:zoom="0.80408886"
+     inkscape:cx="455.39441"
+     inkscape:cy="327.29137"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:grid-bbox="true"
+     inkscape:window-width="968"
+     inkscape:window-height="636"
+     inkscape:window-x="31"
+     inkscape:window-y="45" />
+  <metadata
+     id="metadata2069">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <image
+       id="image1430"
+       height="648.42157"
+       width="762.00000"
+       sodipodi:absref="/Users/sam/Desktop/metal.png"
+       xlink:href="metal.png"
+       x="35.000000"
+       y="1.0000000" />
+    <g
+       id="g1674"
+       transform="matrix(4.493953,0.000000,0.000000,4.493953,-1997.872,-319.2576)"
+       style="opacity:0.20000000">
+      <image
+         y="95.573723"
+         x="496.00000"
+         xlink:href="/Users/sam/DCSquares/data/themes/default/red_square.png"
+         sodipodi:absref="/Users/sam/DCSquares/data/themes/default/red_square.png"
+         width="70.000000"
+         height="70.000000"
+         id="image1571" />
+      <image
+         y="121.59331"
+         x="522.51715"
+         xlink:href="/Users/sam/DCSquares/data/themes/default/green_square.png"
+         sodipodi:absref="/Users/sam/DCSquares/data/themes/default/green_square.png"
+         width="70.000000"
+         height="70.000000"
+         id="image1531" />
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="343pt"
+   height="340pt"
+   id="svg1314"
+   sodipodi:version="0.32"
+   inkscape:version="0.42"
+   sodipodi:docbase="/Users/sam/Desktop"
+   sodipodi:docname="page 2.svg"
+   inkscape:export-filename="/Users/sam/Sites/booklet/page2.png"
+   inkscape:export-xdpi="100.00000"
+   inkscape:export-ydpi="100.00000">
+  <defs
+     id="defs1316">
+    <linearGradient
+       id="linearGradient5084">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop5086" />
+      <stop
+         style="stop-color:#d3cfcf;stop-opacity:1.0000000;"
+         offset="1.0000000"
+         id="stop5088" />
+    </linearGradient>
+    <pattern
+       patternUnits="userSpaceOnUse"
+       width="80.000000"
+       height="20.000000"
+       patternTransform="translate(417.3255,203.2087)"
+       id="pattern3621">
+      <image
+         id="image3623"
+         height="20.000000"
+         width="80.000000"
+         sodipodi:absref="/Users/sam/Sites/dcsquares/images/bg-left.png"
+         xlink:href="/Users/sam/Sites/dcsquares/images/bg-left.png"
+         x="417.32553"
+         y="203.20874"
+         transform="translate(-417.3255,-203.2087)" />
+    </pattern>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient5084"
+       id="linearGradient5090"
+       x1="225.58098"
+       y1="425.41809"
+       x2="225.58098"
+       y2="56.074112"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient5084"
+       id="linearGradient6751"
+       x1="76.989861"
+       y1="302.69604"
+       x2="47.618011"
+       y2="279.37500"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.861194,0.000000,0.000000,0.960463,3.921834,-61.39838)" />
+  </defs>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.2125733"
+     inkscape:cx="274.43623"
+     inkscape:cy="172.98267"
+     inkscape:document-units="pt"
+     inkscape:current-layer="layer1"
+     id="namedview1318"
+     inkscape:window-width="809"
+     inkscape:window-height="609"
+     inkscape:window-x="51"
+     inkscape:window-y="36"
+     showgrid="true" />
+  <metadata
+     id="metadata1320">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#000000;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:1.0000000px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000"
+       id="rect1366"
+       width="428.60806"
+       height="56.716984"
+       x="0.0000000"
+       y="-0.018391348" />
+    <image
+       id="image1363"
+       height="48.000000"
+       width="48.000000"
+       sodipodi:absref="/Users/sam/Sites/dcsquares/images/logo.gif"
+       xlink:href="/Users/sam/Sites/dcsquares/images/logo.gif"
+       x="375.75000"
+       y="5.7500000" />
+    <rect
+       style="fill:url(#linearGradient5090);fill-opacity:1.0;stroke:#000000;stroke-width:1.2489539;stroke-miterlimit:4.0000000;stroke-dasharray:none;stroke-opacity:1.0000000"
+       id="rect2094"
+       width="427.17429"
+       height="367.58347"
+       x="0.71689081"
+       y="56.698589" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1.0000000;stroke:#000000;stroke-width:1.3335904;stroke-miterlimit:4.0000000;stroke-dasharray:none;stroke-opacity:1.0000000"
+       id="rect5860"
+       width="378.75000"
+       height="327.95224"
+       x="23.750000"
+       y="75.086388" />
+    <text
+       xml:space="preserve"
+       style="font-size:36.000000px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125.00000%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Impact"
+       x="8.9140625"
+       y="42.078125"
+       id="text5092"
+       sodipodi:linespacing="125.00000%"><tspan
+         sodipodi:role="line"
+         id="tspan5094"
+         x="8.9140625"
+         y="42.078125">How to Play</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.000000px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125.00000%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans"
+       x="37.083008"
+       y="193.13672"
+       id="text5096"
+       sodipodi:linespacing="125.00000%"><tspan
+         sodipodi:role="line"
+         x="37.083008"
+         y="193.13672"
+         id="tspan5100">General Objects</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.000000px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125.00000%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans"
+       x="37.083008"
+       y="98.551758"
+       id="text5114"
+       sodipodi:linespacing="125.00000%"><tspan
+         sodipodi:role="line"
+         id="tspan5116"
+         x="37.083008"
+         y="98.551758">Overview</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:12.000000px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans"
+       x="49.677734"
+       y="121.25391"
+       id="text5118"><tspan
+         sodipodi:role="line"
+         x="49.677734"
+         y="121.25391"
+         id="tspan5872">The goal of DCSquares is to collect the green squares</tspan><tspan
+         sodipodi:role="line"
+         x="49.677734"
+         y="136.25391"
+         id="tspan5893">and avoid the red squares.  There are also several</tspan><tspan
+         sodipodi:role="line"
+         x="49.677734"
+         y="151.25391"
+         id="tspan5895">special items you may encounter during the game that</tspan><tspan
+         sodipodi:role="line"
+         x="49.677734"
+         y="166.25391"
+         id="tspan5899">will affect the gameplay.</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:12.000000px;font-style:normal;font-weight:normal;fill:#ffffff;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans"
+       x="63.34082"
+       y="416.61719"
+       id="text5130"><tspan
+         sodipodi:role="line"
+         id="tspan5132"
+         x="63.340820"
+         y="416.61719">©2005 Sam Steele.        http://dcsquares.c99.org/</tspan></text>
+    <image
+       id="image5956"
+       height="32.000000"
+       width="32.000000"
+       sodipodi:absref="/Users/sam/Sites/dcsquares/images/howtoplay/score.png"
+       xlink:href="/Users/sam/Sites/dcsquares/images/howtoplay/score.png"
+       x="49.642578"
+       y="275.00000" />
+    <image
+       id="image5996"
+       height="32.000000"
+       width="32.000000"
+       sodipodi:absref="/Users/sam/Sites/dcsquares/images/howtoplay/enemy.png"
+       xlink:href="/Users/sam/Sites/dcsquares/images/howtoplay/enemy.png"
+       x="49.642578"
+       y="331.25000" />
+    <rect
+       style="fill:url(#linearGradient6751);fill-opacity:1.0000000;stroke:#000000;stroke-width:1.1368440;stroke-miterlimit:4.0000000;stroke-dasharray:none;stroke-opacity:1.0000000"
+       id="rect5999"
+       width="27.673508"
+       height="29.165541"
+       x="50.210999"
+       y="207.53131"
+       rx="6.1871843"
+       ry="6.1871843" />
+    <text
+       xml:space="preserve"
+       style="font-size:12.000000px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans"
+       x="87.890625"
+       y="216.08008"
+       id="text6753"><tspan
+         sodipodi:role="line"
+         id="tspan6755"
+         x="87.890625"
+         y="216.08008">This is what you use to interact with the </tspan><tspan
+         sodipodi:role="line"
+         x="87.890625"
+         y="231.08008"
+         id="tspan6757">various other objects in the game. </tspan><tspan
+         sodipodi:role="line"
+         x="87.890625"
+         y="246.08008"
+         id="tspan6759">Use your mouse or analog control stick to move it</tspan><tspan
+         sodipodi:role="line"
+         x="87.890625"
+         y="261.08008"
+         id="tspan6761">around the board.</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:12.000000px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans"
+       x="87.498047"
+       y="284.11719"
+       id="text6771"><tspan
+         sodipodi:role="line"
+         id="tspan6773"
+         x="87.498047"
+         y="284.11719">Collecting these gives you points! The amount of </tspan><tspan
+         sodipodi:role="line"
+         x="87.498047"
+         y="299.11719"
+         id="tspan6775">points you recieve per square depends on how long</tspan><tspan
+         sodipodi:role="line"
+         x="87.498047"
+         y="314.11719"
+         id="tspan6777">you've been playing the current round.</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:12.000000px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans"
+       x="87.890625"
+       y="340.36719"
+       id="text6779"><tspan
+         sodipodi:role="line"
+         id="tspan6781"
+         x="87.890625"
+         y="340.36719">Touching one of these will end your game!  Avoid</tspan><tspan
+         sodipodi:role="line"
+         x="87.890625"
+         y="355.36719"
+         id="tspan6787">them at all cost!</tspan></text>
+  </g>
+</svg>
