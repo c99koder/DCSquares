@@ -174,11 +174,11 @@ void render_squares(float square_alpha) {
 					glBegin(GL_QUADS);
 						glColor4f(limit(c->r+0.4,0,1),limit(c->g+0.4,0,1),limit(c->b+0.4,0,1),(i==0)?square_alpha:square_alpha*((float)(4-i)/8.0f));
 						glVertex3f(-c->size,-c->size,0.1);
-						glColor4f(limit(c->r+0.1,0,1),limit(c->g+0.1,0,1),limit(c->b+0.1,0,1),(i==0)?square_alpha:square_alpha*((float)(4-i)/8.0f));
-						glVertex3f(c->size,-c->size,0.1);
 						glColor4f(limit(c->r,0,1),limit(c->g,0,1),limit(c->b,0,1),(i==0)?square_alpha:square_alpha*((float)(4-i)/8.0f));
+						glVertex3f(c->size,-c->size,0.1);
+						glColor4f(limit(c->r-0.2,0,1),limit(c->g-0.2,0,1),limit(c->b-0.2,0,1),(i==0)?square_alpha:square_alpha*((float)(4-i)/8.0f));
 						glVertex3f(c->size,c->size,0.1);
-						glColor4f(limit(c->r+0.1,0,1),limit(c->g+0.1,0,1),limit(c->b+0.1,0,1),(i==0)?square_alpha:square_alpha*((float)(4-i)/8.0f));
+						glColor4f(limit(c->r,0,1),limit(c->g,0,1),limit(c->b,0,1),(i==0)?square_alpha:square_alpha*((float)(4-i)/8.0f));
 						glVertex3f(-c->size,c->size,0.1);
 					glEnd();
 				} else {
@@ -258,6 +258,9 @@ void update_squares(float s) {
 					break;
 				case MOVE_RIGHT:
 					mx+=8;
+					break;
+				case QUIT_BTN:
+					exit(0);
 					break;
 			}
 			c->x=mx;

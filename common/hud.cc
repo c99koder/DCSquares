@@ -92,11 +92,11 @@ void give_points(squarelist *player) {
 	
 	if(totalsquares%5==0) {
 		scoreval+=20+int(60.0f*(1.0f-tickval));
-		if(scoreval > 1000) scoreval = 1000;
+		if(scoreval > current_level->max_scoreval) scoreval = current_level->max_scoreval;
 		tickval-=0.025;
-		if(tickval<0.2) tickval=0.2;
+		if(tickval<current_level->min_tickval) tickval=current_level->min_tickval;
 		speedval+=0.05;
-		if(speedval>6) speedval=6;
+		if(speedval>current_level->max_speedval) speedval=current_level->max_speedval;
 		player->size++;
 		if(player->size>10) player->size=10;
 	}
@@ -232,18 +232,18 @@ void render_score(float gt) {
 	}
 	oldpt=gt;
 	
-	if(gt <= 3) {
+	if(gt <= 4) {
 		if(current_level->win_mode & MODE_SQUARES) {
 			sprintf(tmp,"Collect %i squares",current_level->squares);
-			center_shad(themeinfo.game_y+60,tmp,24,(gt<2)?limit(gt,0,1):(3-gt));
+			center_shad(themeinfo.game_y+60,tmp,24,(gt<3)?limit(gt,0,1):(4-gt));
 		}
 		if(current_level->win_mode & MODE_SCORE) {
 			sprintf(tmp,"Earn %i points",current_level->score);
-			center_shad(themeinfo.game_y+60,tmp,24,(gt<2)?limit(gt,0,1):(3-gt));
+			center_shad(themeinfo.game_y+60,tmp,24,(gt<3)?limit(gt,0,1):(4-gt));
 		}
 		if(current_level->win_mode & MODE_TIME) {
 			sprintf(tmp,"Survive for %i seconds",current_level->time);
-			center_shad(themeinfo.game_y+60,tmp,24,(gt<2)?limit(gt,0,1):(3-gt));
+			center_shad(themeinfo.game_y+60,tmp,24,(gt<3)?limit(gt,0,1):(4-gt));
 		}
 		/*if(current_level->lose_mode & MODE_TIME) {
 			if(current_level->time < 60) {
@@ -297,11 +297,11 @@ void render_title(float gt) {
 		sprintf(tmp,"%s",highcode);
 		center_shad(120,tmp,16,1);
 	}*/
-#if !defined(SDL) && !defined(DREAMCAST)
-	center_shad_rgb(310,"Click to Begin",20,alpha,1,1,1);
-#endif
+//#if !defined(SDL) && !defined(DREAMCAST)
+	center_shad_rgb(290,"Click to Begin",20,alpha,1,1,1);
+//#endif
 	set_font_size(12);
-	draw_txt(640-txt_width("Version 2.2.0"),480,"Version 2.2.0",0,0,0,1,12);
+	draw_txt(640-txt_width("Version 2.1.4"),480,"Version 2.1.4",0,0,0,1,12);
 	set_font_size(16);
 	center_shad(355,"Programming: Sam Steele",18,1);
 	sprintf(tmp,"Artwork: %s",themeinfo.bg_auth);
