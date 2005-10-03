@@ -293,10 +293,6 @@ void high_scores() {
 	init_genrand(st*1000);
 	
 	while(1) {
-    if(poll_game_device(0)==QUIT_BTN) {
-      exitflag=1;
-      break;
-    }
 		read_mouse(0,&x,&y,&lmb);
     if(poll_game_device(0)==START_BTN || lmb!=0 || gt > 5) {
       break;
@@ -461,10 +457,6 @@ void level_stats() {
 	init_genrand(st*1000);
 	
 	while(1) {
-    if(poll_game_device(0)==QUIT_BTN) {
-      exitflag=1;
-      break;
-    }
 		read_mouse(0,&x,&y,&lmb);
     if(poll_game_device(0)==START_BTN || lmb!=0) {
       break;
@@ -647,7 +639,7 @@ void title_screen() {
 	//player=create_square((640/2)-4,(480/2)-4,8,PLAYER1);
 	//netplay_init();
 
-	while(1) {
+	while(poll_game_device(0) != FIRE_BTN) {
 		if(paused==0) {
 	#ifdef DREAMCAST
 			timer_ms_gettime(&s,&ms);
@@ -673,11 +665,11 @@ void title_screen() {
 		#endif
 					render_squares(0.6);
 					render_title(gt - ot);
-					if(gameoptions.playcount < 25) {
+					/*if(gameoptions.playcount < 25) {
 						if(render_menu(menu,3,gt)!=-1) break;
 					} else {
 						if(render_menu(menu2,4,gt)!=-1) break;
-					}
+					}*/
 					if(gt<0.5) {
 		#ifndef DREAMCAST
 						glEnable(GL_BLEND);
@@ -811,6 +803,18 @@ void play_game() {
 		maxcombo[p]=0;
 		oldx[p]=-1;
 		oldy[p]=-1;
+		switch(p) {
+			case 0:
+				player[p]->r=200.0f/255.0f;			
+				player[p]->g=130.0f/255.0f;
+				player[p]->b=0.0f/255.0f;
+				break;
+			case 1:
+				player[p]->r=130.0f/255.0f;
+				player[p]->g=0.0f/255.0f;			
+				player[p]->b=200.0f/255.0f;
+				break;
+		}
 	}
 	//netplay_init();
 
@@ -831,7 +835,7 @@ void play_game() {
 #endif
 	
 	if((gt-ot)>(1.0f / 120.0f)) {
-		if(gt>1.0f) add_squares(gt - ot);
+		if(gt>2.0f) add_squares(gt - ot);
 		update_squares(gt - ot);
 
 		/*if((tick%2==1) && (oldx!=player->x || oldy!=player->y)) {
