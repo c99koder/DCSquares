@@ -49,8 +49,6 @@ extern int powerup_mode;
 extern int gametime;
 extern char highcode[20];
 extern int bg_tex;
-extern int title_tex;
-extern int menu_tex;
 int state=0;
 NSWindow *gamewindow;
 float gt=0;
@@ -137,7 +135,7 @@ void status(char *msg);
 					if([mnuFreePlay state] == NSOnState) {
 						current_level=free_play;
 					}*/
-					current_level=multi_play;
+					current_level=level_list_head;//multi_play;
 					state=1;
 				} else {
 					for(int p=0; p<current_level->players; p++) {
@@ -348,9 +346,9 @@ void status(char *msg);
 	mousey=480-(int)[theEvent locationInWindow].y;
 		
 	if((mousex >= 0) && (mousex < 640) && (mousey >= 0) && (mousey < 480)) {
-		if(player[1]!=NULL && fade<=0) {
-			player[1]->x=mousex;
-			player[1]->y=mousey;
+		if(player[0]!=NULL && fade<=0) {
+			player[0]->x=mousex;
+			player[0]->y=mousey;
 		}
 	}
 }
@@ -396,12 +394,11 @@ void status(char *msg);
 		if(state!=2) gt+=[timer timeInterval];
     glClearColor( 0, 0, 0, 0 ) ;
     glClear( GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT ) ;
-		if(state==0) render_bg(title_tex,1);
-		else if(state==1) render_bg(bg_tex,1); 
-		else render_bg(menu_tex,1);
+		if(state==1) render_bg_game(bg_tex,1);
+		else render_bg_title(bg_tex,1); 
 		glEnable(GL_BLEND);
 		glDisable(GL_DEPTH_TEST);
-    render_squares((gt<1?(gt*square_alpha):fade<=0?square_alpha:fade*square_alpha));
+    render_squares((gt<1?(gt*square_alpha):fade<=0?square_alpha:fade*square_alpha),(state==1));
 		if(state==0) render_title(gt);
 		if(state==1) render_score(gt);
 		if(state==2) render_win(gt,[timer timeInterval]);

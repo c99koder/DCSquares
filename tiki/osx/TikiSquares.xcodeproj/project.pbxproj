@@ -1,0 +1,533 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		222FC2F60953AE4E009582BD /* game.cc in Sources */ = {isa = PBXBuildFile; fileRef = 222FC2EE0953AE4E009582BD /* game.cc */; };
+		222FC2F70953AE4E009582BD /* hud.cc in Sources */ = {isa = PBXBuildFile; fileRef = 222FC2EF0953AE4E009582BD /* hud.cc */; };
+		222FC2F80953AE4E009582BD /* level.cc in Sources */ = {isa = PBXBuildFile; fileRef = 222FC2F00953AE4E009582BD /* level.cc */; };
+		222FC2F90953AE4E009582BD /* rand.cc in Sources */ = {isa = PBXBuildFile; fileRef = 222FC2F10953AE4E009582BD /* rand.cc */; };
+		222FC2FA0953AE4E009582BD /* score.cc in Sources */ = {isa = PBXBuildFile; fileRef = 222FC2F20953AE4E009582BD /* score.cc */; };
+		222FC2FB0953AE4E009582BD /* squares.cc in Sources */ = {isa = PBXBuildFile; fileRef = 222FC2F30953AE4E009582BD /* squares.cc */; };
+		222FC2FC0953AE4E009582BD /* theme.cc in Sources */ = {isa = PBXBuildFile; fileRef = 222FC2F40953AE4E009582BD /* theme.cc */; };
+		225E20160955FDB20086CB3C /* main.cc in Sources */ = {isa = PBXBuildFile; fileRef = 225E20150955FDB20086CB3C /* main.cc */; };
+		225E2099095601810086CB3C /* loading.png in Resources */ = {isa = PBXBuildFile; fileRef = 225E2044095601810086CB3C /* loading.png */; };
+		225E2143095601AF0086CB3C /* themes in Resources */ = {isa = PBXBuildFile; fileRef = 225E20E9095601AF0086CB3C /* themes */; };
+		225E2144095601AF0086CB3C /* VeraBd.txf in Resources */ = {isa = PBXBuildFile; fileRef = 225E2142095601AF0086CB3C /* VeraBd.txf */; };
+		225E2150095601EC0086CB3C /* texture.mm in Sources */ = {isa = PBXBuildFile; fileRef = 225E214F095601EC0086CB3C /* texture.mm */; };
+		225E2159095602190086CB3C /* options.cc in Sources */ = {isa = PBXBuildFile; fileRef = 225E2157095602190086CB3C /* options.cc */; };
+		225E215A095602190086CB3C /* text.cc in Sources */ = {isa = PBXBuildFile; fileRef = 225E2158095602190086CB3C /* text.cc */; };
+		225E21DF095606350086CB3C /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 225E21DE095606350086CB3C /* OpenGL.framework */; };
+		225E2218095609BE0086CB3C /* TitleScreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 225E2216095609BE0086CB3C /* TitleScreen.cpp */; };
+		225E23BF09560AC40086CB3C /* menuList.cc in Sources */ = {isa = PBXBuildFile; fileRef = 225E23BD09560AC40086CB3C /* menuList.cc */; };
+		225E23C609560BEF0086CB3C /* playField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 225E23C409560BEF0086CB3C /* playField.cpp */; };
+		225E24E00956125D0086CB3C /* Tiki.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 225E24DF0956125D0086CB3C /* Tiki.framework */; };
+		225E25070956138F0086CB3C /* Tiki.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 225E24DF0956125D0086CB3C /* Tiki.framework */; };
+		225E25870956173A0086CB3C /* squaresBg.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 225E25850956173A0086CB3C /* squaresBg.h */; };
+		225E25880956173A0086CB3C /* squaresBg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 225E25860956173A0086CB3C /* squaresBg.cpp */; };
+		225E25EA0958EF490086CB3C /* banna.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 225E25E80958EF480086CB3C /* banna.h */; };
+		225E25EB0958EF490086CB3C /* banna.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 225E25E90958EF490086CB3C /* banna.cpp */; };
+		225E26590958F41B0086CB3C /* DCSMenu.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 225E26570958F41B0086CB3C /* DCSMenu.h */; };
+		225E265A0958F41B0086CB3C /* DCSMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 225E26580958F41B0086CB3C /* DCSMenu.cpp */; };
+		225E26830958F9710086CB3C /* GamePlay.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 225E26810958F9710086CB3C /* GamePlay.h */; };
+		225E26840958F9710086CB3C /* GamePlay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 225E26820958F9710086CB3C /* GamePlay.cpp */; };
+		2284517A095F2865002AF3FE /* squaresHUD.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22845178095F2865002AF3FE /* squaresHUD.h */; };
+		2284517B095F2865002AF3FE /* squaresHUD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22845179095F2865002AF3FE /* squaresHUD.cpp */; };
+		228451F8095F6D91002AF3FE /* box.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 228451F6095F6D91002AF3FE /* box.h */; };
+		228451F9095F6D91002AF3FE /* box.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 228451F7095F6D91002AF3FE /* box.cpp */; };
+		22F3A2C70953AA02005DB9D0 /* Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F3A2C40953AA02005DB9D0 /* Controller.m */; };
+		8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
+		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
+		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
+		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildStyle section */
+		4A9504CCFFE6A4B311CA0CBA /* Debug */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		4A9504CDFFE6A4B311CA0CBA /* Release */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End PBXBuildStyle section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		22F3A2760953A8F4005DB9D0 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				225E25070956138F0086CB3C /* Tiki.framework in CopyFiles */,
+				225E25870956173A0086CB3C /* squaresBg.h in CopyFiles */,
+				225E25EA0958EF490086CB3C /* banna.h in CopyFiles */,
+				225E26590958F41B0086CB3C /* DCSMenu.h in CopyFiles */,
+				225E26830958F9710086CB3C /* GamePlay.h in CopyFiles */,
+				2284517A095F2865002AF3FE /* squaresHUD.h in CopyFiles */,
+				228451F8095F6D91002AF3FE /* box.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+		222FC2EE0953AE4E009582BD /* game.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = game.cc; path = ../../common/game.cc; sourceTree = SOURCE_ROOT; };
+		222FC2EF0953AE4E009582BD /* hud.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = hud.cc; path = ../../common/hud.cc; sourceTree = SOURCE_ROOT; };
+		222FC2F00953AE4E009582BD /* level.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = level.cc; path = ../../common/level.cc; sourceTree = SOURCE_ROOT; };
+		222FC2F10953AE4E009582BD /* rand.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = rand.cc; path = ../../common/rand.cc; sourceTree = SOURCE_ROOT; };
+		222FC2F20953AE4E009582BD /* score.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = score.cc; path = ../../common/score.cc; sourceTree = SOURCE_ROOT; };
+		222FC2F30953AE4E009582BD /* squares.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = squares.cc; path = ../../common/squares.cc; sourceTree = SOURCE_ROOT; };
+		222FC2F40953AE4E009582BD /* theme.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = theme.cc; path = ../../common/theme.cc; sourceTree = SOURCE_ROOT; };
+		225E20150955FDB20086CB3C /* main.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cc; path = ../src/main.cc; sourceTree = SOURCE_ROOT; };
+		225E2044095601810086CB3C /* loading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = loading.png; path = ../../data/loading.png; sourceTree = SOURCE_ROOT; };
+		225E20E9095601AF0086CB3C /* themes */ = {isa = PBXFileReference; lastKnownFileType = folder; name = themes; path = ../../data/themes; sourceTree = SOURCE_ROOT; };
+		225E2142095601AF0086CB3C /* VeraBd.txf */ = {isa = PBXFileReference; lastKnownFileType = file; name = VeraBd.txf; path = ../../data/VeraBd.txf; sourceTree = SOURCE_ROOT; };
+		225E214F095601EC0086CB3C /* texture.mm */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.objcpp; name = texture.mm; path = ../../osx/texture.mm; sourceTree = SOURCE_ROOT; };
+		225E2157095602190086CB3C /* options.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = options.cc; path = ../../common/options.cc; sourceTree = SOURCE_ROOT; };
+		225E2158095602190086CB3C /* text.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = text.cc; path = ../../common/text.cc; sourceTree = SOURCE_ROOT; };
+		225E219E095604F80086CB3C /* font.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = font.h; path = ../../include/font.h; sourceTree = SOURCE_ROOT; };
+		225E219F095604F80086CB3C /* game.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = game.h; path = ../../include/game.h; sourceTree = SOURCE_ROOT; };
+		225E21A0095604F80086CB3C /* http.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = http.h; path = ../../include/http.h; sourceTree = SOURCE_ROOT; };
+		225E21A1095604F80086CB3C /* hud.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = hud.h; path = ../../include/hud.h; sourceTree = SOURCE_ROOT; };
+		225E21A2095604F80086CB3C /* input.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = input.h; path = ../../include/input.h; sourceTree = SOURCE_ROOT; };
+		225E21A3095604F80086CB3C /* level.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = level.h; path = ../../include/level.h; sourceTree = SOURCE_ROOT; };
+		225E21A4095604F80086CB3C /* net.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = net.h; path = ../../include/net.h; sourceTree = SOURCE_ROOT; };
+		225E21A5095604F80086CB3C /* options.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = options.h; path = ../../include/options.h; sourceTree = SOURCE_ROOT; };
+		225E21A6095604F80086CB3C /* rand.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = rand.h; path = ../../include/rand.h; sourceTree = SOURCE_ROOT; };
+		225E21A7095604F80086CB3C /* score.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = score.h; path = ../../include/score.h; sourceTree = SOURCE_ROOT; };
+		225E21A8095604F80086CB3C /* squares.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = squares.h; path = ../../include/squares.h; sourceTree = SOURCE_ROOT; };
+		225E21A9095604F80086CB3C /* text.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = text.h; path = ../../include/text.h; sourceTree = SOURCE_ROOT; };
+		225E21AA095604F80086CB3C /* texture.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = texture.h; path = ../../include/texture.h; sourceTree = SOURCE_ROOT; };
+		225E21AB095604F80086CB3C /* theme.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = theme.h; path = ../../include/theme.h; sourceTree = SOURCE_ROOT; };
+		225E21DE095606350086CB3C /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		225E2215095609BE0086CB3C /* TitleScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TitleScreen.h; path = ../src/TitleScreen.h; sourceTree = SOURCE_ROOT; };
+		225E2216095609BE0086CB3C /* TitleScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TitleScreen.cpp; path = ../src/TitleScreen.cpp; sourceTree = SOURCE_ROOT; };
+		225E23BD09560AC40086CB3C /* menuList.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = menuList.cc; path = ../src/drawables/menuList.cc; sourceTree = SOURCE_ROOT; };
+		225E23BE09560AC40086CB3C /* menuList.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = menuList.h; path = ../src/drawables/menuList.h; sourceTree = SOURCE_ROOT; };
+		225E23C309560BEF0086CB3C /* playField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = playField.h; path = ../src/drawables/playField.h; sourceTree = SOURCE_ROOT; };
+		225E23C409560BEF0086CB3C /* playField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = playField.cpp; path = ../src/drawables/playField.cpp; sourceTree = SOURCE_ROOT; };
+		225E24DF0956125D0086CB3C /* Tiki.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Tiki.framework; path = ../../../../tiki/osx/build/Development/Tiki.framework; sourceTree = SOURCE_ROOT; };
+		225E25850956173A0086CB3C /* squaresBg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = squaresBg.h; path = ../src/drawables/squaresBg.h; sourceTree = SOURCE_ROOT; };
+		225E25860956173A0086CB3C /* squaresBg.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = squaresBg.cpp; path = ../src/drawables/squaresBg.cpp; sourceTree = SOURCE_ROOT; };
+		225E25E80958EF480086CB3C /* banna.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = banna.h; path = ../src/drawables/banna.h; sourceTree = SOURCE_ROOT; };
+		225E25E90958EF490086CB3C /* banna.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = banna.cpp; path = ../src/drawables/banna.cpp; sourceTree = SOURCE_ROOT; };
+		225E26570958F41B0086CB3C /* DCSMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCSMenu.h; path = ../src/DCSMenu.h; sourceTree = SOURCE_ROOT; };
+		225E26580958F41B0086CB3C /* DCSMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DCSMenu.cpp; path = ../src/DCSMenu.cpp; sourceTree = SOURCE_ROOT; };
+		225E26810958F9710086CB3C /* GamePlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GamePlay.h; path = ../src/GamePlay.h; sourceTree = SOURCE_ROOT; };
+		225E26820958F9710086CB3C /* GamePlay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GamePlay.cpp; path = ../src/GamePlay.cpp; sourceTree = SOURCE_ROOT; };
+		22845178095F2865002AF3FE /* squaresHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = squaresHUD.h; path = ../src/drawables/squaresHUD.h; sourceTree = SOURCE_ROOT; };
+		22845179095F2865002AF3FE /* squaresHUD.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = squaresHUD.cpp; path = ../src/drawables/squaresHUD.cpp; sourceTree = SOURCE_ROOT; };
+		228451F6095F6D91002AF3FE /* box.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = box.h; path = ../src/drawables/box.h; sourceTree = SOURCE_ROOT; };
+		228451F7095F6D91002AF3FE /* box.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = box.cpp; path = ../src/drawables/box.cpp; sourceTree = SOURCE_ROOT; };
+		22F3A2C30953AA02005DB9D0 /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Controller.h; sourceTree = "<group>"; };
+		22F3A2C40953AA02005DB9D0 /* Controller.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Controller.m; sourceTree = "<group>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		29B97319FDCFA39411CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
+		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		32CA4F630368D1EE00C91783 /* TikiSquares_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TikiSquares_Prefix.pch; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8D1107320486CEB800E47090 /* TikiSquares.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TikiSquares.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+				225E21DF095606350086CB3C /* OpenGL.framework in Frameworks */,
+				225E24E00956125D0086CB3C /* Tiki.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				22F3A2C30953AA02005DB9D0 /* Controller.h */,
+				22F3A2C40953AA02005DB9D0 /* Controller.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				225E24DF0956125D0086CB3C /* Tiki.framework */,
+				225E21DE095606350086CB3C /* OpenGL.framework */,
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* TikiSquares.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		222FC2ED0953AC84009582BD /* common */ = {
+			isa = PBXGroup;
+			children = (
+				225E2157095602190086CB3C /* options.cc */,
+				225E2158095602190086CB3C /* text.cc */,
+				225E214F095601EC0086CB3C /* texture.mm */,
+				222FC2EE0953AE4E009582BD /* game.cc */,
+				222FC2EF0953AE4E009582BD /* hud.cc */,
+				222FC2F00953AE4E009582BD /* level.cc */,
+				222FC2F10953AE4E009582BD /* rand.cc */,
+				222FC2F20953AE4E009582BD /* score.cc */,
+				222FC2F30953AE4E009582BD /* squares.cc */,
+				222FC2F40953AE4E009582BD /* theme.cc */,
+				225E20150955FDB20086CB3C /* main.cc */,
+			);
+			name = common;
+			sourceTree = "<group>";
+		};
+		225E219D095604E30086CB3C /* include */ = {
+			isa = PBXGroup;
+			children = (
+				225E219E095604F80086CB3C /* font.h */,
+				225E219F095604F80086CB3C /* game.h */,
+				225E21A0095604F80086CB3C /* http.h */,
+				225E21A1095604F80086CB3C /* hud.h */,
+				225E21A2095604F80086CB3C /* input.h */,
+				225E21A3095604F80086CB3C /* level.h */,
+				225E21A4095604F80086CB3C /* net.h */,
+				225E21A5095604F80086CB3C /* options.h */,
+				225E21A6095604F80086CB3C /* rand.h */,
+				225E21A7095604F80086CB3C /* score.h */,
+				225E21A8095604F80086CB3C /* squares.h */,
+				225E21A9095604F80086CB3C /* text.h */,
+				225E21AA095604F80086CB3C /* texture.h */,
+				225E21AB095604F80086CB3C /* theme.h */,
+			);
+			name = include;
+			sourceTree = "<group>";
+		};
+		225E2214095609900086CB3C /* Menus */ = {
+			isa = PBXGroup;
+			children = (
+				225E2215095609BE0086CB3C /* TitleScreen.h */,
+				225E2216095609BE0086CB3C /* TitleScreen.cpp */,
+				225E26570958F41B0086CB3C /* DCSMenu.h */,
+				225E26580958F41B0086CB3C /* DCSMenu.cpp */,
+				225E26810958F9710086CB3C /* GamePlay.h */,
+				225E26820958F9710086CB3C /* GamePlay.cpp */,
+			);
+			name = Menus;
+			sourceTree = "<group>";
+		};
+		225E23BC09560AB10086CB3C /* Drawables */ = {
+			isa = PBXGroup;
+			children = (
+				225E23BD09560AC40086CB3C /* menuList.cc */,
+				225E23BE09560AC40086CB3C /* menuList.h */,
+				225E23C309560BEF0086CB3C /* playField.h */,
+				225E23C409560BEF0086CB3C /* playField.cpp */,
+				225E25850956173A0086CB3C /* squaresBg.h */,
+				225E25860956173A0086CB3C /* squaresBg.cpp */,
+				225E25E80958EF480086CB3C /* banna.h */,
+				225E25E90958EF490086CB3C /* banna.cpp */,
+				22845178095F2865002AF3FE /* squaresHUD.h */,
+				22845179095F2865002AF3FE /* squaresHUD.cpp */,
+				228451F6095F6D91002AF3FE /* box.h */,
+				228451F7095F6D91002AF3FE /* box.cpp */,
+			);
+			name = Drawables;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* TikiSquares */ = {
+			isa = PBXGroup;
+			children = (
+				225E23BC09560AB10086CB3C /* Drawables */,
+				225E2214095609900086CB3C /* Menus */,
+				225E219D095604E30086CB3C /* include */,
+				222FC2ED0953AC84009582BD /* common */,
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = TikiSquares;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				32CA4F630368D1EE00C91783 /* TikiSquares_Prefix.pch */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				225E20E9095601AF0086CB3C /* themes */,
+				225E2142095601AF0086CB3C /* VeraBd.txf */,
+				225E2044095601810086CB3C /* loading.png */,
+				8D1107310486CEB800E47090 /* Info.plist */,
+				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
+				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
+				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D1107260486CEB800E47090 /* TikiSquares */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "TikiSquares" */;
+			buildPhases = (
+				8D1107290486CEB800E47090 /* Resources */,
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+				22F3A2760953A8F4005DB9D0 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			buildSettings = {
+			};
+			dependencies = (
+			);
+			name = TikiSquares;
+			productInstallPath = "$(HOME)/Applications";
+			productName = TikiSquares;
+			productReference = 8D1107320486CEB800E47090 /* TikiSquares.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "TikiSquares" */;
+			buildSettings = {
+			};
+			buildStyles = (
+				4A9504CCFFE6A4B311CA0CBA /* Debug */,
+				4A9504CDFFE6A4B311CA0CBA /* Release */,
+			);
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* TikiSquares */;
+			projectDirPath = "";
+			targets = (
+				8D1107260486CEB800E47090 /* TikiSquares */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D1107290486CEB800E47090 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */,
+				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
+				225E2099095601810086CB3C /* loading.png in Resources */,
+				225E2143095601AF0086CB3C /* themes in Resources */,
+				225E2144095601AF0086CB3C /* VeraBd.txf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072D0486CEB800E47090 /* main.m in Sources */,
+				22F3A2C70953AA02005DB9D0 /* Controller.m in Sources */,
+				222FC2F60953AE4E009582BD /* game.cc in Sources */,
+				222FC2F70953AE4E009582BD /* hud.cc in Sources */,
+				222FC2F80953AE4E009582BD /* level.cc in Sources */,
+				222FC2F90953AE4E009582BD /* rand.cc in Sources */,
+				222FC2FA0953AE4E009582BD /* score.cc in Sources */,
+				222FC2FB0953AE4E009582BD /* squares.cc in Sources */,
+				222FC2FC0953AE4E009582BD /* theme.cc in Sources */,
+				225E20160955FDB20086CB3C /* main.cc in Sources */,
+				225E2150095601EC0086CB3C /* texture.mm in Sources */,
+				225E2159095602190086CB3C /* options.cc in Sources */,
+				225E215A095602190086CB3C /* text.cc in Sources */,
+				225E2218095609BE0086CB3C /* TitleScreen.cpp in Sources */,
+				225E23BF09560AC40086CB3C /* menuList.cc in Sources */,
+				225E23C609560BEF0086CB3C /* playField.cpp in Sources */,
+				225E25880956173A0086CB3C /* squaresBg.cpp in Sources */,
+				225E25EB0958EF490086CB3C /* banna.cpp in Sources */,
+				225E265A0958F41B0086CB3C /* DCSMenu.cpp in Sources */,
+				225E26840958F9710086CB3C /* GamePlay.cpp in Sources */,
+				2284517B095F2865002AF3FE /* squaresHUD.cpp in Sources */,
+				228451F9095F6D91002AF3FE /* box.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		089C165CFE840E0CC02AAC07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				089C165DFE840E0CC02AAC07 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		29B97318FDCFA39411CA2CEA /* MainMenu.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				29B97319FDCFA39411CA2CEA /* English */,
+			);
+			name = MainMenu.nib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C01FCF4B08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(FRAMEWORK_SEARCH_PATHS)",
+					"$(SRCROOT)/../../../../tiki/osx/build/Deployment",
+					"$(SRCROOT)/../../../../tiki/osx/build/Development",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_NAME = TikiSquares;
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = NO;
+			};
+			name = Debug;
+		};
+		C01FCF4C08A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(FRAMEWORK_SEARCH_PATHS)",
+					"$(SRCROOT)/../../../../tiki/osx/build/Deployment",
+					"$(SRCROOT)/../../../../tiki/osx/build/Development",
+				);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_NAME = TikiSquares;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					MACOS,
+					UNIX,
+					TIKI,
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					/sw/include/plib,
+					../../include,
+					"$(HEADER_SEARCH_PATHS)",
+				);
+				PREBINDING = NO;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					MACOS,
+					UNIX,
+					TIKI,
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					/sw/include/plib,
+					../../include,
+					"$(HEADER_SEARCH_PATHS)",
+				);
+				PREBINDING = NO;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "TikiSquares" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4B08A954540054247B /* Debug */,
+				C01FCF4C08A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "TikiSquares" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

@@ -26,7 +26,7 @@
 #include "game.h"
 #include "score.h"
 #include "level.h"
-#if defined(SDL) || defined(DREAMCAST)
+#if defined(SDL)
 #include "sys.h"
 #include "input.h"
 #endif
@@ -46,6 +46,8 @@ float power=0;
 float speedval=1.0;
 extern int powerup_mode;
 extern int bg_tex;
+extern int stat_tex;
+extern int logo_tex;
 
 #ifdef SDL
 extern Mix_Chunk *powerup;
@@ -179,7 +181,7 @@ void render_bar(float power, float max) {
 	  glVertex3f(123,110,0.2);
 	  glEnd();
   }
-	center_shad_rgb(115,msg,16,center_alpha,1,1,1);
+	center_shad_rgb(115,msg,16,center_alpha,1,1,1,true);
 }
 
 void render_score(float gt) {
@@ -235,15 +237,15 @@ void render_score(float gt) {
 	if(gt <= 4) {
 		if(current_level->win_mode & MODE_SQUARES) {
 			sprintf(tmp,"Collect %i squares",current_level->squares);
-			center_shad(themeinfo.game_y+60,tmp,24,(gt<3)?limit(gt,0,1):(4-gt));
+			center_shad(themeinfo.game_y+60,tmp,24,(gt<3)?limit(gt,0,1):(4-gt),true);
 		}
 		if(current_level->win_mode & MODE_SCORE) {
 			sprintf(tmp,"Earn %i points",current_level->score);
-			center_shad(themeinfo.game_y+60,tmp,24,(gt<3)?limit(gt,0,1):(4-gt));
+			center_shad(themeinfo.game_y+60,tmp,24,(gt<3)?limit(gt,0,1):(4-gt),true);
 		}
 		if(current_level->win_mode & MODE_TIME) {
 			sprintf(tmp,"Survive for %i seconds",current_level->time);
-			center_shad(themeinfo.game_y+60,tmp,24,(gt<3)?limit(gt,0,1):(4-gt));
+			center_shad(themeinfo.game_y+60,tmp,24,(gt<3)?limit(gt,0,1):(4-gt),true);
 		}
 		/*if(current_level->lose_mode & MODE_TIME) {
 			if(current_level->time < 60) {
@@ -257,18 +259,27 @@ void render_score(float gt) {
 	
 	for(int p=0; p<current_level->players; p++) {
 		sprintf(tmp,"%i",score[p]);
+		render_box(themeinfo.score_bg_x[p], themeinfo.score_bg_y[p], themeinfo.stat_w, themeinfo.stat_h, stat_tex, 1);
+		center(themeinfo.score_bg_x[p]+(themeinfo.stat_w/2),themeinfo.score_bg_y[p]+themeinfo.stat_size+3,themeinfo.score_title,themeinfo.stat_size,alpha);
 		center(themeinfo.score_x[p],themeinfo.score_y[p],tmp,themeinfo.score_size,alpha);
 		if(current_level->win_mode & MODE_SQUARES) {
 			sprintf(tmp,"%i/%i%s",squares[p],current_level->squares,themeinfo.squares_caption);
 		} else {
 			sprintf(tmp,"%i%s",squares[p],themeinfo.squares_caption);
 		}
+		render_box(themeinfo.squares_bg_x[p], themeinfo.squares_bg_y[p], themeinfo.stat_w, themeinfo.stat_h, stat_tex, 1);
+		center(themeinfo.squares_bg_x[p]+(themeinfo.stat_w/2),themeinfo.squares_bg_y[p]+themeinfo.stat_size+3,themeinfo.squares_title,themeinfo.stat_size,alpha);
 		center(themeinfo.squares_x[p],themeinfo.squares_y[p],tmp,themeinfo.squares_size,alpha);
+		render_box(themeinfo.combo_bg_x[p], themeinfo.combo_bg_y[p], themeinfo.stat_w, themeinfo.stat_h, stat_tex, 1);
+		center(themeinfo.combo_bg_x[p]+(themeinfo.stat_w/2),themeinfo.combo_bg_y[p]+themeinfo.stat_size+3,themeinfo.combo_title,themeinfo.stat_size,alpha);
 		if(combo[p]>4) {
 			sprintf(tmp,"%i%s",combo[p],themeinfo.combo_caption);
 			center(themeinfo.combo_x[p],themeinfo.combo_y[p],tmp,themeinfo.combo_size,alpha);
 		}
 	}		
+	
+	render_box(themeinfo.time_bg_x, themeinfo.time_bg_y, themeinfo.stat_w, themeinfo.stat_h, stat_tex, 1);
+	center(themeinfo.time_bg_x+(themeinfo.stat_w/2),themeinfo.time_bg_y+themeinfo.stat_size+3,themeinfo.time_title,themeinfo.stat_size,alpha);
 
 	if(current_level->lose_mode & MODE_TIME) {
 		center(themeinfo.time_x,themeinfo.time_y,format_time(current_level->time - gt),themeinfo.time_size,alpha);
@@ -297,11 +308,12 @@ void render_title(float gt) {
 		sprintf(tmp,"%s",highcode);
 		center_shad(120,tmp,16,1);
 	}*/
-//#if !defined(SDL) && !defined(DREAMCAST)
+	render_box(themeinfo.title_x + themeinfo.title_w/2 - themeinfo.logo_w/2,themeinfo.title_y + themeinfo.title_h/6 - themeinfo.logo_h / 2,themeinfo.logo_w,themeinfo.logo_h,logo_tex,1);
+#if !defined(SDL) && !defined(TIKI)
 	center_shad_rgb(290,"Click to Begin",20,alpha,1,1,1);
-//#endif
+#endif
 	set_font_size(12);
-	draw_txt(640-txt_width("Version 2.1.4"),480,"Version 2.1.4",0,0,0,1,12);
+	draw_txt(640-txt_width("Version 2.1.6"),480,"Version 2.1.6",0,0,0,1,12);
 	set_font_size(16);
 	center_shad(355,"Programming: Sam Steele",18,1);
 	sprintf(tmp,"Artwork: %s",themeinfo.bg_auth);
@@ -310,7 +322,7 @@ void render_title(float gt) {
 	center_shad(395,tmp,18,1);
 	sprintf(tmp,"Sound effects: %s",themeinfo.sfx_auth);
 	center_shad(415,tmp,18,1);
-	center_shad(440,"http://dcsquares.c99.org",18,1);
+	//center_shad(440,"http://dcsquares.c99.org",18,1);
 	st+=gt;
 	if(st>0.015) {
 		alpha+=bstep;
@@ -479,9 +491,15 @@ void render_highscores() {
 }
 
 void high_scores();
+extern "C" {
+void update_lcds();
+}
 
 void name_entry(unsigned long time) {
+#ifndef TIKI
 #ifdef DREAMCAST
+  uint32 s,ms,tm;
+  float st=0,gt=0,ot=0;
 	char L1[2]="_";
 	char L2[2]="_";
 	char L3[2]="_";
@@ -493,7 +511,9 @@ void name_entry(unsigned long time) {
 	set_font_size(28);
 	
 	sx=themeinfo.game_x + (themeinfo.game_w/2) - ((120+txt_width("_"))/2);
-	
+	timer_ms_gettime(&s,&ms);
+	st=s+((float)ms/1000.0f);
+		
 	power=0;
 	
 	rank=score_list_rank(score[0]);
@@ -542,6 +562,14 @@ void name_entry(unsigned long time) {
 		L2[0]=name[1];
 		L3[0]=name[2];
 		
+    timer_ms_gettime(&s,&ms);
+		
+	  update_lcds();
+		gt=(s+((float)ms/1000.0f))-st;
+		
+		add_squares(gt - ot);
+		update_squares(gt - ot);
+		
 		if(sys_render_begin()) {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			render_bg(bg_tex,0.8);
@@ -551,6 +579,7 @@ void name_entry(unsigned long time) {
 			glEnable(GL_BLEND);
 			glDisable(GL_DEPTH_TEST);
 #endif
+			render_squares(0.6);
 			glColor4f(0,0,0,0.4);
 			//render_score(0);
 			center_shad_rgb(100,"Name Entry",28,1,1,1,1);
@@ -574,11 +603,15 @@ void name_entry(unsigned long time) {
 			center_shad_rgb(400,"Use left and right to move.",16,1,1,1,1);
 			center_shad_rgb(420,"Press Start when finished.",16,1,1,1,1);
 			sys_render_finish();
+			
+			ot = gt;
+			
 		}
 		if(x>0) delay((x==MOVE_LEFT || x==MOVE_RIGHT)?0.20:0.15);
 	}
 	score_list_insert(name,score[0],maxcombo[0],time,0);
 	save_scores();
 	high_scores();
+#endif
 #endif
 }

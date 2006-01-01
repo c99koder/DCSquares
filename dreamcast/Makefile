@@ -4,14 +4,14 @@ all:squares.bin
 
 include $(KOS_BASE)/Makefile.rules
 
-KOS_CFLAGS += -I../include -g  -Iinclude -DDREAMCAST -DOPENGL
+KOS_CFLAGS += -I../include -g  -Iinclude -DDREAMCAST -DOPENGL -DGOAT
 
 squares.bin: ${OBJS}
 	kos-c++ $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -g -o squares.elf \
-		$(OBJS) -L. -L$(KOS_BASE)/lib -lc99 \
+		$(OBJS) -L. -L$(KOS_BASE)/lib -lc99 -lmenu \
 		-ldcplib -ltsunami -lparallax -lkosutils -limageload -lkmg \
 		-lpng -ljpeg -lgl -ltremor -lbz2 -lz -lm $(LIBS)
-	sh-elf-strip squares.elf
+#	sh-elf-strip squares.elf
 	sh-elf-objcopy -R .stack -O binary squares.elf squares.bin
 
 clean:

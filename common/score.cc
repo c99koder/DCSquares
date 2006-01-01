@@ -18,9 +18,6 @@
 #ifdef MACOS
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
-
-void MessageBox(char *title, char *message);
-void status(char *text);
 #else
 #include <GL/gl.h>
 #include <GL/glu.h>
@@ -57,7 +54,7 @@ score_table_t * tab=NULL;
 
 struct score_list_node *score_list_head=NULL;
 
-#if defined(SDL) || defined(DREAMCAST) 
+#if defined(SDL) || defined(TIKI) 
 
 void status(char *msg);
 extern gameoptions_t gameoptions;
@@ -146,10 +143,12 @@ void score_list_init() {
 #ifdef DREAMCAST
 	strcpy(buf,"/vmu/a1/scores.ds2");
 #else
+#ifdef NET
 	if(gameoptions.net) {
 		status("Downloading high score list");
 		http_get_file(buf,"dcsquares.c99.org",80,"/scores_raw.php",ct,&len);
 	}
+#endif
 #endif
   f=fopen(buf,"rb");
 	if(f) {

@@ -18,13 +18,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
 
-#ifdef DREAMCAST
-#include <kos.h>
-#include <kos/dbglog.h>
-#include <tsu/font.h>
-//#include <dcplib/fnt.h>
-#include <GL/gl.h>
-#endif
 #ifdef WIN32
 #include <windows.h>
 #include <GL\gl.h>
@@ -42,12 +35,22 @@ void MessageBox(char *title, char *msg);
 #include "squares.h"
 #include "theme.h"
 #include "text.h"
-#ifndef DREAMCAST
+#ifndef TIKI
 #include "ul.h"
 #include "fnt.h"
+#else
+#include <Tiki/tiki.h>
+#include <Tiki/font.h>
+#include <Tiki/texture.h>
+#include <Tiki/plxcompat.h>
+
+using namespace Tiki;
+using namespace Tiki::GL;
+using namespace Tiki::GL::Plxcompat;
+
 #endif
 
-#ifndef DREAMCAST
+#ifndef TIKI
 fntRenderer *textR;
 fntTexFont *font;
 #else
@@ -61,25 +64,44 @@ extern themeinfo_t themeinfo;
 
 void center(int x, int y,char *text, int point, float fade) {
 	set_font_size(point);
+	text_set_z(40);
 	draw_txt((x)-(txt_width(text)/2),y,text,(float)themeinfo.text_r / 255.0f,(float)themeinfo.text_g / 255.0f,(float)themeinfo.text_b / 255.0f,fade,point);
 }
 
-void center_shad_rgb(int y,char *text, int point, float fade, float r, float g, float b) {
+void center_shad_rgb(int y,char *text, int point, float fade, float r, float g, float b, bool game) {
 	set_font_size(point);
-	draw_txt((themeinfo.game_x+(themeinfo.game_w/2))-(txt_width(text)/2)+1,y+1,text,0,0,0,fade*0.6,point);
-	draw_txt((themeinfo.game_x+(themeinfo.game_w/2))-(txt_width(text)/2)-1,y-1,text,r,g,b,fade,point);
+	if(game) {
+		text_set_z(40.90);
+		draw_txt((themeinfo.game_x+(themeinfo.game_w/2))-(txt_width(text)/2)+1,y+1,text,0,0,0,fade*0.6,point);
+		text_set_z(40.9999);
+		draw_txt((themeinfo.game_x+(themeinfo.game_w/2))-(txt_width(text)/2)-1,y-1,text,r,g,b,fade,point);
+	} else {
+		text_set_z(40.90);
+		draw_txt((themeinfo.title_x+(themeinfo.title_w/2))-(txt_width(text)/2)+1,y+1,text,0,0,0,fade*0.6,point);
+		text_set_z(40.9999);
+		draw_txt((themeinfo.title_x+(themeinfo.title_w/2))-(txt_width(text)/2)-1,y-1,text,r,g,b,fade,point);
+	}
 }
-void center_shad(int y,char *text, int point, float fade) {
+void center_shad(int y,char *text, int point, float fade, bool game) {
 	set_font_size(point);
-	draw_txt((themeinfo.game_x+(themeinfo.game_w/2))-(txt_width(text)/2)+1,y+1,text,0,0,0,fade*0.6,point);
-	draw_txt((themeinfo.game_x+(themeinfo.game_w/2))-(txt_width(text)/2)-1,y-1,text,(float)themeinfo.text_r / 255.0f,(float)themeinfo.text_g / 255.0f,(float)themeinfo.text_b / 255.0f,fade,point);
+	if(game) {
+		text_set_z(40.90);
+		draw_txt((themeinfo.game_x+(themeinfo.game_w/2))-(txt_width(text)/2)+1,y+1,text,0,0,0,fade*0.6,point);
+		text_set_z(40.9999);
+		draw_txt((themeinfo.game_x+(themeinfo.game_w/2))-(txt_width(text)/2)-1,y-1,text,(float)themeinfo.text_r / 255.0f,(float)themeinfo.text_g / 255.0f,(float)themeinfo.text_b / 255.0f,fade,point);
+	} else {
+		text_set_z(40.90);
+		draw_txt((themeinfo.title_x+(themeinfo.title_w/2))-(txt_width(text)/2)+1,y+1,text,0,0,0,fade*0.6,point);
+		text_set_z(40.9999);
+		draw_txt((themeinfo.title_x+(themeinfo.title_w/2))-(txt_width(text)/2)-1,y-1,text,(float)themeinfo.text_r / 255.0f,(float)themeinfo.text_g / 255.0f,(float)themeinfo.text_b / 255.0f,fade,point);
+	}
 }
 void draw_txt(int x, int y, char *text, float r, float g, float b, float a, int point) {
   if(r>1) r=1; if(r<0) r=0;
   if(g>1) g=1; if(g<0) g=0;
   if(b>1) b=1; if(b<0) b=0;
   if(a>1) a=1; if(a<0) a=0;
-#ifndef DREAMCAST
+#ifndef TIKI
   glMatrixMode(GL_PROJECTION);
   glPushMatrix();
   glLoadIdentity();
@@ -107,11 +129,10 @@ void draw_txt(int x, int y, char *text, float r, float g, float b, float a, int 
 #else
   int cx=x,cy=y,i;
   char tmp[2];
-  fnt->setColor(r,g,b);
-  fnt->setAlpha(a);
+  fnt->setColor(Color(a,r,g,b));
   fnt->setSize(point);
   tmp[1]='\0';
-  fnt->draw(cx, cy-((float)point/4.0f), text_z, text);
+  fnt->draw(Vector(cx, cy-((float)point/4.0f), text_z), text);
   for(i=0;i<strlen(text);i++) {
     tmp[0]=text[i];
     if(tmp[0]=='\n') {
@@ -124,14 +145,14 @@ void draw_txt(int x, int y, char *text, float r, float g, float b, float a, int 
 #endif
 }
 
-#ifndef DREAMCAST
+#ifndef TIKI
 void cbk( enum ulSeverity severity, char* msg ){
 	//MessageBox(NULL,msg,"Warning",MB_OK|MB_ICONEXCLAMATION);
 }
 #endif
 
 int text_init(char *filename, int pointsize) {
-#ifndef DREAMCAST
+#ifndef TIKI
   //ulSetErrorCallback(cbk);
   fntInit();
   textR=new fntRenderer();
@@ -156,16 +177,16 @@ int text_init(char *filename, int pointsize) {
 
 float txt_width(char *text) {
   float top,bot,left,right;
-#ifndef DREAMCAST 
+#ifndef TIKI 
   font->getBBox(text,textR->getPointSize(),0,&left,&right,&bot,&top);
 #else
-  fnt->getTextSize(text,&right,&bot);
+  fnt->getTextSize(text,right,bot);
 #endif
   return right;
 }
 
 void set_font_size(int pointsize) {
-#ifndef DREAMCAST
+#ifndef TIKI
   textR->setPointSize(pointsize);
 #else
   fnt->setSize(pointsize);

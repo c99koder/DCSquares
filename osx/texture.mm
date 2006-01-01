@@ -273,20 +273,6 @@ glTexImage2D(GL_TEXTURE_2D, 0, [bitmap bitsPerPixel]==24?GL_RGB8:GL_RGBA,
     textures[pos].txraddr=pvr_mem_malloc(TextureImage->w*TextureImage->h*2);
     pvr_txr_load_ex((void*)TextureImage->data, (void *)textures[pos].txraddr, TextureImage->w, TextureImage->h, PVR_TXRLOAD_16BPP|PVR_TXRLOAD_INVERT_Y);
     if(trans) {
-      t=(uint16*)textures[pos].txraddr;
-      for (i=0; i<TextureImage->w*TextureImage->h; i++) {
-        r = (t[i] >> 11) & 31;
-        g = (t[i] >> 5) & 63;
-        b = (t[i] >> 0) & 31;
-        if (r < 15 && g < 15 && b <15)
-          a = 0x00;
-        else
-          a = 0x0f;
-        t[i] = (a << 12) |
-               ((r >> 1) << 8) |
-               ((g >> 2) << 4) |
-               ((b >> 1) << 0);
-      }
       glKosTex2D(GL_ARGB4444_TWID, TextureImage->w, TextureImage->h, (void*)textures[pos].txraddr);
     } else {
       glKosTex2D(GL_RGB565_TWID, TextureImage->w, TextureImage->h, (void*)textures[pos].txraddr);

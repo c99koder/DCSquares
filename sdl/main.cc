@@ -105,8 +105,6 @@ int exitflag=0;
 int paused=0;
 float game_gt;
 extern int bg_tex;
-extern int title_tex;
-extern int menu_tex;
 extern int effect_type;
 extern float effect_timer;
 extern int maxcombo[MAX_PLAYERS];
@@ -125,7 +123,7 @@ int render_menu(char menu[][20], int size, float gt) {
 	static float tm=0;
 	static float oldgt=gt;
 	
-	float mx=float(themeinfo.game_x + themeinfo.game_w) /2.0f;
+	float mx=float(themeinfo.title_x + themeinfo.title_w) /2.0f;
 	
 	if(gt < oldgt) oldgt=gt;
 	
@@ -198,7 +196,7 @@ glLoadIdentity();
 		lmb=0;
 	}
 	
-		glColor4f(1,1,1,0.7);
+		glColor4f(1,1,1,0.4);
 		glBegin(GL_QUADS);
 		glVertex3f(mx-(w/2),185+(menu_select*24),0.91);
 		glVertex3f(mx-(w/2)+w,185+(menu_select*24),0.91);
@@ -317,7 +315,7 @@ void high_scores() {
 
 		if(sys_render_begin()) {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			render_bg_game(menu_tex,1);
+			render_bg_title(bg_tex,1);
 #ifdef DREAMCAST
 			glKosFinishList();
 #else
@@ -379,7 +377,7 @@ void high_scores() {
 
 		if(sys_render_begin()) {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			render_bg_game(menu_tex,1);
+			render_bg_title(bg_tex,1);
 #ifdef DREAMCAST
 			glKosFinishList();
 #else
@@ -393,7 +391,7 @@ void high_scores() {
 			glVertex3f(24+497,40+401,0.11);
 			glVertex3f(24,441,0.11);
 			glEnd();*/
-						//render_squares(1.0f-((gt)/2.0f));
+			render_squares(1.0f-((gt)/2.0f));
 			//render_highscores();
 #ifndef DREAMCAST
 			glEnable(GL_BLEND);
@@ -481,7 +479,7 @@ void level_stats() {
 
 		if(sys_render_begin()) {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			render_bg_game(menu_tex,0.8);
+			render_bg_title(bg_tex,0.8);
 #ifdef DREAMCAST
 			glKosFinishList();
 #else
@@ -543,7 +541,7 @@ void level_stats() {
 
 		if(sys_render_begin()) {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			render_bg_game(title_tex,1);
+			render_bg_title(bg_tex,1);
 #ifdef DREAMCAST
 			glKosFinishList();
 #else
@@ -552,8 +550,8 @@ void level_stats() {
 #endif
 			glColor4f(0,0,0,0.4);
 
-						//render_squares(1.0f-((gt)/2.0f));
-			//render_highscores();
+			render_squares(1.0f-((gt)/2.0f));
+
 #ifndef DREAMCAST
 			glEnable(GL_BLEND);
 			glDisable(GL_DEPTH_TEST);
@@ -562,10 +560,10 @@ void level_stats() {
 			glLoadIdentity();
 			glColor4f(0.8,0.8,0.8,(gt/0.5));
 			glBegin(GL_QUADS);
-			glVertex3f(0,0,0.9);
-			glVertex3f(640,0,0.9);
-			glVertex3f(640,480,0.9);
-			glVertex3f(0,480,0.9);
+			glVertex3f(0,0,0.999);
+			glVertex3f(640,0,0.999);
+			glVertex3f(640,480,0.999);
+			glVertex3f(0,480,0.999);
 			glEnd();
 			sys_render_finish();
 		}
@@ -590,8 +588,8 @@ void title_screen() {
 	squarelist *c;
 	int max=0,size=6;
 
-	char menu[][20] = { "New Game","Highscores","Options" };
-	char menu2[][20] = { "New Game","Highscores","Options","SnakeGame" };
+	char menu[][20] = { "New Game","Free Play","Highscores","Options","Quit" };
+	char menu2[][20] = { "New Game","Free Play", "Highscores","Options","SnakeGame","Quit" };
 
 	char tmp[256];
 	char tmp2[30];
@@ -656,7 +654,7 @@ void title_screen() {
 
 				if(sys_render_begin()) {
 					glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-					render_bg_game(title_tex,1);
+					render_bg_title(bg_tex,1);
 		#ifdef DREAMCAST
 					glKosFinishList();
 		#else
@@ -665,11 +663,11 @@ void title_screen() {
 		#endif
 					render_squares(0.6);
 					render_title(gt - ot);
-					/*if(gameoptions.playcount < 25) {
-						if(render_menu(menu,3,gt)!=-1) break;
+					if(gameoptions.playcount < 25) {
+						if(render_menu(menu,5,gt)!=-1) break;
 					} else {
-						if(render_menu(menu2,4,gt)!=-1) break;
-					}*/
+						if(render_menu(menu2,6,gt)!=-1) break;
+					}
 					if(gt<0.5) {
 		#ifndef DREAMCAST
 						glEnable(GL_BLEND);
@@ -713,7 +711,7 @@ void title_screen() {
 
 		if(sys_render_begin()) {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			render_bg_game(title_tex,1);
+			render_bg_title(bg_tex,1);
 #ifdef DREAMCAST
 			glKosFinishList();
 #else
@@ -797,7 +795,7 @@ void play_game() {
 	
 	for(int p=0; p<current_level->players; p++) {
 		player[p]=create_square(((640/(current_level->players+1))*(p+1))-4,(480/2)-4,6,p);
-		score[p]=0;
+		score[p]=123465;
 		combo[p]=0;
 		squares[p]=0;
 		maxcombo[p]=0;
@@ -805,9 +803,9 @@ void play_game() {
 		oldy[p]=-1;
 		switch(p) {
 			case 0:
-				player[p]->r=200.0f/255.0f;			
-				player[p]->g=130.0f/255.0f;
-				player[p]->b=0.0f/255.0f;
+				player[p]->r=0;//200.0f/255.0f;			
+				player[p]->g=0;//130.0f/255.0f;
+				player[p]->b=0;//0.0f/255.0f;
 				break;
 			case 1:
 				player[p]->r=130.0f/255.0f;
@@ -856,7 +854,7 @@ void play_game() {
 			glDisable(GL_DEPTH_TEST);
 			//if(debugtxt[0]!='\0') center(100,debugtxt,20,0);
 #endif
-			render_squares(gt<1?(gt):1.0);
+			render_squares(gt<1?(gt):1.0,true);
 			if(gt>0.4) render_score(gt);
 
 			for(int p=0; p< current_level->players; p++) {
@@ -960,8 +958,8 @@ void play_game() {
 			glDisable(GL_DEPTH_TEST);
 			//if(debugtxt[0]!='\0') center(100,debugtxt,20,0);
 #endif
-			render_squares(1.0f-((gt)/2.0f));
-			//render_score(gt);
+			render_squares(1.0f-((gt)/2.0f),true);
+
 #ifndef DREAMCAST
 			glEnable(GL_BLEND);
 			glDisable(GL_DEPTH_TEST);
@@ -969,10 +967,10 @@ void play_game() {
 glDisable(GL_TEXTURE_2D);
 			glColor4f(0.8,0.8,0.8,gt);
 			glBegin(GL_QUADS);
-			glVertex3f(0,0,0.9);
-			glVertex3f(640,0,0.9);
-			glVertex3f(640,480,0.9);
-			glVertex3f(0,480,0.9);
+			glVertex3f(0,0,0.999);
+			glVertex3f(640,0,0.999);
+			glVertex3f(640,480,0.999);
+			glVertex3f(0,480,0.999);
 			glEnd();
 			sys_render_finish();
 		}
@@ -1076,15 +1074,11 @@ int /*main*/WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 	c99_mouse_init();
 	texture_init();
 	levels_init();
-#ifdef DREAMCAST
-	text_init("helvetica_dc.txf",40);
-#else
-	text_init("Helvetica-Bold.txf",40);
-#endif
+	text_init("VeraBd.txf",40);
 	load_options();
   write_options();
 	score_list_init();
-	load_theme(gameoptions.theme,0);
+	load_theme("goat",0);
 #ifdef DREAMCAST
   set_show_cursor(0);
 	set_echo(0);
@@ -1114,12 +1108,21 @@ while(exitflag==0) {
 		switch(menu_select)
 		{
 			case 0:
-				current_level = multi_play;//free_play;
-				if(current_level->win_mode == MODE_SQUARES) {
-					current_level->win_mode = MODE_SCORE;
-				} else {
-					current_level->win_mode = MODE_SQUARES;
+				current_level = level_list_head;
+				gameoptions.playcount++;
+				while(current_level!=NULL) {
+					play_game();
+					level_stats();
+					if(check_win(game_gt,0) == 1) {
+						current_level=current_level->next;
+					} else {
+						current_level=NULL;
+					}	
 				}
+				current_level=free_play;
+				break;
+			case 1:
+				current_level = free_play;
 				gameoptions.playcount++;
 				play_game();
 				if(current_level->players==1 && score[0]>1000) {
@@ -1139,30 +1142,20 @@ while(exitflag==0) {
 					}
 				}
 				level_stats();
-				//name_entry(game_gt*1000);
+				name_entry(game_gt*1000);
 				write_options();
 				break;
-			/*case 1:
-				current_level = level_list_head;
-				while(current_level!=NULL) {
-					play_game();
-					level_stats();
-					if(check_win(game_gt) == 1) {
-						current_level=current_level->next;
-					} else {
-						current_level=NULL;
-					}	
-				}
-				current_level=free_play;
-				break;*/
-			case 1:
+			case 2:
 				high_scores();
 				break;
-			case 2:
+			case 3:
 				select_options();
 				break;
-			case 3:
+			case 4:
 				snakemain();
+				break;
+			case 5:
+				exitflag=1;
 				break;
 		}
 	}

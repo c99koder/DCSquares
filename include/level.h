@@ -23,8 +23,11 @@ struct level_node {
 	bool power_score;
 	bool power_evil;
 	float tickval;
+	float min_tickval;
 	float speedval;
+	float max_speedval;
 	float scoreval;
+	float max_scoreval;
 	int players;
 	struct level_node *next;
 };

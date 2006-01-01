@@ -73,6 +73,7 @@ int dcs_sfx=1;
 extern float power;
 extern int score[MAX_PLAYERS],score_tex,enemy_tex;
 
+extern int game_tex;
 extern int combo[MAX_PLAYERS];
 extern int maxcombo[MAX_PLAYERS];
 extern themeinfo_t themeinfo;
@@ -98,18 +99,23 @@ extern float effect_mode;
 extern float effect_timer;
 extern int effect_type;
 
-void render_squares(float square_alpha) {
+void render_squares(float square_alpha, bool game) {
 	squarelist *c=squarehead;
 	float angle,x,y,dx,dy,l,i;
 
 //#ifdef MACOS
-	glViewport(themeinfo.game_x,480-(themeinfo.game_y+themeinfo.game_h),themeinfo.game_w,themeinfo.game_h);
-//#else
+	if(game)
+		glViewport(themeinfo.game_x,480-(themeinfo.game_y+themeinfo.game_h),themeinfo.game_w,themeinfo.game_h);
+	else
+		glViewport(themeinfo.title_x,480-(themeinfo.title_y+themeinfo.title_h),themeinfo.title_w,themeinfo.title_h);
+	//#else
 //	glViewport(themeinfo.game_x,themeinfo.game_y,themeinfo.game_w,themeinfo.game_h);
 //#endif
 	glEnable(GL_BLEND);
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_TEXTURE_2D);
+	
+	render_bg(game_tex,1);
 	
 	if(effect_type!=-1) {
 		switch(effect_type) {
@@ -198,14 +204,14 @@ void render_squares(float square_alpha) {
 			} else {
 				if(c->shadow_tex!=-1) {
 					glLoadIdentity();
-					glTranslatef(c->x+2+dx,c->y+2+dy,0.1);
+					glTranslatef(c->x+2+dx,c->y+2+dy,0.011);
 					glRotatef(c->angle,0,0,1);
 					glColor4f(c->r,c->g,c->b,square_alpha*((float)(8-i)/8.0f));
 					glScalef(themeinfo.scale,themeinfo.scale,1.0);
 					render_poly(c->size,c->shadow_tex,square_alpha*((float)(4-i)/4.0f));
 				}
 				glLoadIdentity();
-				glTranslatef(c->x+dx,c->y+dy,0.2);
+				glTranslatef(c->x+dx,c->y+dy,0.012);
 				glRotatef(c->angle,0,0,1);
 				glColor4f(c->r,c->g,c->b,square_alpha);
 				glScalef(themeinfo.scale,themeinfo.scale,1.0);
@@ -241,7 +247,7 @@ void update_squares(float s) {
 			c->angle+=180*s;
 			if(c->angle>360) c->angle-=360;
 		}
-#if defined(SDL) || defined(DREAMCAST)
+#if !defined(TIKI) && (defined(SDL) || defined(DREAMCAST))
 		if(c->type<PLAYER_NET) {
 			mx=c->x;
 			my=c->y;
@@ -260,7 +266,7 @@ void update_squares(float s) {
 					mx+=8;
 					break;
 				case QUIT_BTN:
-					exit(0);
+					//exit(0);
 					break;
 			}
 			c->x=mx;

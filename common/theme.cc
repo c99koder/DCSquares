@@ -34,16 +34,25 @@
 #include <stdlib.h>
 #include <string.h>
 
+#ifdef TIKI
+#include <Tiki/tiki.h>
+#include <Tiki/gl.h>
+
+using namespace Tiki;
+using namespace Tiki::GL;
+#endif
+
 #include "squares.h"
 #include "theme.h"
 #include "texture.h"
-#if defined(DREAMCAST) || defined(SDL)
+#if !defined(TIKI) && (defined(DREAMCAST) || defined(SDL))
 #include "sys.h"
 #endif
 
 int loading_tex=15;
-int menu_tex=1;
-int title_tex=2;
+int logo_tex=0;
+int game_tex=1;
+int stat_tex=2;
 int bg_tex=3;
 int score_tex=4;
 int enemy_tex=5;
@@ -129,17 +138,39 @@ void render_bg(int tex, float fade) {
 	switch_tex(tex);
 	glBegin(GL_QUADS);
 	glTexCoord2f(0,uv[0]);
-	glVertex3f(0,0,0.1);
+	glVertex3f(0,0,0.0);
 	glTexCoord2f(1,uv[1]);
-	glVertex3f(640,0,0.1);
+	glVertex3f(640,0,0.0);
 	glTexCoord2f(1,uv[2]);
-	glVertex3f(640,480,0.1);
+	glVertex3f(640,480,0.0);
 	glTexCoord2f(0,uv[3]);
-	glVertex3f(0,480,0.1);
+	glVertex3f(0,480,0.0);
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
 }
 
+void render_box(int x, int y, int w, int h, int tex, float fade) {
+#ifdef DREAMCAST
+  GLfloat uv[4]={1,1,0,0};
+#else
+  GLfloat uv[4]={0,0,1,1};
+#endif
+	glEnable(GL_TEXTURE_2D);
+	glLoadIdentity();	
+	glColor3f(fade,fade,fade);
+	switch_tex(tex);
+	glBegin(GL_QUADS);
+	glTexCoord2f(0,uv[0]);
+	glVertex3f(x,y,0.025);
+	glTexCoord2f(1,uv[1]);
+	glVertex3f(x+w,y,0.025);
+	glTexCoord2f(1,uv[2]);
+	glVertex3f(x+w,y+h,0.025);
+	glTexCoord2f(0,uv[3]);
+	glVertex3f(x,y+h,0.025);
+	glEnd();
+	glDisable(GL_TEXTURE_2D);
+}
 
 void render_bg_game(int tex, float fade) {
 	glEnable(GL_TEXTURE_2D);
@@ -184,14 +215,14 @@ void render_bg_game(int tex, float fade) {
 	glTexCoord2f((float)themeinfo.game_x/640.0f,1);
 	glVertex3f((float)themeinfo.game_x,480,0.9);
 	
-	glTexCoord2f((float)themeinfo.game_x/640.0f,(float)themeinfo.game_y/480.0f);
+	/*glTexCoord2f((float)themeinfo.game_x/640.0f,(float)themeinfo.game_y/480.0f);
 	glVertex3f((float)themeinfo.game_x,(float)themeinfo.game_y,0.1);
 	glTexCoord2f(((float)themeinfo.game_x+(float)themeinfo.game_w)/640.0f,(float)themeinfo.game_y/480.0f);
 	glVertex3f((float)themeinfo.game_x+(float)themeinfo.game_w,(float)themeinfo.game_y,0.1);
 	glTexCoord2f(((float)themeinfo.game_x+(float)themeinfo.game_w)/640.0f,((float)themeinfo.game_y+(float)themeinfo.game_h)/480.0f);
 	glVertex3f((float)themeinfo.game_x+(float)themeinfo.game_w,(float)themeinfo.game_y+(float)themeinfo.game_h,0.1);
 	glTexCoord2f((float)themeinfo.game_x/640.0f,((float)themeinfo.game_y+(float)themeinfo.game_h)/480.0f);
-	glVertex3f((float)themeinfo.game_x,(float)themeinfo.game_y+(float)themeinfo.game_h,0.1);
+	glVertex3f((float)themeinfo.game_x,(float)themeinfo.game_y+(float)themeinfo.game_h,0.1);*/
 #else
 	glTexCoord2f(0,1);
 	glVertex3f(0,0,0.9);
@@ -212,13 +243,13 @@ void render_bg_game(int tex, float fade) {
 	glVertex3f((float)themeinfo.game_x,(float)themeinfo.game_y,0.9);
 
 	glTexCoord2f(((float)themeinfo.game_x+(float)themeinfo.game_w)/640.0f,1);
-	glVertex3f((float)themeinfo.game_x+(float)themeinfo.game_w,0,0.9);
+	glVertex3f((float)themeinfo.game_x+(float)themeinfo.game_w,0,0.02);
 	glTexCoord2f(1,1);
-	glVertex3f(640,0,0.9);
+	glVertex3f(640,0,0.02);
 	glTexCoord2f(1,1-(((float)themeinfo.game_y+(float)themeinfo.game_h)/480.0f));
-	glVertex3f(640,(float)themeinfo.game_y+(float)themeinfo.game_h,0.9);
+	glVertex3f(640,(float)themeinfo.game_y+(float)themeinfo.game_h,0.02);
 	glTexCoord2f(((float)themeinfo.game_x+(float)themeinfo.game_w)/640.0f,1-(((float)themeinfo.game_y+(float)themeinfo.game_h)/480.0f));
-	glVertex3f((float)themeinfo.game_x+(float)themeinfo.game_w,(float)themeinfo.game_y+(float)themeinfo.game_h,0.9);
+	glVertex3f((float)themeinfo.game_x+(float)themeinfo.game_w,(float)themeinfo.game_y+(float)themeinfo.game_h,0.02);
 
 	glTexCoord2f((float)themeinfo.game_x/640.0f,1-(((float)themeinfo.game_y+(float)themeinfo.game_h)/480.0f));
 	glVertex3f((float)themeinfo.game_x,(float)themeinfo.game_y+(float)themeinfo.game_h,0.9);
@@ -229,14 +260,115 @@ void render_bg_game(int tex, float fade) {
 	glTexCoord2f((float)themeinfo.game_x/640.0f,0);
 	glVertex3f((float)themeinfo.game_x,480,0.9);
 	
-	glTexCoord2f((float)themeinfo.game_x/640.0f,1-(float)themeinfo.game_y/480.0f);
+	/*glTexCoord2f((float)themeinfo.game_x/640.0f,1-(float)themeinfo.game_y/480.0f);
 	glVertex3f((float)themeinfo.game_x,(float)themeinfo.game_y,0.01);
 	glTexCoord2f(((float)themeinfo.game_x+(float)themeinfo.game_w)/640.0f,1-(float)themeinfo.game_y/480.0f);
 	glVertex3f((float)themeinfo.game_x+(float)themeinfo.game_w,(float)themeinfo.game_y,0.01);
 	glTexCoord2f(((float)themeinfo.game_x+(float)themeinfo.game_w)/640.0f,1-((float)themeinfo.game_y+(float)themeinfo.game_h)/480.0f);
 	glVertex3f((float)themeinfo.game_x+(float)themeinfo.game_w,(float)themeinfo.game_y+(float)themeinfo.game_h,0.01);
 	glTexCoord2f((float)themeinfo.game_x/640.0f,1-((float)themeinfo.game_y+(float)themeinfo.game_h)/480.0f);
-	glVertex3f((float)themeinfo.game_x,(float)themeinfo.game_y+(float)themeinfo.game_h,0.01);
+	glVertex3f((float)themeinfo.game_x,(float)themeinfo.game_y+(float)themeinfo.game_h,0.01);*/
+#endif
+	glEnd();
+	glDisable(GL_TEXTURE_2D);
+}
+
+void render_bg_title(int tex, float fade) {
+	glEnable(GL_TEXTURE_2D);
+	glLoadIdentity();	
+	glColor3f(fade,fade,fade);
+	switch_tex(tex);
+	glBegin(GL_QUADS);
+#ifndef DREAMCAST
+	glTexCoord2f(0,0);
+	glVertex3f(0,0,0.9);
+	glTexCoord2f((float)themeinfo.title_x/640.0f,0);
+	glVertex3f((float)themeinfo.title_x,0,0.9);
+	glTexCoord2f((float)themeinfo.title_x/640.0f,1);
+	glVertex3f((float)themeinfo.title_x,480,0.9);
+	glTexCoord2f(0,1);
+	glVertex3f(0,480,0.9);
+	
+	glTexCoord2f((float)themeinfo.title_x/640.0f,0);
+	glVertex3f((float)themeinfo.title_x,0,0.9);
+	glTexCoord2f(((float)themeinfo.title_x+(float)themeinfo.title_w)/640.0f,0);
+	glVertex3f((float)themeinfo.title_x+(float)themeinfo.title_w,0,0.9);
+	glTexCoord2f(((float)themeinfo.title_x+(float)themeinfo.title_w)/640.0f,(float)themeinfo.title_y/480.0f);
+	glVertex3f((float)themeinfo.title_x+(float)themeinfo.title_w,(float)themeinfo.title_y,0.9);
+	glTexCoord2f((float)themeinfo.title_x/640.0f,(float)themeinfo.title_y/480.0f);
+	glVertex3f((float)themeinfo.title_x,(float)themeinfo.title_y,0.9);
+	
+	glTexCoord2f(((float)themeinfo.title_x+(float)themeinfo.title_w)/640.0f,0);
+	glVertex3f((float)themeinfo.title_x+(float)themeinfo.title_w,0,0.9);
+	glTexCoord2f(1,0);
+	glVertex3f(640,0,0.9);
+	glTexCoord2f(1,(((float)themeinfo.title_y+(float)themeinfo.title_h)/480.0f));
+	glVertex3f(640,(float)themeinfo.title_y+(float)themeinfo.title_h,0.9);
+	glTexCoord2f(((float)themeinfo.title_x+(float)themeinfo.title_w)/640.0f,(((float)themeinfo.title_y+(float)themeinfo.title_h)/480.0f));
+	glVertex3f((float)themeinfo.title_x+(float)themeinfo.title_w,(float)themeinfo.title_y+(float)themeinfo.title_h,0.9);
+	
+	glTexCoord2f((float)themeinfo.title_x/640.0f,(((float)themeinfo.title_y+(float)themeinfo.title_h)/480.0f));
+	glVertex3f((float)themeinfo.title_x,(float)themeinfo.title_y+(float)themeinfo.title_h,0.9);
+	glTexCoord2f(1,(((float)themeinfo.title_y+(float)themeinfo.title_h)/480.0f));
+	glVertex3f(640,(float)themeinfo.title_y+(float)themeinfo.title_h,0.9);
+	glTexCoord2f(1,1);
+	glVertex3f(640,480,0.9);
+	glTexCoord2f((float)themeinfo.title_x/640.0f,1);
+	glVertex3f((float)themeinfo.title_x,480,0.9);
+	
+	glTexCoord2f((float)themeinfo.title_x/640.0f,(float)themeinfo.title_y/480.0f);
+	glVertex3f((float)themeinfo.title_x,(float)themeinfo.title_y,0.1);
+	glTexCoord2f(((float)themeinfo.title_x+(float)themeinfo.title_w)/640.0f,(float)themeinfo.title_y/480.0f);
+	glVertex3f((float)themeinfo.title_x+(float)themeinfo.title_w,(float)themeinfo.title_y,0.1);
+	glTexCoord2f(((float)themeinfo.title_x+(float)themeinfo.title_w)/640.0f,((float)themeinfo.title_y+(float)themeinfo.title_h)/480.0f);
+	glVertex3f((float)themeinfo.title_x+(float)themeinfo.title_w,(float)themeinfo.title_y+(float)themeinfo.title_h,0.1);
+	glTexCoord2f((float)themeinfo.title_x/640.0f,((float)themeinfo.title_y+(float)themeinfo.title_h)/480.0f);
+	glVertex3f((float)themeinfo.title_x,(float)themeinfo.title_y+(float)themeinfo.title_h,0.1);
+#else
+	glTexCoord2f(0,1);
+	glVertex3f(0,0,0.9);
+	glTexCoord2f((float)themeinfo.title_x/640.0f,1);
+	glVertex3f((float)themeinfo.title_x,0,0.9);
+	glTexCoord2f((float)themeinfo.title_x/640.0f,0);
+	glVertex3f((float)themeinfo.title_x,480,0.9);
+	glTexCoord2f(0,0);
+	glVertex3f(0,480,0.9);
+	
+	glTexCoord2f((float)themeinfo.title_x/640.0f,1);
+	glVertex3f((float)themeinfo.title_x,0,0.9);
+	glTexCoord2f(((float)themeinfo.title_x+(float)themeinfo.title_w)/640.0f,1);
+	glVertex3f((float)themeinfo.title_x+(float)themeinfo.title_w,1,0.9);
+	glTexCoord2f(((float)themeinfo.title_x+(float)themeinfo.title_w)/640.0f,1-(float)themeinfo.title_y/480.0f);
+	glVertex3f((float)themeinfo.title_x+(float)themeinfo.title_w,(float)themeinfo.title_y,0.9);
+	glTexCoord2f((float)themeinfo.title_x/640.0f,1-(float)themeinfo.title_y/480.0f);
+	glVertex3f((float)themeinfo.title_x,(float)themeinfo.title_y,0.9);
+	
+	glTexCoord2f(((float)themeinfo.title_x+(float)themeinfo.title_w)/640.0f,1);
+	glVertex3f((float)themeinfo.title_x+(float)themeinfo.title_w,0,0.9);
+	glTexCoord2f(1,1);
+	glVertex3f(640,0,0.9);
+	glTexCoord2f(1,1-(((float)themeinfo.title_y+(float)themeinfo.title_h)/480.0f));
+	glVertex3f(640,(float)themeinfo.title_y+(float)themeinfo.title_h,0.9);
+	glTexCoord2f(((float)themeinfo.title_x+(float)themeinfo.title_w)/640.0f,1-(((float)themeinfo.title_y+(float)themeinfo.title_h)/480.0f));
+	glVertex3f((float)themeinfo.title_x+(float)themeinfo.title_w,(float)themeinfo.title_y+(float)themeinfo.title_h,0.9);
+	
+	glTexCoord2f((float)themeinfo.title_x/640.0f,1-(((float)themeinfo.title_y+(float)themeinfo.title_h)/480.0f));
+	glVertex3f((float)themeinfo.title_x,(float)themeinfo.title_y+(float)themeinfo.title_h,0.9);
+	glTexCoord2f(1,1-(((float)themeinfo.title_y+(float)themeinfo.title_h)/480.0f));
+	glVertex3f(640,(float)themeinfo.title_y+(float)themeinfo.title_h,0.9);
+	glTexCoord2f(1,0);
+	glVertex3f(640,480,0.9);
+	glTexCoord2f((float)themeinfo.title_x/640.0f,0);
+	glVertex3f((float)themeinfo.title_x,480,0.9);
+	
+	/*glTexCoord2f((float)themeinfo.title_x/640.0f,1-(float)themeinfo.title_y/480.0f);
+	glVertex3f((float)themeinfo.title_x,(float)themeinfo.title_y,0.01);
+	glTexCoord2f(((float)themeinfo.title_x+(float)themeinfo.title_w)/640.0f,1-(float)themeinfo.title_y/480.0f);
+	glVertex3f((float)themeinfo.title_x+(float)themeinfo.title_w,(float)themeinfo.title_y,0.01);
+	glTexCoord2f(((float)themeinfo.title_x+(float)themeinfo.title_w)/640.0f,1-((float)themeinfo.title_y+(float)themeinfo.title_h)/480.0f);
+	glVertex3f((float)themeinfo.title_x+(float)themeinfo.title_w,(float)themeinfo.title_y+(float)themeinfo.title_h,0.01);
+	glTexCoord2f((float)themeinfo.title_x/640.0f,1-((float)themeinfo.title_y+(float)themeinfo.title_h)/480.0f);
+	glVertex3f((float)themeinfo.title_x,(float)themeinfo.title_y+(float)themeinfo.title_h,0.01);*/
 #endif
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
@@ -253,13 +385,13 @@ void render_poly(int size, int tex, float fade) {
 	switch_tex(tex);
 	glBegin(GL_QUADS);
 	glTexCoord2f(0,uv[0]);
-	glVertex3f(-size,-size,0.1);
+	glVertex3f(-size,-size,0.0);
 	glTexCoord2f(1,uv[1]);
-	glVertex3f(size,-size,0.1);
+	glVertex3f(size,-size,0.0);
 	glTexCoord2f(1,uv[2]);
-	glVertex3f(size,size,0.1);
+	glVertex3f(size,size,0.0);
 	glTexCoord2f(0,uv[3]);
-	glVertex3f(-size,size,0.1);
+	glVertex3f(-size,size,0.0);
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
 }
@@ -336,6 +468,13 @@ int load_theme(char *theme, int sfx) {
 	themeinfo.game_y=0;
 	themeinfo.game_w=640;
 	themeinfo.game_h=480;
+	themeinfo.title_x=0;
+	themeinfo.title_y=0;
+	themeinfo.title_w=640;
+	themeinfo.title_h=480;
+	themeinfo.logo_w=0;
+	themeinfo.stat_w=-1;
+	themeinfo.stat_h=-1;
 	themeinfo.invinc[0]='\0';
 	themeinfo.plus1000[0]='\0';
 	themeinfo.slowdown[0]='\0';
@@ -350,14 +489,18 @@ int load_theme(char *theme, int sfx) {
 	themeinfo.score_x[0]=320;
 	themeinfo.score_y[0]=240;
 	themeinfo.score_size=26;
+	themeinfo.score_title[0]='\0';
+	themeinfo.score_caption[0]='\0';
 	strcpy(themeinfo.squares_caption," squares");
 	themeinfo.squares_x[0]=320;
 	themeinfo.squares_y[0]=260;
 	themeinfo.squares_size=20;
+	themeinfo.squares_title[0]='\0';
 	strcpy(themeinfo.combo_caption," combo");
 	themeinfo.combo_x[0]=320;
 	themeinfo.combo_y[0]=280;
 	themeinfo.combo_size=16;
+	themeinfo.combo_title[0]='\0';
 	themeinfo.time_x=320;
 	themeinfo.time_y=300;
 	themeinfo.time_size=16;
@@ -371,7 +514,11 @@ int load_theme(char *theme, int sfx) {
 			MessageBox(NULL,A2W("Cannot load default theme"),A2W("Error"),MB_OK|MB_ICONHAND);
 #endif
 #ifdef MACOS
-			MessageBox("Error","Cannot load default theme");
+			//MessageBox("Error","Cannot load default theme");
+#endif
+#ifdef TIKI
+			printf("Cannot load default theme\n");
+			exit(-1);
 #endif
 			return -1;
 		}
@@ -394,11 +541,20 @@ int load_theme(char *theme, int sfx) {
 		if(!strcmp(buf,"squares_caption")) {
 			p=themeinfo.squares_caption;
 		}
+		if(!strcmp(buf,"squares_title")) {
+			p=themeinfo.squares_title;
+		}
 	  if(!strcmp(buf,"squares_x")) {
 	    themeinfo.squares_x[0]=atoi(val);
 	  }
 	  if(!strcmp(buf,"squares_y")) {
 	    themeinfo.squares_y[0]=atoi(val);
+	  }
+	  if(!strcmp(buf,"squares_bg_x")) {
+	    themeinfo.squares_bg_x[0]=atoi(val);
+	  }
+	  if(!strcmp(buf,"squares_bg_y")) {
+	    themeinfo.squares_bg_y[0]=atoi(val);
 	  }
 	  if(!strcmp(buf,"squares_size")) {
 	    themeinfo.squares_size=atoi(val);
@@ -409,17 +565,38 @@ int load_theme(char *theme, int sfx) {
 	  if(!strcmp(buf,"score_y")) {
 	    themeinfo.score_y[0]=atoi(val);
 	  }
+	  if(!strcmp(buf,"score_bg_x")) {
+	    themeinfo.score_bg_x[0]=atoi(val);
+	  }
+	  if(!strcmp(buf,"score_bg_y")) {
+	    themeinfo.score_bg_y[0]=atoi(val);
+	  }
 	  if(!strcmp(buf,"score_size")) {
 	    themeinfo.score_size=atoi(val);
 	  }
+		if(!strcmp(buf,"score_caption")) {
+			p=themeinfo.score_caption;
+		}
+		if(!strcmp(buf,"score_title")) {
+			p=themeinfo.score_title;
+		}
 		if(!strcmp(buf,"combo_caption")) {
 			p=themeinfo.combo_caption;
+		}
+		if(!strcmp(buf,"combo_title")) {
+			p=themeinfo.combo_title;
 		}
 	  if(!strcmp(buf,"combo_x")) {
 	    themeinfo.combo_x[0]=atoi(val);
 	  }
 	  if(!strcmp(buf,"combo_y")) {
 	    themeinfo.combo_y[0]=atoi(val);
+	  }
+	  if(!strcmp(buf,"combo_bg_x")) {
+	    themeinfo.combo_bg_x[0]=atoi(val);
+	  }
+	  if(!strcmp(buf,"combo_bg_y")) {
+	    themeinfo.combo_bg_y[0]=atoi(val);
 	  }
 	  if(!strcmp(buf,"combo_size")) {
 	    themeinfo.combo_size=atoi(val);
@@ -430,9 +607,18 @@ int load_theme(char *theme, int sfx) {
 	  if(!strcmp(buf,"time_y")) {
 	    themeinfo.time_y=atoi(val);
 	  }
+	  if(!strcmp(buf,"time_bg_x")) {
+	    themeinfo.time_bg_x=atoi(val);
+	  }
+	  if(!strcmp(buf,"time_bg_y")) {
+	    themeinfo.time_bg_y=atoi(val);
+	  }
 	  if(!strcmp(buf,"time_size")) {
 	    themeinfo.time_size=atoi(val);
 	  }
+		if(!strcmp(buf,"time_title")) {
+			p=themeinfo.time_title;
+		}
 		if(!strcmp(buf,"invinc")) {
 			p=themeinfo.invinc;
 		}
@@ -469,7 +655,6 @@ int load_theme(char *theme, int sfx) {
 	  if(!strcmp(buf,"scale")) {
 	    themeinfo.scale=atof(val);
 			if(themeinfo.scale < 1) themeinfo.scale=1;
-			printf("Scale: %f\n",themeinfo.scale);
 	  }
 	  if(!strcmp(buf,"good_r")) {
 	    themeinfo.good_r=atoi(val);
@@ -510,6 +695,33 @@ int load_theme(char *theme, int sfx) {
 	  if(!strcmp(buf,"game_h")) {
 	    themeinfo.game_h=atoi(val);
 	  }		
+	  if(!strcmp(buf,"title_x")) {
+	    themeinfo.title_x=atoi(val);
+	  }
+	  if(!strcmp(buf,"title_y")) {
+	    themeinfo.title_y=atoi(val);
+	  }
+	  if(!strcmp(buf,"title_w")) {
+	    themeinfo.title_w=atoi(val);
+	  }		
+	  if(!strcmp(buf,"title_h")) {
+	    themeinfo.title_h=atoi(val);
+	  }	
+	  if(!strcmp(buf,"logo_w")) {
+	    themeinfo.logo_w=atoi(val);
+	  }
+	  if(!strcmp(buf,"logo_h")) {
+	    themeinfo.logo_h=atoi(val);
+	  }
+	  if(!strcmp(buf,"stat_w")) {
+	    themeinfo.stat_w=atoi(val);
+	  }		
+	  if(!strcmp(buf,"stat_h")) {
+	    themeinfo.stat_h=atoi(val);
+	  }	
+	  if(!strcmp(buf,"stat_size")) {
+	    themeinfo.stat_size=atoi(val);
+	  }	
 		for(int i=0; i<MAX_PLAYERS; i++) {
 			sprintf(buf2,"squares_x%i",i);
 			if(!strcmp(buf,buf2)) {
@@ -519,6 +731,14 @@ int load_theme(char *theme, int sfx) {
 			if(!strcmp(buf,buf2)) {
 				themeinfo.squares_y[i]=atoi(val);
 			}
+			sprintf(buf2,"squares_bg_x%i",i);
+			if(!strcmp(buf,buf2)) {
+				themeinfo.squares_bg_x[i]=atoi(val);
+			}
+			sprintf(buf2,"squares_bg_y%i",i);
+			if(!strcmp(buf,buf2)) {
+				themeinfo.squares_bg_y[i]=atoi(val);
+			}
 			sprintf(buf2,"score_x%i",i);
 			if(!strcmp(buf,buf2)) {
 				themeinfo.score_x[i]=atoi(val);
@@ -527,6 +747,14 @@ int load_theme(char *theme, int sfx) {
 			if(!strcmp(buf,buf2)) {
 				themeinfo.score_y[i]=atoi(val);
 			}
+			sprintf(buf2,"score_bg_x%i",i);
+			if(!strcmp(buf,buf2)) {
+				themeinfo.score_bg_x[i]=atoi(val);
+			}
+			sprintf(buf2,"score_bg_y%i",i);
+			if(!strcmp(buf,buf2)) {
+				themeinfo.score_bg_y[i]=atoi(val);
+			}
 			sprintf(buf2,"combo_x%i",i);
 			if(!strcmp(buf,buf2)) {
 				themeinfo.combo_x[i]=atoi(val);
@@ -534,6 +762,14 @@ int load_theme(char *theme, int sfx) {
 			sprintf(buf2,"combo_y%i",i);
 			if(!strcmp(buf,buf2)) {
 				themeinfo.combo_y[i]=atoi(val);
+			}
+			sprintf(buf2,"combo_bg_x%i",i);
+			if(!strcmp(buf,buf2)) {
+				themeinfo.combo_bg_x[i]=atoi(val);
+			}
+			sprintf(buf2,"combo_bg_y%i",i);
+			if(!strcmp(buf,buf2)) {
+				themeinfo.combo_bg_y[i]=atoi(val);
 			}
 		}
 	  if(p!=NULL) {
@@ -545,20 +781,29 @@ int load_theme(char *theme, int sfx) {
 	  }
 	}
 	fclose(f);
-#if defined(SDL) || defined(DREAMCAST)
+#if defined(SDL) || defined(TIKI)
 	load_texture("loading",loading_tex,0);
 	for(float x=0; x<=1; x+=0.01) {
+#ifdef TIKI
+		Frame::begin();
+#else
 		if(sys_render_begin()) {
+#endif
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			render_bg(loading_tex,x);
+#ifdef TIKI
+			Frame::finish();
+#else
 			sys_render_finish();
 		}		
 		delay(0.01);
+#endif
 	}
 #endif	
-	load_texture(theme_dir("menu"),menu_tex,0);
+	load_texture(theme_dir("game_bg"),game_tex,0);
 	load_texture(theme_dir("bg"),bg_tex,0);
-	load_texture(theme_dir("title"),title_tex,0);
+	load_texture(theme_dir("stat_bg"),stat_tex,0);
+	if(themeinfo.logo_w>0) load_texture(theme_dir("logo"),logo_tex,1);
 	if(themeinfo.score[0]!='\0') load_texture(theme_dir(themeinfo.score),score_tex,1);
 	if(themeinfo.invinc[0]!='\0') load_texture(theme_dir(themeinfo.invinc),invinc_tex,1);
 	if(themeinfo.plus1000[0]!='\0') load_texture(theme_dir(themeinfo.plus1000),plus_tex,1);
@@ -617,16 +862,23 @@ int load_theme(char *theme, int sfx) {
   g_pSoundManager->Create( &gameover, A2W(theme_dir("gameover.wav")), 0, GUID_NULL );
 	}
 #endif
-#if defined(SDL) || defined(DREAMCAST)
+#if defined(SDL) || defined(TIKI)
 	for(float x=0; x<=1; x+=0.01) {
+#ifdef TIKI
+		Frame::begin();
+#else
 		if(sys_render_begin()) {
+#endif
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			render_bg(loading_tex,1.0f-x);
+#ifdef TIKI
+			Frame::finish();
+#else
 			sys_render_finish();
 		}		
-		delay(0.01);
-	}
 #endif
+	}
+#endif	
   return 0;
 }
 

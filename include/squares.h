@@ -50,7 +50,7 @@ struct squarelist {
 	struct squarelist *next;
 };
 
-void render_squares(float square_alpha);
+void render_squares(float square_alpha, bool game=false);
 void update_squares(float s);
 void set_fade_color(float f);
 void destroy_list();

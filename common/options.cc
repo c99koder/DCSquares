@@ -58,7 +58,7 @@ void center(int x, int y,char *text, int point, float fade);
 void render_bg(int tex, float fade);
 void status(char *text);
 
-extern int menu_tex;
+extern int bg_tex;
 extern themeinfo_t themeinfo;
 
 void scan_directory(char *path, char dir[][256], int *count) {
@@ -231,7 +231,7 @@ void load_options() {
 		}
 		if(!strcmp(buf,"music")) {
 			p=NULL;
-			gameoptions.bgm=atoi(val);
+			//gameoptions.bgm=atoi(val);
 		}
 	  if(!strcmp(buf,"theme")) {
 			p=gameoptions.theme;
@@ -290,6 +290,9 @@ void transbox(int x, int y, int x1, int y1) {
 	glEnd();
 }
 
+
+#if 0
+
 void line_input(char *buf) {
 	char c;
 	
@@ -304,8 +307,6 @@ void line_input(char *buf) {
 		}
 	}
 }
-
-#if 0
 
 void SETIP(uint8 *dst, uint32 src) {
 	dst[0]=(src >> 24) & 0xff;
@@ -354,7 +355,7 @@ void network_setup() {
 	while(loop==1) {
 		if(sys_render_begin()) {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			render_bg(title_tex,1);
+			render_bg(bg_tex,1);
 #ifdef DREAMCAST
 			glKosFinishList();
 #else
@@ -481,202 +482,3 @@ glLoadIdentity();
 	lwip_kos_init();
 }
 #endif
-
-void select_options() {
-#ifdef DREAMCAST
-  uint32 s,ms,tm;
-  float st=0,gt=0,ot=0;
-#endif
-#ifdef SDL
-  float st=0,gt=0,ot=0;
-#endif	
-	set_font_size(16);
-	int boxx=themeinfo.game_x+100;
-	int boxx1=(themeinfo.game_x+themeinfo.game_w)-100;
-#ifdef DREAMCAST
-	int boxy=themeinfo.game_y+150;
-	int boxy1=(themeinfo.game_y+150)+100;
-	int y[] = { boxy+40, boxy+60, boxy+100 };
-	#define OPTIONS_MENU_END 2
-#else
-	int boxy=themeinfo.game_y+120;
-	int boxy1=(themeinfo.game_y+120)+180;
-	int y[] = { boxy+40, boxy+60, boxy+100, boxy+120, boxy+140, boxy+180 };
-	#define OPTIONS_MENU_END 5
-#endif
-	char oldtheme[100];
-	int sel=0;
-  int loop=1;
-	int flash=0;
-	float rot=0;
-	int x,mx=0,my=0,lmb=0,oldlmb=1;
-  char buf[256];
-	char themes[100][256];
-	int themecnt;
-	int t=0;
-	int pgd=0,opgd=0;
-	
-	strcpy(oldtheme,gameoptions.theme);
-	
-	scan_directory("themes",themes,&themecnt);
-	set_font_size(22);
-#ifdef SDL
-  st = (float)SDL_GetTicks() / 1000.0f;
-#endif
-#ifdef DREAMCAST
-	timer_ms_gettime(&s,&ms);
-	st=s+((float)ms/1000.0f);
-#endif	
-	while(loop==1) {
-#ifdef DREAMCAST
-    timer_ms_gettime(&s,&ms);
-		
-	  //update_lcds();
-		gt=(s+((float)ms/1000.0f))-st;
-#endif
-#ifdef SDL
-		gt=((float)SDL_GetTicks()/1000.0f)-st;
-#endif		
-		if(sys_render_begin()) {
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			render_bg(menu_tex,1);
-#ifdef DREAMCAST
-			glKosFinishList();
-#else
-			glEnable(GL_BLEND);
-			glDisable(GL_DEPTH_TEST);
-#endif
-			glLoadIdentity();
-			transbox(boxx,boxy,boxx1,boxy1);
-			center((themeinfo.game_x+themeinfo.game_w)/2,themeinfo.game_y+40,"Options",24,1);
-//      sprintf(buf,"oldlmb: %i, lmb: %i",oldlmb,lmb);
-//      draw_txt(10,10,buf,1,1,1,1,16);
-			draw_txt(boxx+20,boxy+20,"General",1,1,1,1.0,20);
-			draw_txt(boxx+40,boxy+40,"Theme:",0.8,0.8,0.8,1.0,18);
-			draw_txt(boxx+40+txt_width("Theme: "),boxy+40,gameoptions.theme,0.9,0.9,0.9,1.0,18);
-			draw_txt(boxx+40,boxy+60,"Music:",0.8,0.8,0.8,1.0,18);
-			draw_txt(boxx+40+txt_width("Music: "),boxy+60,gameoptions.bgm?(char *)"On":(char *)"Off",0.9,0.9,0.9,1.0,18);
-#ifndef DREAMCAST
-			draw_txt(boxx+20,boxy+80,"DCSquares Online",1,1,1,1.0,20);
-			draw_txt(boxx+40,boxy+100,"Username:",0.8,0.8,0.8,1.0,18);
-			draw_txt(boxx+40+txt_width("Username: "),boxy+100,gameoptions.username,0.9,0.9,0.9,1.0,18);
-			draw_txt(boxx+40,boxy+120,"Password:",0.8,0.8,0.8,1.0,18);
-			draw_txt(boxx+40+txt_width("Password: "),boxy+120,gameoptions.password,0.9,0.9,0.9,1.0,18);
-			draw_txt(boxx+40,boxy+140,"Internet Scores:",0.8,0.8,0.8,1.0,18);
-			draw_txt(boxx+40+txt_width("Internet Scores: "),boxy+140,gameoptions.net?(char *)"On":(char *)"Off",0.9,0.9,0.9,1.0,18);
-			draw_txt(boxx+40,boxy+180,"Return to Menu",0.8,0.8,0.8,1.0,18);
-#else 
-			draw_txt(boxx+40,boxy+100,"Return to Menu",0.8,0.8,0.8,1.0,18);
-#endif
-			center_shad(themeinfo.game_y+themeinfo.game_h-22,"Use the mouse to select an option and click",16,1);
-			center_shad(themeinfo.game_y+themeinfo.game_h-2,"to toggle.  Use the keyboard to edit text.",16,1);
-				
-			glDisable(GL_TEXTURE_2D);
-			glColor4f(1,1,1,1);
-			glTranslatef(boxx+28,y[sel]-10,0.8);
-			glRotatef(rot,0,0,1);
-			glBegin(GL_QUADS);
-			glVertex3f(-6,-6,0);
-			glVertex3f(6,-6,0);
-			glVertex3f(6,6,0);
-			glVertex3f(-6,6,0);
-			glEnd();
-#ifndef DREAMCAST
-			if(flash && (sel==2 || sel==3)) {
-				set_font_size(18);
-				glLoadIdentity();
-				if(sel==2) glTranslatef(boxx+40+txt_width("Username: ")+txt_width(gameoptions.username),y[sel]-10,0.8);
-				if(sel==3) glTranslatef(boxx+40+txt_width("Password: ")+txt_width(gameoptions.password),y[sel]-10,0.8);
-				glBegin(GL_QUADS);
-				glVertex3f(0,-8,0);
-				glVertex3f(12,-8,0);
-				glVertex3f(12,8,0);
-				glVertex3f(0,8,0);
-				glEnd();
-			}
-#endif
-#ifdef DREAMCAST
-	glLoadIdentity();
-  glDisable(GL_TEXTURE_2D);
-  glColor4f(0,0,0,0.8);
-  glBegin(GL_TRIANGLES);
-  glVertex3f(mx-2,my-4,0.99);
-  glVertex3f(mx+18,my+16,0.99);
-  glVertex3f(mx-2,my+24,0.99);
-  glEnd();
-  glColor3f(0,0.6,0.8);
-  glBegin(GL_TRIANGLES);
-  glVertex3f(mx,my,1.0);
-  glVertex3f(mx+15,my+15,1.0);
-  glVertex3f(mx,my+21,1.0);
-  glEnd();
-#endif
-
-			sys_render_finish();			
-		}
-		
-		read_mouse(0,&mx,&my,&lmb);
-		if(mx<0) mx=0;
-		if(mx>640) mx=640;
-		if(my<0) my=0;
-		if(my>480) my=480;
-		for(x=0;x<=OPTIONS_MENU_END;x++) {
-		  if(my>y[x]-14 && my<y[x]+6) sel=x;
-		}
-		
-		pgd=poll_game_device(0);
-		
-		if((int)rot%45==0 || pgd != opgd) {
-			opgd=pgd;
-			switch(pgd) {
-				case MOVE_DOWN:
-					sel++;
-					if(sel>OPTIONS_MENU_END) sel=OPTIONS_MENU_END;
-					break;
-				case MOVE_UP:
-					sel--;
-					if(sel<0) sel=0;
-					break;
-				case FIRE_BTN:
-					lmb=1;
-					break;
-			}
-		}
-		if(lmb&&oldlmb==0) {
-			if(sel==0) {
-			  if(!strcmp(gameoptions.theme,themes[t])) t++;
-				t%=themecnt;
-			  strcpy(gameoptions.theme,themes[t]);
-				t++;
-			}
-			if(sel==1) gameoptions.bgm=gameoptions.bgm?0:1;
-			if(sel==4) gameoptions.net=gameoptions.net?0:1;
-#ifdef DREAMCAST
-			//if(sel==5) network_setup();
-#endif
-		  if(sel==OPTIONS_MENU_END) loop=0;
-		}
-		oldlmb=lmb;
-		if(sel==2) {
-			line_input(gameoptions.username);
-		}
-		if(sel==3) line_input(gameoptions.password);
-		rot+=(gt-ot)*360;
-		if(rot>=360) rot=0;
-		if((int)rot%180==0) {flash++; flash%=2; }
-		ot=gt;
-	}
-	do {
-		if(sys_render_begin()) {
-			read_mouse(0,&mx,&my,&lmb);
-			sys_render_finish();
-		}
-	} while(lmb);
-	write_options();
-	if(gameoptions.bgm==0) sndoggvorbis_stop();
-	if(strcmp(gameoptions.theme,oldtheme)) {
-		unload_theme();
-		sndoggvorbis_stop();
-		load_theme(gameoptions.theme,1);
-	}
-}
