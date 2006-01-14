@@ -41,6 +41,8 @@ DCSMenu::DCSMenu(bool game) {
 	box=new Box(640,480);
 	box->setTranslate(Vector(320,240,1000));
 	m_scene->subAdd(box);
+	
+	init();
 }
 
 void DCSMenu::init() {
@@ -51,19 +53,14 @@ void DCSMenu::init() {
 	power=0;
 	powerup_mode=-1;
 	effect_type=-1;
-	gt=ogt=0;
 }
 
 void DCSMenu::FadeIn() {
-	box->animRemoveAll();
-	box->setTint(Color(1,1,1,1));
-	box->animAdd(new TintFader(Color(0,1,1,1),Color(-1.0f/30.0f,0,0,0)));
+	box->fadeIn();
 }
 
 void DCSMenu::FadeOut() {
-	box->animRemoveAll();
-	box->setTint(Color(0,1,1,1));
-	box->animAdd(new TintFader(Color(1,1,1,1),Color(1.0f/30.0f,0,0,0)));
+	box->fadeOut();
 }
 
 void DCSMenu::inputEvent(const Event & evt) {

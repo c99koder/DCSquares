@@ -19,7 +19,7 @@ using namespace Tiki;
 using namespace Tiki::GL;
 
 #include "TitleScreen.h"
-#include "squaresHUD.h"
+#include "drawables/squaresHUD.h"
 #include "level.h"
 #include "squares.h"
 #include "theme.h"
@@ -35,15 +35,18 @@ TitleScreen::TitleScreen() : DCSMenu(false) {
 	m_scene->subAdd(new TikiCursor);
 
 	ml = new menuList(fnt);
-	ml->setSize(152,98);
+	ml->setSize(156,122);
 	ml->setTranslate(Vector(320,240,20));
 	ml->setTextColor(Color(1,1,1));
 	ml->addItem("New Game");
 	ml->addItem("Free Play");
+	ml->addItem("Multiplayer");
 	ml->addItem("Highscores");
 	ml->addItem("Quit");
-	ml->selectItem(0);
 	m_scene->subAdd(ml);
+	
+	init();
+	m_menuItems=5;
 }
 
 void TitleScreen::init() {
@@ -53,9 +56,8 @@ void TitleScreen::init() {
 		score[p]=0;
 		combo[p]=0;
 	}
-	
+	ml->selectItem(0);
 	m_selection=0;
-	m_menuItems=4;
 	m_repeatDelay=0;
 }
 
@@ -70,6 +72,7 @@ void TitleScreen::inputEvent(const Event & evt) {
 		case Event::EvtKeypress:
 			switch(evt.key) {
 				case Event::KeySelect:
+				case 32:
 					FadeOut();
 					startExit();
 					m_exitSpeed=1.0f/30.0f;

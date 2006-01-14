@@ -45,6 +45,7 @@ private:
 	RefPtr<Font> m_fnt;							//Font to draw with
 	float	m_w, m_h;									//Width and height of menu
 	Color m_textColor;							//Color of text
+	bool m_changed;							//Has our position changed?
 };
 
 #endif

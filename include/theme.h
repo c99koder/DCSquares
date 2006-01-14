@@ -29,6 +29,7 @@ struct themeinfo_t {
 	int combo_x[MAX_PLAYERS],combo_y[MAX_PLAYERS],combo_size, combo_bg_x[MAX_PLAYERS], combo_bg_y[MAX_PLAYERS];
 	int time_x,time_y,time_size,time_bg_x,time_bg_y;
 	char time_caption[40],time_title[40];
+	int player_x[MAX_PLAYERS],player_y[MAX_PLAYERS];
 	int logo_w,logo_h;
 };
 

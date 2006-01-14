@@ -30,14 +30,20 @@ extern themeinfo_t themeinfo;
 
 extern int score[],combo[],squares[],maxcombo[],powerup_mode;
 extern squarelist *player[];
-extern float gt;
+extern float game_gt;
+bool gameFadingOut;
 
 GamePlay::GamePlay() : DCSMenu(true) {
-	m_scene->subAdd(new squaresHUD(1));
+	hud=new squaresHUD(1);
+	m_scene->subAdd(hud);
+	init();
 }
 
 void GamePlay::init() {
 	DCSMenu::init();
+	
+	hud->init();
+	gameFadingOut=false;
 	
 	for(int p=0; p<current_level->players; p++) {
 		player[p]=create_square(((640/(current_level->players+1))*(p+1))-4,(480/2)-4,6,p);
@@ -65,6 +71,7 @@ void GamePlay::controlPerFrame() {
 		c=check_collide(player[p]);
 		if(c!=NULL && ((c->type == ENEMY && powerup_mode!=INVINC) || (c->type == SCORE && powerup_mode==EVIL))) {
 			if(current_level->lose_mode & MODE_ENEMY) {
+				gameFadingOut=true;
 				FadeOut();
 				startExit();
 				m_exitSpeed=1.0f/30.0f;
@@ -78,7 +85,8 @@ void GamePlay::controlPerFrame() {
 				}
 			}
 		}
-		if(check_win(gt,p) != 0) {
+		if(check_win(game_gt,p) != 0) {
+			gameFadingOut=true;
 			FadeOut();
 			startExit();
 			m_exitSpeed=1.0f/30.0f;
@@ -89,10 +97,25 @@ void GamePlay::controlPerFrame() {
 void GamePlay::inputEvent(const Event & evt) {
 	switch(evt.type) {
 		case Event::EvtQuit:
+			quitNow();
 			break;
 		case Event::EvtMouseMove:
-			player[evt.port]->x=evt.x;
-			player[evt.port]->y=evt.y;
+			if(!m_exiting) {
+				player[evt.port]->x=evt.x;
+				player[evt.port]->y=evt.y;
+			}
+			break;
+		case Event::EvtAxis:
+			if(!m_exiting) {
+				switch(evt.axis) {
+					case Event::AxisX:
+						player[evt.port]->xv=(evt.axisValue/8.0f);
+						break;
+					case Event::AxisY:
+						player[evt.port]->yv=(evt.axisValue/8.0f);
+						break;
+				}
+			}
 			break;
 	}
 }

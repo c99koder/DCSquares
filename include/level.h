@@ -12,6 +12,7 @@
 #define MODE_ENEMY 8
 	
 struct level_node {
+	int level;
 	int win_mode;
 	int lose_mode;
 	int score;

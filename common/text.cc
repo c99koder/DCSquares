@@ -68,6 +68,14 @@ void center(int x, int y,char *text, int point, float fade) {
 	draw_txt((x)-(txt_width(text)/2),y,text,(float)themeinfo.text_r / 255.0f,(float)themeinfo.text_g / 255.0f,(float)themeinfo.text_b / 255.0f,fade,point);
 }
 
+void center_shad_rgb(int x, int y,char *text, int point, float fade, float r, float g, float b) {
+	set_font_size(point);
+	text_set_z(40.90);
+	draw_txt(x-(txt_width(text)/2)+1,y+1,text,0,0,0,fade*0.6,point);
+	text_set_z(40.9999);
+	draw_txt(x-(txt_width(text)/2)-1,y-1,text,r,g,b,fade,point);
+}
+
 void center_shad_rgb(int y,char *text, int point, float fade, float r, float g, float b, bool game) {
 	set_font_size(point);
 	if(game) {
@@ -82,6 +90,7 @@ void center_shad_rgb(int y,char *text, int point, float fade, float r, float g, 
 		draw_txt((themeinfo.title_x+(themeinfo.title_w/2))-(txt_width(text)/2)-1,y-1,text,r,g,b,fade,point);
 	}
 }
+
 void center_shad(int y,char *text, int point, float fade, bool game) {
 	set_font_size(point);
 	if(game) {
@@ -114,7 +123,7 @@ void draw_txt(int x, int y, char *text, float r, float g, float b, float a, int 
 
   textR->setPointSize(point);
   textR->begin();
-  glColor4f(r,g,b,a);
+	textR->setColor(Color(a,r,g,b));
   textR->start2f(x,480-y);
   textR->puts(text);
   textR->end();

@@ -19,10 +19,12 @@ level_node *level_list_tail=NULL;
 level_node *free_play=NULL;
 level_node *multi_play=NULL;
 extern int score[MAX_PLAYERS],squares[MAX_PLAYERS];
+int level_cnt=1;
 
 level_node *create_level(int win_mode,int lose_mode) {
 	level_node *tmp = new level_node;
 	
+	tmp->level=level_cnt++;
 	tmp->win_mode=win_mode;
 	tmp->lose_mode=lose_mode;
 	tmp->score=0;
@@ -54,6 +56,7 @@ void levels_init() {
 	level_node *tmp;
 	
 	free_play=new level_node;
+	free_play->level=0;
 	free_play->win_mode=0;
 	free_play->lose_mode=MODE_ENEMY;
 	free_play->score=0;
@@ -74,6 +77,7 @@ void levels_init() {
 	free_play->next=NULL;
 	
 	multi_play=new level_node;
+	multi_play->level=0;
 	multi_play->win_mode=MODE_SQUARES;
 	multi_play->lose_mode=MODE_TIME;
 	multi_play->score=20000;

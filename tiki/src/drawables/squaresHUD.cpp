@@ -19,22 +19,24 @@ using namespace Tiki::GL;
 #include "squares.h"
 #include "hud.h"
 
-float gt;
-float ogt;
 float game_gt;
 
 squaresHUD::squaresHUD(int mode) {
 	m_mode = mode;
-	gt=ogt=0;
+	init();
+}
+
+void squaresHUD::init() {
+	m_gt=m_ogt=0;
 }
 
 squaresHUD::~squaresHUD() {
-	game_gt=gt;
 };
 
 void squaresHUD::nextFrame(uint64 tm) {
-	ogt=gt;
-	gt+=tm/1000000.0f;
+	m_ogt=m_gt;
+	m_gt+=tm/1000000.0f;
+	if(m_mode==1) game_gt=m_gt;
 }
 
 void squaresHUD::draw(ObjType list) {
@@ -42,13 +44,13 @@ void squaresHUD::draw(ObjType list) {
 		glLoadIdentity();
 		switch(m_mode) {
 			case 0:
-				render_title(gt);
+				render_title(m_gt);
 				break;
 			case 1:
-				render_score(gt);
+				render_score(m_gt);
 				break;
 			case 2:
-				render_win(game_gt,gt-ogt);
+				render_win(game_gt,m_gt-m_ogt);
 				break;
 		}
 	}

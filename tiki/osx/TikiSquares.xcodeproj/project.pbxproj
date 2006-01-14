@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2208E34F096858F1005C2102 /* LevelStats.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2208E34D096858F1005C2102 /* LevelStats.h */; };
+		2208E350096858F1005C2102 /* LevelStats.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2208E34E096858F1005C2102 /* LevelStats.cpp */; };
+		2208E5D1096F47F7005C2102 /* HighScores.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2208E5CF096F47F7005C2102 /* HighScores.h */; };
+		2208E5D2096F47F7005C2102 /* HighScores.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2208E5D0096F47F7005C2102 /* HighScores.cpp */; };
 		222FC2F60953AE4E009582BD /* game.cc in Sources */ = {isa = PBXBuildFile; fileRef = 222FC2EE0953AE4E009582BD /* game.cc */; };
 		222FC2F70953AE4E009582BD /* hud.cc in Sources */ = {isa = PBXBuildFile; fileRef = 222FC2EF0953AE4E009582BD /* hud.cc */; };
 		222FC2F80953AE4E009582BD /* level.cc in Sources */ = {isa = PBXBuildFile; fileRef = 222FC2F00953AE4E009582BD /* level.cc */; };
@@ -39,6 +43,8 @@
 		2284517B095F2865002AF3FE /* squaresHUD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22845179095F2865002AF3FE /* squaresHUD.cpp */; };
 		228451F8095F6D91002AF3FE /* box.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 228451F6095F6D91002AF3FE /* box.h */; };
 		228451F9095F6D91002AF3FE /* box.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 228451F7095F6D91002AF3FE /* box.cpp */; };
+		22E2E7F40971ED0200D3CB40 /* NameEntry.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22E2E7F20971ED0200D3CB40 /* NameEntry.h */; };
+		22E2E7F50971ED0200D3CB40 /* NameEntry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22E2E7F30971ED0200D3CB40 /* NameEntry.cpp */; };
 		22F3A2C70953AA02005DB9D0 /* Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F3A2C40953AA02005DB9D0 /* Controller.m */; };
 		8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
@@ -75,6 +81,9 @@
 				225E26830958F9710086CB3C /* GamePlay.h in CopyFiles */,
 				2284517A095F2865002AF3FE /* squaresHUD.h in CopyFiles */,
 				228451F8095F6D91002AF3FE /* box.h in CopyFiles */,
+				2208E34F096858F1005C2102 /* LevelStats.h in CopyFiles */,
+				2208E5D1096F47F7005C2102 /* HighScores.h in CopyFiles */,
+				22E2E7F40971ED0200D3CB40 /* NameEntry.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +93,10 @@
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+		2208E34D096858F1005C2102 /* LevelStats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LevelStats.h; path = ../src/LevelStats.h; sourceTree = SOURCE_ROOT; };
+		2208E34E096858F1005C2102 /* LevelStats.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LevelStats.cpp; path = ../src/LevelStats.cpp; sourceTree = SOURCE_ROOT; };
+		2208E5CF096F47F7005C2102 /* HighScores.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HighScores.h; path = ../src/HighScores.h; sourceTree = SOURCE_ROOT; };
+		2208E5D0096F47F7005C2102 /* HighScores.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HighScores.cpp; path = ../src/HighScores.cpp; sourceTree = SOURCE_ROOT; };
 		222FC2EE0953AE4E009582BD /* game.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = game.cc; path = ../../common/game.cc; sourceTree = SOURCE_ROOT; };
 		222FC2EF0953AE4E009582BD /* hud.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = hud.cc; path = ../../common/hud.cc; sourceTree = SOURCE_ROOT; };
 		222FC2F00953AE4E009582BD /* level.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = level.cc; path = ../../common/level.cc; sourceTree = SOURCE_ROOT; };
@@ -132,6 +145,8 @@
 		22845179095F2865002AF3FE /* squaresHUD.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = squaresHUD.cpp; path = ../src/drawables/squaresHUD.cpp; sourceTree = SOURCE_ROOT; };
 		228451F6095F6D91002AF3FE /* box.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = box.h; path = ../src/drawables/box.h; sourceTree = SOURCE_ROOT; };
 		228451F7095F6D91002AF3FE /* box.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = box.cpp; path = ../src/drawables/box.cpp; sourceTree = SOURCE_ROOT; };
+		22E2E7F20971ED0200D3CB40 /* NameEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NameEntry.h; path = ../src/NameEntry.h; sourceTree = SOURCE_ROOT; };
+		22E2E7F30971ED0200D3CB40 /* NameEntry.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NameEntry.cpp; path = ../src/NameEntry.cpp; sourceTree = SOURCE_ROOT; };
 		22F3A2C30953AA02005DB9D0 /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Controller.h; sourceTree = "<group>"; };
 		22F3A2C40953AA02005DB9D0 /* Controller.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Controller.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -242,6 +257,12 @@
 				225E26580958F41B0086CB3C /* DCSMenu.cpp */,
 				225E26810958F9710086CB3C /* GamePlay.h */,
 				225E26820958F9710086CB3C /* GamePlay.cpp */,
+				2208E34D096858F1005C2102 /* LevelStats.h */,
+				2208E34E096858F1005C2102 /* LevelStats.cpp */,
+				2208E5CF096F47F7005C2102 /* HighScores.h */,
+				2208E5D0096F47F7005C2102 /* HighScores.cpp */,
+				22E2E7F20971ED0200D3CB40 /* NameEntry.h */,
+				22E2E7F30971ED0200D3CB40 /* NameEntry.cpp */,
 			);
 			name = Menus;
 			sourceTree = "<group>";
@@ -399,6 +420,9 @@
 				225E26840958F9710086CB3C /* GamePlay.cpp in Sources */,
 				2284517B095F2865002AF3FE /* squaresHUD.cpp in Sources */,
 				228451F9095F6D91002AF3FE /* box.cpp in Sources */,
+				2208E350096858F1005C2102 /* LevelStats.cpp in Sources */,
+				2208E5D2096F47F7005C2102 /* HighScores.cpp in Sources */,
+				22E2E7F50971ED0200D3CB40 /* NameEntry.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

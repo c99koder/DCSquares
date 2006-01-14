@@ -122,42 +122,43 @@ void render_squares(float square_alpha, bool game) {
 			case INVINC:
 				glColor4f(0,1,0,0.4 * effect_timer);
 				glBegin(GL_QUADS);
-				glVertex3f(0,0,0.11);
-				glVertex3f(640,0,0.11);
-				glVertex3f(640,480,0.11);
-				glVertex3f(0,480,0.11);
+				glVertex3f(0,0,0.0021);
+				glVertex3f(640,0,0.0021);
+				glVertex3f(640,480,0.0021);
+				glVertex3f(0,480,0.0021);
 				glEnd();
 				break;
 			case SLOWMO:
 				glColor4f(0,0,0,0.4 * effect_timer);
 				glBegin(GL_QUADS);
-				glVertex3f(0,0,0.11);
-				glVertex3f(640,0,0.11);
-				glVertex3f(640,480,0.11);
-				glVertex3f(0,480,0.11);
+				glVertex3f(0,0,0.0021);
+				glVertex3f(640,0,0.0021);
+				glVertex3f(640,480,0.0021);
+				glVertex3f(0,480,0.0021);
 				glEnd();
 				break;
 			case EVIL:
 				glColor4f(1,0,0,0.4 * effect_timer);
 				glBegin(GL_QUADS);
-				glVertex3f(0,0,0.11);
-				glVertex3f(640,0,0.11);
-				glVertex3f(640,480,0.11);
-				glVertex3f(0,480,0.11);
+				glVertex3f(0,0,0.0021);
+				glVertex3f(640,0,0.0021);
+				glVertex3f(640,480,0.0021);
+				glVertex3f(0,480,0.0021);
 				glEnd();
 				break;
 			case SPEED:
 				glColor4f(1,1,1,0.4 * effect_timer);
 				glBegin(GL_QUADS);
-				glVertex3f(0,0,0.11);
-				glVertex3f(640,0,0.11);
-				glVertex3f(640,480,0.11);
-				glVertex3f(0,480,0.11);
+				glVertex3f(0,0,0.0021);
+				glVertex3f(640,0,0.0021);
+				glVertex3f(640,480,0.0021);
+				glVertex3f(0,480,0.0021);
 				glEnd();
 				break;
 		}
 	}	
 	while(c!=NULL) {
+		if(c->deleted==1) { c=c->next; continue; }
 		glLoadIdentity();
 		for(i=(c->type>PLAYER_NET && (powerup_mode==SLOWMO || powerup_mode==SPEED))?4:0;i>=0;i--) {
 			dx=0;
@@ -179,13 +180,13 @@ void render_squares(float square_alpha, bool game) {
 				if(c->type<POWERUP) {
 					glBegin(GL_QUADS);
 						glColor4f(limit(c->r+0.4,0,1),limit(c->g+0.4,0,1),limit(c->b+0.4,0,1),(i==0)?square_alpha:square_alpha*((float)(4-i)/8.0f));
-						glVertex3f(-c->size,-c->size,0.1);
+						glVertex3f(-c->size,-c->size,0.011);
 						glColor4f(limit(c->r,0,1),limit(c->g,0,1),limit(c->b,0,1),(i==0)?square_alpha:square_alpha*((float)(4-i)/8.0f));
-						glVertex3f(c->size,-c->size,0.1);
+						glVertex3f(c->size,-c->size,0.011);
 						glColor4f(limit(c->r-0.2,0,1),limit(c->g-0.2,0,1),limit(c->b-0.2,0,1),(i==0)?square_alpha:square_alpha*((float)(4-i)/8.0f));
-						glVertex3f(c->size,c->size,0.1);
+						glVertex3f(c->size,c->size,0.011);
 						glColor4f(limit(c->r,0,1),limit(c->g,0,1),limit(c->b,0,1),(i==0)?square_alpha:square_alpha*((float)(4-i)/8.0f));
-						glVertex3f(-c->size,c->size,0.1);
+						glVertex3f(-c->size,c->size,0.011);
 					glEnd();
 				} else {
 					glBegin(GL_POLYGON);
@@ -197,7 +198,7 @@ void render_squares(float square_alpha, bool game) {
 								dy = c->size - y;
 								l = (sqrt((dx*dx)+(dy*dy))/(c->size*4)) * 0.4;
 								glColor4f(c->r+l, c->g+l, c->b+l,(i==0)?square_alpha:square_alpha*((float)(4-i)/8.0f));  
-								glVertex3f(cos(angle)*c->size,sin(angle)*c->size,0.1);
+								glVertex3f(cos(angle)*c->size,sin(angle)*c->size,0.011);
 						}
 					glEnd();
 				}
@@ -240,6 +241,7 @@ void update_squares(float s) {
 	if(powerup_mode==SPEED) speedmod=2;
 	
 	while(c!=NULL) {
+		if(c->deleted==1) { c=c->next; continue; }
 	  square_count++;
 		if(c->xv!=0) c->x+=((float)c->xv*speedmod*s*100);
 		if(c->yv!=0) c->y+=((float)c->yv*speedmod*s*100);
@@ -247,8 +249,8 @@ void update_squares(float s) {
 			c->angle+=180*s;
 			if(c->angle>360) c->angle-=360;
 		}
-#if !defined(TIKI) && (defined(SDL) || defined(DREAMCAST))
 		if(c->type<PLAYER_NET) {
+#ifndef TIKI
 			mx=c->x;
 			my=c->y;
 			read_mouse(c->type,&mx,&my,&lmb);
@@ -271,12 +273,12 @@ void update_squares(float s) {
 			}
 			c->x=mx;
 			c->y=my;			
+#endif
 			if(c->x<0) c->x=0;
 			if(c->x>640) c->x=640;
 			if(c->y<0) c->y=0;
 			if(c->y>480) c->y=480;
 		}
-#endif
 		if(c->type>PLAYER_NET) {
 			if(c->x<0-c->size || c->x>640+c->size || c->y < 0-c->size || c->y > 480+c->size) {
 				c->deleted=1;
@@ -319,6 +321,8 @@ squarelist *check_collide(squarelist *player) {
 	b2.setMax(player->x+(player->size*themeinfo.scale),player->y+(player->size*themeinfo.scale),1);
 	
 	while(c!=NULL) {
+		if(c->deleted==1) { c=c->next; continue; }
+
 		if(c!=player) {
 			b1.setMin(c->x-(c->size*themeinfo.scale),c->y-(c->size*themeinfo.scale),-1);
 			b1.setMax(c->x+(c->size*themeinfo.scale),c->y+(c->size*themeinfo.scale),1);
@@ -399,15 +403,9 @@ squarelist *check_collide(squarelist *player) {
 
 void destroy_list() {
 	squarelist *c=squarehead;
-	squarelist *p=NULL;
 	squarelist *o=NULL;
 	
 	while(c!=NULL) {
-		if(p!=NULL) {
-			p->next=c->next;
-		} else {
-			squarehead=c->next;
-		}
 		o=c;
 		c=c->next;
 		delete o;

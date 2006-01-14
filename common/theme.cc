@@ -504,6 +504,8 @@ int load_theme(char *theme, int sfx) {
 	themeinfo.time_x=320;
 	themeinfo.time_y=300;
 	themeinfo.time_size=16;
+	themeinfo.player_x[0]=-800;
+	themeinfo.player_y[0]=-800;
 	
   f=fopen(theme_dir("theme.ini"),"r");
 	if(!f) {
@@ -770,6 +772,14 @@ int load_theme(char *theme, int sfx) {
 			sprintf(buf2,"combo_bg_y%i",i);
 			if(!strcmp(buf,buf2)) {
 				themeinfo.combo_bg_y[i]=atoi(val);
+			}
+			sprintf(buf2,"player_x%i",i);
+			if(!strcmp(buf,buf2)) {
+				themeinfo.player_x[i]=atoi(val);
+			}
+			sprintf(buf2,"player_y%i",i);
+			if(!strcmp(buf,buf2)) {
+				themeinfo.player_y[i]=atoi(val);
 			}
 		}
 	  if(p!=NULL) {

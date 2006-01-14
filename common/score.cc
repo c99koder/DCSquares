@@ -68,17 +68,19 @@ void save_scores() {
 			strcpy(tab->entries[x].name,current->name);
 			tab->entries[x].score = current->score;
 			tab->entries[x].difficulty = current->combo;
-      tab->entries[x].level_reached = 0;
-      tab->entries[x].time_lasted = current->time;
+			tab->entries[x].level_reached = current->level;
+			tab->entries[x].time_lasted = current->time;
 			current=current->next;
 		} else {
 			strcpy(tab->entries[x].name,"---");
 			tab->entries[x].score = 0;
 			tab->entries[x].difficulty = 0;
-      tab->entries[x].level_reached = 0;
-      tab->entries[x].time_lasted = 0;
+			tab->entries[x].level_reached = 0;
+			tab->entries[x].time_lasted = 0;
 		}
 	}
+
+	tab->bitfield = SCORE_NAME | SCORE_SCORE | SCORE_TIME | SCORE_LEVEL;
 	
 	if(goat_save_score_table(0,tab)<0) perror("save");
 #else
@@ -105,7 +107,7 @@ void save_scores() {
 				fputs(buf,f);
 				sprintf(buf,"%i\n",current->combo);
 				fputs(buf,f);
-				sprintf(buf,"%i\n",current->time);
+				sprintf(buf,"%i\n",current->time*1000);
 				fputs(buf,f);
 				sprintf(buf,"%i\n",current->level);
 				fputs(buf,f);
@@ -171,7 +173,7 @@ void score_list_init() {
 			fgets(buf,200,f);
 			level=atoi(buf);
 			if(score>0) {
-				score_list_insert(name,score,combo,time,level);
+				score_list_insert(name,score,combo,time/1000,level);
 			}
 		}
 		fclose(f);
@@ -184,8 +186,14 @@ void score_list_init() {
 		tab->settings[0] = 0;
 		tab->settings[1] = 0;
 		tab->play_cnt = 1;
-		tab->bitfield = SCORE_NAME | SCORE_SCORE | SCORE_TIME;
+		tab->bitfield = SCORE_NAME | SCORE_SCORE | SCORE_TIME | SCORE_LEVEL;
 		tab->score_cnt = 10;
+		
+		/*score_list_insert("SAM",48915,73,102,0);
+		score_list_insert("BRI",95084,131,120,0);
+		score_list_insert("Gil",1060,52,40,0);
+		score_list_insert("Dan",10400,45,62,0);
+		score_list_insert("Jay",108000,76,87,0);*/
 	} else {
 		for(int x=0; x<tab->score_cnt; x++) {
 			if(tab->entries[x].score>0) {
@@ -194,11 +202,6 @@ void score_list_init() {
 		}
 	}
 #endif
-	/*score_list_insert("Sam",1000,56,1234,0);
-	score_list_insert("Brian",1020,58,12344,0);
-	score_list_insert("Gil",1060,52,13444,0);
-	score_list_insert("Dan",10400,45,124424,0);
-	score_list_insert("Jay",108000,76,4364,0);*/
 }
 
 int score_list_size() {

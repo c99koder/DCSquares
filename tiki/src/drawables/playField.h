@@ -21,6 +21,7 @@ public:
 	
 private:
 	bool m_game;
+	float m_countdown;
 };
 
 #endif

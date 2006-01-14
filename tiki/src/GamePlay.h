@@ -11,6 +11,7 @@
 #include "drawables/menuList.h"
 #include "drawables/playField.h"
 #include "drawables/squaresBg.h"
+#include "drawables/squaresHUD.h"
 #include "drawables/banna.h"
 #include "DCSMenu.h"
 #include "squares.h"
@@ -24,4 +25,5 @@ public:
 protected:
 	void inputEvent(const Event & evt);
 private:
+		RefPtr<squaresHUD> hud;
 };

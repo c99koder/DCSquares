@@ -23,12 +23,14 @@ using namespace Tiki::GL;
 
 extern int score[],squares[],powerup_mode;
 squarelist *player[MAX_PLAYERS];
+extern bool gameFadingOut;
 
 playField::playField(bool game) {
 	destroy_list();
 	init_genrand(Time::gettime()*1000);
 		
 	m_game = game;
+	if(game) m_countdown = 1.5f; else m_countdown=0;
 }
 
 playField::~playField() {
@@ -42,7 +44,16 @@ void playField::draw(ObjType list) {
 
 void playField::nextFrame(uint64 tm) {
 	float gt=tm/1000000.0f;
+	if(m_countdown>0) m_countdown -= gt;
 	
-	add_squares(gt);
+	if(m_countdown<=0) add_squares(gt);
 	update_squares(gt);
+	
+	if(m_game && gameFadingOut) {
+		for(int p=0; p<current_level->players;p++) {
+			player[p]->xv=0;
+			player[p]->yv=0;
+			player[p]->size+=200.0f / 30.0f;
+		}
+	}
 }

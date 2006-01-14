@@ -14,6 +14,7 @@ class squaresHUD : public Drawable {
 public:
 	squaresHUD(int mode);
 	~squaresHUD();
+	void init();
 	
 	//Overloaded functions
 	void draw(ObjType list);
@@ -21,6 +22,7 @@ public:
 	
 private:
 	int m_mode;
+	float m_gt,m_ogt;
 };
 
 #endif

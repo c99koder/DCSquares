@@ -175,10 +175,10 @@ void render_bar(float power, float max) {
   if(powerup_mode <MINISQUARE || 
     (powerup_mode>PLUS1000 && powerup_mode<MINUS1000)) {
 	  glBegin(GL_QUADS);
-	  glVertex3f(123,100,0.2);
-	  glVertex3f(123+w,100,0.2);
-	  glVertex3f(123+w,110,0.2);
-	  glVertex3f(123,110,0.2);
+	  glVertex3f(123,100,0.02);
+	  glVertex3f(123+w,100,0.02);
+	  glVertex3f(123+w,110,0.02);
+	  glVertex3f(123,110,0.02);
 	  glEnd();
   }
 	center_shad_rgb(115,msg,16,center_alpha,1,1,1,true);
@@ -237,15 +237,15 @@ void render_score(float gt) {
 	if(gt <= 4) {
 		if(current_level->win_mode & MODE_SQUARES) {
 			sprintf(tmp,"Collect %i squares",current_level->squares);
-			center_shad(themeinfo.game_y+60,tmp,24,(gt<3)?limit(gt,0,1):(4-gt),true);
+			center_shad(themeinfo.game_y+60,tmp,24,(gt<3)?limit(gt,0,1):(4.0f-gt),true);
 		}
 		if(current_level->win_mode & MODE_SCORE) {
 			sprintf(tmp,"Earn %i points",current_level->score);
-			center_shad(themeinfo.game_y+60,tmp,24,(gt<3)?limit(gt,0,1):(4-gt),true);
+			center_shad(themeinfo.game_y+60,tmp,24,(gt<3)?limit(gt,0,1):(4.0f-gt),true);
 		}
 		if(current_level->win_mode & MODE_TIME) {
 			sprintf(tmp,"Survive for %i seconds",current_level->time);
-			center_shad(themeinfo.game_y+60,tmp,24,(gt<3)?limit(gt,0,1):(4-gt),true);
+			center_shad(themeinfo.game_y+60,tmp,24,(gt<3)?limit(gt,0,1):(4.0f-gt),true);
 		}
 		/*if(current_level->lose_mode & MODE_TIME) {
 			if(current_level->time < 60) {
@@ -258,6 +258,8 @@ void render_score(float gt) {
 	}
 	
 	for(int p=0; p<current_level->players; p++) {
+		sprintf(tmp,"Player %i",p+1);
+		center_shad_rgb(themeinfo.player_x[p],themeinfo.player_y[p],tmp, themeinfo.stat_size+2, alpha, 1, 1, 1);
 		sprintf(tmp,"%i",score[p]);
 		render_box(themeinfo.score_bg_x[p], themeinfo.score_bg_y[p], themeinfo.stat_w, themeinfo.stat_h, stat_tex, 1);
 		center(themeinfo.score_bg_x[p]+(themeinfo.stat_w/2),themeinfo.score_bg_y[p]+themeinfo.stat_size+3,themeinfo.score_title,themeinfo.stat_size,alpha);
@@ -353,7 +355,7 @@ void render_win(float gametime, float interval) {
 	gt+=interval;
 	
 	for(int p=0; p<current_level->players; p++) {
-		if(combo[0] > maxcombo[0]) maxcombo[0] = combo[0];
+		if(combo[p] > maxcombo[p]) maxcombo[p] = combo[p];
 	}
 	
 	if(winner>-1) {
@@ -422,28 +424,28 @@ void render_win(float gametime, float interval) {
 					break;
 			}
 		}
-		/*if(gt>2) {
+		if(gt>2) {
 			sprintf(tmp,"Time: %s",format_time(gametime));
 			if(current_level->time != 0) {
 				sprintf(tmp2,"/%s",format_time(current_level->time));
 				strcat(tmp,tmp2);
 			}
-			draw_txt(themeinfo.game_x+40,themeinfo.game_y+160,tmp,float(themeinfo.text_r)/255.0f,float(themeinfo.text_g)/255.0f,float(themeinfo.text_b)/255.0f,1,18);
-		}*/
+			draw_txt(themeinfo.title_x+40,themeinfo.title_y+160,tmp,float(themeinfo.text_r)/255.0f,float(themeinfo.text_g)/255.0f,float(themeinfo.text_b)/255.0f,1,18);
+		}
 	}
 	
-	if(highcode[0]!='\0') {
-		center_shad(themeinfo.game_y+200,"Your code for this score is:",18,1);
-		center_shad_rgb(themeinfo.game_y+222,highcode,20,1,1,1,1);
-		center_shad(themeinfo.game_y+240,"You can enter this code on the web",18,1);
-		center_shad(themeinfo.game_y+260,"at http://dcsquares.c99.org/ to",18,1);
-		center_shad(themeinfo.game_y+280,"compete against players worldwide!",18,1);	
+	if(highcode[0]!='\0' && gt>2.5) {
+		center_shad(themeinfo.title_y+200,"Your code for this score is:",18,1);
+		center_shad_rgb(themeinfo.title_y+222,highcode,20,1,1,1,1);
+		center_shad(themeinfo.title_y+240,"You can enter this code on the web",18,1);
+		center_shad(themeinfo.title_y+260,"at http://dcsquares.c99.org/ to",18,1);
+		center_shad(themeinfo.title_y+280,"compete against players worldwide!",18,1);	
 	}
 	
 #ifdef DREAMCAST
-	center_shad_rgb(themeinfo.game_y+themeinfo.game_h-2,"Press start or click to continue.",16,1,1,1,1);
+	center_shad_rgb(themeinfo.title_y+themeinfo.title_h-2,"Press start or click to continue.",16,1,1,1,1);
 #else
-	center_shad_rgb(themeinfo.game_y+themeinfo.game_h-2,"Click the mouse to continue.",16,1,1,1,1);
+	center_shad_rgb(themeinfo.title_y+themeinfo.title_h-2,"Click the mouse to continue.",16,1,1,1,1);
 #endif
 }
 
