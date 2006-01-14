@@ -14,6 +14,8 @@
 #include <Tiki/texture.h>
 #include <Tiki/plxcompat.h>
 
+#include <Tiki/anims/tintfader.h>
+
 using namespace Tiki;
 using namespace Tiki::GL;
 using namespace Tiki::GL::Plxcompat;
@@ -25,7 +27,19 @@ using namespace Tiki::GL::Plxcompat;
 Box::Box(float w, float h) {
 	m_border=false;
 	m_w=w;
-	m_h=w;
+	m_h=h;
+	m_stopAnim=false;
+	m_fadeIn=m_fadeOut=false;
+}
+
+void Box::fadeIn() {
+	m_stopAnim=true;
+	m_fadeIn=true;
+}
+
+void Box::fadeOut() {
+	m_stopAnim=true;
+	m_fadeOut=true;
 }
 
 Box::~Box() {
@@ -59,6 +73,23 @@ void Box::drawBox(float w, float h, Color c) {
 }
 
 void Box::draw(ObjType list) {
+	if(m_stopAnim) {
+		animRemoveAll();
+		m_stopAnim=false;
+	}
+	
+	if(m_fadeIn) {
+		m_fadeIn=false;
+		setTint(Color(1,1,1,1));
+		animAdd(new TintFader(Color(0,1,1,1),Color(-1.0f/30.0f,0,0,0)));
+	}
+
+	if(m_fadeOut) {
+		m_fadeOut=false;
+		setTint(Color(0,1,1,1));
+		animAdd(new TintFader(Color(1,1,1,1),Color(1.0f/30.0f,0,0,0)));
+	}
+	
 	if(list==Trans) {
 		if(m_border) drawBox(m_w+8,m_h+8,m_borderColor);
 		drawBox(m_w,m_h,getColor());
