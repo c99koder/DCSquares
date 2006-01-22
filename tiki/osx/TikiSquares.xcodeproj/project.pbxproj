@@ -43,6 +43,8 @@
 		2284517B095F2865002AF3FE /* squaresHUD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22845179095F2865002AF3FE /* squaresHUD.cpp */; };
 		228451F8095F6D91002AF3FE /* box.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 228451F6095F6D91002AF3FE /* box.h */; };
 		228451F9095F6D91002AF3FE /* box.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 228451F7095F6D91002AF3FE /* box.cpp */; };
+		2292A1020983F92E00A517F0 /* HowToPlay.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2292A1000983F92E00A517F0 /* HowToPlay.h */; };
+		2292A1030983F92E00A517F0 /* HowToPlay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2292A1010983F92E00A517F0 /* HowToPlay.cpp */; };
 		229ACE8B0979A234001928CA /* MultiPlaySetup.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 229ACE890979A234001928CA /* MultiPlaySetup.h */; };
 		229ACE8C0979A234001928CA /* MultiPlaySetup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 229ACE8A0979A234001928CA /* MultiPlaySetup.cpp */; };
 		22E2E7F40971ED0200D3CB40 /* NameEntry.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22E2E7F20971ED0200D3CB40 /* NameEntry.h */; };
@@ -87,6 +89,7 @@
 				2208E5D1096F47F7005C2102 /* HighScores.h in CopyFiles */,
 				22E2E7F40971ED0200D3CB40 /* NameEntry.h in CopyFiles */,
 				229ACE8B0979A234001928CA /* MultiPlaySetup.h in CopyFiles */,
+				2292A1020983F92E00A517F0 /* HowToPlay.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,7 +117,6 @@
 		225E214F095601EC0086CB3C /* texture.mm */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.objcpp; name = texture.mm; path = ../../osx/texture.mm; sourceTree = SOURCE_ROOT; };
 		225E2157095602190086CB3C /* options.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = options.cc; path = ../../common/options.cc; sourceTree = SOURCE_ROOT; };
 		225E2158095602190086CB3C /* text.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = text.cc; path = ../../common/text.cc; sourceTree = SOURCE_ROOT; };
-		225E219E095604F80086CB3C /* font.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = font.h; path = ../../include/font.h; sourceTree = SOURCE_ROOT; };
 		225E219F095604F80086CB3C /* game.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = game.h; path = ../../include/game.h; sourceTree = SOURCE_ROOT; };
 		225E21A0095604F80086CB3C /* http.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = http.h; path = ../../include/http.h; sourceTree = SOURCE_ROOT; };
 		225E21A1095604F80086CB3C /* hud.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = hud.h; path = ../../include/hud.h; sourceTree = SOURCE_ROOT; };
@@ -148,6 +150,8 @@
 		22845179095F2865002AF3FE /* squaresHUD.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = squaresHUD.cpp; path = ../src/drawables/squaresHUD.cpp; sourceTree = SOURCE_ROOT; };
 		228451F6095F6D91002AF3FE /* box.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = box.h; path = ../src/drawables/box.h; sourceTree = SOURCE_ROOT; };
 		228451F7095F6D91002AF3FE /* box.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = box.cpp; path = ../src/drawables/box.cpp; sourceTree = SOURCE_ROOT; };
+		2292A1000983F92E00A517F0 /* HowToPlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HowToPlay.h; path = ../src/HowToPlay.h; sourceTree = SOURCE_ROOT; };
+		2292A1010983F92E00A517F0 /* HowToPlay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HowToPlay.cpp; path = ../src/HowToPlay.cpp; sourceTree = SOURCE_ROOT; };
 		229ACE890979A234001928CA /* MultiPlaySetup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MultiPlaySetup.h; path = ../src/MultiPlaySetup.h; sourceTree = SOURCE_ROOT; };
 		229ACE8A0979A234001928CA /* MultiPlaySetup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MultiPlaySetup.cpp; path = ../src/MultiPlaySetup.cpp; sourceTree = SOURCE_ROOT; };
 		22E2E7F20971ED0200D3CB40 /* NameEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NameEntry.h; path = ../src/NameEntry.h; sourceTree = SOURCE_ROOT; };
@@ -235,7 +239,6 @@
 		225E219D095604E30086CB3C /* include */ = {
 			isa = PBXGroup;
 			children = (
-				225E219E095604F80086CB3C /* font.h */,
 				225E219F095604F80086CB3C /* game.h */,
 				225E21A0095604F80086CB3C /* http.h */,
 				225E21A1095604F80086CB3C /* hud.h */,
@@ -270,6 +273,8 @@
 				22E2E7F30971ED0200D3CB40 /* NameEntry.cpp */,
 				229ACE890979A234001928CA /* MultiPlaySetup.h */,
 				229ACE8A0979A234001928CA /* MultiPlaySetup.cpp */,
+				2292A1000983F92E00A517F0 /* HowToPlay.h */,
+				2292A1010983F92E00A517F0 /* HowToPlay.cpp */,
 			);
 			name = Menus;
 			sourceTree = "<group>";
@@ -431,6 +436,7 @@
 				2208E5D2096F47F7005C2102 /* HighScores.cpp in Sources */,
 				22E2E7F50971ED0200D3CB40 /* NameEntry.cpp in Sources */,
 				229ACE8C0979A234001928CA /* MultiPlaySetup.cpp in Sources */,
+				2292A1030983F92E00A517F0 /* HowToPlay.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

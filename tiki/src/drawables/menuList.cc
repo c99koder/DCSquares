@@ -25,6 +25,7 @@
 using namespace Tiki;
 using namespace Tiki::GL;
 
+#include "text.h"
 #include "box.h"
 #include "menuList.h"
 
@@ -33,7 +34,7 @@ menuList::menuList(Font *fnt) {
 	m_bg->setTint(Color(0.4,1,1,1));
 	m_bg->setBorder(Color(0.4,0,0,0));
 	subAdd(m_bg);
-	m_bar=new Box(0,24);
+	m_bar=new Box(0,22);
 	m_bar->setTint(Color(0.6,1,1,1));
 	//m_bar->animAdd(new AlphaRotate(1.0f/60.0f,0.4));
 	subAdd(m_bar);
@@ -52,8 +53,8 @@ void menuList::setSize(float w, float h) {
 	m_h=h;
 	m_bg->setSize(m_w,m_h);
 	m_bg->setTranslate(Vector(0,0,-0.002));
-	m_bar->setSize(m_w,24);
-	m_bar->setTranslate(Vector(0,-m_h/2 - 11 + 24,-0.001));
+	m_bar->setSize(m_w,22);
+	m_bar->setTranslate(Vector(0,-m_h/2 - 11 + 22,-0.001));
 }
 
 void menuList::setTextColor(Color c) {
@@ -76,20 +77,21 @@ void menuList::draw(ObjType list) {
 	
 	if(m_changed) {
 		m_bar->animRemoveAll();
-		m_bar->animAdd(new LogXYMover(0,-m_h/2 - 11 + ((m_currentItem+1)*24)));
+		m_bar->animAdd(new LogXYMover(0,-m_h/2 - 11 + ((m_currentItem+1)*22)));
 		m_changed=false;
 	}
 	
 	if(list==Trans) {
 		Drawable::draw(list);	
 		
-		m_fnt->setSize(20);
+		m_fnt->setSize(18);
+		set_font_size(18);
 		if(m_itemList.size() > 0) {
 			for(item_iter = m_itemList.begin(); item_iter != m_itemList.end(); item_iter++) {
 				m_fnt->setColor(getColor() * Color(0.4,0,0,0));
-				m_fnt->draw(getPosition() + Vector(2,2,0) + Vector((-m_w/2)+4,-m_h/2 - 4 + ((i+1)*24),0.1),*(item_iter));
+				m_fnt->draw(getPosition() + Vector(2,2,0) + Vector(-txt_width((char *)(*(item_iter)).c_str())/2,-m_h/2 - 6 + ((i+1)*22),0.1),*(item_iter));
 				m_fnt->setColor(getColor() * m_textColor);
-				m_fnt->draw(getPosition() + Vector((-m_w/2)+4,-m_h/2 - 4 + ((i+1)*24),0.11),*(item_iter));
+				m_fnt->draw(getPosition() + Vector(-txt_width((char *)(*(item_iter)).c_str())/2,-m_h/2 - 6 + ((i+1)*22),0.11),*(item_iter));
 				i++;
 			}
 		}

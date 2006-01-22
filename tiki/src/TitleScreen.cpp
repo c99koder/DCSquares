@@ -35,18 +35,19 @@ TitleScreen::TitleScreen() : DCSMenu(false) {
 	m_scene->subAdd(new TikiCursor);
 
 	ml = new menuList(fnt);
-	ml->setSize(156,122);
+	ml->setSize(150,132);
 	ml->setTranslate(Vector(320,240,20));
 	ml->setTextColor(Color(1,1,1));
 	ml->addItem("New Game");
 	ml->addItem("Free Play");
 	ml->addItem("Multiplayer");
+	ml->addItem("How to Play");
 	ml->addItem("Highscores");
 	ml->addItem("Quit");
 	m_scene->subAdd(ml);
 	
 	init();
-	m_menuItems=5;
+	m_menuItems=6;
 }
 
 void TitleScreen::init() {

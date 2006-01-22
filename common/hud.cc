@@ -321,14 +321,14 @@ void render_title(float gt) {
 	set_font_size(12);
 	draw_txt(640-txt_width("Version 2.1.6"),480,"Version 2.1.6",0,0,0,1,12);
 	set_font_size(16);
-	center_shad(355,"Programming: Sam Steele",18,1);
+	center_shad(355,"Programming: Sam Steele",16,1);
 	sprintf(tmp,"Artwork: %s",themeinfo.bg_auth);
-	center_shad(375,tmp,18,1);
+	center_shad(375,tmp,16,1);
 	sprintf(tmp,"Music: %s",themeinfo.music_auth);
-	center_shad(395,tmp,18,1);
+	center_shad(395,tmp,16,1);
 	sprintf(tmp,"Sound effects: %s",themeinfo.sfx_auth);
-	center_shad(415,tmp,18,1);
-	//center_shad(440,"http://dcsquares.c99.org",18,1);
+	center_shad(415,tmp,16,1);
+	//center_shad(440,"http://dcsquares.c99.org",16,1);
 	st+=gt;
 	if(st>0.015) {
 		alpha+=bstep;

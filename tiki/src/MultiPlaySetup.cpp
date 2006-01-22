@@ -42,11 +42,11 @@ MultiPlaySetup::MultiPlaySetup() : DCSMenu(false) {
 	m_scene->subAdd(new TikiCursor);
 	
 	ml = new menuList(fnt);
-	ml->setSize(252,122);
+	ml->setSize(250,110);
 	ml->setTranslate(Vector(320,240,20));
 	ml->setTextColor(Color(1,1,1));
-	ml->addItem("10 square match");
 	ml->addItem("20 square match");
+	ml->addItem("50 square match");
 	ml->addItem("5000 point match");
 	ml->addItem("10000 point match");
 	ml->addItem("Survival");

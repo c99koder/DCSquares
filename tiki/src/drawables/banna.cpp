@@ -33,27 +33,8 @@ void Banna::draw(ObjType list) {
 	plx_vertex_t vert;
 	
 	if(list==Trans) {
-		switch_tex(m_tex);
-		
-		vert.argb = c;
-		vert.oargb = 0;
-		
-		vert.flags = PLX_VERT;
-		vert.x = tv.x-m_w/2;
-		vert.y = tv.y+m_h/2;
-		vert.z = tv.z;
-		plx_prim(&vert, sizeof(vert));
-		
-		vert.y = tv.y-m_h/2;
-		plx_prim(&vert, sizeof(vert));
-		
-		vert.x = tv.x+m_w/2;
-		vert.y = tv.y+m_h/2;
-		plx_prim(&vert, sizeof(vert));
-		
-		vert.flags = PLX_VERT_EOS;
-		vert.y = tv.y-m_h/2;
-		plx_prim(&vert, sizeof(vert));
+		glEnable(GL_TEXTURE_2D);
+		render_box(tv.x-m_w/2,tv.y-m_h/2,m_w,m_h,m_tex,c.a);
 	}
 }
 

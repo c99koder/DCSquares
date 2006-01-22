@@ -157,7 +157,7 @@ void render_box(int x, int y, int w, int h, int tex, float fade) {
 #endif
 	glEnable(GL_TEXTURE_2D);
 	glLoadIdentity();	
-	glColor3f(fade,fade,fade);
+	glColor4f(1,1,1,fade);
 	switch_tex(tex);
 	glBegin(GL_QUADS);
 	glTexCoord2f(0,uv[0]);
@@ -791,7 +791,7 @@ int load_theme(char *theme, int sfx) {
 	  }
 	}
 	fclose(f);
-#if defined(SDL) || defined(TIKI)
+/*#if defined(SDL) || defined(TIKI)
 	load_texture("loading",loading_tex,0);
 	for(float x=0; x<=1; x+=0.01) {
 #ifdef TIKI
@@ -809,7 +809,7 @@ int load_theme(char *theme, int sfx) {
 		delay(0.01);
 #endif
 	}
-#endif	
+#endif*/	
 	load_texture(theme_dir("game_bg"),game_tex,0);
 	load_texture(theme_dir("bg"),bg_tex,0);
 	load_texture(theme_dir("stat_bg"),stat_tex,0);
@@ -872,7 +872,7 @@ int load_theme(char *theme, int sfx) {
   g_pSoundManager->Create( &gameover, A2W(theme_dir("gameover.wav")), 0, GUID_NULL );
 	}
 #endif
-#if defined(SDL) || defined(TIKI)
+/*#if defined(SDL) || defined(TIKI)
 	for(float x=0; x<=1; x+=0.01) {
 #ifdef TIKI
 		Frame::begin();
@@ -888,7 +888,7 @@ int load_theme(char *theme, int sfx) {
 		}		
 #endif
 	}
-#endif	
+#endif	*/
   return 0;
 }
 
