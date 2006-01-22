@@ -32,6 +32,7 @@ extern int score[],combo[],squares[],maxcombo[],powerup_mode;
 extern squarelist *player[];
 extern float game_gt;
 bool gameFadingOut;
+int dmloser=-1;
 
 GamePlay::GamePlay() : DCSMenu(true) {
 	hud=new squaresHUD(1);
@@ -44,6 +45,7 @@ void GamePlay::init() {
 	
 	hud->init();
 	gameFadingOut=false;
+	dmloser=-1;
 	
 	for(int p=0; p<current_level->players; p++) {
 		player[p]=create_square(((640/(current_level->players+1))*(p+1))-4,(480/2)-4,6,p);
@@ -71,6 +73,7 @@ void GamePlay::controlPerFrame() {
 		c=check_collide(player[p]);
 		if(c!=NULL && ((c->type == ENEMY && powerup_mode!=INVINC) || (c->type == SCORE && powerup_mode==EVIL))) {
 			if(current_level->lose_mode & MODE_ENEMY) {
+				dmloser=p;
 				gameFadingOut=true;
 				FadeOut();
 				startExit();
@@ -80,7 +83,7 @@ void GamePlay::controlPerFrame() {
 					score[p]-=100;
 				}
 				if(current_level->win_mode & MODE_SQUARES) {
-					squares[p]-=10;
+					squares[p]-=(current_level->squares/10)+1;
 					if(squares[p]<0) squares[p]=0;
 				}
 			}
@@ -103,6 +106,34 @@ void GamePlay::inputEvent(const Event & evt) {
 			if(!m_exiting) {
 				player[evt.port]->x=evt.x;
 				player[evt.port]->y=evt.y;
+			}
+			break;
+		case Event::EvtBtnPress:
+			switch(evt.btn) {
+				case Event::BtnUp:
+					player[evt.port]->yv=-6.0f;
+					break;
+				case Event::BtnDown:
+					player[evt.port]->yv=6.0f;
+					break;
+				case Event::BtnLeft:
+					player[evt.port]->xv=-6.0f;
+					break;
+				case Event::BtnRight:
+					player[evt.port]->xv=6.0f;
+					break;
+			}
+			break;
+		case Event::EvtBtnRelease:
+			switch(evt.btn) {
+				case Event::BtnUp:
+				case Event::BtnDown:
+					player[evt.port]->yv=0;
+					break;
+				case Event::BtnLeft:
+				case Event::BtnRight:
+					player[evt.port]->xv=0;
+					break;
 			}
 			break;
 		case Event::EvtAxis:

@@ -1,9 +1,9 @@
 /*
- *  TitleScreen.h
+ *  MultiPlaySetup.h
  *  TikiSquares
  *
- *  Created by Sam Steele on 12/18/05.
- *  Copyright 2005 __MyCompanyName__. All rights reserved.
+ *  Created by Sam Steele on 1/14/06.
+ *  Copyright 2006 __MyCompanyName__. All rights reserved.
  *
  */
 
@@ -14,11 +14,11 @@
 #include "drawables/banna.h"
 #include "DCSMenu.h"
 
-class TitleScreen : public DCSMenu {
+class MultiPlaySetup : public DCSMenu {
 public:
-	TitleScreen();
+	MultiPlaySetup();
 	void init();
-
+	
 	int getSelection() { return m_selection; }
 protected:
 	void inputEvent(const Event & evt);

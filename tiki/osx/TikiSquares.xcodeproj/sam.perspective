@@ -204,7 +204,7 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>229ACE870979A109001928CA</string>
+						<string>229ACF770981D07F001928CA</string>
 						<key>history</key>
 						<array>
 							<string>229ACC5309797887001928CA</string>
@@ -262,8 +262,6 @@
 			<key>Layout</key>
 			<array>
 				<dict>
-					<key>BecomeActive</key>
-					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -311,6 +309,8 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
+									<integer>20</integer>
+									<integer>14</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -343,12 +343,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>22F3A2660953A801005DB9D0</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>NameEntry.cpp</string>
+								<string>GamePlay.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -356,11 +358,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>22F3A2670953A801005DB9D0</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>NameEntry.cpp</string>
+										<string>GamePlay.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>229ACE850979A109001928CA</string>
+										<string>229ACF750981D07E001928CA</string>
 										<key>history</key>
 										<array>
 											<string>22F3A2CB0953AA1D005DB9D0</string>
@@ -376,7 +378,6 @@
 											<string>2284548C095F8D5C002AF3FE</string>
 											<string>2284556A095F97C4002AF3FE</string>
 											<string>2208E045096775BF005C2102</string>
-											<string>2208E2DE0968492E005C2102</string>
 											<string>2208E3340968564B005C2102</string>
 											<string>2208E3E90968619A005C2102</string>
 											<string>2208E45A096CAA60005C2102</string>
@@ -388,7 +389,6 @@
 											<string>2208E501096CB61A005C2102</string>
 											<string>2208E503096CB61A005C2102</string>
 											<string>2208E505096CB61A005C2102</string>
-											<string>2208E58B096CBF7E005C2102</string>
 											<string>2208E5C7096EA6D4005C2102</string>
 											<string>2208E64F096F4DD4005C2102</string>
 											<string>2208E7BE096F6591005C2102</string>
@@ -398,22 +398,26 @@
 											<string>2208E83D096F9B60005C2102</string>
 											<string>22E2E8050971F5E600D3CB40</string>
 											<string>22B9DE14097968EC00F98EA2</string>
-											<string>229ACC4C09797886001928CA</string>
 											<string>229ACC7809797989001928CA</string>
-											<string>229ACD2C09797F13001928CA</string>
 											<string>229ACDA509798F0C001928CA</string>
-											<string>229ACDC609799048001928CA</string>
-											<string>229ACDD8097991EE001928CA</string>
 											<string>229ACDED09799372001928CA</string>
 											<string>229ACE1B09799787001928CA</string>
-											<string>229ACE4609799B13001928CA</string>
-											<string>229ACE5209799CD5001928CA</string>
-											<string>229ACE7B0979A109001928CA</string>
-											<string>229ACE7C0979A109001928CA</string>
 											<string>229ACE7D0979A109001928CA</string>
-											<string>229ACE7E0979A109001928CA</string>
 											<string>229ACE7F0979A109001928CA</string>
-											<string>229ACE800979A109001928CA</string>
+											<string>229ACE970979A370001928CA</string>
+											<string>229ACE980979A370001928CA</string>
+											<string>229ACE990979A370001928CA</string>
+											<string>229ACE9A0979A370001928CA</string>
+											<string>229ACEBE0979A412001928CA</string>
+											<string>229ACED80979A50C001928CA</string>
+											<string>229ACF120979A9EC001928CA</string>
+											<string>229ACF230979AAE1001928CA</string>
+											<string>229ACF360979B018001928CA</string>
+											<string>229ACF370979B018001928CA</string>
+											<string>229ACF500979B1E3001928CA</string>
+											<string>229ACF510979B1E3001928CA</string>
+											<string>229ACF680979B59D001928CA</string>
+											<string>229ACF690979B59D001928CA</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -521,6 +525,43 @@
 											<string>229ACE820979A109001928CA</string>
 											<string>229ACE830979A109001928CA</string>
 											<string>229ACE840979A109001928CA</string>
+											<string>229ACE9D0979A370001928CA</string>
+											<string>229ACE9E0979A370001928CA</string>
+											<string>229ACE9F0979A370001928CA</string>
+											<string>229ACEA00979A370001928CA</string>
+											<string>229ACEA10979A370001928CA</string>
+											<string>229ACEA20979A370001928CA</string>
+											<string>229ACEA30979A370001928CA</string>
+											<string>229ACEA40979A370001928CA</string>
+											<string>229ACEAD0979A398001928CA</string>
+											<string>229ACEC00979A412001928CA</string>
+											<string>229ACEC10979A412001928CA</string>
+											<string>229ACECA0979A487001928CA</string>
+											<string>229ACECB0979A487001928CA</string>
+											<string>229ACEDA0979A50C001928CA</string>
+											<string>229ACEDB0979A50C001928CA</string>
+											<string>229ACEE70979A60F001928CA</string>
+											<string>229ACEF90979A6F5001928CA</string>
+											<string>229ACEFA0979A6F5001928CA</string>
+											<string>229ACEFB0979A6F5001928CA</string>
+											<string>229ACEFC0979A6F5001928CA</string>
+											<string>229ACF070979A870001928CA</string>
+											<string>229ACF140979A9EC001928CA</string>
+											<string>229ACF260979AAE1001928CA</string>
+											<string>229ACF270979AAE1001928CA</string>
+											<string>229ACF280979AAE1001928CA</string>
+											<string>229ACF290979AAE1001928CA</string>
+											<string>229ACF2A0979AAE1001928CA</string>
+											<string>229ACF390979B018001928CA</string>
+											<string>229ACF3A0979B018001928CA</string>
+											<string>229ACF3B0979B018001928CA</string>
+											<string>229ACF3C0979B018001928CA</string>
+											<string>229ACF3D0979B018001928CA</string>
+											<string>229ACF450979B069001928CA</string>
+											<string>229ACF530979B1E3001928CA</string>
+											<string>229ACF540979B1E3001928CA</string>
+											<string>229ACF550979B1E3001928CA</string>
+											<string>229ACF6A0979B59D001928CA</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -721,7 +762,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>22F3A2BD0953A910005DB9D0</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>main.cc</string>
+								<string>level.cc</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -729,11 +770,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>22F3A2BE0953A910005DB9D0</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>main.cc</string>
+										<string>level.cc</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>229ACE860979A109001928CA</string>
+										<string>229ACF760981D07E001928CA</string>
 										<key>history</key>
 										<array>
 											<string>22F3A2CB0953AA1D005DB9D0</string>
@@ -766,7 +807,6 @@
 											<string>2208E501096CB61A005C2102</string>
 											<string>2208E503096CB61A005C2102</string>
 											<string>2208E505096CB61A005C2102</string>
-											<string>2208E543096CB94A005C2102</string>
 											<string>2208E586096CBF13005C2102</string>
 											<string>2208E5A1096EA66D005C2102</string>
 											<string>2208E5B3096EA677005C2102</string>
@@ -785,8 +825,11 @@
 											<string>229ACDCC0979904A001928CA</string>
 											<string>229ACDE109799209001928CA</string>
 											<string>229ACE5A09799CDC001928CA</string>
-											<string>229ACE6B0979A074001928CA</string>
-											<string>229ACE6C0979A074001928CA</string>
+											<string>229ACE970979A370001928CA</string>
+											<string>229ACEEA0979A611001928CA</string>
+											<string>229ACEFF0979A6F7001928CA</string>
+											<string>229ACF580979B1E5001928CA</string>
+											<string>229ACF560979B1E3001928CA</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -846,6 +889,8 @@
 											<string>229ACDE309799209001928CA</string>
 											<string>229ACE5C09799CDC001928CA</string>
 											<string>229ACE6D0979A074001928CA</string>
+											<string>229ACE9E0979A370001928CA</string>
+											<string>229ACEA40979A370001928CA</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>

@@ -47,6 +47,7 @@ using namespace Tiki::Hid;
 #include "LevelStats.h"
 #include "HighScores.h"
 #include "NameEntry.h"
+#include "MultiPlaySetup.h"
 
 extern float game_gt;
 extern char highcode[];
@@ -118,6 +119,7 @@ void play_game(level_node *level) {
 extern "C" int tiki_main(int argc, char **argv) {
 	TitleScreen *ts;
 	HighScores *hs;
+	MultiPlaySetup *mps;
 	
 	// Init Tiki
 	Tiki::init(argc, argv);
@@ -165,6 +167,36 @@ extern "C" int tiki_main(int argc, char **argv) {
 				play_game(free_play);
 				break;
 			case 2:
+				mps=new MultiPlaySetup;
+				mps->FadeIn();
+				mps->doMenu();
+				switch(mps->getSelection()) {
+					case 0:
+						multi_play->win_mode=MODE_SQUARES;
+						multi_play->lose_mode=MODE_TIME;
+						multi_play->squares=10;
+						break;
+					case 1:
+						multi_play->win_mode=MODE_SQUARES;
+						multi_play->lose_mode=MODE_TIME;
+						multi_play->squares=20;
+						break;
+					case 2:
+						multi_play->win_mode=MODE_SCORE;
+						multi_play->lose_mode=MODE_TIME;
+						multi_play->score=5000;
+						break;
+					case 3:
+						multi_play->win_mode=MODE_SCORE;
+						multi_play->lose_mode=MODE_TIME;
+						multi_play->score=10000;
+						break;
+					case 4:
+						multi_play->win_mode=0;
+						multi_play->lose_mode=MODE_ENEMY;
+						break;
+				}
+				delete mps;
 				play_game(multi_play);
 				break;
 			case 3:

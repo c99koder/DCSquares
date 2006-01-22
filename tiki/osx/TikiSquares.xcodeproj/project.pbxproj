@@ -43,6 +43,8 @@
 		2284517B095F2865002AF3FE /* squaresHUD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22845179095F2865002AF3FE /* squaresHUD.cpp */; };
 		228451F8095F6D91002AF3FE /* box.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 228451F6095F6D91002AF3FE /* box.h */; };
 		228451F9095F6D91002AF3FE /* box.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 228451F7095F6D91002AF3FE /* box.cpp */; };
+		229ACE8B0979A234001928CA /* MultiPlaySetup.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 229ACE890979A234001928CA /* MultiPlaySetup.h */; };
+		229ACE8C0979A234001928CA /* MultiPlaySetup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 229ACE8A0979A234001928CA /* MultiPlaySetup.cpp */; };
 		22E2E7F40971ED0200D3CB40 /* NameEntry.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22E2E7F20971ED0200D3CB40 /* NameEntry.h */; };
 		22E2E7F50971ED0200D3CB40 /* NameEntry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22E2E7F30971ED0200D3CB40 /* NameEntry.cpp */; };
 		22F3A2C70953AA02005DB9D0 /* Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F3A2C40953AA02005DB9D0 /* Controller.m */; };
@@ -84,6 +86,7 @@
 				2208E34F096858F1005C2102 /* LevelStats.h in CopyFiles */,
 				2208E5D1096F47F7005C2102 /* HighScores.h in CopyFiles */,
 				22E2E7F40971ED0200D3CB40 /* NameEntry.h in CopyFiles */,
+				229ACE8B0979A234001928CA /* MultiPlaySetup.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,6 +148,8 @@
 		22845179095F2865002AF3FE /* squaresHUD.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = squaresHUD.cpp; path = ../src/drawables/squaresHUD.cpp; sourceTree = SOURCE_ROOT; };
 		228451F6095F6D91002AF3FE /* box.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = box.h; path = ../src/drawables/box.h; sourceTree = SOURCE_ROOT; };
 		228451F7095F6D91002AF3FE /* box.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = box.cpp; path = ../src/drawables/box.cpp; sourceTree = SOURCE_ROOT; };
+		229ACE890979A234001928CA /* MultiPlaySetup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MultiPlaySetup.h; path = ../src/MultiPlaySetup.h; sourceTree = SOURCE_ROOT; };
+		229ACE8A0979A234001928CA /* MultiPlaySetup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MultiPlaySetup.cpp; path = ../src/MultiPlaySetup.cpp; sourceTree = SOURCE_ROOT; };
 		22E2E7F20971ED0200D3CB40 /* NameEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NameEntry.h; path = ../src/NameEntry.h; sourceTree = SOURCE_ROOT; };
 		22E2E7F30971ED0200D3CB40 /* NameEntry.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NameEntry.cpp; path = ../src/NameEntry.cpp; sourceTree = SOURCE_ROOT; };
 		22F3A2C30953AA02005DB9D0 /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Controller.h; sourceTree = "<group>"; };
@@ -263,6 +268,8 @@
 				2208E5D0096F47F7005C2102 /* HighScores.cpp */,
 				22E2E7F20971ED0200D3CB40 /* NameEntry.h */,
 				22E2E7F30971ED0200D3CB40 /* NameEntry.cpp */,
+				229ACE890979A234001928CA /* MultiPlaySetup.h */,
+				229ACE8A0979A234001928CA /* MultiPlaySetup.cpp */,
 			);
 			name = Menus;
 			sourceTree = "<group>";
@@ -423,6 +430,7 @@
 				2208E350096858F1005C2102 /* LevelStats.cpp in Sources */,
 				2208E5D2096F47F7005C2102 /* HighScores.cpp in Sources */,
 				22E2E7F50971ED0200D3CB40 /* NameEntry.cpp in Sources */,
+				229ACE8C0979A234001928CA /* MultiPlaySetup.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

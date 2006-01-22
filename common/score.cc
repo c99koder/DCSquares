@@ -80,8 +80,6 @@ void save_scores() {
 		}
 	}
 
-	tab->bitfield = SCORE_NAME | SCORE_SCORE | SCORE_TIME | SCORE_LEVEL;
-	
 	if(goat_save_score_table(0,tab)<0) perror("save");
 #else
 	FILE *f;

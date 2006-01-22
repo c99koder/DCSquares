@@ -25,6 +25,12 @@ extern int score[],squares[],powerup_mode;
 squarelist *player[MAX_PLAYERS];
 extern bool gameFadingOut;
 
+#ifdef DREAMCAST
+extern "C" {
+	void update_lcds();
+}
+#endif
+
 playField::playField(bool game) {
 	destroy_list();
 	init_genrand(Time::gettime()*1000);
@@ -48,6 +54,10 @@ void playField::nextFrame(uint64 tm) {
 	
 	if(m_countdown<=0) add_squares(gt);
 	update_squares(gt);
+	
+#ifdef DREAMCAST
+	update_lcds();
+#endif
 	
 	if(m_game && gameFadingOut) {
 		for(int p=0; p<current_level->players;p++) {

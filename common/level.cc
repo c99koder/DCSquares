@@ -18,7 +18,7 @@ level_node *level_list_head=NULL;
 level_node *level_list_tail=NULL;
 level_node *free_play=NULL;
 level_node *multi_play=NULL;
-extern int score[MAX_PLAYERS],squares[MAX_PLAYERS];
+extern int score[MAX_PLAYERS],squares[MAX_PLAYERS],dmloser;
 int level_cnt=1;
 
 level_node *create_level(int win_mode,int lose_mode) {
@@ -81,7 +81,7 @@ void levels_init() {
 	multi_play->win_mode=MODE_SQUARES;
 	multi_play->lose_mode=MODE_TIME;
 	multi_play->score=20000;
-	multi_play->time=60*5;
+	multi_play->time=60*3;
 	multi_play->squares=30;
 	multi_play->tickval=1.0f; //1.0
 	multi_play->min_tickval=0.6;
@@ -109,10 +109,10 @@ void levels_init() {
 	tmp->power_evil=0;
 
 	//Level 2:
-	//Collect 40 squares in 120 seconds
+	//Collect 30 squares in 120 seconds
 	//Score powerups
 	tmp=create_level(MODE_SQUARES,MODE_TIME|MODE_ENEMY);
-	tmp->squares=40;
+	tmp->squares=30;
 	tmp->time=120;
 	tmp->power_speed=0;
 	tmp->power_size=0;
@@ -120,40 +120,63 @@ void levels_init() {
 	tmp->power_evil=0;
 	
 	//Level 3:
-	//Collect 60 squares in 120 seconds
+	//Collect 40 squares in 120 seconds
 	//Score and size powerups
 	tmp=create_level(MODE_SQUARES,MODE_TIME|MODE_ENEMY);
-	tmp->squares=60;
+	tmp->squares=40;
 	tmp->time=120;
 	tmp->power_speed=0;
 	tmp->power_size=1;
 	tmp->power_score=1;
 	tmp->power_evil=0;
+	tmp->speedval=1.4f;
 	
 	//Level 4:
-	//Earn 5000 points
+	//Collect 50 squares in 120 seconds
 	//Score, size, and speed powerups
-	tmp=create_level(MODE_SCORE,MODE_ENEMY);
-	tmp->score=5000;
-	//tmp->time=10;
+	tmp=create_level(MODE_SQUARES,MODE_TIME|MODE_ENEMY);
+	tmp->squares=50;
+	tmp->time=120;
 	tmp->power_speed=1;
 	tmp->power_size=1;
 	tmp->power_score=1;
-	tmp->power_evil=0;
-	
+	tmp->power_evil=1;
+	tmp->speedval=1.6f;
+
 	//Level 5:
-	//Survive for 30 seconds
-	//All powerups
-	tmp=create_level(MODE_TIME,MODE_ENEMY);
-	tmp->time=30;
-	tmp->speedval=4;
-	tmp->tickval=0.6;
-	tmp->scoreval=1000;
+	//Collect 60 squares in 120 seconds
+	//Score, size, and speed powerups
+	tmp=create_level(MODE_SQUARES,MODE_TIME|MODE_ENEMY);
+	tmp->squares=60;
+	tmp->time=120;
+	tmp->power_speed=1;
+	tmp->power_size=1;
+	tmp->power_score=1;
+	tmp->power_evil=1;
+	tmp->speedval=1.8f;
+	
+	//Level 6:
+	//Collect 70 squares in 120 seconds
+	//Score, size, and speed powerups
+	tmp=create_level(MODE_SQUARES,MODE_TIME|MODE_ENEMY);
+	tmp->squares=70;
+	tmp->time=120;
+	tmp->power_speed=1;
+	tmp->power_size=1;
+	tmp->power_score=1;
+	tmp->power_evil=1;
+	tmp->speedval=2.0f;
 		
 	current_level = free_play;
 }
 
 int check_win(float gt, int p) {
+	if(current_level->players > 1 && dmloser != -1 && current_level->lose_mode & MODE_ENEMY && dmloser != p) {
+		return 1;
+	}
+	if(current_level->players > 1 && dmloser != -1 && current_level->lose_mode & MODE_ENEMY && dmloser == p) {
+		return -1;
+	}
 	if(current_level->lose_mode & MODE_TIME && (current_level->time - gt < 0)) {
 		//printf("time: lose\n");
 		return -1;

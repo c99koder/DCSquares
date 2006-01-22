@@ -247,6 +247,10 @@ void render_score(float gt) {
 			sprintf(tmp,"Survive for %i seconds",current_level->time);
 			center_shad(themeinfo.game_y+60,tmp,24,(gt<3)?limit(gt,0,1):(4.0f-gt),true);
 		}
+		if(current_level->win_mode == 0 && current_level->lose_mode == MODE_ENEMY) {
+			sprintf(tmp,"Avoid the red squares",current_level->time);
+			center_shad(themeinfo.game_y+60,tmp,24,(gt<3)?limit(gt,0,1):(4.0f-gt),true);
+		}
 		/*if(current_level->lose_mode & MODE_TIME) {
 			if(current_level->time < 60) {
 				sprintf(tmp,"in %i seconds",current_level->time);
