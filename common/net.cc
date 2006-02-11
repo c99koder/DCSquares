@@ -38,15 +38,18 @@
 #include <stdlib.h>
 #include "squares.h"
 #include "http.h"
+#include "squarenet.h"
 #include "net.h"
 
 #define PORT 6000
+
 void debug(char *msg);
 
 int lobbysocket;
 int gamesocket;
 int sendsocket;
 struct squarelist *netplayer;
+snAuth AUTH;
 
 struct userlist_node *userlist=NULL;
 
@@ -74,13 +77,15 @@ int userlist_size() {
 	return count;
 }
 
-void lobby_send(int chan, int msg, char *packet) {
-	int numbytes;
-	char buf[256];
+void lobby_send(snChannel chan, snPacketType type, int len, void *data) {
+	snPacket p;
+  memset(&p,0,sizeof(p));
 
-  memset(buf,0,128);
-	sprintf(buf,"%i:%i:%s",chan,msg,packet);
-	send(lobbysocket,buf,128,0);
+	p.chan=chan;
+	p.type=type;
+	memcpy(p.data,data,len);
+
+	send(lobbysocket,&p,sizeof(p),0);
 }
 
 int lobby_connect(char *host, char *username, char *password) {
@@ -99,17 +104,13 @@ int lobby_connect(char *host, char *username, char *password) {
   
   connect(lobbysocket, (struct sockaddr*)&sinRemote, sizeof(struct sockaddr_in));
 	
-	r=recv(lobbysocket,msg,128,0);
-	
-	printf("incoming: %s\n",msg);
-	
-	sprintf(msg,"%s:%s",username,password);
-	lobby_send(0,1,msg);
+	strcpy(AUTH.user,username);
+	strcpy(AUTH.pass,password);
 }	
 
 void lobby_update() {
 	int r;
-	char buf[256];
+	snPacket p;
 	timeval tv;
 	fd_set readfds;
 		
@@ -122,9 +123,8 @@ void lobby_update() {
 	select(lobbysocket+1, &readfds, NULL, NULL, &tv);
 	
 	if (FD_ISSET(lobbysocket, &readfds)) {
-		r=recv(lobbysocket,buf,128,0);
-		//printf("%s\n",buf);
-		process_packet(buf);
+		r=recv(lobbysocket,&p,sizeof(snPacket),0);
+		process_packet(p);
 	}
 }
 
@@ -136,58 +136,56 @@ void lobby_disconnect() {
 #endif
 }
 
-void process_packet(char *msg) {
-	int chan=atoi(strtok(msg,":"));
-	int msgid=atoi(strtok(NULL,":"));
-	char *data=strtok(NULL,"\0");
-	
-	switch(chan) {
-		case 0: //Channel 0: Server Data
-			process_server_packet(msgid,data);
+void process_packet(snPacket p) {
+	switch(p.chan) {
+		case CHAN_SERVER: //Channel 0: Server Data
+			process_server_packet(p.type,p.data);
 			break;
-		case 1: //Channel 1: Chat Data
-			process_chat_packet(msgid,data);
+		case CHAN_CHAT: //Channel 1: Chat Data
+			process_chat_packet(p.type,p.data);
 			break;
-		case 2: //Channel 2: Game Data
+		case CHAN_GAME: //Channel 2: Game Data
 		//process_game_packet(strtok(NULL,"\0"));
 		break;
 	}	
 }		
 
-void process_server_packet(int msgid, char *data) {
+void process_server_packet(snPacketType t, void *data) {
 	char *val;
 	char buf[256];
 	
-	switch(msgid) {
-		case 1: //Server text message
+	switch(t) {
+		case SERVER_VERSION: //Server version message
+			printf("Protocol: %i\n",((snServerVersion *)data)->protoVersion);
+			lobby_send(CHAN_SERVER,SERVER_AUTH,sizeof(AUTH),&AUTH);
+			break;
+		case SERVER_MSG: //Server text message
 			sprintf(buf,"-- %s",data);
 			os_chat_insert_text(buf);
 			break;
 	}
 }
 
-void process_chat_packet(int msgid, char *data) {
+void process_chat_packet(snPacketType t, void *data) {
 	char *val;
 	char buf[256];
 	
-	switch(msgid) {
-		case 0: //Room info
-			val=strtok(data,":");
-			switch(val[0]) {
-				case 'U': //User
-					add_user(strtok(NULL,"\0"));
+	switch(t) {
+		case CHAT_INFO: //Room info
+			switch(((snChatInfo *)data)->infoType) {
+				case chatInfoUser: //User
+					add_user(((snChatInfo *)data)->data);
 					os_chat_reload_users();
 					break;
 			}
 			break;
-		case 1: //User chat message
-			val=strtok(data,":");
-			sprintf(buf,"<%s> %s",val,strtok(NULL,"\0"));
+		case CHAT_MSG: //User chat message
+			sprintf(buf,"<%s> %s",((snChatMsg *)data)->user,((snChatMsg *)data)->msg);
 			os_chat_insert_text(buf);
 			break;
-		case 2: //User has joined channel
-			add_user(data);
-			sprintf(buf,"*** %s has joined the room",data);
+		case CHAT_JOIN: //User has joined channel
+			add_user(((snChatJoin *)data)->user);
+			sprintf(buf,"*** %s has joined the room",((snChatJoin *)data)->user);
 			os_chat_insert_text(buf);
 			os_chat_reload_users();
 			break;

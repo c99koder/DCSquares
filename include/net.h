@@ -10,14 +10,14 @@
 void net_update();
 void netplay_init();
 void net_sendpacket(char *packet);
-void process_game_packet(char *buf);
-void process_packet(char *msg);
-void process_server_packet(int msgid, char*data);
-void process_chat_packet(int msgid, char*data);
+void process_game_packet(snPacketType t, void *buf);
+void process_packet(snPacket p);
+void process_server_packet(snPacketType t, void *data);
+void process_chat_packet(snPacketType t, void* data);
 int lobby_connect(char *host, char *username, char *password);
 void lobby_update();
 void lobby_disconnect();
-void lobby_send(int chan, int msg, char *text);
+void lobby_send(snChannel c, snPacketType t, int len, void *data);
 struct userlist_node {
 	char username[50];
 	struct userlist_node *next;

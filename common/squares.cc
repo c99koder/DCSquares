@@ -250,7 +250,7 @@ void update_squares(float s) {
 			if(c->angle>360) c->angle-=360;
 		}
 		if(c->type<PLAYER_NET) {
-#ifndef TIKI
+#ifdef LINUX
 			mx=c->x;
 			my=c->y;
 			read_mouse(c->type,&mx,&my,&lmb);

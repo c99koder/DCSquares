@@ -21,6 +21,7 @@
 #include "texture.h"
 #include "score.h"
 #include "level.h"
+#include "squarenet.h"
 #include "net.h"
 #include "rand.h"
 
@@ -135,7 +136,7 @@ void status(char *msg);
 					if([mnuFreePlay state] == NSOnState) {
 						current_level=free_play;
 					}*/
-					current_level=level_list_head;//multi_play;
+					current_level=free_play;//multi_play;
 					state=1;
 				} else {
 					for(int p=0; p<current_level->players; p++) {
@@ -300,7 +301,7 @@ void status(char *msg);
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 	glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 	texture_init();
-	text_init("Helvetica-Bold.txf",20);
+	text_init("VeraBd.txf",20);
 	levels_init();
 #ifdef OPENAL
 	dev = alcOpenDevice((ALubyte *)getenv("OPENAL_DEVICE"));  // getenv()==NULL is okay.

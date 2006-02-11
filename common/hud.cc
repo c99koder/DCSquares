@@ -41,6 +41,7 @@ int scoreval=20;
 int maxcombo[MAX_PLAYERS];
 int gametime=0;
 int totalsquares=0;
+int dmloser=-1;
 float tickval=0.5;
 float power=0;
 float speedval=1.0;
@@ -248,7 +249,7 @@ void render_score(float gt) {
 			center_shad(themeinfo.game_y+60,tmp,24,(gt<3)?limit(gt,0,1):(4.0f-gt),true);
 		}
 		if(current_level->win_mode == 0 && current_level->lose_mode == MODE_ENEMY) {
-			sprintf(tmp,"Avoid the red squares",current_level->time);
+			sprintf(tmp,"Collect the green squares",current_level->time);
 			center_shad(themeinfo.game_y+60,tmp,24,(gt<3)?limit(gt,0,1):(4.0f-gt),true);
 		}
 		/*if(current_level->lose_mode & MODE_TIME) {

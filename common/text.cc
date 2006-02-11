@@ -55,10 +55,10 @@ fntRenderer *textR;
 fntTexFont *font;
 #else
 RefPtr<Font> fnt;
+#endif
 float text_z=0.95f;
 
-void text_set_z(float z) { text_z=z; }
-#endif 
+void text_set_z(float z) { text_z=z; } 
 
 extern themeinfo_t themeinfo;
 
@@ -123,7 +123,7 @@ void draw_txt(int x, int y, char *text, float r, float g, float b, float a, int 
 
   textR->setPointSize(point);
   textR->begin();
-	textR->setColor(Color(a,r,g,b));
+	glColor4f(r,g,b,a);
   textR->start2f(x,480-y);
   textR->puts(text);
   textR->end();

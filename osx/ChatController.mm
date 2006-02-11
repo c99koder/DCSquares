@@ -1,5 +1,6 @@
 #import "Preferences.h"
 #import "ChatController.h"
+#include "squarenet.h"
 #include "net.h"
 
 NSTableView *osTblNames;
@@ -10,7 +11,9 @@ NSWindow *osChatWindow;
 
 - (IBAction)chatSend:(id)sender
 {
-	lobby_send(1,1,(char *)[[txtInput stringValue] cString]);
+	snChatMsg m;
+	strcpy(m.msg,[[txtInput stringValue] cString]);
+	lobby_send(CHAN_CHAT,CHAT_MSG,sizeof(m),&m);
 	[txtInput setStringValue:@""];
 	[[txtInput window] makeFirstResponder:txtInput];
 }
@@ -22,7 +25,7 @@ NSWindow *osChatWindow;
 
 - (IBAction)onStartGame:(id)sender
 {
-	lobby_send(2,1,"");
+	//lobby_send(2,1,"");
 }
 
 - (IBAction)onChatConnect:(id)sender
@@ -31,7 +34,7 @@ NSWindow *osChatWindow;
 	osTblNames = tblNames;
 	osTxtChat = txtChat;
 	osChatWindow = wndChat;
-	lobby_connect("192.168.11.101",[prefs getUsername],[prefs getPassword]);
+	lobby_connect("192.168.11.100",[prefs getUsername],[prefs getPassword]);
 	timer = [[NSTimer
 		scheduledTimerWithTimeInterval: (1.0f / 10.0f)
 														target: self

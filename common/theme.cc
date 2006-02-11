@@ -198,13 +198,13 @@ void render_bg_game(int tex, float fade) {
 	glVertex3f((float)themeinfo.game_x,(float)themeinfo.game_y,0.9);
 
 	glTexCoord2f(((float)themeinfo.game_x+(float)themeinfo.game_w)/640.0f,0);
-	glVertex3f((float)themeinfo.game_x+(float)themeinfo.game_w,0,0.9);
+	glVertex3f((float)themeinfo.game_x+(float)themeinfo.game_w,0,0.02);
 	glTexCoord2f(1,0);
-	glVertex3f(640,0,0.9);
+	glVertex3f(640,0,0.02);
 	glTexCoord2f(1,(((float)themeinfo.game_y+(float)themeinfo.game_h)/480.0f));
-	glVertex3f(640,(float)themeinfo.game_y+(float)themeinfo.game_h,0.9);
+	glVertex3f(640,(float)themeinfo.game_y+(float)themeinfo.game_h,0.02);
 	glTexCoord2f(((float)themeinfo.game_x+(float)themeinfo.game_w)/640.0f,(((float)themeinfo.game_y+(float)themeinfo.game_h)/480.0f));
-	glVertex3f((float)themeinfo.game_x+(float)themeinfo.game_w,(float)themeinfo.game_y+(float)themeinfo.game_h,0.9);
+	glVertex3f((float)themeinfo.game_x+(float)themeinfo.game_w,(float)themeinfo.game_y+(float)themeinfo.game_h,0.02);
 
 	glTexCoord2f((float)themeinfo.game_x/640.0f,(((float)themeinfo.game_y+(float)themeinfo.game_h)/480.0f));
 	glVertex3f((float)themeinfo.game_x,(float)themeinfo.game_y+(float)themeinfo.game_h,0.9);
@@ -214,15 +214,6 @@ void render_bg_game(int tex, float fade) {
 	glVertex3f(640,480,0.9);
 	glTexCoord2f((float)themeinfo.game_x/640.0f,1);
 	glVertex3f((float)themeinfo.game_x,480,0.9);
-	
-	/*glTexCoord2f((float)themeinfo.game_x/640.0f,(float)themeinfo.game_y/480.0f);
-	glVertex3f((float)themeinfo.game_x,(float)themeinfo.game_y,0.1);
-	glTexCoord2f(((float)themeinfo.game_x+(float)themeinfo.game_w)/640.0f,(float)themeinfo.game_y/480.0f);
-	glVertex3f((float)themeinfo.game_x+(float)themeinfo.game_w,(float)themeinfo.game_y,0.1);
-	glTexCoord2f(((float)themeinfo.game_x+(float)themeinfo.game_w)/640.0f,((float)themeinfo.game_y+(float)themeinfo.game_h)/480.0f);
-	glVertex3f((float)themeinfo.game_x+(float)themeinfo.game_w,(float)themeinfo.game_y+(float)themeinfo.game_h,0.1);
-	glTexCoord2f((float)themeinfo.game_x/640.0f,((float)themeinfo.game_y+(float)themeinfo.game_h)/480.0f);
-	glVertex3f((float)themeinfo.game_x,(float)themeinfo.game_y+(float)themeinfo.game_h,0.1);*/
 #else
 	glTexCoord2f(0,1);
 	glVertex3f(0,0,0.9);
@@ -259,15 +250,6 @@ void render_bg_game(int tex, float fade) {
 	glVertex3f(640,480,0.9);
 	glTexCoord2f((float)themeinfo.game_x/640.0f,0);
 	glVertex3f((float)themeinfo.game_x,480,0.9);
-	
-	/*glTexCoord2f((float)themeinfo.game_x/640.0f,1-(float)themeinfo.game_y/480.0f);
-	glVertex3f((float)themeinfo.game_x,(float)themeinfo.game_y,0.01);
-	glTexCoord2f(((float)themeinfo.game_x+(float)themeinfo.game_w)/640.0f,1-(float)themeinfo.game_y/480.0f);
-	glVertex3f((float)themeinfo.game_x+(float)themeinfo.game_w,(float)themeinfo.game_y,0.01);
-	glTexCoord2f(((float)themeinfo.game_x+(float)themeinfo.game_w)/640.0f,1-((float)themeinfo.game_y+(float)themeinfo.game_h)/480.0f);
-	glVertex3f((float)themeinfo.game_x+(float)themeinfo.game_w,(float)themeinfo.game_y+(float)themeinfo.game_h,0.01);
-	glTexCoord2f((float)themeinfo.game_x/640.0f,1-((float)themeinfo.game_y+(float)themeinfo.game_h)/480.0f);
-	glVertex3f((float)themeinfo.game_x,(float)themeinfo.game_y+(float)themeinfo.game_h,0.01);*/
 #endif
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
@@ -791,9 +773,9 @@ int load_theme(char *theme, int sfx) {
 	  }
 	}
 	fclose(f);
-/*#if defined(SDL) || defined(TIKI)
+#if defined(SDL) || defined(TIKI)
 	load_texture("loading",loading_tex,0);
-	for(float x=0; x<=1; x+=0.01) {
+	for(float x=0; x<=1; x+=0.015) {
 #ifdef TIKI
 		Frame::begin();
 #else
@@ -809,7 +791,7 @@ int load_theme(char *theme, int sfx) {
 		delay(0.01);
 #endif
 	}
-#endif*/	
+#endif
 	load_texture(theme_dir("game_bg"),game_tex,0);
 	load_texture(theme_dir("bg"),bg_tex,0);
 	load_texture(theme_dir("stat_bg"),stat_tex,0);
@@ -830,8 +812,8 @@ int load_theme(char *theme, int sfx) {
 	powerdown=Mix_LoadWAV(theme_dir("powerdown.wav"));
 	collect=Mix_LoadWAV(theme_dir("collect.wav"));
 	gameover=Mix_LoadWAV(theme_dir("gameover.wav"));
-	bgm=Mix_LoadMUS(theme_dir("bg_loop.ogg"));
-	title=Mix_LoadMUS(theme_dir("bgdim_loop.ogg"));
+	bgm=Mix_LoadMUS(theme_dir("game.ogg"));
+	title=Mix_LoadMUS(theme_dir("title.ogg"));
 #endif
 #ifdef OPENAL
 	alGenBuffers(6, buffers);
@@ -852,9 +834,9 @@ int load_theme(char *theme, int sfx) {
   alBufferData(buffers[SND_GAMEOVER], format, data, size, freq);
   alutUnloadWAV(format, data, size, freq);
 	addSource(SND_GAMEOVER,AL_FALSE);
-	LoadOgg(theme_dir("bgdim_loop.ogg"),SND_TITLE);
+	LoadOgg(theme_dir("title.ogg"),SND_TITLE);
 	addSource(SND_TITLE,AL_TRUE);
-	LoadOgg(theme_dir("bg_loop.ogg"),SND_BGM);
+	LoadOgg(theme_dir("game.ogg"),SND_BGM);
 	addSource(SND_BGM,AL_TRUE);
 #endif
 #ifdef DREAMCAST
@@ -872,8 +854,8 @@ int load_theme(char *theme, int sfx) {
   g_pSoundManager->Create( &gameover, A2W(theme_dir("gameover.wav")), 0, GUID_NULL );
 	}
 #endif
-/*#if defined(SDL) || defined(TIKI)
-	for(float x=0; x<=1; x+=0.01) {
+#if defined(SDL) || defined(TIKI)
+	for(float x=0; x<=1; x+=0.015) {
 #ifdef TIKI
 		Frame::begin();
 #else
@@ -888,7 +870,7 @@ int load_theme(char *theme, int sfx) {
 		}		
 #endif
 	}
-#endif	*/
+#endif
   return 0;
 }
 
