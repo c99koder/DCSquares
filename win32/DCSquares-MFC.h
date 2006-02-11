@@ -45,8 +45,8 @@ public:
 	CPlayerMP3 mp3player;
 	CUpdateDlg updateDlg;
 	int updateMode;
-	afx_msg void OnConnectToLobby();
 	afx_msg void OnHelpHowtoplay();
+	afx_msg void OnGameConnecttolobby();
 };
 DWORD __stdcall MEditStreamInCallback(DWORD dwCookie, LPBYTE pbBuff, LONG cb, LONG *pcb);
 extern CDCSquaresMFCApp theApp;

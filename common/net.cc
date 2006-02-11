@@ -81,11 +81,11 @@ void lobby_send(snChannel chan, snPacketType type, int len, void *data) {
 	snPacket p;
   memset(&p,0,sizeof(p));
 
-	p.chan=chan;
-	p.type=type;
+	p.chan=(snChannel)htonl(chan);
+	p.type=(snPacketType)htonl(type);
 	memcpy(p.data,data,len);
 
-	send(lobbysocket,&p,sizeof(p),0);
+	send(lobbysocket,(char *)&p,sizeof(p),0);
 }
 
 int lobby_connect(char *host, char *username, char *password) {
@@ -123,7 +123,7 @@ void lobby_update() {
 	select(lobbysocket+1, &readfds, NULL, NULL, &tv);
 	
 	if (FD_ISSET(lobbysocket, &readfds)) {
-		r=recv(lobbysocket,&p,sizeof(snPacket),0);
+		r=recv(lobbysocket,(char *)&p,sizeof(snPacket),0);
 		process_packet(p);
 	}
 }
@@ -137,6 +137,8 @@ void lobby_disconnect() {
 }
 
 void process_packet(snPacket p) {
+	p.chan=(snChannel)ntohl(p.chan);
+	p.type=(snPacketType)ntohl(p.type);
 	switch(p.chan) {
 		case CHAN_SERVER: //Channel 0: Server Data
 			process_server_packet(p.type,p.data);

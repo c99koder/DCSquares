@@ -5,6 +5,7 @@
 #include "DCSquares-MFC.h"
 #include "ChatDlg.h"
 #include ".\chatdlg.h"
+#include "squarenet.h"
 #include "net.h"
 
 // CChatDlg dialog
@@ -70,7 +71,7 @@ int CChatDlg::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	os_user_list = &lstUserList;
 	os_chat_text = &txtChatText;
 
-	lobby_connect("192.168.11.101","DJ Shibby","jay123");
+	lobby_connect("192.168.11.100","DJ Shibby","jay123");
 	SetTimer(1000,1000 / 10,NULL);
 	return 0;
 }
@@ -91,11 +92,12 @@ void CChatDlg::OnClose()
 
 void CChatDlg::OnBtnSend()
 {
-
-	// TODO: Add your control notification handler code here
+	snChatMsg m;
 	CString s;
 	txtChatInput.GetWindowText(s);
-	lobby_send(1,1,(char *)(LPCTSTR)s);
+
+	strcpy(m.msg,(char *)(LPCTSTR)s);
+	lobby_send(CHAN_CHAT,CHAT_MSG,sizeof(m),&m);
 	txtChatInput.SetWindowText("");
 	txtChatInput.SetFocus();
 }

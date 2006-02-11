@@ -7,7 +7,12 @@
  *
  */
 
+#ifdef WIN32
+#pragma pack(1)
+#define __PACKED__
+#else
 #define __PACKED__ __attribute__((__packed__));
+#endif
 
 enum snChannel { CHAN_SERVER, CHAN_CHAT, CHAN_GAME };
 enum snPacketType { 

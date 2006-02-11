@@ -440,7 +440,7 @@ int load_theme(char *theme, int sfx) {
 	char *p=NULL;
 	char *val;
 
-	if(theme!=NULL) strcpy(dcs_theme,theme); else strcpy(dcs_theme,"default");
+	if(theme!=NULL) strcpy(dcs_theme,theme); else strcpy(dcs_theme,"goat");
 
 	themeinfo.scale=2;
 	themeinfo.text_r=100;
@@ -491,8 +491,8 @@ int load_theme(char *theme, int sfx) {
 	
   f=fopen(theme_dir("theme.ini"),"r");
 	if(!f) {
-		if(strcmp("default",theme)) {
-			return load_theme("default",sfx);
+		if(strcmp("goat",theme)) {
+			return load_theme("goat",sfx);
 		} else {
 #ifdef WIN32
 			MessageBox(NULL,A2W("Cannot load default theme"),A2W("Error"),MB_OK|MB_ICONHAND);

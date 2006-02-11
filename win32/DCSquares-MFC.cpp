@@ -41,8 +41,8 @@ BEGIN_MESSAGE_MAP(CDCSquaresMFCApp, CWinApp)
 	ON_COMMAND(ID_CHECK_UPDATES, OnCheckUpdates)
 	ON_COMMAND(ID_PREFS, OnPrefs)
 	ON_COMMAND(ID_SCORES_HIGHSCORES, OnScoresHighscores)
-	ON_COMMAND(ID_GAME_CONNECTTOLOBBY, OnConnectToLobby)
 	ON_COMMAND(ID_HELP_HOWTOPLAY, OnHelpHowtoplay)
+	ON_COMMAND(ID_GAME_CONNECTTOLOBBY32778, OnGameConnecttolobby)
 END_MESSAGE_MAP()
 
 
@@ -113,6 +113,10 @@ BOOL CDCSquaresMFCApp::InitInstance()
 //		return FALSE;
 
 	LoadSettings();
+
+	texture_init();
+	levels_init();
+
 	WORD wVersionRequested;
 WSADATA wsaData;
 int err;
@@ -128,7 +132,7 @@ HRESULT hr;
         DXTRACE_ERR_MSGBOX( TEXT("Initialize"), E_OUTOFMEMORY );
         return FALSE;
     }
-	if( FAILED( hr = g_pSoundManager->Initialize( m_pMainWnd->GetSafeHwnd(), DSSCL_PRIORITY ) ) )
+	/*if( FAILED( hr = g_pSoundManager->Initialize( m_pMainWnd->GetSafeHwnd(), DSSCL_PRIORITY ) ) )
     {
         DXTRACE_ERR_MSGBOX( TEXT("Initialize"), hr );
         return FALSE;
@@ -138,11 +142,9 @@ HRESULT hr;
     {
         DXTRACE_ERR_MSGBOX( TEXT("SetPrimaryBufferFormat"), hr );
         return FALSE;
-    }
-	texture_init();
-	levels_init();
+    }*/
 		
-	if(text_init("Helvetica-Bold.txf",20)==0 && load_theme((char *)theme.GetString(),sfx)==0) {
+	if(text_init("VeraBd.txf",20)==0 && load_theme((char *)theme.GetString(),sfx)==0) {
 		// The one and only window has been initialized, so show and update it
 		//m_pMainWnd->UpdateWindow();
 		//m_pMainWnd->RedrawWindow();
@@ -305,15 +307,15 @@ void CDCSquaresMFCApp::OnScoresHighscores()
 	hs.DoModal();
 }
 
-void CDCSquaresMFCApp::OnConnectToLobby()
-{
-	// TODO: Add your command handler code here
-	CChatDlg c;
-	c.DoModal();
-}
-
 void CDCSquaresMFCApp::OnHelpHowtoplay()
 {
 	// TODO: Add your command handler code here
 	CHyperLink::GotoURL("http://dcsquares.c99.org/howtoplay.php",0);
+}
+
+void CDCSquaresMFCApp::OnGameConnecttolobby()
+{
+	// TODO: Add your command handler code here
+	CChatDlg c;
+	c.DoModal();
 }

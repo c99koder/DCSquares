@@ -46,11 +46,11 @@ BEGIN_MESSAGE_MAP(CDCSquaresMFCView, CView)
 END_MESSAGE_MAP()
 
 // CDCSquaresMFCView construction/destruction
-extern int combo;
-extern int maxcombo;
-extern int score;
+extern int combo[MAX_PLAYERS];
+extern int maxcombo[MAX_PLAYERS];
+extern int score[MAX_PLAYERS];
 extern int highscore;
-extern int squares;
+extern int squares[MAX_PLAYERS];
 extern int scoreval;
 extern float tickval;
 extern float power;
@@ -58,10 +58,8 @@ extern char highcode[20];
 extern float speedval;
 extern int powerup_mode;
 extern int effect_type;
-float square_alpha=1.0;
 extern int bg_tex;
-extern int title_tex;
-extern int menu_tex;
+float square_alpha=1.0;
 float gt = 0;
 float fade = 0;
 float eoe=0;
@@ -116,9 +114,8 @@ void CDCSquaresMFCView::OnDraw(CDC* /*pDC*/)
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clear Screen And Depth Buffer
 	glLoadIdentity();									// Reset The Current Modelview Matrix
-	if(state==0) render_bg(title_tex,1);
-	else if(state==1) render_bg(bg_tex,1);
-	else render_bg(menu_tex,1);
+	if(state==1) render_bg_game(bg_tex,1);
+	else render_bg_title(bg_tex,1);
 #ifdef DREAMCAST
 	glKosFinishList();
 #else
@@ -364,19 +361,21 @@ void CDCSquaresMFCView::OnTimer(UINT nIDEvent)
 					state=1;
 					while(ShowCursor(FALSE)>=0);
 				} else {
-					if(check_win(gt) == 1) {
-						state=1;
-						if(current_level->next!=NULL) {
-							current_level=current_level->next;
+					for(int p=0; p<current_level->players;p++) {
+						if(check_win(gt,p) == 1) {
+							state=1;
+							if(current_level->next!=NULL) {
+								current_level=current_level->next;
+							} else {
+								state=0;
+							}
 						} else {
 							state=0;
 						}
-					} else {
-						state=0;
-					}
-					if(state==0) {
-						while(ShowCursor(TRUE)<0);
-						//[NSCursor unhide];
+						if(state==0) {
+							while(ShowCursor(TRUE)<0);
+							//[NSCursor unhide];
+						}
 					}
 				}
 				if(state!=0) {
@@ -385,22 +384,22 @@ void CDCSquaresMFCView::OnTimer(UINT nIDEvent)
 					square_alpha=1.0;
 				}
 			} else if(state==1) {
-				if(combo > maxcombo) maxcombo = combo;
-				if(check_win(gt) == 1) {
-					state=2;
-				} else {
+				for(int p=0; p<current_level->players; p++) {
+					if(combo[p] > maxcombo[p]) maxcombo[p] = combo[p];
+				}
+				if(check_win(gt,0) != 1 && current_level->players==1) {
 					state=2;
 					if(theApp.autoSubmit && (theApp.username.GetLength()>0 && theApp.password.GetLength()>0)) {
 						theApp.statusDlg.statusTxt.SetWindowText("Submitting score");
 						theApp.statusDlg.ShowWindow(SW_SHOW);
 						theApp.statusDlg.UpdateWindow();
-						Scores.submitScore(theApp.username.AllocSysString(),theApp.password.AllocSysString(),score,maxcombo,gt,L"PC",&x);
+						Scores.submitScore(theApp.username.AllocSysString(),theApp.password.AllocSysString(),score[0],maxcombo[0],gt,L"PC",&x);
 						theApp.statusDlg.ShowWindow(SW_HIDE);
 						highcode[0]='\0';
 					} else {
 						int cnt=0;
 						do {
-							encrypt(genrand_int32()%26,(unsigned char *)build_code(score,squares,maxcombo,0),(unsigned char *)highcode);
+							encrypt(genrand_int32()%26,(unsigned char *)build_code(score[0],squares[0],maxcombo[0],0),(unsigned char *)highcode);
 							cnt++;
 							if(cnt>20) {
 								highcode[0]='\0';
@@ -417,10 +416,10 @@ void CDCSquaresMFCView::OnTimer(UINT nIDEvent)
 				tickval=current_level->tickval; //1.0
 				speedval=current_level->speedval; //1.2
 				scoreval=current_level->scoreval; //100
-				score=0;
-				combo=0;
-				squares=0;
-				maxcombo=0;
+				score[0]=0;
+				combo[0]=0;
+				squares[0]=0;
+				maxcombo[0]=0;
 				gt=0;
 				theApp.mp3player.hrStop();
 			}
@@ -431,8 +430,8 @@ void CDCSquaresMFCView::OnTimer(UINT nIDEvent)
 	}
 
 	if(theApp.bgm && !theApp.mp3player.boIsPlaying()) {
-		if(state==0) theApp.mp3player.hrLoad(theme_dir("bgdim_loop.ogg"));
-		if(state==1) theApp.mp3player.hrLoad(theme_dir("bg_loop.ogg"));
+		if(state==0) theApp.mp3player.hrLoad(theme_dir("title.ogg"));
+		if(state==1) theApp.mp3player.hrLoad(theme_dir("game.ogg"));
 		theApp.mp3player.hrPlay();
 		GetFocus();
 	}
@@ -465,13 +464,10 @@ void CDCSquaresMFCView::OnTimer(UINT nIDEvent)
 					submit_code(highcode);
 			}*/
 		}
-		switch(check_win(gt)) {
-			case 1: //win
+		for(int p=0;p<current_level->players; p++) {
+			if(check_win(gt,p)!=0) {
 				fade=1.0;
-				break;
-			case -1: //lose
-				fade=1.0;
-				break;
+			}
 		}
 	}
 	update_squares(e-oe);

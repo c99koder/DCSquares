@@ -90,6 +90,10 @@ BEGIN
         MENUITEM SEPARATOR
         MENUITEM "&About DCSquares...",         ID_APP_ABOUT
     END
+    POPUP "&Game"
+    BEGIN
+        MENUITEM "C&onnect to Lobby...",        ID_GAME_CONNECTTOLOBBY32778
+    END
 END
 
 
