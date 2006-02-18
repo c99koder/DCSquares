@@ -12,7 +12,7 @@
 
 class squaresBg : public Drawable {
 public:
-	squaresBg(int tex, bool game);
+	squaresBg(Texture *tex, bool game);
 	~squaresBg();
 	
 	//Overloaded functions
@@ -20,7 +20,7 @@ public:
 	
 private:
 	bool m_game;
-	int m_tex;
+	Texture *m_tex;
 };
 
 #endif

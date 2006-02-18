@@ -11,6 +11,7 @@
 #include <Tiki/gl.h>
 #include <Tiki/drawable.h>
 #include <Tiki/tikitime.h>
+#include <Tiki/texture.h>
 
 using namespace Tiki;
 using namespace Tiki::GL;
@@ -19,7 +20,7 @@ using namespace Tiki::GL;
 #include "squares.h"
 #include "theme.h"
 
-squaresBg::squaresBg(int tex, bool game) {
+squaresBg::squaresBg(Texture *tex, bool game) {
 	m_game = game;
 	m_tex = tex;
 }

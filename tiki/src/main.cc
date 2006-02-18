@@ -7,10 +7,16 @@
  *
  */
 
+#include <time.h>
 #include <Tiki/tiki.h>
 #include <Tiki/plxcompat.h>
 #include <Tiki/gl.h>
 #include <Tiki/hid.h>
+#include <Tiki/texture.h>
+
+using namespace Tiki;
+using namespace Tiki::GL;
+
 #ifdef DREAMCAST
 #include <kos.h>
 #include <oggvorbis/sndoggvorbis.h>
@@ -125,8 +131,8 @@ extern "C" int tiki_main(int argc, char **argv) {
 	
 	// Init Tiki
 	Tiki::init(argc, argv);
-	Tiki::setName("TikiSquares", NULL);
-	Tiki::GL::showCursor(false);
+	//Tiki::setName("TikiSquares", NULL);
+	//Tiki::GL::showCursor(false);
 	Hid::callbackReg(tkCallback, NULL);
 
 #ifdef DREAMCAST
@@ -140,7 +146,6 @@ extern "C" int tiki_main(int argc, char **argv) {
 	if(goat_50hz()) vid_set_mode(DM_640x480_PAL_IL,PM_RGB565);
 #endif
 #endif
-	texture_init();
 	levels_init();
 	score_list_init();
 	text_init("VeraBd.txf",40);

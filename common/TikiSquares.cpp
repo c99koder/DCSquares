@@ -9,6 +9,8 @@
 #include <Tiki/Tiki.h>
 
 #if TIKI_PLAT == TIKI_WIN32
+#include "pch.h"
+#include <windows.h>
 static char szAppName[] = "TikiTest";
 int APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 #else

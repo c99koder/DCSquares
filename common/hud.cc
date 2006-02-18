@@ -1,21 +1,10 @@
-#ifdef WIN32
-#include <windows.h>
-#endif
-#ifdef DREAMCAST
-#include <kos.h>
-#endif
-#ifdef MACOS
-#include <OpenGL/gl.h>
-#else
-#include <GL/gl.h>
-#endif
-#ifdef SDL
-#include <SDL/SDL.h>
-#ifdef MACOS
-#include <SDL_mixer/SDL_mixer.h>
-#else
-#include <SDL/SDL_mixer.h>
-#endif
+#ifdef TIKI
+#include <Tiki/tiki.h>
+#include <Tiki/gl.h>
+#include <Tiki/texture.h>
+
+using namespace Tiki;
+using namespace Tiki::GL;
 #endif
 #include <stdio.h>
 #include <math.h>
@@ -26,10 +15,6 @@
 #include "game.h"
 #include "score.h"
 #include "level.h"
-#if defined(SDL)
-#include "sys.h"
-#include "input.h"
-#endif
 
 extern themeinfo_t themeinfo;
 extern char highcode[20];
@@ -46,18 +31,9 @@ float tickval=0.5;
 float power=0;
 float speedval=1.0;
 extern int powerup_mode;
-extern int bg_tex;
-extern int stat_tex;
-extern int logo_tex;
-
-#ifdef SDL
-extern Mix_Chunk *powerup;
-extern Mix_Chunk *powerdown;
-extern Mix_Chunk *collect;
-extern Mix_Chunk *gameover;
-extern Mix_Music *bgm;
-extern Mix_Music *title;
-#endif
+extern Texture *bg_tex;
+extern Texture *stat_tex;
+extern Texture *logo_tex;
 
 #ifdef DREAMCAST
 extern sfxhnd_t powerup;

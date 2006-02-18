@@ -32,9 +32,7 @@
 void MessageBox(char *title, char *msg);
 #endif
 
-#include "squares.h"
-#include "theme.h"
-#include "text.h"
+
 #ifndef TIKI
 #include "ul.h"
 #include "fnt.h"
@@ -49,7 +47,9 @@ using namespace Tiki::GL;
 using namespace Tiki::GL::Plxcompat;
 
 #endif
-
+#include "squares.h"
+#include "theme.h"
+#include "text.h"
 #ifndef TIKI
 fntRenderer *textR;
 fntTexFont *font;

@@ -14,7 +14,7 @@
 
 class Banna : public Drawable {
 public:
-	Banna(ObjType list, int tex) : m_list(list), m_tex(tex) {};
+	Banna(ObjType list, Texture *tex) : m_list(list), m_tex(tex) {};
 	~Banna() {};
 	
 	void setSize(float w, float h);
@@ -23,7 +23,7 @@ public:
 	void draw(ObjType list);
 	
 private:
-	int m_tex;
+	Texture *m_tex;
 	ObjType m_list;
 	float m_w, m_h;
 };

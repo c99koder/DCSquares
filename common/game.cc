@@ -1,3 +1,11 @@
+#ifdef TIKI
+#include <Tiki/tiki.h>
+#include <Tiki/gl.h>
+#include <Tiki/texture.h>
+
+using namespace Tiki;
+using namespace Tiki::GL;
+#endif
 #include <stdlib.h>
 #include <stdio.h>
 #include "squares.h"

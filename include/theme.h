@@ -34,11 +34,11 @@ struct themeinfo_t {
 };
 
 
-void render_bg(int tex, float fade);
-void render_bg_game(int tex, float fade);
-void render_bg_title(int tex, float fade);
-void render_poly(int size, int tex, float fade);
-void render_box(int x, int y, int w, int h, int tex, float fade);
+void render_bg(Texture *tex, float fade);
+void render_bg_game(Texture *tex, float fade);
+void render_bg_title(Texture *tex, float fade);
+void render_poly(int size, Texture *tex, float fade);
+void render_box(int x, int y, int w, int h, Texture *tex, float fade);
 char *theme_dir(char *filename);
 int load_theme(char *theme, int sfx);
 void unload_theme();

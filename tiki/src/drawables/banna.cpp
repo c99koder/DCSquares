@@ -12,6 +12,7 @@
 #include <Tiki/drawable.h>
 #include <Tiki/plxcompat.h>
 #include <Tiki/tikitime.h>
+#include <Tiki/texture.h>
 
 using namespace Tiki;
 using namespace Tiki::GL;

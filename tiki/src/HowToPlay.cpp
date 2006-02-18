@@ -11,6 +11,7 @@
 #include "Tiki/genmenu.h"
 #include <Tiki/drawables/label.h>
 #include <Tiki/anims/tintfader.h>
+#include <Tiki/texture.h>
 
 using namespace Tiki;
 using namespace Tiki::GL;
@@ -58,16 +59,16 @@ extern themeinfo_t themeinfo;
 	m_help[m_page]->subAdd(b);\
 	COLOR_TEXT(X+10, Y, TEXT);
 
-extern int score_tex;
-extern int enemy_tex;
-extern int invinc_tex;
-extern int slow_tex; 
-extern int mini_tex;
-extern int plus_tex;
-extern int evil_tex;
-extern int speed_tex;
-extern int minus_tex;
-extern int big_tex;
+extern Texture *score_tex;
+extern Texture *enemy_tex;
+extern Texture *invinc_tex;
+extern Texture *slow_tex; 
+extern Texture *mini_tex;
+extern Texture *plus_tex;
+extern Texture *evil_tex;
+extern Texture *speed_tex;
+extern Texture *minus_tex;
+extern Texture *big_tex;
 
 
 HowToPlay::HowToPlay() : DCSMenu(false) {

@@ -18,7 +18,7 @@ using namespace Tiki;
 using namespace Tiki::GL;
 
 #include "GamePlay.h"
-#include "squaresHUD.h"
+#include "drawables/squaresHUD.h"
 #include "level.h"
 #include "squares.h"
 #include "theme.h"
@@ -32,7 +32,7 @@ extern int score[],combo[],squares[],maxcombo[],powerup_mode;
 extern squarelist *player[];
 extern float game_gt;
 bool gameFadingOut;
-int dmloser=-1;
+extern int dmloser;
 
 GamePlay::GamePlay() : DCSMenu(true) {
 	hud=new squaresHUD(1);

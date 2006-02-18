@@ -9,6 +9,7 @@
 
 #include "Tiki/tiki.h"
 #include "Tiki/genmenu.h"
+#include <Tiki/texture.h>
 
 using namespace Tiki;
 using namespace Tiki::GL;

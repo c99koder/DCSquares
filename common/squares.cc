@@ -6,58 +6,24 @@
  *  chip@njit.lan
  ****************************************************************************/
 
+#ifdef TIKI
+#include <Tiki/tiki.h>
+#include <Tiki/gl.h>
+#include <Tiki/vector.h>
+#include <Tiki/texture.h>
+
+using namespace Tiki;
+using namespace Tiki::Math;
+using namespace Tiki::GL;
+#endif
 #include <stdlib.h>
 #include <math.h>
-#ifdef WIN32
-#define M_PI 3.141592653589793238
-#include <windows.h>
-#ifdef DIRECTX
-#include <dxstdafx.h>
 
-extern CSound *powerup;
-extern CSound *powerdown;
-extern CSound *collect;
-extern CSound *gameover;
-#endif
-#endif
-#ifdef DREAMCAST
-#include <kos.h>
-#endif
-#ifdef MACOS
-#include <OpenGL/gl.h>
-#else
-#include <GL/gl.h>
-#endif
-#ifdef SDL
-#include <SDL/SDL.h>
-#ifdef MACOS
-#include <SDL_mixer/SDL_mixer.h>
-#else
-#include <SDL/SDL_mixer.h>
-#endif
-#endif
-#if defined(DREAMCAST) || defined(SDL)
-#include "input.h"
-#endif
 #include "squares.h"
 #include "theme.h"
 #include "hud.h"
 #include "rand.h"
 #include "level.h"
-#ifdef DREAMCAST
-#include <dcplib/sg.h>
-#else
-#include <sg.h>
-#endif
-
-#ifdef SDL
-extern Mix_Chunk *powerup;
-extern Mix_Chunk *powerdown;
-extern Mix_Chunk *collect;
-extern Mix_Chunk *gameover;
-extern Mix_Music *bgm;
-extern Mix_Music *title;
-#endif
 
 #ifdef DREAMCAST
 extern sfxhnd_t powerup;
@@ -71,17 +37,16 @@ int powerup_mode=-1;
 int dcs_sfx=1;
 
 extern float power;
-extern int score[MAX_PLAYERS],score_tex,enemy_tex;
-
-extern int game_tex;
+extern int score[MAX_PLAYERS];
 extern int combo[MAX_PLAYERS];
 extern int maxcombo[MAX_PLAYERS];
 extern themeinfo_t themeinfo;
-extern int score_tex;
-extern int enemy_tex;
-extern int invinc_tex;
-extern int evil_tex;
-extern int shadow_tex;
+extern Texture *game_tex;
+extern Texture *score_tex;
+extern Texture *enemy_tex;
+extern Texture *invinc_tex;
+extern Texture *evil_tex;
+extern Texture *shadow_tex;
 
 int square_count=0;
 
@@ -176,7 +141,7 @@ void render_squares(float square_alpha, bool game) {
 			glRotatef(c->angle,0,0,1);
 			
 			glScalef(themeinfo.scale,themeinfo.scale,1.0);
-			if(c->tex==-1) {
+			if(c->tex==NULL) {
 				if(c->type<POWERUP) {
 					glBegin(GL_QUADS);
 						glColor4f(limit(c->r+0.4,0,1),limit(c->g+0.4,0,1),limit(c->b+0.4,0,1),(i==0)?square_alpha:square_alpha*((float)(4-i)/8.0f));
@@ -203,7 +168,7 @@ void render_squares(float square_alpha, bool game) {
 					glEnd();
 				}
 			} else {
-				if(c->shadow_tex!=-1) {
+				if(c->shadow_tex!=NULL) {
 					glLoadIdentity();
 					glTranslatef(c->x+2+dx,c->y+2+dy,0.011);
 					glRotatef(c->angle,0,0,1);
@@ -316,17 +281,20 @@ void update_squares(float s) {
 
 squarelist *check_collide(squarelist *player) {
 	squarelist *c=squarehead;
-	sgBox b1,b2;
-	b2.setMin(player->x-(player->size*themeinfo.scale),player->y-(player->size*themeinfo.scale),-1);
-	b2.setMax(player->x+(player->size*themeinfo.scale),player->y+(player->size*themeinfo.scale),1);
-	
+	Vector min1,max1,min2,max2;
+
+	min2=Vector(player->x-(player->size*themeinfo.scale),player->y-(player->size*themeinfo.scale),-1);
+	max2=Vector(player->x+(player->size*themeinfo.scale),player->y+(player->size*themeinfo.scale),1);
+
 	while(c!=NULL) {
 		if(c->deleted==1) { c=c->next; continue; }
 
 		if(c!=player) {
-			b1.setMin(c->x-(c->size*themeinfo.scale),c->y-(c->size*themeinfo.scale),-1);
-			b1.setMax(c->x+(c->size*themeinfo.scale),c->y+(c->size*themeinfo.scale),1);
-			if(b1.intersects(&b2)) {
+			min1=Vector(c->x-(c->size*themeinfo.scale),c->y-(c->size*themeinfo.scale),-1);
+			min2=Vector(c->x+(c->size*themeinfo.scale),c->y+(c->size*themeinfo.scale),1);
+			if(min1.x <= max2.x && max1.x >= min2.x &&
+		min1.y <= max2.y && max1.y >= min2.y &&
+		min1.z <= max2.z && max1.z >= min2.z) {
 				if(c!=NULL&&c->type>PLAYER_NET) {
 					c->deleted=1;
 					if(c->type==SCORE && powerup_mode!=EVIL) {
@@ -447,8 +415,8 @@ squarelist *create_square(int x, int y, int size, int type) {
 	c->tm=0;
 	c->id=square_pool++;
 	c->deleted=0;
-	c->tex=-1;
-	c->shadow_tex=-1;
+	c->tex=NULL;
+	c->shadow_tex=NULL;
 	switch(type) {
 		case SCORE:
 			if(themeinfo.score[0]!='\0') c->tex=score_tex;

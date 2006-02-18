@@ -160,7 +160,7 @@ int load_texture(char *fn3, int pos, bool trans)									// Load Bitmaps And Con
   int r,g,b,a,i;
   uint16 *t;
 #endif
-#ifdef DIRECTX
+#ifdef WIN32
 	pngInfo info;
 #endif
 #ifdef SDL
@@ -179,7 +179,7 @@ int load_texture(char *fn3, int pos, bool trans)									// Load Bitmaps And Con
     textures[pos].txr=texture_ram[pos];
 	glBindTexture(GL_TEXTURE_2D, textures[pos].txr);
 	//printf("fn2: %s\n",fn2);
-#ifdef DIRECTX
+#ifdef WIN32
 	if (pngLoad(fn2,PNG_NOMIPMAP, PNG_ALPHA, &info)) {
 #endif
 #ifdef SDL
@@ -191,7 +191,7 @@ int load_texture(char *fn3, int pos, bool trans)									// Load Bitmaps And Con
 floaded:
         if(1) {
 #endif
-#ifdef DIRECTX
+#ifdef WIN32
 		textures[pos].xsize=info.Width;
 		textures[pos].ysize=info.Height;
 #else
@@ -234,7 +234,7 @@ floaded:
           return -1;
         }
 
-#if defined(DREAMCAST) || defined(DIRECTX)
+#if defined(DREAMCAST) || defined(WIN32)
 	if (1)
 #else
 	if(TextureImage)

@@ -9,6 +9,7 @@
 
 #include "Tiki/tiki.h"
 #include "Tiki/genmenu.h"
+#include <Tiki/texture.h>
 #include <Tiki/drawables/label.h>
 #include <Tiki/anims/logxymover.h>
 

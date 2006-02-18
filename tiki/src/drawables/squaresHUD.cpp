@@ -11,6 +11,7 @@
 #include <Tiki/gl.h>
 #include <Tiki/drawable.h>
 #include <Tiki/tikitime.h>
+#include <Tiki/texture.h>
 
 using namespace Tiki;
 using namespace Tiki::GL;

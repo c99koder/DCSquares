@@ -1,70 +1,37 @@
-#ifdef DIRECTX
-#define UNICODE
-#endif
-#ifdef WIN32
-#include <windows.h>
-#include <atlconv.h>
-#endif
-#ifdef DIRECTX
-#include "dxutil.h"
-#include "dsutil.h"
-#endif
-#ifdef DREAMCAST
-#include <kos.h>
-#endif
-#ifdef MACOS
-#include <OpenGL/gl.h>
-#else
-#include <GL/gl.h>
-#endif
-#ifdef OPENAL
-#define AL_FORMAT_VORBIS_EXT 0x10003
-#include <AL/al.h>
-#include <AL/alut.h>
-#endif
-#ifdef SDL
-#include <SDL/SDL.h>
-#ifdef MACOS
-#include <SDL_mixer/SDL_mixer.h>
-#else
-#include <SDL/SDL_mixer.h>
-#endif
-#endif
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 #ifdef TIKI
 #include <Tiki/tiki.h>
 #include <Tiki/gl.h>
+#include <Tiki/texture.h>
 
 using namespace Tiki;
 using namespace Tiki::GL;
 #endif
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 #include "squares.h"
 #include "theme.h"
-#include "texture.h"
-#if !defined(TIKI) && (defined(DREAMCAST) || defined(SDL))
-#include "sys.h"
-#endif
 
-int loading_tex=15;
-int logo_tex=0;
-int game_tex=1;
-int stat_tex=2;
-int bg_tex=3;
-int score_tex=4;
-int enemy_tex=5;
-int invinc_tex=6;
-int slow_tex=7; 
-int mini_tex=8;
-int plus_tex=9;
-int evil_tex=10;
-int speed_tex=11;
-int minus_tex=12;
-int big_tex=13;
-int shadow_tex=14;
+Texture *loading_tex;
+Texture *logo_tex;
+Texture *game_tex;
+Texture *stat_tex;
+Texture *bg_tex;
+Texture *score_tex;
+Texture *enemy_tex;
+Texture *invinc_tex;
+Texture *slow_tex; 
+Texture *mini_tex;
+Texture *plus_tex;
+Texture *evil_tex;
+Texture *speed_tex;
+Texture *minus_tex;
+Texture *big_tex;
+Texture *shadow_tex;
+
 char dcs_theme[100];
 themeinfo_t themeinfo = {
 	"None",
@@ -77,56 +44,8 @@ themeinfo_t themeinfo = {
 };
 
 void MessageBox(char *title, char *msg);
-#ifdef OPENAL
-#include <sys/stat.h>
-ALuint buffers[6];
-ALuint sources[6];
 
-void addSource( int buffer, int loop ) {
-	alSource3f( sources[buffer] , AL_POSITION       , 0.0f , 0.0f , 0.0f );
-	alSource3f( sources[buffer] , AL_VELOCITY       , 0.0f , 0.0f , 0.0f );
-	alSource3f( sources[buffer] , AL_DIRECTION      , 0.0f , 0.0f , 0.0f );
-	alSourcef ( sources[buffer] , AL_ROLLOFF_FACTOR  , 0.0                );
-	alSourcei ( sources[buffer] , AL_SOURCE_RELATIVE , AL_TRUE            );
-	alSourcei(sources[buffer] , AL_LOOPING, loop);
-	alSourcei(sources[buffer] , AL_BUFFER , buffers[buffer]);  
-}
-
-void LoadOgg( char* inSoundFile, int buffer ) 
-{
-  void  *   ovdata  ;	
-  FILE  *   fh      ;
-  
-  fh = fopen( inSoundFile , "rb") ;
-  if( fh != NULL ) 
-  {
-    struct stat sbuf ;
-   
-    if( stat( inSoundFile , &sbuf ) != -1 ) 
-    {
-      ovdata = malloc( sbuf.st_size ) ;
-      if( ovdata != NULL )
-      {
-        fread( ovdata       ,
-               1            ,
-               sbuf.st_size , 
-               fh           ) ;
-        
-        alBufferData( buffers[buffer]               ,
-                      AL_FORMAT_VORBIS_EXT  ,
-                      ovdata                ,
-                      sbuf.st_size          ,
-                      1                     ) ;
-        
-        free( ovdata ) ;
-      }				 
-      fclose( fh ) ;
-    }	   
-  }
-}
-#endif
-
-void render_bg(int tex, float fade) {
+void render_bg(Texture *tex, float fade) {
 #ifdef DREAMCAST
   GLfloat uv[4]={1,1,0,0};
 #else
@@ -135,7 +54,7 @@ void render_bg(int tex, float fade) {
 	glEnable(GL_TEXTURE_2D);
 	glLoadIdentity();	
 	glColor3f(fade,fade,fade);
-	switch_tex(tex);
+	tex->select();
 	glBegin(GL_QUADS);
 	glTexCoord2f(0,uv[0]);
 	glVertex3f(0,0,0.0);
@@ -149,7 +68,7 @@ void render_bg(int tex, float fade) {
 	glDisable(GL_TEXTURE_2D);
 }
 
-void render_box(int x, int y, int w, int h, int tex, float fade) {
+void render_box(int x, int y, int w, int h, Texture *tex, float fade) {
 #ifdef DREAMCAST
   GLfloat uv[4]={1,1,0,0};
 #else
@@ -158,7 +77,7 @@ void render_box(int x, int y, int w, int h, int tex, float fade) {
 	glEnable(GL_TEXTURE_2D);
 	glLoadIdentity();	
 	glColor4f(1,1,1,fade);
-	switch_tex(tex);
+	tex->select();
 	glBegin(GL_QUADS);
 	glTexCoord2f(0,uv[0]);
 	glVertex3f(x,y,0.025);
@@ -172,11 +91,11 @@ void render_box(int x, int y, int w, int h, int tex, float fade) {
 	glDisable(GL_TEXTURE_2D);
 }
 
-void render_bg_game(int tex, float fade) {
+void render_bg_game(Texture *tex, float fade) {
 	glEnable(GL_TEXTURE_2D);
 	glLoadIdentity();	
 	glColor3f(fade,fade,fade);
-	switch_tex(tex);
+	tex->select();
 	glBegin(GL_QUADS);
 #ifndef DREAMCAST
 	glTexCoord2f(0,0);
@@ -255,11 +174,11 @@ void render_bg_game(int tex, float fade) {
 	glDisable(GL_TEXTURE_2D);
 }
 
-void render_bg_title(int tex, float fade) {
+void render_bg_title(Texture *tex, float fade) {
 	glEnable(GL_TEXTURE_2D);
 	glLoadIdentity();	
 	glColor3f(fade,fade,fade);
-	switch_tex(tex);
+	tex->select();
 	glBegin(GL_QUADS);
 #ifndef DREAMCAST
 	glTexCoord2f(0,0);
@@ -356,7 +275,7 @@ void render_bg_title(int tex, float fade) {
 	glDisable(GL_TEXTURE_2D);
 }
 
-void render_poly(int size, int tex, float fade) {
+void render_poly(int size, Texture *tex, float fade) {
 #ifdef DREAMCAST
   GLfloat uv[4]={1,1,0,0};
 #else
@@ -364,7 +283,7 @@ void render_poly(int size, int tex, float fade) {
 #endif
 	glEnable(GL_TEXTURE_2D);
 	glColor4f(1,1,1,fade);
-	switch_tex(tex);
+	tex->select();
 	glBegin(GL_QUADS);
 	glTexCoord2f(0,uv[0]);
 	glVertex3f(-size,-size,0.0);
@@ -388,29 +307,6 @@ extern "C" {
 void update_lcds();
 }
 #endif
-#ifdef SDL
-Mix_Chunk *powerup;
-Mix_Chunk *powerdown;
-Mix_Chunk *collect;
-Mix_Chunk *gameover;
-Mix_Music *bgm;
-Mix_Music *title;
-#endif
-#ifdef DIRECTX
-extern HDC hDC;
-extern HWND hWnd;
-extern CSoundManager *g_pSoundManager;
-CSound *powerup=NULL;
-CSound *powerdown=NULL;
-CSound *collect=NULL;
-CSound *gameover=NULL;
-
-void audio_init();
-void audio_shutdown();
-void play_bgm(LPCWSTR fn);
-void stop_bgm();
-void c99_show_cursor(bool r);
-#endif
 
 char *theme_dir(char *filename) {
   static char buf[256];
@@ -423,17 +319,6 @@ char *theme_dir(char *filename) {
 }
 
 int load_theme(char *theme, int sfx) {
-#ifdef DIRECTX
-	USES_CONVERSION;
-#endif
-#ifdef OPENAL
-    // Variables to load into.
-    ALenum format;
-    ALsizei size;
-    ALvoid* data;
-    ALsizei freq;
-    ALboolean loop;
-#endif
     FILE *f;
 	char buf[200];
 	char buf2[200];
@@ -495,7 +380,7 @@ int load_theme(char *theme, int sfx) {
 			return load_theme("goat",sfx);
 		} else {
 #ifdef WIN32
-			MessageBox(NULL,A2W("Cannot load default theme"),A2W("Error"),MB_OK|MB_ICONHAND);
+			MessageBox(NULL,"Cannot load default theme","Error",MB_OK|MB_ICONHAND);
 #endif
 #ifdef MACOS
 			//MessageBox("Error","Cannot load default theme");
@@ -774,7 +659,7 @@ int load_theme(char *theme, int sfx) {
 	}
 	fclose(f);
 #if defined(SDL) || defined(TIKI)
-	load_texture("loading",loading_tex,0);
+	loading_tex=new Texture("loading.png",false);
 	for(float x=0; x<=1; x+=0.015) {
 #ifdef TIKI
 		Frame::begin();
@@ -792,67 +677,26 @@ int load_theme(char *theme, int sfx) {
 #endif
 	}
 #endif
-	load_texture(theme_dir("game_bg"),game_tex,0);
-	load_texture(theme_dir("bg"),bg_tex,0);
-	load_texture(theme_dir("stat_bg"),stat_tex,0);
-	if(themeinfo.logo_w>0) load_texture(theme_dir("logo"),logo_tex,1);
-	if(themeinfo.score[0]!='\0') load_texture(theme_dir(themeinfo.score),score_tex,1);
-	if(themeinfo.invinc[0]!='\0') load_texture(theme_dir(themeinfo.invinc),invinc_tex,1);
-	if(themeinfo.plus1000[0]!='\0') load_texture(theme_dir(themeinfo.plus1000),plus_tex,1);
-	if(themeinfo.slowdown[0]!='\0') load_texture(theme_dir(themeinfo.slowdown),slow_tex,1);
-	if(themeinfo.minisquare[0]!='\0') load_texture(theme_dir(themeinfo.minisquare),mini_tex,1);
-	if(themeinfo.enemy[0]!='\0') load_texture(theme_dir(themeinfo.enemy),enemy_tex,1);
-	if(themeinfo.bigsquare[0]!='\0') load_texture(theme_dir(themeinfo.bigsquare),big_tex,1);
-	if(themeinfo.evil[0]!='\0') load_texture(theme_dir(themeinfo.evil),evil_tex,1);
-	if(themeinfo.minus1000[0]!='\0') load_texture(theme_dir(themeinfo.minus1000),minus_tex,1);
-	if(themeinfo.speedup[0]!='\0') load_texture(theme_dir(themeinfo.speedup),speed_tex,1);
-	if(themeinfo.powershadow[0]!='\0') load_texture(theme_dir(themeinfo.powershadow),shadow_tex,1);
-#ifdef SDL
-	powerup=Mix_LoadWAV(theme_dir("powerup.wav"));
-	powerdown=Mix_LoadWAV(theme_dir("powerdown.wav"));
-	collect=Mix_LoadWAV(theme_dir("collect.wav"));
-	gameover=Mix_LoadWAV(theme_dir("gameover.wav"));
-	bgm=Mix_LoadMUS(theme_dir("game.ogg"));
-	title=Mix_LoadMUS(theme_dir("title.ogg"));
-#endif
-#ifdef OPENAL
-	alGenBuffers(6, buffers);
-	alGenSources(6, sources);
-	alutLoadWAVFile((ALbyte *)theme_dir("collect.wav"), &format, &data, &size, &freq, &loop);
-  alBufferData(buffers[SND_COLLECT], format, data, size, freq);
-  alutUnloadWAV(format, data, size, freq);
-	addSource(SND_COLLECT,AL_FALSE);
-	alutLoadWAVFile((ALbyte *)theme_dir("powerup.wav"), &format, &data, &size, &freq, &loop);
-  alBufferData(buffers[SND_POWERUP], format, data, size, freq);
-  alutUnloadWAV(format, data, size, freq);
-	addSource(SND_POWERUP,AL_FALSE);
-	alutLoadWAVFile((ALbyte *)theme_dir("powerdown.wav"), &format, &data, &size, &freq, &loop);
-  alBufferData(buffers[SND_POWERDOWN], format, data, size, freq);
-  alutUnloadWAV(format, data, size, freq);
-	addSource(SND_POWERDOWN,AL_FALSE);
-	alutLoadWAVFile((ALbyte *)theme_dir("gameover.wav"), &format, &data, &size, &freq, &loop);
-  alBufferData(buffers[SND_GAMEOVER], format, data, size, freq);
-  alutUnloadWAV(format, data, size, freq);
-	addSource(SND_GAMEOVER,AL_FALSE);
-	LoadOgg(theme_dir("title.ogg"),SND_TITLE);
-	addSource(SND_TITLE,AL_TRUE);
-	LoadOgg(theme_dir("game.ogg"),SND_BGM);
-	addSource(SND_BGM,AL_TRUE);
-#endif
+	game_tex=new Texture(theme_dir("game_bg.png"),0);
+	bg_tex=new Texture(theme_dir("bg.png"),0);
+	stat_tex=new Texture(theme_dir("stat_bg.png"),0);
+	if(themeinfo.logo_w>0) logo_tex=new Texture(theme_dir("logo.png"),1);
+	if(themeinfo.score[0]!='\0') score_tex=new Texture(theme_dir(themeinfo.score),1);
+	if(themeinfo.invinc[0]!='\0') invinc_tex=new Texture(theme_dir(themeinfo.invinc),1);
+	if(themeinfo.plus1000[0]!='\0') plus_tex=new Texture(theme_dir(themeinfo.plus1000),1);
+	if(themeinfo.slowdown[0]!='\0') slow_tex=new Texture(theme_dir(themeinfo.slowdown),1);
+	if(themeinfo.minisquare[0]!='\0') mini_tex=new Texture(theme_dir(themeinfo.minisquare),1);
+	if(themeinfo.enemy[0]!='\0') enemy_tex=new Texture(theme_dir(themeinfo.enemy),1);
+	if(themeinfo.bigsquare[0]!='\0') big_tex=new Texture(theme_dir(themeinfo.bigsquare),1);
+	if(themeinfo.evil[0]!='\0') evil_tex=new Texture(theme_dir(themeinfo.evil),1);
+	if(themeinfo.minus1000[0]!='\0') minus_tex=new Texture(theme_dir(themeinfo.minus1000),1);
+	if(themeinfo.speedup[0]!='\0') speed_tex=new Texture(theme_dir(themeinfo.speedup),1);
+	if(themeinfo.powershadow[0]!='\0') shadow_tex=new Texture(theme_dir(themeinfo.powershadow),1);
 #ifdef DREAMCAST
 	powerup=snd_sfx_load(theme_dir("powerup.wav"));
 	powerdown=snd_sfx_load(theme_dir("powerdown.wav"));
 	collect=snd_sfx_load(theme_dir("collect.wav"));
 	gameover=snd_sfx_load(theme_dir("gameover.wav"));
-#endif
-#ifdef DIRECTX
-	if(sfx) {
-  USES_CONVERSION;
-  g_pSoundManager->Create( &powerup, A2W(theme_dir("powerup.wav")), 0, GUID_NULL );
-  g_pSoundManager->Create( &powerdown, A2W(theme_dir("powerdown.wav")), 0, GUID_NULL );
-  g_pSoundManager->Create( &collect, A2W(theme_dir("collect.wav")), 0, GUID_NULL );
-  g_pSoundManager->Create( &gameover, A2W(theme_dir("gameover.wav")), 0, GUID_NULL );
-	}
 #endif
 #if defined(SDL) || defined(TIKI)
 	for(float x=0; x<=1; x+=0.015) {
@@ -875,36 +719,10 @@ int load_theme(char *theme, int sfx) {
 }
 
 void unload_theme() {
-  clear_texture_cache();
-#ifdef SDL
-	Mix_FreeChunk(powerup);
-	Mix_FreeChunk(powerdown);
-	Mix_FreeChunk(collect);
-	Mix_FreeChunk(gameover);
-	Mix_FreeMusic(bgm);
-	Mix_FreeMusic(title);
-#endif
 #ifdef DREAMCAST
 	snd_sfx_unload(powerup);
 	snd_sfx_unload(powerdown);
 	snd_sfx_unload(collect);
 	snd_sfx_unload(gameover);
-#endif
-#ifdef OPENAL
-	for(int x=0; x<6; x++) {
-		alSourceStop(sources[x]);
-	}
-	alDeleteBuffers(6,buffers);
-	alDeleteSources(6,sources);
-#endif
-#ifdef DIRECTX
-  delete powerup;
-  delete powerdown;
-  delete gameover;
-  delete collect;
-  powerup=NULL;
-  powerdown=NULL;
-  gameover=NULL;
-  collect=NULL;
 #endif
 }
