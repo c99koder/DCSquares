@@ -92,6 +92,7 @@ void play_game(level_node *level) {
 		//if(current_level->players==1 && !check_win(game_gt,0))
 		//	sprintf(highcode,"GOAT-GOAT-GOAT");
 		delete gp;
+		if(quitting) return;
 		if(combo[0]>maxcombo[0]) maxcombo[0]=combo[0];
 		ls=new LevelStats();
 		//ls->init();
@@ -102,6 +103,7 @@ void play_game(level_node *level) {
 			current_level=current_level->next;
 		else
 			break;
+		if(quitting) return;
 	} while(current_level != NULL);
 	rank=score_list_rank(score[0]);
 	if(current_level->players==1 && rank <= 10) {
