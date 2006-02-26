@@ -85,7 +85,7 @@ int lobby_connect(char *host, char *username, char *password) {
   sinRemote.sin_family = AF_INET;
   sinRemote.sin_addr.s_addr = resolve((char *)host);
 	if(sinRemote.sin_addr.s_addr==0) return -1;
-  sinRemote.sin_port = htons(PORT);
+  sinRemote.sin_port = htonl(PORT);
   
   connect(lobbysocket, (struct sockaddr*)&sinRemote, sizeof(struct sockaddr_in));
 	
@@ -164,13 +164,13 @@ void process_chat_packet(snPacketType t, void *data) {
 
 			
 			snGameChallenge chal;
-			chal.gameid=htons(-1);
+			chal.gameid=htonl(-1);
 			strcpy(chal.user,((snChatInfo *)data)->data);
-			chal.squares=htons(10);
-			chal.score=htons(0);
-			chal.time=htons(60*3);
-			chal.win_mode=htons(MODE_SQUARES);
-			chal.lose_mode=htons(MODE_TIME);
+			chal.squares=htonl(10);
+			chal.score=htonl(0);
+			chal.time=htonl(60*3);
+			chal.win_mode=htonl(MODE_SQUARES);
+			chal.lose_mode=htonl(MODE_TIME);
 			
 			lobby_send(CHAN_GAME,GAME_CHALLENGE,sizeof(chal),&chal);
 			sprintf(buf,"Sending challenge to %s",chal.user);
@@ -216,7 +216,7 @@ void process_game_packet(snPacketType t, void *data) {
 			} else if(ntohs(((snGameChallenge *)data)->accept)==0) {
 				sprintf(buf,"Challenge recieved from %s",((snGameChallenge *)data)->user);
 				os_chat_insert_text(CHAN_GAME,buf);
-				((snGameChallenge *)data)->accept=htons(1);
+				((snGameChallenge *)data)->accept=htonl(1);
 				lobby_send(CHAN_GAME,GAME_CHALLENGE,sizeof(snGameChallenge),data);
 			} else { //-1 to reject
 				os_chat_insert_text(CHAN_GAME,"Challenge rejected");
@@ -264,10 +264,10 @@ void net_sendpacket(char *packet) {
 	struct sockaddr_in their_addr; // connector's address information
 	int numbytes;
 	char buf[256];
-	unsigned short int len=htons(strlen(packet));
+	unsigned short int len=htonl(strlen(packet));
 
 	their_addr.sin_family = AF_INET;     // host byte order
-	their_addr.sin_port = htons(PORT); // short, network byte order
+	their_addr.sin_port = htonl(PORT); // short, network byte order
 #ifdef MACOS
 	their_addr.sin_addr.s_addr = inet_addr("192.168.11.6"/*6*/);
 #endif
@@ -293,7 +293,7 @@ void netplay_init() {
 	}
 
 	my_addr.sin_family = AF_INET;         // host byte order
-	my_addr.sin_port = htons(PORT);     // short, network byte order
+	my_addr.sin_port = htonl(PORT);     // short, network byte order
 	my_addr.sin_addr.s_addr = INADDR_ANY; // automatically fill with my IP
 	memset(&(my_addr.sin_zero), '\0', 8); // zero the rest of the struct
 
