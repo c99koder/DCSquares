@@ -165,7 +165,7 @@ void process_chat_packet(snPacketType t, void *data) {
 			
 			snGameChallenge chal;
 			chal.gameid=htonl(-1);
-			strcpy(chal.user,((snChatJoin *)data)->user);
+			strcpy(chal.user,((snChatInfo *)data)->data);
 			chal.squares=htonl(10);
 			chal.score=htonl(0);
 			chal.time=htonl(60*3);
