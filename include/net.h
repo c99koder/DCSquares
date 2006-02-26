@@ -18,14 +18,5 @@ int lobby_connect(char *host, char *username, char *password);
 void lobby_update();
 void lobby_disconnect();
 void lobby_send(snChannel c, snPacketType t, int len, void *data);
-struct userlist_node {
-	char username[50];
-	struct userlist_node *next;
-};
-
-struct userlist_node *get_userlist();
-void add_user(char *username);
-int userlist_size();
-
-void os_chat_insert_text(char *text);
+void os_chat_insert_text(int channel, char *text);
 void os_chat_reload_users();

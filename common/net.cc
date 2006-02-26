@@ -36,9 +36,18 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#ifdef TIKI
+#include <Tiki/tiki.h>
+#include <Tiki/gl.h>
+#include <Tiki/texture.h>
+
+using namespace Tiki;
+using namespace Tiki::GL;
+#endif
 #include "squares.h"
 #include "http.h"
 #include "squarenet.h"
+#include "level.h"
 #include "net.h"
 
 #define PORT 6000
@@ -51,31 +60,7 @@ int sendsocket;
 struct squarelist *netplayer;
 snAuth AUTH;
 
-struct userlist_node *userlist=NULL;
-
-struct userlist_node *get_userlist() {
-	return userlist;
-}
-
-void add_user(char *username) {
-	struct userlist_node *current = new userlist_node;
-	
-	strcpy(current->username,username);
-	current->next=userlist;
-	userlist=current;
-}
-
-int userlist_size() {
-	struct userlist_node *current=userlist;
-	int count=0;
-	
-	while(current!=NULL) {
-		count++;
-		current=current->next;
-	}
-	
-	return count;
-}
+std::list<std::string> userlist;
 
 void lobby_send(snChannel chan, snPacketType type, int len, void *data) {
 	snPacket p;
@@ -153,7 +138,6 @@ void process_packet(snPacket p) {
 }		
 
 void process_server_packet(snPacketType t, void *data) {
-	char *val;
 	char buf[256];
 	
 	switch(t) {
@@ -163,35 +147,107 @@ void process_server_packet(snPacketType t, void *data) {
 			break;
 		case SERVER_MSG: //Server text message
 			sprintf(buf,"-- %s",data);
-			os_chat_insert_text(buf);
+			os_chat_insert_text(CHAN_SERVER,buf);
 			break;
 	}
 }
 
 void process_chat_packet(snPacketType t, void *data) {
-	char *val;
 	char buf[256];
 	
 	switch(t) {
 		case CHAT_INFO: //Room info
 			switch(((snChatInfo *)data)->infoType) {
 				case chatInfoUser: //User
-					add_user(((snChatInfo *)data)->data);
+					userlist.push_back(((snChatInfo *)data)->data);
 					os_chat_reload_users();
 					break;
 			}
 			break;
 		case CHAT_MSG: //User chat message
 			sprintf(buf,"<%s> %s",((snChatMsg *)data)->user,((snChatMsg *)data)->msg);
-			os_chat_insert_text(buf);
+			os_chat_insert_text(CHAN_CHAT,buf);
 			break;
 		case CHAT_JOIN: //User has joined channel
-			add_user(((snChatJoin *)data)->user);
+			userlist.push_back(((snChatJoin *)data)->user);
 			sprintf(buf,"*** %s has joined the room",((snChatJoin *)data)->user);
-			os_chat_insert_text(buf);
+			os_chat_insert_text(CHAN_CHAT,buf);
+			os_chat_reload_users();
+			
+			snGameChallenge chal;
+			chal.gameid=htonl(-1);
+			strcpy(chal.user,((snChatJoin *)data)->user);
+			chal.squares=htonl(10);
+			chal.score=htonl(0);
+			chal.time=htonl(60*3);
+			chal.win_mode=htonl(MODE_SQUARES);
+			chal.lose_mode=htonl(MODE_TIME);
+			
+			lobby_send(CHAN_GAME,GAME_CHALLENGE,sizeof(chal),&chal);
+			break;
+		case CHAT_PART: //User has parted channel
+			userlist.remove(((snChatJoin *)data)->user);
+			sprintf(buf,"*** %s has left the room",((snChatJoin *)data)->user);
+			os_chat_insert_text(CHAN_CHAT,buf);
 			os_chat_reload_users();
 			break;
 	}
+}
+
+void process_game_packet(snPacketType t, void *data) {
+	char *val;
+	squarelist *c;
+	char buf[256];
+
+	switch(t) {
+		case GAME_CHALLENGE:
+			if(ntohl(((snGameChallenge *)data)->accept)==1) {
+				multi_play->squares=ntohl(((snGameChallenge *)data)->squares);
+				multi_play->score=ntohl(((snGameChallenge *)data)->score);
+				multi_play->time=ntohl(((snGameChallenge *)data)->time);
+				multi_play->win_mode=ntohl(((snGameChallenge *)data)->win_mode);
+				multi_play->lose_mode=ntohl(((snGameChallenge *)data)->lose_mode);
+			} else if(ntohl(((snGameChallenge *)data)->accept)==0) {
+				((snGameChallenge *)data)->accept=htonl(1);
+				lobby_send(CHAN_GAME,GAME_CHALLENGE,sizeof(snGameChallenge),data);
+			} else { //-1 to reject
+			}
+			break;
+	}
+#if 0	
+	if(val[0]=='p') { //Network player's current coordinates
+		netplayer->x=atoi(strtok(NULL,","));
+		netplayer->y=atoi(strtok(NULL,","));
+		netplayer->size=atoi(strtok(NULL,","));
+		if(netplayer->size>12 || netplayer->size<0) debug(buf2);
+	}
+	if(val[0]=='c') { //Spawn a new square
+		x=atoi(strtok(NULL,","));
+		y=atoi(strtok(NULL,","));
+		size=atoi(strtok(NULL,","));
+		type=atoi(strtok(NULL,","));
+		id=atoi(strtok(NULL,","));
+		xv=atoi(strtok(NULL,","));
+		yv=atoi(strtok(NULL,","));
+		c=create_square(x,y,size,type);
+		if(c->id!=id) c->id=id;
+		c->xv=xv;
+		c->yv=yv;
+	}
+	if(val[0]=='g') { //Judgement!  Decide whether a remote player is allowed to collect a square by checking if we got to it first
+		c=get_square_by_id(atoi(strtok(NULL,",")));
+		if(c!=NULL) {
+			if(c->tm==0 || atoi(strtok(NULL,","))<c->tm) { //Remote player got the square first
+				c->deleted=1;
+				net_sendpacket("2:s"); //Send the acknowledgement
+				give_points(PLAYER_NET); //Update the remote player's score on our screen
+			}
+		}
+	}
+	if(val[0]=='s') { //Square collection acknowledgement
+		give_points(PLAYER1); //give ourselves some points
+	}
+#endif
 }
 
 #if 0
@@ -283,47 +339,5 @@ void net_update(void) {
   }
 } 
 
-void process_game_packet(char *buf) {
-	char *val;
-	squarelist *c;
-	int x,y,size,type,id,xv,yv;
-	char buf2[256];
-	//printf("Data: %s\n",buf);
-  strcpy(buf2,buf);
-	val=strtok(buf,",");
-	if(val[0]=='.') //Game is ready to start
-		paused=0;
-	if(val[0]=='p') { //Network player's current coordinates
-		netplayer->x=atoi(strtok(NULL,","));
-		netplayer->y=atoi(strtok(NULL,","));
-		netplayer->size=atoi(strtok(NULL,","));
-		if(netplayer->size>12 || netplayer->size<0) debug(buf2);
-	}
-	if(val[0]=='c') { //Spawn a new square
-		x=atoi(strtok(NULL,","));
-		y=atoi(strtok(NULL,","));
-		size=atoi(strtok(NULL,","));
-		type=atoi(strtok(NULL,","));
-		id=atoi(strtok(NULL,","));
-		xv=atoi(strtok(NULL,","));
-		yv=atoi(strtok(NULL,","));
-		c=create_square(x,y,size,type);
-		if(c->id!=id) c->id=id;
-		c->xv=xv;
-		c->yv=yv;
-	}
-	if(val[0]=='g') { //Judgement!  Decide whether a remote player is allowed to collect a square by checking if we got to it first
-		c=get_square_by_id(atoi(strtok(NULL,",")));
-		if(c!=NULL) {
-			if(c->tm==0 || atoi(strtok(NULL,","))<c->tm) { //Remote player got the square first
-				c->deleted=1;
-				net_sendpacket("2:s"); //Send the acknowledgement
-				give_points(PLAYER_NET); //Update the remote player's score on our screen
-			}
-		}
-	}
-	if(val[0]=='s') { //Square collection acknowledgement
-		give_points(PLAYER1); //give ourselves some points
-	}
-}
+
 #endif

@@ -23,7 +23,13 @@ enum snPacketType {
 	CHAT_INFO,
 	CHAT_JOIN,
 	CHAT_MSG,
-	CHAT_PART
+	CHAT_PART,
+	GAME_CHALLENGE,
+	GAME_START,
+	GAME_ADD,
+	GAME_MOVE,
+	GAME_WIN,
+	GAME_LOSE
 };
 
 struct snPacket {
@@ -53,6 +59,30 @@ struct snChatMsg {
 struct snChatJoin {
 	char user[16];
 } __PACKED__;
+
+struct snChatPart {
+	char user[16];
+} __PACKED__;
+
+struct snGameChallenge {
+	int gameid;
+	char user[16];
+	int squares;
+	int score;
+	int time;
+	int win_mode;
+	int lose_mode;
+	int accept;
+};
+
+struct snGameAdd {
+	float x,y;
+	float xv,yv;
+	float size;
+	int type;
+	int tm;
+	int id;
+};
 
 enum infoType_t { chatInfoUser, chatInfoTopic };
 

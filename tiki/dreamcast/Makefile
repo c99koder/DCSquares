@@ -1,5 +1,5 @@
 TIKI_BASE = /Users/sam/tiki
-OBJS = ../src/TitleScreen.o ../src/DCSMenu.o ../src/GamePlay.o ../src/LevelStats.o ../src/HighScores.o ../src/NameEntry.o ../src/MultiPlaySetup.o
+OBJS = ../src/TitleScreen.o ../src/DCSMenu.o ../src/GamePlay.o ../src/LevelStats.o ../src/HighScores.o ../src/NameEntry.o ../src/MultiPlaySetup.o ../src/HowToPlay.o
 OBJS += ../src/drawables/menuList.o ../src/drawables/playField.o ../src/drawables/squaresBg.o ../src/drawables/banna.o ../src/drawables/squaresHUD.o ../src/drawables/box.o
 OBJS += ../src/main.o ../../common/TikiSquares.o ../../common/squares.o ../../common/text.o ../../common/texture.o ../../common/score.o ../../common/hud.o ../../common/theme.o ../../common/game.o ../../common/rand.o ../../common/level.o #vmuify.o icon.o lcd.o snake.o romdisk.o
 OBJS += lcd.o romdisk.o

@@ -41,6 +41,7 @@ KOS_INIT_ROMDISK(romdisk);
 #include "score.h"
 #include "theme.h"
 #include "rand.h"
+#include "squarenet.h"
 
 using namespace Tiki;
 using namespace Tiki::Math;
@@ -55,6 +56,7 @@ using namespace Tiki::Hid;
 #include "NameEntry.h"
 #include "MultiPlaySetup.h"
 #include "HowToPlay.h"
+#include "NetworkLobby.h"
 
 extern float game_gt;
 extern char highcode[];
@@ -157,6 +159,11 @@ extern "C" int tiki_main(int argc, char **argv) {
 	score_list_init();
 	load_theme("goat",0);
 	srand(time(0));
+	
+	NetworkLobby *nl = new NetworkLobby("192.168.11.100","DJ Shibby","jay123");
+	nl->insertText(CHAN_GAME,"Connecting to lobby...");
+	nl->FadeIn();
+	nl->doMenu();
 	
 #ifdef DREAMCAST
 	sndoggvorbis_start(theme_dir("title.ogg"),1);
