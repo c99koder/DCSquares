@@ -258,6 +258,7 @@ void process_game_packet(snPacketType t, void *data) {
 			
 			strcpy(m.msg,"Can you hear me now?");
 			game_send(CHAN_CHAT,CHAT_MSG,sizeof(m),&m);
+			break;
 			
 		case GAME_CHALLENGE:
 			if(ntohl(((snGameChallenge *)data)->accept)==1) {
