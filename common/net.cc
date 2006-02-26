@@ -85,7 +85,7 @@ int lobby_connect(char *host, char *username, char *password) {
   sinRemote.sin_family = AF_INET;
   sinRemote.sin_addr.s_addr = resolve((char *)host);
 	if(sinRemote.sin_addr.s_addr==0) return -1;
-  sinRemote.sin_port = htonl(PORT);
+  sinRemote.sin_port = htons(PORT);
   
   connect(lobbysocket, (struct sockaddr*)&sinRemote, sizeof(struct sockaddr_in));
 	
@@ -205,15 +205,15 @@ void process_game_packet(snPacketType t, void *data) {
 
 	switch(t) {
 		case GAME_CHALLENGE:
-			if(ntohs(((snGameChallenge *)data)->accept)==1) {
-				multi_play->squares=ntohs(((snGameChallenge *)data)->squares);
-				multi_play->score=ntohs(((snGameChallenge *)data)->score);
-				multi_play->time=ntohs(((snGameChallenge *)data)->time);
-				multi_play->win_mode=ntohs(((snGameChallenge *)data)->win_mode);
-				multi_play->lose_mode=ntohs(((snGameChallenge *)data)->lose_mode);
+			if(ntohl(((snGameChallenge *)data)->accept)==1) {
+				multi_play->squares=ntohl(((snGameChallenge *)data)->squares);
+				multi_play->score=ntohl(((snGameChallenge *)data)->score);
+				multi_play->time=ntohl(((snGameChallenge *)data)->time);
+				multi_play->win_mode=ntohl(((snGameChallenge *)data)->win_mode);
+				multi_play->lose_mode=ntohl(((snGameChallenge *)data)->lose_mode);
 				sprintf(buf,"Accepted challenge!");
 				os_chat_insert_text(CHAN_GAME,buf);
-			} else if(ntohs(((snGameChallenge *)data)->accept)==0) {
+			} else if(ntohl(((snGameChallenge *)data)->accept)==0) {
 				sprintf(buf,"Challenge recieved from %s",((snGameChallenge *)data)->user);
 				os_chat_insert_text(CHAN_GAME,buf);
 				((snGameChallenge *)data)->accept=htonl(1);
