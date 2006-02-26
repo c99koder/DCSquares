@@ -22,6 +22,8 @@ using namespace Tiki::GL;
 #include "level.h"
 #include "squares.h"
 #include "theme.h"
+#include "squarenet.h"
+#include "net.h"
 
 extern RefPtr<Font> fnt;
 
@@ -61,6 +63,10 @@ void GamePlay::init() {
 				player[p]->r=130.0f/255.0f;
 				player[p]->g=0.0f/255.0f;			
 				player[p]->b=200.0f/255.0f;
+				if(current_level->net) {
+					netplayer=player[p];
+					netplayer->type=PLAYER_NET;
+				}
 				break;
 		}
 	}
@@ -106,6 +112,11 @@ void GamePlay::inputEvent(const Event & evt) {
 			if(!m_exiting) {
 				player[evt.port]->x=evt.x;
 				player[evt.port]->y=evt.y;
+				if(current_level->net) {
+					snGamePlayerMove m;
+					m.x=evt.x;
+					m.y=evt.y;
+					game_send(CHAN_GAME,GAME_PLAYERMOVE,sizeof(m),&m);
 			}
 			break;
 		case Event::EvtBtnPress:

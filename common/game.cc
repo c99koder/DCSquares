@@ -26,7 +26,7 @@ void add_squares(float st) {
 	
 	gt += st;
 	
-	if(gt-oldgt<(tickval/4.0f)) {
+	if(gt-oldgt<(tickval/4.0f) || current_level->net) {
 		return;
 	}
 

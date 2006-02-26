@@ -272,8 +272,10 @@ void render_score(float gt) {
 	}		
 
 	if(gt-oldgt>tickval) {
-		for(int p=0; p<current_level->players; p++) {
-			score[p]++;
+		if(current_level->net==0) {
+			for(int p=0; p<current_level->players; p++) {
+				score[p]++;
+			}
 		}
 		oldgt=gt;
 	}

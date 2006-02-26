@@ -242,6 +242,8 @@ void process_chat_packet(snPacketType t, void *data) {
 	}
 }
 
+void play_game(level_node *level);
+
 void process_game_packet(snPacketType t, void *data) {
 	char *val;
 	squarelist *c;
@@ -253,8 +255,7 @@ void process_game_packet(snPacketType t, void *data) {
 			
 			strcpy(remote_host,((snGameStart *)data)->host);
 			
-			strcpy(m.msg,"Can you hear me now?");
-			game_send(CHAN_CHAT,CHAT_MSG,sizeof(m),&m);
+			play_game(multi_play);
 			break;
 			
 		case GAME_CHALLENGE:
@@ -281,6 +282,11 @@ void process_game_packet(snPacketType t, void *data) {
 			} else { //-1 to reject
 				os_chat_insert_text(CHAN_GAME,"Challenge rejected");
 			}
+			break;
+		
+		case GAME_PLAYERMOVE:
+			netplayer->x=ntohl(((snGamePlayerMove *)data)->x);
+			netplayer->y=ntohl(((snGamePlayerMove *)data)->y);			
 			break;
 	}
 #if 0	

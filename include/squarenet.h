@@ -27,7 +27,7 @@ enum snPacketType {
 	GAME_CHALLENGE,
 	GAME_START,
 	GAME_ADD,
-	GAME_MOVE,
+	GAME_PLAYERMOVE,
 	GAME_WIN,
 	GAME_LOSE
 };
@@ -79,6 +79,10 @@ struct snGameStart {
 	int gameid;
 	char host[20];
 	int r, g, b;
+} __PACKED__;
+
+struct snGamePlayerMove {
+	int x,y;
 } __PACKED__;
 
 struct snGameAdd {
