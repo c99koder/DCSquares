@@ -274,7 +274,7 @@ void process_game_packet(snPacketType t, void *data) {
 				gs.r=htonl(rand()%255);
 				gs.g=htonl(rand()%255);
 				gs.b=htonl(rand()%255);
-				lobby_send(CHAN_GAME,GAME_START,sizeof(gs),&gs);
+				lobby_send(CHAN_GAME,GAME_START,sizeof(snGameStart),&gs);
 			} else if(ntohl(((snGameChallenge *)data)->accept)==0) {
 				sprintf(buf,"Challenge recieved from %s",((snGameChallenge *)data)->user);
 				os_chat_insert_text(CHAN_GAME,buf);

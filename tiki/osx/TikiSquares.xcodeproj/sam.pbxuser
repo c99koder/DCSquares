@@ -479,7 +479,7 @@
 		fRef = 22EC3F3F09A8EE4A00938C38 /* net.cc */;
 		name = "net.cc: 214";
 		rLen = 0;
-		rLoc = 6960;
+		rLoc = 6969;
 		rType = 0;
 		vrLen = 1752;
 		vrLoc = 3642;
@@ -489,7 +489,7 @@
 		fRef = 22EC3F3F09A8EE4A00938C38 /* net.cc */;
 		name = "net.cc: 214";
 		rLen = 0;
-		rLoc = 6960;
+		rLoc = 6969;
 		rType = 0;
 		vrLen = 1715;
 		vrLoc = 4205;
@@ -499,7 +499,7 @@
 		fRef = 22EC3F3F09A8EE4A00938C38 /* net.cc */;
 		name = "net.cc: 214";
 		rLen = 0;
-		rLoc = 6960;
+		rLoc = 6969;
 		rType = 0;
 		vrLen = 337;
 		vrLoc = 4205;
@@ -509,7 +509,7 @@
 		fRef = 22EC3F3F09A8EE4A00938C38 /* net.cc */;
 		name = "net.cc: 214";
 		rLen = 0;
-		rLoc = 6960;
+		rLoc = 6969;
 		rType = 0;
 		vrLen = 337;
 		vrLoc = 4205;
@@ -519,7 +519,7 @@
 		fRef = 22EC3F3F09A8EE4A00938C38 /* net.cc */;
 		name = "net.cc: 214";
 		rLen = 0;
-		rLoc = 6960;
+		rLoc = 6969;
 		rType = 0;
 		vrLen = 1580;
 		vrLoc = 3206;
@@ -529,7 +529,7 @@
 		fRef = 22EC3F3F09A8EE4A00938C38 /* net.cc */;
 		name = "net.cc: 214";
 		rLen = 0;
-		rLoc = 6960;
+		rLoc = 6969;
 		rType = 0;
 		vrLen = 314;
 		vrLoc = 4205;
@@ -539,7 +539,7 @@
 		fRef = 22EC3F3F09A8EE4A00938C38 /* net.cc */;
 		name = "net.cc: 351";
 		rLen = 0;
-		rLoc = 8461;
+		rLoc = 8470;
 		rType = 0;
 		vrLen = 1548;
 		vrLoc = 3206;
@@ -549,7 +549,7 @@
 		fRef = 22EC3F3F09A8EE4A00938C38 /* net.cc */;
 		name = "net.cc: 351";
 		rLen = 0;
-		rLoc = 8461;
+		rLoc = 8470;
 		rType = 0;
 		vrLen = 1481;
 		vrLoc = 3206;
@@ -559,7 +559,7 @@
 		fRef = 22EC3F3F09A8EE4A00938C38 /* net.cc */;
 		name = "net.cc: 351";
 		rLen = 0;
-		rLoc = 8461;
+		rLoc = 8470;
 		rType = 0;
 		vrLen = 354;
 		vrLoc = 4243;
@@ -569,7 +569,7 @@
 		fRef = 22EC3F3F09A8EE4A00938C38 /* net.cc */;
 		name = "net.cc: 353";
 		rLen = 0;
-		rLoc = 8459;
+		rLoc = 8468;
 		rType = 0;
 		vrLen = 1407;
 		vrLoc = 3202;
@@ -579,7 +579,7 @@
 		fRef = 22EC3F3F09A8EE4A00938C38 /* net.cc */;
 		name = "net.cc: 353";
 		rLen = 0;
-		rLoc = 8459;
+		rLoc = 8468;
 		rType = 0;
 		vrLen = 388;
 		vrLoc = 4175;
@@ -589,7 +589,7 @@
 		fRef = 22EC3F3F09A8EE4A00938C38 /* net.cc */;
 		name = "net.cc: 353";
 		rLen = 0;
-		rLoc = 8459;
+		rLoc = 8468;
 		rType = 0;
 		vrLen = 1407;
 		vrLoc = 3202;
@@ -599,7 +599,7 @@
 		fRef = 22EC3F3F09A8EE4A00938C38 /* net.cc */;
 		name = "net.cc: 353";
 		rLen = 0;
-		rLoc = 8459;
+		rLoc = 8468;
 		rType = 0;
 		vrLen = 388;
 		vrLoc = 4175;
@@ -609,7 +609,7 @@
 		fRef = 22EC3F3F09A8EE4A00938C38 /* net.cc */;
 		name = "net.cc: 353";
 		rLen = 0;
-		rLoc = 8459;
+		rLoc = 8468;
 		rType = 0;
 		vrLen = 388;
 		vrLoc = 4175;
@@ -619,7 +619,7 @@
 		fRef = 22EC3F3F09A8EE4A00938C38 /* net.cc */;
 		name = "net.cc: 353";
 		rLen = 0;
-		rLoc = 8459;
+		rLoc = 8468;
 		rType = 0;
 		vrLen = 388;
 		vrLoc = 4175;
@@ -629,7 +629,7 @@
 		fRef = 22EC3F3F09A8EE4A00938C38 /* net.cc */;
 		name = "net.cc: 353";
 		rLen = 0;
-		rLoc = 8459;
+		rLoc = 8468;
 		rType = 0;
 		vrLen = 1407;
 		vrLoc = 3202;
@@ -639,7 +639,7 @@
 		fRef = 22EC3F3F09A8EE4A00938C38 /* net.cc */;
 		name = "net.cc: 353";
 		rLen = 0;
-		rLoc = 8459;
+		rLoc = 8468;
 		rType = 0;
 		vrLen = 388;
 		vrLoc = 4175;
@@ -649,7 +649,7 @@
 		fRef = 22EC3F3F09A8EE4A00938C38 /* net.cc */;
 		name = "net.cc: 353";
 		rLen = 0;
-		rLoc = 8459;
+		rLoc = 8468;
 		rType = 0;
 		vrLen = 1407;
 		vrLoc = 3202;
@@ -659,7 +659,7 @@
 		fRef = 22EC3F3F09A8EE4A00938C38 /* net.cc */;
 		name = "net.cc: 353";
 		rLen = 0;
-		rLoc = 8459;
+		rLoc = 8468;
 		rType = 0;
 		vrLen = 239;
 		vrLoc = 4175;
@@ -669,7 +669,7 @@
 		fRef = 22EC3F3F09A8EE4A00938C38 /* net.cc */;
 		name = "net.cc: 353";
 		rLen = 0;
-		rLoc = 8459;
+		rLoc = 8468;
 		rType = 0;
 		vrLen = 1407;
 		vrLoc = 3202;
@@ -679,7 +679,7 @@
 		fRef = 22EC3F3F09A8EE4A00938C38 /* net.cc */;
 		name = "net.cc: 353";
 		rLen = 0;
-		rLoc = 8459;
+		rLoc = 8468;
 		rType = 0;
 		vrLen = 239;
 		vrLoc = 4175;
@@ -689,7 +689,7 @@
 		fRef = 22EC3F3F09A8EE4A00938C38 /* net.cc */;
 		name = "net.cc: 353";
 		rLen = 0;
-		rLoc = 8459;
+		rLoc = 8468;
 		rType = 0;
 		vrLen = 1407;
 		vrLoc = 3202;
@@ -699,7 +699,7 @@
 		fRef = 22EC3F3F09A8EE4A00938C38 /* net.cc */;
 		name = "net.cc: 353";
 		rLen = 0;
-		rLoc = 8459;
+		rLoc = 8468;
 		rType = 0;
 		vrLen = 239;
 		vrLoc = 4175;
@@ -709,7 +709,7 @@
 		fRef = 22EC3F3F09A8EE4A00938C38 /* net.cc */;
 		name = "net.cc: 353";
 		rLen = 0;
-		rLoc = 8459;
+		rLoc = 8468;
 		rType = 0;
 		vrLen = 239;
 		vrLoc = 4175;
@@ -719,7 +719,7 @@
 		fRef = 22EC3F3F09A8EE4A00938C38 /* net.cc */;
 		name = "net.cc: 353";
 		rLen = 0;
-		rLoc = 8459;
+		rLoc = 8468;
 		rType = 0;
 		vrLen = 1278;
 		vrLoc = 3202;
@@ -729,7 +729,7 @@
 		fRef = 22EC3F3F09A8EE4A00938C38 /* net.cc */;
 		name = "net.cc: 353";
 		rLen = 0;
-		rLoc = 8459;
+		rLoc = 8468;
 		rType = 0;
 		vrLen = 239;
 		vrLoc = 4175;
@@ -779,7 +779,7 @@
 		fRef = 22EC3F3F09A8EE4A00938C38 /* net.cc */;
 		name = "net.cc: 314";
 		rLen = 0;
-		rLoc = 8458;
+		rLoc = 8467;
 		rType = 0;
 		vrLen = 2119;
 		vrLoc = 4793;
@@ -789,7 +789,7 @@
 		fRef = 22EC3F3F09A8EE4A00938C38 /* net.cc */;
 		name = "net.cc: 214";
 		rLen = 0;
-		rLoc = 6919;
+		rLoc = 6928;
 		rType = 0;
 		vrLen = 2078;
 		vrLoc = 3850;
@@ -819,7 +819,7 @@
 		fRef = 22EC3F3F09A8EE4A00938C38 /* net.cc */;
 		name = "net.cc: 215";
 		rLen = 0;
-		rLoc = 6919;
+		rLoc = 6928;
 		rType = 0;
 		vrLen = 2070;
 		vrLoc = 3850;
@@ -859,7 +859,7 @@
 		fRef = 22EC3F3F09A8EE4A00938C38 /* net.cc */;
 		name = "net.cc: process_game_packet";
 		rLen = 0;
-		rLoc = 6919;
+		rLoc = 6928;
 		rType = 0;
 		vrLen = 1382;
 		vrLoc = 4502;
@@ -899,7 +899,7 @@
 		fRef = 22EC3F3F09A8EE4A00938C38 /* net.cc */;
 		name = "net.cc: 314";
 		rLen = 0;
-		rLoc = 8458;
+		rLoc = 8467;
 		rType = 0;
 		vrLen = 2112;
 		vrLoc = 6160;
@@ -919,7 +919,7 @@
 		fRef = 22EC3F3F09A8EE4A00938C38 /* net.cc */;
 		name = "net.cc: 314";
 		rLen = 0;
-		rLoc = 8458;
+		rLoc = 8467;
 		rType = 0;
 		vrLen = 2119;
 		vrLoc = 4793;
@@ -949,10 +949,50 @@
 		fRef = 22EC3F3F09A8EE4A00938C38 /* net.cc */;
 		name = "net.cc: 323";
 		rLen = 0;
-		rLoc = 8459;
+		rLoc = 8468;
 		rType = 0;
 		vrLen = 205;
 		vrLoc = 4115;
+	};
+	22132C7809B253910082876A /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 22EC3F3F09A8EE4A00938C38 /* net.cc */;
+		name = "net.cc: 257";
+		rLen = 0;
+		rLoc = 6107;
+		rType = 0;
+		vrLen = 2062;
+		vrLoc = 5183;
+	};
+	22132C7909B253940082876A /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 22EC3F3F09A8EE4A00938C38 /* net.cc */;
+		name = "net.cc: 257";
+		rLen = 0;
+		rLoc = 6107;
+		rType = 0;
+		vrLen = 2076;
+		vrLoc = 5241;
+	};
+	22132C7A09B253940082876A /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 22EC3F3F09A8EE4A00938C38 /* net.cc */;
+		name = "net.cc: 257";
+		rLen = 0;
+		rLoc = 6107;
+		rType = 0;
+		vrLen = 776;
+		vrLoc = 5183;
+	};
+	22132C7E09B254280082876A /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 22EC3F3F09A8EE4A00938C38 /* net.cc */;
+		name = "net.cc: 257";
+		rLen = 0;
+		rLoc = 6107;
+		rType = 0;
+		vrLen = 776;
+		vrLoc = 5183;
 	};
 	222FC2EE0953AE4E009582BD /* game.cc */ = {
 		uiCtxt = {
@@ -2143,9 +2183,9 @@
 	};
 	22EC3F3F09A8EE4A00938C38 /* net.cc */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1032, 4522}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1033, 4522}}";
 			sepNavSelRange = "{6107, 0}";
-			sepNavVisRect = "{{0, 3140}, {1032, 814}}";
+			sepNavVisRect = "{{0, 3136}, {1033, 330}}";
 		};
 	};
 	22EC3F4B09A8EE7F00938C38 /* PBXTextBookmark */ = {
@@ -3260,6 +3300,10 @@
 			22132C6D09B2536A0082876A /* PBXTextBookmark */ = 22132C6D09B2536A0082876A /* PBXTextBookmark */;
 			22132C6E09B2536A0082876A /* PBXTextBookmark */ = 22132C6E09B2536A0082876A /* PBXTextBookmark */;
 			22132C6F09B2536A0082876A /* PBXTextBookmark */ = 22132C6F09B2536A0082876A /* PBXTextBookmark */;
+			22132C7809B253910082876A /* PBXTextBookmark */ = 22132C7809B253910082876A /* PBXTextBookmark */;
+			22132C7909B253940082876A /* PBXTextBookmark */ = 22132C7909B253940082876A /* PBXTextBookmark */;
+			22132C7A09B253940082876A /* PBXTextBookmark */ = 22132C7A09B253940082876A /* PBXTextBookmark */;
+			22132C7E09B254280082876A /* PBXTextBookmark */ = 22132C7E09B254280082876A /* PBXTextBookmark */;
 			222FC3000953C5C4009582BD = 222FC3000953C5C4009582BD /* PBXTextBookmark */;
 			222FC3030953C5C4009582BD = 222FC3030953C5C4009582BD /* PBXTextBookmark */;
 			222FC3040953C5C4009582BD = 222FC3040953C5C4009582BD /* PBXTextBookmark */;
