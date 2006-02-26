@@ -54,9 +54,8 @@ using namespace Tiki::GL;
 
 void debug(char *msg);
 
-int lobbysocket;
-int gamesocket;
-int sendsocket;
+SOCKET lobbysocket;
+SOCKET gamesocket;
 char remote_host[20];
 struct squarelist *netplayer;
 snAuth AUTH;
@@ -73,10 +72,12 @@ void game_send(snChannel chan, snPacketType type, int len, void *data) {
 	memcpy(p.data,data,len);
 	
 	their_addr.sin_family = AF_INET;
-	their_addr.sin_port = htonl(PORT);
+	their_addr.sin_port = htons(PORT);
 	their_addr.sin_addr.s_addr = inet_addr(remote_host);
 
-	sendto(sendsocket, (char *)&p, sizeof(p), 0,(struct sockaddr *)&their_addr, sizeof(struct sockaddr));
+	if(sendto(gamesocket, (char *)&p, sizeof(p), 0,(struct sockaddr *)&their_addr, sizeof(struct sockaddr)) == -1) {
+		perror("sendto");
+	}
 }
 
 void lobby_send(snChannel chan, snPacketType type, int len, void *data) {
@@ -115,13 +116,9 @@ int lobby_connect(char *host, char *username, char *password) {
 		perror("socket");
 		exit(1);
 	}
-	if ((sendsocket = socket(AF_INET, SOCK_DGRAM, 0)) == -1) {
-		perror("socket");
-		exit(1);
-	}
 	
 	my_addr.sin_family = AF_INET;         // host byte order
-	my_addr.sin_port = htonl(PORT);     // short, network byte order
+	my_addr.sin_port = htons(PORT);     // short, network byte order
 	my_addr.sin_addr.s_addr = INADDR_ANY; // automatically fill with my IP
 	memset(&(my_addr.sin_zero), '\0', 8); // zero the rest of the struct
 	
