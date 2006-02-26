@@ -215,6 +215,9 @@
 				RelativePath="..\..\common\game.cc">
 			</File>
 			<File
+				RelativePath="..\..\common\http.cc">
+			</File>
+			<File
 				RelativePath="..\..\common\hud.cc">
 			</File>
 			<File
@@ -222,6 +225,9 @@
 			</File>
 			<File
 				RelativePath="..\src\main.cc">
+			</File>
+			<File
+				RelativePath="..\..\common\net.cc">
 			</File>
 			<File
 				RelativePath="..\..\common\rand.cc">
@@ -286,6 +292,12 @@
 			</File>
 			<File
 				RelativePath="..\src\NameEntry.h">
+			</File>
+			<File
+				RelativePath="..\src\NetworkLobby.cpp">
+			</File>
+			<File
+				RelativePath="..\src\NetworkLobby.h">
 			</File>
 			<File
 				RelativePath="..\src\TitleScreen.cpp">
