@@ -132,8 +132,8 @@ void process_packet(snPacket p) {
 			process_chat_packet(p.type,p.data);
 			break;
 		case CHAN_GAME: //Channel 2: Game Data
-		//process_game_packet(strtok(NULL,"\0"));
-		break;
+			process_game_packet(p.type,p.data);
+			break;
 	}	
 }		
 
@@ -161,18 +161,7 @@ void process_chat_packet(snPacketType t, void *data) {
 				case chatInfoUser: //User
 					userlist.push_back(((snChatInfo *)data)->data);
 					os_chat_reload_users();
-					break;
-			}
-			break;
-		case CHAT_MSG: //User chat message
-			sprintf(buf,"<%s> %s",((snChatMsg *)data)->user,((snChatMsg *)data)->msg);
-			os_chat_insert_text(CHAN_CHAT,buf);
-			break;
-		case CHAT_JOIN: //User has joined channel
-			userlist.push_back(((snChatJoin *)data)->user);
-			sprintf(buf,"*** %s has joined the room",((snChatJoin *)data)->user);
-			os_chat_insert_text(CHAN_CHAT,buf);
-			os_chat_reload_users();
+
 			
 			snGameChallenge chal;
 			chal.gameid=htonl(-1);
@@ -186,6 +175,19 @@ void process_chat_packet(snPacketType t, void *data) {
 			lobby_send(CHAN_GAME,GAME_CHALLENGE,sizeof(chal),&chal);
 			sprintf(buf,"Sending challenge to %s",chal.user);
 			os_chat_insert_text(CHAN_GAME,buf);
+
+					break;
+			}
+			break;
+		case CHAT_MSG: //User chat message
+			sprintf(buf,"<%s> %s",((snChatMsg *)data)->user,((snChatMsg *)data)->msg);
+			os_chat_insert_text(CHAN_CHAT,buf);
+			break;
+		case CHAT_JOIN: //User has joined channel
+			userlist.push_back(((snChatJoin *)data)->user);
+			sprintf(buf,"*** %s has joined the room",((snChatJoin *)data)->user);
+			os_chat_insert_text(CHAN_CHAT,buf);
+			os_chat_reload_users();
 			break;
 		case CHAT_PART: //User has parted channel
 			userlist.remove(((snChatJoin *)data)->user);
