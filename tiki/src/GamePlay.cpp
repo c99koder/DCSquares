@@ -32,6 +32,7 @@ extern themeinfo_t themeinfo;
 
 extern int score[],combo[],squares[],maxcombo[],powerup_mode;
 extern squarelist *player[];
+extern squarelist *netplayer;
 extern float game_gt;
 bool gameFadingOut;
 extern int dmloser;
@@ -117,6 +118,7 @@ void GamePlay::inputEvent(const Event & evt) {
 					m.x=evt.x;
 					m.y=evt.y;
 					game_send(CHAN_GAME,GAME_PLAYERMOVE,sizeof(m),&m);
+				}
 			}
 			break;
 		case Event::EvtBtnPress:
