@@ -166,7 +166,7 @@ void NetworkLobby::inputEvent(const Event & evt) {
 }
 
 void NetworkLobby::controlPerFrame() {
-	lobby_update();
+	net_update();
 }
 
 void os_chat_insert_text(int channel, char *text) {

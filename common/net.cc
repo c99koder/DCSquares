@@ -57,10 +57,27 @@ void debug(char *msg);
 int lobbysocket;
 int gamesocket;
 int sendsocket;
+char remote_host[20];
 struct squarelist *netplayer;
 snAuth AUTH;
 
 std::list<std::string> userlist;
+
+void game_send(snChannel chan, snPacketType type, int len, void *data) {
+	struct sockaddr_in their_addr; // connector's address information
+	snPacket p;
+  memset(&p,0,sizeof(p));
+	
+	p.chan=(snChannel)htonl(chan);
+	p.type=(snPacketType)htonl(type);
+	memcpy(p.data,data,len);
+	
+	their_addr.sin_family = AF_INET;
+	their_addr.sin_port = htonl(PORT);
+	their_addr.sin_addr.s_addr = inet_addr(remote_host);
+
+	sendto(sendsocket, (char *)&p, sizeof(p), 0,(struct sockaddr *)&their_addr, sizeof(struct sockaddr));
+}
 
 void lobby_send(snChannel chan, snPacketType type, int len, void *data) {
 	snPacket p;
@@ -75,6 +92,8 @@ void lobby_send(snChannel chan, snPacketType type, int len, void *data) {
 
 int lobby_connect(char *host, char *username, char *password) {
   struct sockaddr_in sinRemote;
+	struct sockaddr_in my_addr;    // my address information
+	
   char msg[300];
 	int r;
 	
@@ -91,9 +110,29 @@ int lobby_connect(char *host, char *username, char *password) {
 	
 	strcpy(AUTH.user,username);
 	strcpy(AUTH.pass,password);
+
+	if ((gamesocket = socket(AF_INET, SOCK_DGRAM, 0)) == -1) {
+		perror("socket");
+		exit(1);
+	}
+	if ((sendsocket = socket(AF_INET, SOCK_DGRAM, 0)) == -1) {
+		perror("socket");
+		exit(1);
+	}
+	
+	my_addr.sin_family = AF_INET;         // host byte order
+	my_addr.sin_port = htonl(PORT);     // short, network byte order
+	my_addr.sin_addr.s_addr = INADDR_ANY; // automatically fill with my IP
+	memset(&(my_addr.sin_zero), '\0', 8); // zero the rest of the struct
+	
+	if (bind(gamesocket, (struct sockaddr *)&my_addr,sizeof(struct sockaddr)) == -1) {
+		perror("bind");
+		exit(1);
+	}
+	
 }	
 
-void lobby_update() {
+void net_update() {
 	int r;
 	snPacket p;
 	timeval tv;
@@ -111,6 +150,16 @@ void lobby_update() {
 		r=recv(lobbysocket,(char *)&p,sizeof(snPacket),0);
 		process_packet(p);
 	}
+	
+	FD_ZERO(&readfds);
+	FD_SET(gamesocket, &readfds);
+
+	select(gamesocket+1, &readfds, NULL, NULL, &tv);
+	
+	if (FD_ISSET(gamesocket, &readfds)) {
+		r=recv(gamesocket,(char *)&p,sizeof(snPacket),0);
+		process_packet(p);
+  }
 }
 
 void lobby_disconnect() {
@@ -161,21 +210,19 @@ void process_chat_packet(snPacketType t, void *data) {
 				case chatInfoUser: //User
 					userlist.push_back(((snChatInfo *)data)->data);
 					os_chat_reload_users();
-
 			
-			snGameChallenge chal;
-			chal.gameid=htonl(-1);
-			strcpy(chal.user,((snChatInfo *)data)->data);
-			chal.squares=htonl(10);
-			chal.score=htonl(0);
-			chal.time=htonl(60*3);
-			chal.win_mode=htonl(MODE_SQUARES);
-			chal.lose_mode=htonl(MODE_TIME);
-			
-			lobby_send(CHAN_GAME,GAME_CHALLENGE,sizeof(chal),&chal);
-			sprintf(buf,"Sending challenge to %s",chal.user);
-			os_chat_insert_text(CHAN_GAME,buf);
-
+					snGameChallenge chal;
+					chal.gameid=htonl(-1);
+					strcpy(chal.user,((snChatInfo *)data)->data);
+					chal.squares=htonl(10);
+					chal.score=htonl(0);
+					chal.time=htonl(60*3);
+					chal.win_mode=htonl(MODE_SQUARES);
+					chal.lose_mode=htonl(MODE_TIME);
+					
+					lobby_send(CHAN_GAME,GAME_CHALLENGE,sizeof(chal),&chal);
+					sprintf(buf,"Sending challenge to %s",chal.user);
+					os_chat_insert_text(CHAN_GAME,buf);
 					break;
 			}
 			break;
@@ -204,6 +251,14 @@ void process_game_packet(snPacketType t, void *data) {
 	char buf[256];
 
 	switch(t) {
+		case GAME_START:
+			snChatMsg m;
+			
+			strcpy(remote_host,((snGameStart *)data)->host);
+			
+			strcpy(m.msg,"Can you hear me now?");
+			game_send(CHAN_CHAT,CHAT_MSG,sizeof(m),&m);
+			
 		case GAME_CHALLENGE:
 			if(ntohl(((snGameChallenge *)data)->accept)==1) {
 				multi_play->squares=ntohl(((snGameChallenge *)data)->squares);
@@ -211,8 +266,15 @@ void process_game_packet(snPacketType t, void *data) {
 				multi_play->time=ntohl(((snGameChallenge *)data)->time);
 				multi_play->win_mode=ntohl(((snGameChallenge *)data)->win_mode);
 				multi_play->lose_mode=ntohl(((snGameChallenge *)data)->lose_mode);
+				multi_play->net=1;
 				sprintf(buf,"Accepted challenge!");
 				os_chat_insert_text(CHAN_GAME,buf);
+				snGameStart gs;
+				gs.gameid=((snGameChallenge *)data)->gameid;
+				gs.r=htonl(rand()%255);
+				gs.g=htonl(rand()%255);
+				gs.b=htonl(rand()%255);
+				lobby_send(CHAN_GAME,GAME_START,sizeof(gs),&gs);
 			} else if(ntohl(((snGameChallenge *)data)->accept)==0) {
 				sprintf(buf,"Challenge recieved from %s",((snGameChallenge *)data)->user);
 				os_chat_insert_text(CHAN_GAME,buf);
@@ -258,95 +320,3 @@ void process_game_packet(snPacketType t, void *data) {
 	}
 #endif
 }
-
-#if 0
-void net_sendpacket(char *packet) {
-	struct sockaddr_in their_addr; // connector's address information
-	int numbytes;
-	char buf[256];
-	unsigned short int len=htonl(strlen(packet));
-
-	their_addr.sin_family = AF_INET;     // host byte order
-	their_addr.sin_port = htonl(PORT); // short, network byte order
-#ifdef MACOS
-	their_addr.sin_addr.s_addr = inet_addr("192.168.11.6"/*6*/);
-#endif
-#ifdef DREAMCAST
-	their_addr.sin_addr.s_addr = inet_addr("192.168.11.103");
-#endif
-  memset(buf,0,128);
-	strcpy(buf,packet);
-	sendto(gamesocket, buf, 128, 0,(struct sockaddr *)&their_addr, sizeof(struct sockaddr));
-}
-extern int paused;
-
-void netplay_init() {
-	struct sockaddr_in my_addr;    // my address information
-
-	if ((gamesocket = socket(AF_INET, SOCK_DGRAM, 0)) == -1) {
-			perror("socket");
-			exit(1);
-	}
-	if ((sendsocket = socket(AF_INET, SOCK_DGRAM, 0)) == -1) {
-			perror("socket");
-			exit(1);
-	}
-
-	my_addr.sin_family = AF_INET;         // host byte order
-	my_addr.sin_port = htonl(PORT);     // short, network byte order
-	my_addr.sin_addr.s_addr = INADDR_ANY; // automatically fill with my IP
-	memset(&(my_addr.sin_zero), '\0', 8); // zero the rest of the struct
-
-	if (bind(gamesocket, (struct sockaddr *)&my_addr,
-																				sizeof(struct sockaddr)) == -1) {
-			perror("bind");
-			exit(1);
-	}
-	debug("Hello Debug");
-	//Create the remote network player object
-	netplayer=create_square(40,40,10,PLAYER_NET);
-	netplayer->r=0;
-	netplayer->g=0;
-	netplayer->b=0.8;
-	netplayer->angle=0;
-#ifdef DREAMCAST
-  paused=1; //pause the Dreamcast so it waits for the Mac to start the game
-#endif
-#ifdef MACOS
-  net_sendpacket("2:."); //Send the message to the Dreamcast telling it we're ready to play!
-#endif
-}
-
-void give_points(int who);
-
-void net_update(void) {
-	struct sockaddr_in their_addr; // connector's address information
-	int addr_len, numbytes;
-	char buf[256];
-	char *val;
-	squarelist *c;
-	unsigned short int len;
-	
-	timeval tv;
-	fd_set readfds;
-		
-	tv.tv_sec = 0;
-	tv.tv_usec = 0;
-
-	FD_ZERO(&readfds);
-	FD_SET(gamesocket, &readfds);
-  //printf("Select\n");
-	// don't care about writefds and exceptfds:
-	select(gamesocket+1, &readfds, NULL, NULL, &tv);
-
-	if (FD_ISSET(gamesocket, &readfds)) {
-	  //printf("Recieve\n");
-		addr_len = sizeof(struct sockaddr);
-		numbytes=recvfrom(gamesocket,buf,128,0,(struct sockaddr *)&their_addr, &addr_len);
-		buf[numbytes] = '\0';
-		process_packet(buf);
-  }
-} 
-
-
-#endif

@@ -73,7 +73,13 @@ struct snGameChallenge {
 	int win_mode;
 	int lose_mode;
 	int accept;
-};
+} __PACKED__;
+
+struct snGameStart {
+	int gameid;
+	char host[20];
+	int r, g, b;
+} __PACKED__;
 
 struct snGameAdd {
 	float x,y;
@@ -82,7 +88,7 @@ struct snGameAdd {
 	int type;
 	int tm;
 	int id;
-};
+} __PACKED__;
 
 enum infoType_t { chatInfoUser, chatInfoTopic };
 
