@@ -139,6 +139,18 @@ extern "C" int tiki_main(int argc, char **argv) {
 	//Tiki::GL::showCursor(false);
 	Hid::callbackReg(tkCallback, NULL);
 
+#if TIKI_PLAT==TIKI_WIN32 //init winsock
+		WORD sockVersion;
+	WSADATA wsaData;
+	int nret;
+
+	sockVersion = MAKEWORD(1, 1);			// We'd like Winsock version 1.1
+
+
+	// We begin by initializing Winsock
+	WSAStartup(sockVersion, &wsaData);
+#endif
+
 #ifdef DREAMCAST
   //arch_set_exit_path(ARCH_EXIT_MENU);
   fs_chdir("/rd");
@@ -160,7 +172,11 @@ extern "C" int tiki_main(int argc, char **argv) {
 	load_theme("goat",0);
 	srand(time(0));
 	
+#if TIKI_PLAT == TIKI_WIN32
+	NetworkLobby *nl = new NetworkLobby("192.168.11.100","c99koder","027325");
+#else
 	NetworkLobby *nl = new NetworkLobby("192.168.11.100","DJ Shibby","jay123");
+#endif
 	nl->insertText(CHAN_GAME,"Connecting to lobby...");
 	nl->FadeIn();
 	nl->doMenu();

@@ -184,6 +184,8 @@ void process_chat_packet(snPacketType t, void *data) {
 			chal.lose_mode=htonl(MODE_TIME);
 			
 			lobby_send(CHAN_GAME,GAME_CHALLENGE,sizeof(chal),&chal);
+			sprintf(buf,"Sending challenge to %s",chal.user);
+			os_chat_insert_text(CHAN_GAME,buf);
 			break;
 		case CHAT_PART: //User has parted channel
 			userlist.remove(((snChatJoin *)data)->user);
@@ -207,10 +209,15 @@ void process_game_packet(snPacketType t, void *data) {
 				multi_play->time=ntohl(((snGameChallenge *)data)->time);
 				multi_play->win_mode=ntohl(((snGameChallenge *)data)->win_mode);
 				multi_play->lose_mode=ntohl(((snGameChallenge *)data)->lose_mode);
+				sprintf(buf,"Accepted challenge!");
+				os_chat_insert_text(CHAN_GAME,buf);
 			} else if(ntohl(((snGameChallenge *)data)->accept)==0) {
+				sprintf(buf,"Challenge recieved from %s",((snGameChallenge *)data)->user);
+				os_chat_insert_text(CHAN_GAME,buf);
 				((snGameChallenge *)data)->accept=htonl(1);
 				lobby_send(CHAN_GAME,GAME_CHALLENGE,sizeof(snGameChallenge),data);
 			} else { //-1 to reject
+				os_chat_insert_text(CHAN_GAME,"Challenge rejected");
 			}
 			break;
 	}
