@@ -164,13 +164,13 @@ void process_chat_packet(snPacketType t, void *data) {
 
 			
 			snGameChallenge chal;
-			chal.gameid=htonl(-1);
+			chal.gameid=htons(-1);
 			strcpy(chal.user,((snChatInfo *)data)->data);
-			chal.squares=htonl(10);
-			chal.score=htonl(0);
-			chal.time=htonl(60*3);
-			chal.win_mode=htonl(MODE_SQUARES);
-			chal.lose_mode=htonl(MODE_TIME);
+			chal.squares=htons(10);
+			chal.score=htons(0);
+			chal.time=htons(60*3);
+			chal.win_mode=htons(MODE_SQUARES);
+			chal.lose_mode=htons(MODE_TIME);
 			
 			lobby_send(CHAN_GAME,GAME_CHALLENGE,sizeof(chal),&chal);
 			sprintf(buf,"Sending challenge to %s",chal.user);
@@ -205,18 +205,18 @@ void process_game_packet(snPacketType t, void *data) {
 
 	switch(t) {
 		case GAME_CHALLENGE:
-			if(ntohl(((snGameChallenge *)data)->accept)==1) {
-				multi_play->squares=ntohl(((snGameChallenge *)data)->squares);
-				multi_play->score=ntohl(((snGameChallenge *)data)->score);
-				multi_play->time=ntohl(((snGameChallenge *)data)->time);
-				multi_play->win_mode=ntohl(((snGameChallenge *)data)->win_mode);
-				multi_play->lose_mode=ntohl(((snGameChallenge *)data)->lose_mode);
+			if(ntohs(((snGameChallenge *)data)->accept)==1) {
+				multi_play->squares=ntohs(((snGameChallenge *)data)->squares);
+				multi_play->score=ntohs(((snGameChallenge *)data)->score);
+				multi_play->time=ntohs(((snGameChallenge *)data)->time);
+				multi_play->win_mode=ntohs(((snGameChallenge *)data)->win_mode);
+				multi_play->lose_mode=ntohs(((snGameChallenge *)data)->lose_mode);
 				sprintf(buf,"Accepted challenge!");
 				os_chat_insert_text(CHAN_GAME,buf);
-			} else if(ntohl(((snGameChallenge *)data)->accept)==0) {
+			} else if(ntohs(((snGameChallenge *)data)->accept)==0) {
 				sprintf(buf,"Challenge recieved from %s",((snGameChallenge *)data)->user);
 				os_chat_insert_text(CHAN_GAME,buf);
-				((snGameChallenge *)data)->accept=htonl(1);
+				((snGameChallenge *)data)->accept=htons(1);
 				lobby_send(CHAN_GAME,GAME_CHALLENGE,sizeof(snGameChallenge),data);
 			} else { //-1 to reject
 				os_chat_insert_text(CHAN_GAME,"Challenge rejected");
