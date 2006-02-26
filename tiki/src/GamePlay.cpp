@@ -102,6 +102,10 @@ void GamePlay::controlPerFrame() {
 			m_exitSpeed=1.0f/30.0f;
 		}
 	}
+
+	if(current_level->net) {
+		net_update();
+	}
 }
 
 void GamePlay::inputEvent(const Event & evt) {
@@ -115,9 +119,9 @@ void GamePlay::inputEvent(const Event & evt) {
 				player[evt.port]->y=evt.y;
 				if(current_level->net) {
 					snGamePlayerMove m;
-					m.x=evt.x;
-					m.y=evt.y;
-					game_send(CHAN_GAME,GAME_PLAYERMOVE,sizeof(m),&m);
+					m.x=htonl(evt.x);
+					m.y=htonl(evt.y);
+					game_send(CHAN_GAME,GAME_PLAYERMOVE,sizeof(snGamePlayerMove),&m);
 				}
 			}
 			break;
