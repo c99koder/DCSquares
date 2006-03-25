@@ -213,7 +213,7 @@ void process_chat_packet(snPacketType t, void *data) {
 					strcpy(chal.user,((snChatInfo *)data)->data);
 					chal.squares=htonl(10);
 					chal.score=htonl(0);
-					chal.time=htonl(60*3);
+					chal.time=htonl(30);//60*3);
 					chal.win_mode=htonl(MODE_SQUARES);
 					chal.lose_mode=htonl(MODE_TIME);
 					
@@ -285,12 +285,14 @@ void process_game_packet(snPacketType t, void *data) {
 			break;
 		
 		case GAME_PLAYERMOVE:
-			netplayer->x=ntohl(((snGamePlayerMove *)data)->x);
-			netplayer->y=ntohl(((snGamePlayerMove *)data)->y);			
+			if(netplayer!=NULL) {
+				netplayer->x=ntohl(((snGamePlayerMove *)data)->x);
+				netplayer->y=ntohl(((snGamePlayerMove *)data)->y);
+			}
 			break;
 	}
 #if 0	
-	if(val[0]=='p') { //Network player's current coordinates
+	if(val[0]=='p' && netplayer!=NULL) { //Network player's current coordinates
 		netplayer->x=atoi(strtok(NULL,","));
 		netplayer->y=atoi(strtok(NULL,","));
 		netplayer->size=atoi(strtok(NULL,","));
