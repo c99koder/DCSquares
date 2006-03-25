@@ -74,6 +74,8 @@ void tkCallback(const Hid::Event & evt, void * data) {
 #endif
 }
 
+extern squarelist *netplayer;
+
 void play_game(level_node *level) {
 	GamePlay *gp;
 	LevelStats *ls;
@@ -94,6 +96,7 @@ void play_game(level_node *level) {
 		//if(current_level->players==1 && !check_win(game_gt,0))
 		//	sprintf(highcode,"GOAT-GOAT-GOAT");
 		delete gp;
+		netplayer=NULL;
 		if(quitting) return;
 		if(combo[0]>maxcombo[0]) maxcombo[0]=combo[0];
 		ls=new LevelStats();
