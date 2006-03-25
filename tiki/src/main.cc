@@ -172,14 +172,14 @@ extern "C" int tiki_main(int argc, char **argv) {
 	load_theme("goat",0);
 	srand(time(0));
 	
-#if TIKI_PLAT == TIKI_WIN32
-	//NetworkLobby *nl = new NetworkLobby("192.168.11.100","c99koder","027325");
+#if TIKI_PLAT == TIKI_MACOSX
+	NetworkLobby *nl = new NetworkLobby("192.168.11.100","c99koder","027325");
 #else
-	//NetworkLobby *nl = new NetworkLobby("192.168.11.100","DJ Shibby","jay123");
+	NetworkLobby *nl = new NetworkLobby("192.168.11.100","DJ Shibby","jay123");
 #endif
-	//nl->insertText(CHAN_GAME,"Connecting to lobby...");
-	//nl->FadeIn();
-	//nl->doMenu();
+	nl->insertText(CHAN_GAME,"Connecting to lobby...");
+	nl->FadeIn();
+	nl->doMenu();
 	
 #ifdef DREAMCAST
 	sndoggvorbis_start(theme_dir("title.ogg"),1);
