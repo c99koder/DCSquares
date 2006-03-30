@@ -1,0 +1,635 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		220695750823590E00D46540 /* MyOpenGLView.h in Headers */ = {isa = PBXBuildFile; fileRef = F53AD7FF029DEC3C01CA2123 /* MyOpenGLView.h */; };
+		2206957E0823590E00D46540 /* WindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FE5E43B0767733600278B04 /* WindowController.h */; };
+		2206957F0823590E00D46540 /* Preferences.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FE5E4990767DD6A00278B04 /* Preferences.h */; };
+		220695800823590E00D46540 /* UpdateChecker.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F157B700770C63F00B0A66A /* UpdateChecker.h */; };
+		220695810823590E00D46540 /* ScoreController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F29FE890808A7780019E209 /* ScoreController.h */; };
+		220695820823590E00D46540 /* Scores.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F29FE8B0808A7780019E209 /* Scores.h */; };
+		220695830823590E00D46540 /* WSGeneratedObj.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F29FE8D0808A7780019E209 /* WSGeneratedObj.h */; };
+		220695850823590E00D46540 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
+		220695880823590E00D46540 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 4F157B2A0770B83F00B0A66A /* icon.icns */; };
+		220695890823590E00D46540 /* DCSquares.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F157B930770D5AE00B0A66A /* DCSquares.plist */; };
+		2206958C0823590E00D46540 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.mm */; settings = {ATTRIBUTES = (); }; };
+		2206958D0823590E00D46540 /* MyOpenGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F0718CC07669C1F00827E7D /* MyOpenGLView.mm */; };
+		220695950823590E00D46540 /* texture.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F0719520766B1A200827E7D /* texture.mm */; };
+		220695960823590E00D46540 /* WindowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4FE5E43C0767733600278B04 /* WindowController.mm */; };
+		220695970823590E00D46540 /* Preferences.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4FE5E4980767DD6A00278B04 /* Preferences.mm */; };
+		220695980823590E00D46540 /* UpdateChecker.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F157B710770C63F00B0A66A /* UpdateChecker.mm */; };
+		2206959A0823590E00D46540 /* ScoreController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F29FE8A0808A7780019E209 /* ScoreController.mm */; };
+		2206959B0823590E00D46540 /* Scores.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F29FE8C0808A7780019E209 /* Scores.mm */; };
+		2206959C0823590E00D46540 /* WSGeneratedObj.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F29FE8E0808A7780019E209 /* WSGeneratedObj.mm */; };
+		2206959E0823590E00D46540 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		2206959F0823590E00D46540 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F53AD7DA029DE94301CA2123 /* OpenGL.framework */; };
+		2211E45508364ABF0059F43E /* font.h in Headers */ = {isa = PBXBuildFile; fileRef = 2211E44B08364ABF0059F43E /* font.h */; };
+		2211E45608364AC00059F43E /* game.h in Headers */ = {isa = PBXBuildFile; fileRef = 2211E44C08364ABF0059F43E /* game.h */; };
+		2211E45708364AC00059F43E /* hud.h in Headers */ = {isa = PBXBuildFile; fileRef = 2211E44D08364ABF0059F43E /* hud.h */; };
+		2211E45808364AC00059F43E /* input.h in Headers */ = {isa = PBXBuildFile; fileRef = 2211E44E08364ABF0059F43E /* input.h */; };
+		2211E45908364AC00059F43E /* rand.h in Headers */ = {isa = PBXBuildFile; fileRef = 2211E44F08364ABF0059F43E /* rand.h */; };
+		2211E45A08364AC00059F43E /* score.h in Headers */ = {isa = PBXBuildFile; fileRef = 2211E45008364ABF0059F43E /* score.h */; };
+		2211E45B08364AC00059F43E /* squares.h in Headers */ = {isa = PBXBuildFile; fileRef = 2211E45108364ABF0059F43E /* squares.h */; };
+		2211E45C08364AC00059F43E /* text.h in Headers */ = {isa = PBXBuildFile; fileRef = 2211E45208364ABF0059F43E /* text.h */; };
+		2211E45D08364AC00059F43E /* texture.h in Headers */ = {isa = PBXBuildFile; fileRef = 2211E45308364ABF0059F43E /* texture.h */; };
+		2211E45E08364AC00059F43E /* theme.h in Headers */ = {isa = PBXBuildFile; fileRef = 2211E45408364ABF0059F43E /* theme.h */; };
+		2245F47C0829608F0008B01F /* game.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2245F4720829608F0008B01F /* game.cc */; };
+		2245F47D0829608F0008B01F /* http.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2245F4730829608F0008B01F /* http.cc */; };
+		2245F47E0829608F0008B01F /* hud.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2245F4740829608F0008B01F /* hud.cc */; };
+		2245F47F0829608F0008B01F /* net.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2245F4750829608F0008B01F /* net.cc */; };
+		2245F4810829608F0008B01F /* rand.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2245F4770829608F0008B01F /* rand.cc */; };
+		2245F4820829608F0008B01F /* score.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2245F4780829608F0008B01F /* score.cc */; };
+		2245F4830829608F0008B01F /* squares.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2245F4790829608F0008B01F /* squares.cc */; };
+		2245F4840829608F0008B01F /* text.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2245F47A0829608F0008B01F /* text.cc */; };
+		2245F4850829608F0008B01F /* theme.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2245F47B0829608F0008B01F /* theme.cc */; };
+		226EBC2C083BD3A6005D5ECC /* level.cc in Sources */ = {isa = PBXBuildFile; fileRef = 226EBC2A083BD3A6005D5ECC /* level.cc */; };
+		22764ACC085A471C0073B672 /* level.h in Headers */ = {isa = PBXBuildFile; fileRef = 22764ACA085A471C0073B672 /* level.h */; };
+		22764ACD085A471C0073B672 /* net.h in Headers */ = {isa = PBXBuildFile; fileRef = 22764ACB085A471C0073B672 /* net.h */; };
+		22764B91085A6BDA0073B672 /* ChatController.h in Headers */ = {isa = PBXBuildFile; fileRef = 22764B8F085A6BDA0073B672 /* ChatController.h */; };
+		22764B92085A6BDA0073B672 /* ChatController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 22764B90085A6BDA0073B672 /* ChatController.mm */; };
+		22941ACE0864852D009C8957 /* openal.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22941ACD0864852D009C8957 /* openal.dylib */; };
+		22941AD70864858F009C8957 /* openal.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22941ACD0864852D009C8957 /* openal.dylib */; };
+		22E07E53099E444B002A2AFC /* themes in Resources */ = {isa = PBXBuildFile; fileRef = 22E07E37099E444B002A2AFC /* themes */; };
+		22E07E54099E444B002A2AFC /* loading.png in Resources */ = {isa = PBXBuildFile; fileRef = 22E07E51099E444B002A2AFC /* loading.png */; };
+		22E07E55099E444B002A2AFC /* VeraBd.txf in Resources */ = {isa = PBXBuildFile; fileRef = 22E07E52099E444B002A2AFC /* VeraBd.txf */; };
+		22E07F33099E5516002A2AFC /* squarenet.h in Headers */ = {isa = PBXBuildFile; fileRef = 22E07F32099E5515002A2AFC /* squarenet.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildStyle section */
+		4A9504CCFFE6A4B311CA0CBA /* Development */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				OPTIMIZATION_CFLAGS = "-O0";
+				ZERO_LINK = NO;
+			};
+			name = Development;
+		};
+		4A9504CDFFE6A4B311CA0CBA /* Deployment */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+/* End PBXBuildStyle section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		220695A30823590E00D46540 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+				22941AD70864858F009C8957 /* openal.dylib in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		220695A50823590E00D46540 /* Info.plist */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 30; path = Info.plist; sourceTree = "<group>"; };
+		220695A60823590F00D46540 /* DCSquares.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DCSquares.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2211E44B08364ABF0059F43E /* font.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = font.h; path = ../include/font.h; sourceTree = SOURCE_ROOT; };
+		2211E44C08364ABF0059F43E /* game.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = game.h; path = ../include/game.h; sourceTree = SOURCE_ROOT; };
+		2211E44D08364ABF0059F43E /* hud.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = hud.h; path = ../include/hud.h; sourceTree = SOURCE_ROOT; };
+		2211E44E08364ABF0059F43E /* input.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = input.h; path = ../include/input.h; sourceTree = SOURCE_ROOT; };
+		2211E44F08364ABF0059F43E /* rand.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = rand.h; path = ../include/rand.h; sourceTree = SOURCE_ROOT; };
+		2211E45008364ABF0059F43E /* score.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = score.h; path = ../include/score.h; sourceTree = SOURCE_ROOT; };
+		2211E45108364ABF0059F43E /* squares.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = squares.h; path = ../include/squares.h; sourceTree = SOURCE_ROOT; };
+		2211E45208364ABF0059F43E /* text.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = text.h; path = ../include/text.h; sourceTree = SOURCE_ROOT; };
+		2211E45308364ABF0059F43E /* texture.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = texture.h; path = ../include/texture.h; sourceTree = SOURCE_ROOT; };
+		2211E45408364ABF0059F43E /* theme.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = theme.h; path = ../include/theme.h; sourceTree = SOURCE_ROOT; };
+		2245F4720829608F0008B01F /* game.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = game.cc; path = ../common/game.cc; sourceTree = SOURCE_ROOT; };
+		2245F4730829608F0008B01F /* http.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = http.cc; path = ../common/http.cc; sourceTree = SOURCE_ROOT; };
+		2245F4740829608F0008B01F /* hud.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = hud.cc; path = ../common/hud.cc; sourceTree = SOURCE_ROOT; };
+		2245F4750829608F0008B01F /* net.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = net.cc; path = ../common/net.cc; sourceTree = SOURCE_ROOT; };
+		2245F4770829608F0008B01F /* rand.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = rand.cc; path = ../common/rand.cc; sourceTree = SOURCE_ROOT; };
+		2245F4780829608F0008B01F /* score.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = score.cc; path = ../common/score.cc; sourceTree = SOURCE_ROOT; };
+		2245F4790829608F0008B01F /* squares.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = squares.cc; path = ../common/squares.cc; sourceTree = SOURCE_ROOT; };
+		2245F47A0829608F0008B01F /* text.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = text.cc; path = ../common/text.cc; sourceTree = SOURCE_ROOT; };
+		2245F47B0829608F0008B01F /* theme.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = theme.cc; path = ../common/theme.cc; sourceTree = SOURCE_ROOT; };
+		226EBC2A083BD3A6005D5ECC /* level.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = level.cc; path = ../common/level.cc; sourceTree = SOURCE_ROOT; };
+		22764ACA085A471C0073B672 /* level.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = level.h; path = ../include/level.h; sourceTree = SOURCE_ROOT; };
+		22764ACB085A471C0073B672 /* net.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = net.h; path = ../include/net.h; sourceTree = SOURCE_ROOT; };
+		22764B8F085A6BDA0073B672 /* ChatController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ChatController.h; sourceTree = "<group>"; };
+		22764B90085A6BDA0073B672 /* ChatController.mm */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.objcpp; path = ChatController.mm; sourceTree = "<group>"; };
+		22941ACD0864852D009C8957 /* openal.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = openal.dylib; sourceTree = "<group>"; };
+		22E07E37099E444B002A2AFC /* themes */ = {isa = PBXFileReference; lastKnownFileType = folder; name = themes; path = ../goat/themes; sourceTree = SOURCE_ROOT; };
+		22E07E51099E444B002A2AFC /* loading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = loading.png; path = ../goat/loading.png; sourceTree = SOURCE_ROOT; };
+		22E07E52099E444B002A2AFC /* VeraBd.txf */ = {isa = PBXFileReference; lastKnownFileType = file; name = VeraBd.txf; path = ../goat/VeraBd.txf; sourceTree = SOURCE_ROOT; };
+		22E07F32099E5515002A2AFC /* squarenet.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = squarenet.h; path = ../include/squarenet.h; sourceTree = SOURCE_ROOT; };
+		29B97316FDCFA39411CA2CEA /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
+		29B97319FDCFA39411CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
+		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		4F0718CC07669C1F00827E7D /* MyOpenGLView.mm */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.objcpp; path = MyOpenGLView.mm; sourceTree = "<group>"; };
+		4F0719520766B1A200827E7D /* texture.mm */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.objcpp; path = texture.mm; sourceTree = "<group>"; };
+		4F157B2A0770B83F00B0A66A /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
+		4F157B700770C63F00B0A66A /* UpdateChecker.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = UpdateChecker.h; sourceTree = "<group>"; };
+		4F157B710770C63F00B0A66A /* UpdateChecker.mm */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.objcpp; path = UpdateChecker.mm; sourceTree = "<group>"; };
+		4F157B930770D5AE00B0A66A /* DCSquares.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xml; path = DCSquares.plist; sourceTree = "<group>"; };
+		4F29FE890808A7780019E209 /* ScoreController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ScoreController.h; sourceTree = "<group>"; };
+		4F29FE8A0808A7780019E209 /* ScoreController.mm */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.objcpp; path = ScoreController.mm; sourceTree = "<group>"; };
+		4F29FE8B0808A7780019E209 /* Scores.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Scores.h; sourceTree = "<group>"; };
+		4F29FE8C0808A7780019E209 /* Scores.mm */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.objcpp; path = Scores.mm; sourceTree = "<group>"; };
+		4F29FE8D0808A7780019E209 /* WSGeneratedObj.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = WSGeneratedObj.h; sourceTree = "<group>"; };
+		4F29FE8E0808A7780019E209 /* WSGeneratedObj.mm */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.objcpp; path = WSGeneratedObj.mm; sourceTree = "<group>"; };
+		4FE5E43B0767733600278B04 /* WindowController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = WindowController.h; sourceTree = "<group>"; };
+		4FE5E43C0767733600278B04 /* WindowController.mm */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.objcpp; path = WindowController.mm; sourceTree = "<group>"; };
+		4FE5E4980767DD6A00278B04 /* Preferences.mm */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.objcpp; path = Preferences.mm; sourceTree = "<group>"; };
+		4FE5E4990767DD6A00278B04 /* Preferences.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Preferences.h; sourceTree = "<group>"; };
+		F53AD7DA029DE94301CA2123 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		F53AD7FF029DEC3C01CA2123 /* MyOpenGLView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyOpenGLView.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2206959D0823590E00D46540 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2206959E0823590E00D46540 /* Cocoa.framework in Frameworks */,
+				2206959F0823590E00D46540 /* OpenGL.framework in Frameworks */,
+				22941ACE0864852D009C8957 /* openal.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				4F29FE890808A7780019E209 /* ScoreController.h */,
+				4F29FE8A0808A7780019E209 /* ScoreController.mm */,
+				4F29FE8B0808A7780019E209 /* Scores.h */,
+				4F29FE8C0808A7780019E209 /* Scores.mm */,
+				4F29FE8D0808A7780019E209 /* WSGeneratedObj.h */,
+				4F29FE8E0808A7780019E209 /* WSGeneratedObj.mm */,
+				4F157B700770C63F00B0A66A /* UpdateChecker.h */,
+				4F157B710770C63F00B0A66A /* UpdateChecker.mm */,
+				4FE5E43B0767733600278B04 /* WindowController.h */,
+				4FE5E43C0767733600278B04 /* WindowController.mm */,
+				4FE5E4980767DD6A00278B04 /* Preferences.mm */,
+				4FE5E4990767DD6A00278B04 /* Preferences.h */,
+				F53AD7FF029DEC3C01CA2123 /* MyOpenGLView.h */,
+				4F0718CC07669C1F00827E7D /* MyOpenGLView.mm */,
+				22764B8F085A6BDA0073B672 /* ChatController.h */,
+				22764B90085A6BDA0073B672 /* ChatController.mm */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+				F53AD7DA029DE94301CA2123 /* OpenGL.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				220695A60823590F00D46540 /* DCSquares.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* CocoaGL */ = {
+			isa = PBXGroup;
+			children = (
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+				220695A50823590E00D46540 /* Info.plist */,
+			);
+			name = CocoaGL;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				22E07F32099E5515002A2AFC /* squarenet.h */,
+				22764ACA085A471C0073B672 /* level.h */,
+				22764ACB085A471C0073B672 /* net.h */,
+				2211E44B08364ABF0059F43E /* font.h */,
+				2211E44C08364ABF0059F43E /* game.h */,
+				2211E44D08364ABF0059F43E /* hud.h */,
+				2211E44E08364ABF0059F43E /* input.h */,
+				2211E44F08364ABF0059F43E /* rand.h */,
+				2211E45008364ABF0059F43E /* score.h */,
+				2211E45108364ABF0059F43E /* squares.h */,
+				2211E45208364ABF0059F43E /* text.h */,
+				2211E45308364ABF0059F43E /* texture.h */,
+				2211E45408364ABF0059F43E /* theme.h */,
+				2245F4720829608F0008B01F /* game.cc */,
+				2245F4730829608F0008B01F /* http.cc */,
+				2245F4740829608F0008B01F /* hud.cc */,
+				226EBC2A083BD3A6005D5ECC /* level.cc */,
+				2245F4750829608F0008B01F /* net.cc */,
+				2245F4770829608F0008B01F /* rand.cc */,
+				2245F4780829608F0008B01F /* score.cc */,
+				2245F4790829608F0008B01F /* squares.cc */,
+				2245F47A0829608F0008B01F /* text.cc */,
+				2245F47B0829608F0008B01F /* theme.cc */,
+				4F0719520766B1A200827E7D /* texture.mm */,
+				29B97316FDCFA39411CA2CEA /* main.mm */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				22941ACD0864852D009C8957 /* openal.dylib */,
+				4F157B930770D5AE00B0A66A /* DCSquares.plist */,
+				4F157B2A0770B83F00B0A66A /* icon.icns */,
+				22E07E37099E444B002A2AFC /* themes */,
+				22E07E51099E444B002A2AFC /* loading.png */,
+				22E07E52099E444B002A2AFC /* VeraBd.txf */,
+				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
+				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		220695740823590E00D46540 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				220695750823590E00D46540 /* MyOpenGLView.h in Headers */,
+				2206957E0823590E00D46540 /* WindowController.h in Headers */,
+				2206957F0823590E00D46540 /* Preferences.h in Headers */,
+				220695800823590E00D46540 /* UpdateChecker.h in Headers */,
+				220695810823590E00D46540 /* ScoreController.h in Headers */,
+				220695820823590E00D46540 /* Scores.h in Headers */,
+				220695830823590E00D46540 /* WSGeneratedObj.h in Headers */,
+				2211E45508364ABF0059F43E /* font.h in Headers */,
+				2211E45608364AC00059F43E /* game.h in Headers */,
+				2211E45708364AC00059F43E /* hud.h in Headers */,
+				2211E45808364AC00059F43E /* input.h in Headers */,
+				2211E45908364AC00059F43E /* rand.h in Headers */,
+				2211E45A08364AC00059F43E /* score.h in Headers */,
+				2211E45B08364AC00059F43E /* squares.h in Headers */,
+				2211E45C08364AC00059F43E /* text.h in Headers */,
+				2211E45D08364AC00059F43E /* texture.h in Headers */,
+				2211E45E08364AC00059F43E /* theme.h in Headers */,
+				22764ACC085A471C0073B672 /* level.h in Headers */,
+				22764ACD085A471C0073B672 /* net.h in Headers */,
+				22764B91085A6BDA0073B672 /* ChatController.h in Headers */,
+				22E07F33099E5516002A2AFC /* squarenet.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		220695730823590E00D46540 /* DCSquares */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 221224F4085737C60012A668 /* Build configuration list for PBXNativeTarget "DCSquares" */;
+			buildPhases = (
+				220695740823590E00D46540 /* Headers */,
+				220695840823590E00D46540 /* Resources */,
+				2206958B0823590E00D46540 /* Sources */,
+				2206959D0823590E00D46540 /* Frameworks */,
+				220695A30823590E00D46540 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					MACOS,
+					UNIX,
+					OPENGL,
+					OPENAL,
+				);
+				HEADER_SEARCH_PATHS = (
+					../include,
+					.,
+					/sw/include/plib,
+				);
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = .;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-lplibul",
+					"-lplibfnt",
+					"-lplibsg",
+				);
+				PRODUCT_NAME = DCSquares;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = app;
+			};
+			dependencies = (
+			);
+			name = DCSquares;
+			productInstallPath = "$(HOME)/Applications";
+			productName = CocoaGL;
+			productReference = 220695A60823590F00D46540 /* DCSquares.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 221224F8085737C60012A668 /* Build configuration list for PBXProject "DCSquares" */;
+			buildSettings = {
+			};
+			buildStyles = (
+				4A9504CCFFE6A4B311CA0CBA /* Development */,
+				4A9504CDFFE6A4B311CA0CBA /* Deployment */,
+			);
+			hasScannedForEncodings = 0;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* CocoaGL */;
+			projectDirPath = "";
+			targets = (
+				220695730823590E00D46540 /* DCSquares */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		220695840823590E00D46540 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				220695850823590E00D46540 /* MainMenu.nib in Resources */,
+				220695880823590E00D46540 /* icon.icns in Resources */,
+				220695890823590E00D46540 /* DCSquares.plist in Resources */,
+				22E07E53099E444B002A2AFC /* themes in Resources */,
+				22E07E54099E444B002A2AFC /* loading.png in Resources */,
+				22E07E55099E444B002A2AFC /* VeraBd.txf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2206958B0823590E00D46540 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2206958C0823590E00D46540 /* main.mm in Sources */,
+				2206958D0823590E00D46540 /* MyOpenGLView.mm in Sources */,
+				220695950823590E00D46540 /* texture.mm in Sources */,
+				220695960823590E00D46540 /* WindowController.mm in Sources */,
+				220695970823590E00D46540 /* Preferences.mm in Sources */,
+				220695980823590E00D46540 /* UpdateChecker.mm in Sources */,
+				2206959A0823590E00D46540 /* ScoreController.mm in Sources */,
+				2206959B0823590E00D46540 /* Scores.mm in Sources */,
+				2206959C0823590E00D46540 /* WSGeneratedObj.mm in Sources */,
+				2245F47C0829608F0008B01F /* game.cc in Sources */,
+				2245F47D0829608F0008B01F /* http.cc in Sources */,
+				2245F47E0829608F0008B01F /* hud.cc in Sources */,
+				2245F47F0829608F0008B01F /* net.cc in Sources */,
+				2245F4810829608F0008B01F /* rand.cc in Sources */,
+				2245F4820829608F0008B01F /* score.cc in Sources */,
+				2245F4830829608F0008B01F /* squares.cc in Sources */,
+				2245F4840829608F0008B01F /* text.cc in Sources */,
+				2245F4850829608F0008B01F /* theme.cc in Sources */,
+				226EBC2C083BD3A6005D5ECC /* level.cc in Sources */,
+				22764B92085A6BDA0073B672 /* ChatController.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		29B97318FDCFA39411CA2CEA /* MainMenu.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				29B97319FDCFA39411CA2CEA /* English */,
+			);
+			name = MainMenu.nib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		221224F5085737C60012A668 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					MACOS,
+					UNIX,
+					OPENGL,
+				);
+				HEADER_SEARCH_PATHS = (
+					../include,
+					.,
+					/sw/include/plib,
+				);
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)\"";
+				OPTIMIZATION_CFLAGS = "-O0";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-lplibfnt",
+					"-lplibul",
+				);
+				OTHER_LDFLAGS_i386 = "-L/sw/i386/lib";
+				OTHER_LDFLAGS_ppc = "-L/sw/lib -L. -lopenal";
+				PER_ARCH_CFLAGS_ppc = "-DOPENAL";
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
+				PRODUCT_NAME = DCSquares;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = NO;
+			};
+			name = Development;
+		};
+		221224F6085737C60012A668 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					MACOS,
+					UNIX,
+					OPENGL,
+				);
+				HEADER_SEARCH_PATHS = (
+					../include,
+					.,
+					/sw/include/plib,
+				);
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)\"";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-lplibfnt",
+					"-lplibul",
+				);
+				OTHER_LDFLAGS_i386 = "-L/sw/i386/lib";
+				OTHER_LDFLAGS_ppc = "-L/sw/lib -L. -lopenal";
+				PER_ARCH_CFLAGS_ppc = "-DOPENAL";
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
+				PRODUCT_NAME = DCSquares;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		221224F7085737C60012A668 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					MACOS,
+					UNIX,
+					OPENGL,
+				);
+				HEADER_SEARCH_PATHS = (
+					../include,
+					.,
+					/sw/include/plib,
+				);
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)\"";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-lplibfnt",
+					"-lplibul",
+				);
+				OTHER_LDFLAGS_i386 = "-L/sw/i386/lib";
+				OTHER_LDFLAGS_ppc = "-L/sw/lib -L. -lopenal";
+				PER_ARCH_CFLAGS_ppc = "-DOPENAL";
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
+				PRODUCT_NAME = DCSquares;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = NO;
+			};
+			name = Default;
+		};
+		221224F9085737C60012A668 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = ppc;
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+			};
+			name = Development;
+		};
+		221224FA085737C60012A668 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = ppc;
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+			};
+			name = Deployment;
+		};
+		221224FB085737C60012A668 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = ppc;
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+			};
+			name = Default;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		221224F4085737C60012A668 /* Build configuration list for PBXNativeTarget "DCSquares" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				221224F5085737C60012A668 /* Development */,
+				221224F6085737C60012A668 /* Deployment */,
+				221224F7085737C60012A668 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		221224F8085737C60012A668 /* Build configuration list for PBXProject "DCSquares" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				221224F9085737C60012A668 /* Development */,
+				221224FA085737C60012A668 /* Deployment */,
+				221224FB085737C60012A668 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
