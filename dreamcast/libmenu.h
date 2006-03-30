@@ -22,7 +22,7 @@ __BEGIN_DECLS
 
 // You'll have one of these per entry in the score table.
 typedef struct score_entry {
-	char	name[8]		PACKED;		// NUL-terminated!
+	char	name[16]	PACKED;		// NUL-terminated!
 	uint32	score		PACKED;
 	uint32	difficulty	PACKED;
 	uint32	level_reached	PACKED;

@@ -33,9 +33,6 @@
 		22EF8C6B09DC5C6C00C3095D /* squares.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22EF8C5F09DC5C6C00C3095D /* squares.cc */; };
 		22EF8C6C09DC5C6C00C3095D /* text.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22EF8C6009DC5C6C00C3095D /* text.cc */; };
 		22EF8C6D09DC5C6C00C3095D /* theme.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22EF8C6109DC5C6C00C3095D /* theme.cc */; };
-		22EF8C8C09DC5C8D00C3095D /* loading.png in Resources */ = {isa = PBXBuildFile; fileRef = 22EF8C7009DC5C8D00C3095D /* loading.png */; };
-		22EF8C8D09DC5C8D00C3095D /* themes in Resources */ = {isa = PBXBuildFile; fileRef = 22EF8C7109DC5C8D00C3095D /* themes */; };
-		22EF8C8E09DC5C8D00C3095D /* VeraBd.txf in Resources */ = {isa = PBXBuildFile; fileRef = 22EF8C8B09DC5C8D00C3095D /* VeraBd.txf */; };
 		22EF8CD709DC5CAC00C3095D /* Tiki.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22EF8C9409DC5CAB00C3095D /* Tiki.framework */; };
 		22EF8CD809DC5CB800C3095D /* Tiki.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22EF8C9409DC5CAB00C3095D /* Tiki.framework */; };
 		22EF8D0209DC5CF800C3095D /* box.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22EF8CE409DC5CF800C3095D /* box.h */; };
@@ -67,6 +64,9 @@
 		22EF8D1C09DC5CF800C3095D /* text.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22EF8CFF09DC5CF800C3095D /* text.h */; };
 		22EF8D1D09DC5CF800C3095D /* texture.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22EF8D0009DC5CF800C3095D /* texture.h */; };
 		22EF8D1E09DC5CF800C3095D /* theme.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22EF8D0109DC5CF800C3095D /* theme.h */; };
+		22EF8DEE09DC6CBA00C3095D /* loading.png in Resources */ = {isa = PBXBuildFile; fileRef = 22EF8DD209DC6CBA00C3095D /* loading.png */; };
+		22EF8DEF09DC6CBA00C3095D /* themes in Resources */ = {isa = PBXBuildFile; fileRef = 22EF8DD309DC6CBA00C3095D /* themes */; };
+		22EF8DF009DC6CBA00C3095D /* VeraBd.txf in Resources */ = {isa = PBXBuildFile; fileRef = 22EF8DED09DC6CBA00C3095D /* VeraBd.txf */; };
 		22F3A2C70953AA02005DB9D0 /* Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F3A2C40953AA02005DB9D0 /* Controller.m */; };
 		8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
@@ -161,9 +161,6 @@
 		22EF8C5F09DC5C6C00C3095D /* squares.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = squares.cc; path = ../src/squares.cc; sourceTree = SOURCE_ROOT; };
 		22EF8C6009DC5C6C00C3095D /* text.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = text.cc; path = ../src/text.cc; sourceTree = SOURCE_ROOT; };
 		22EF8C6109DC5C6C00C3095D /* theme.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = theme.cc; path = ../src/theme.cc; sourceTree = SOURCE_ROOT; };
-		22EF8C7009DC5C8D00C3095D /* loading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = loading.png; path = ../goat/loading.png; sourceTree = SOURCE_ROOT; };
-		22EF8C7109DC5C8D00C3095D /* themes */ = {isa = PBXFileReference; lastKnownFileType = folder; name = themes; path = ../goat/themes; sourceTree = SOURCE_ROOT; };
-		22EF8C8B09DC5C8D00C3095D /* VeraBd.txf */ = {isa = PBXFileReference; lastKnownFileType = file; name = VeraBd.txf; path = ../goat/VeraBd.txf; sourceTree = SOURCE_ROOT; };
 		22EF8C9409DC5CAB00C3095D /* Tiki.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Tiki.framework; path = ../../../tiki/osx/build/Development/Tiki.framework; sourceTree = SOURCE_ROOT; };
 		22EF8CE409DC5CF800C3095D /* box.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = box.h; sourceTree = "<group>"; };
 		22EF8CE509DC5CF800C3095D /* menuList.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = menuList.h; sourceTree = "<group>"; };
@@ -194,6 +191,9 @@
 		22EF8CFF09DC5CF800C3095D /* text.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = text.h; path = ../include/text.h; sourceTree = SOURCE_ROOT; };
 		22EF8D0009DC5CF800C3095D /* texture.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = texture.h; path = ../include/texture.h; sourceTree = SOURCE_ROOT; };
 		22EF8D0109DC5CF800C3095D /* theme.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = theme.h; path = ../include/theme.h; sourceTree = SOURCE_ROOT; };
+		22EF8DD209DC6CBA00C3095D /* loading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = loading.png; path = ../goat/squares/loading.png; sourceTree = SOURCE_ROOT; };
+		22EF8DD309DC6CBA00C3095D /* themes */ = {isa = PBXFileReference; lastKnownFileType = folder; name = themes; path = ../goat/squares/themes; sourceTree = SOURCE_ROOT; };
+		22EF8DED09DC6CBA00C3095D /* VeraBd.txf */ = {isa = PBXFileReference; lastKnownFileType = file; name = VeraBd.txf; path = ../goat/squares/VeraBd.txf; sourceTree = SOURCE_ROOT; };
 		22F3A2C30953AA02005DB9D0 /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Controller.h; sourceTree = "<group>"; };
 		22F3A2C40953AA02005DB9D0 /* Controller.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Controller.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -384,9 +384,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				22EF8C7009DC5C8D00C3095D /* loading.png */,
-				22EF8C7109DC5C8D00C3095D /* themes */,
-				22EF8C8B09DC5C8D00C3095D /* VeraBd.txf */,
+				22EF8DD209DC6CBA00C3095D /* loading.png */,
+				22EF8DD309DC6CBA00C3095D /* themes */,
+				22EF8DED09DC6CBA00C3095D /* VeraBd.txf */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
@@ -455,9 +455,9 @@
 			files = (
 				8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */,
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
-				22EF8C8C09DC5C8D00C3095D /* loading.png in Resources */,
-				22EF8C8D09DC5C8D00C3095D /* themes in Resources */,
-				22EF8C8E09DC5C8D00C3095D /* VeraBd.txf in Resources */,
+				22EF8DEE09DC6CBA00C3095D /* loading.png in Resources */,
+				22EF8DEF09DC6CBA00C3095D /* themes in Resources */,
+				22EF8DF009DC6CBA00C3095D /* VeraBd.txf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

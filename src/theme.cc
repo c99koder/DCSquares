@@ -15,22 +15,22 @@ using namespace Tiki::GL;
 #include "squares.h"
 #include "theme.h"
 
-Texture *loading_tex;
-Texture *logo_tex;
-Texture *game_tex;
-Texture *stat_tex;
-Texture *bg_tex;
-Texture *score_tex;
-Texture *enemy_tex;
-Texture *invinc_tex;
-Texture *slow_tex; 
-Texture *mini_tex;
-Texture *plus_tex;
-Texture *evil_tex;
-Texture *speed_tex;
-Texture *minus_tex;
-Texture *big_tex;
-Texture *shadow_tex;
+RefPtr<Texture> loading_tex;
+RefPtr<Texture> logo_tex;
+RefPtr<Texture> game_tex;
+RefPtr<Texture> stat_tex;
+RefPtr<Texture> bg_tex;
+RefPtr<Texture> score_tex;
+RefPtr<Texture> enemy_tex;
+RefPtr<Texture> invinc_tex;
+RefPtr<Texture> slow_tex; 
+RefPtr<Texture> mini_tex;
+RefPtr<Texture> plus_tex;
+RefPtr<Texture> evil_tex;
+RefPtr<Texture> speed_tex;
+RefPtr<Texture> minus_tex;
+RefPtr<Texture> big_tex;
+RefPtr<Texture> shadow_tex;
 
 char dcs_theme[100];
 themeinfo_t themeinfo = {

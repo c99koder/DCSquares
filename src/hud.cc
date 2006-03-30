@@ -31,9 +31,9 @@ float tickval=0.5;
 float power=0;
 float speedval=1.0;
 extern int powerup_mode;
-extern Texture *bg_tex;
-extern Texture *stat_tex;
-extern Texture *logo_tex;
+extern RefPtr<Texture> bg_tex;
+extern RefPtr<Texture> stat_tex;
+extern RefPtr<Texture> logo_tex;
 
 #ifdef DREAMCAST
 extern sfxhnd_t powerup;

@@ -26,7 +26,7 @@ extern float speedval;
 extern float gt,ogt;
 extern int effect_type;
 extern int powerup_mode;
-extern Texture *bg_tex;
+extern RefPtr<Texture> bg_tex;
 
 DCSMenu::DCSMenu(bool game) {
 	GenericMenu::GenericMenu();

@@ -60,16 +60,16 @@ extern themeinfo_t themeinfo;
 	m_help[m_page]->subAdd(b);\
 	COLOR_TEXT(X+10, Y, TEXT);
 
-extern Texture *score_tex;
-extern Texture *enemy_tex;
-extern Texture *invinc_tex;
-extern Texture *slow_tex; 
-extern Texture *mini_tex;
-extern Texture *plus_tex;
-extern Texture *evil_tex;
-extern Texture *speed_tex;
-extern Texture *minus_tex;
-extern Texture *big_tex;
+extern RefPtr<Texture> score_tex;
+extern RefPtr<Texture> enemy_tex;
+extern RefPtr<Texture> invinc_tex;
+extern RefPtr<Texture> slow_tex; 
+extern RefPtr<Texture> mini_tex;
+extern RefPtr<Texture> plus_tex;
+extern RefPtr<Texture> evil_tex;
+extern RefPtr<Texture> speed_tex;
+extern RefPtr<Texture> minus_tex;
+extern RefPtr<Texture> big_tex;
 
 
 HowToPlay::HowToPlay() : DCSMenu(false) {

@@ -44,8 +44,8 @@ struct squarelist {
 	int type;
 	int tm;
 	int id;
-	Texture *tex;
-	Texture *shadow_tex;
+	RefPtr<Texture> tex;
+	RefPtr<Texture> shadow_tex;
 	bool deleted;
 	struct squarelist *next;
 };

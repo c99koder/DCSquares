@@ -41,18 +41,18 @@ extern int score[MAX_PLAYERS];
 extern int combo[MAX_PLAYERS];
 extern int maxcombo[MAX_PLAYERS];
 extern themeinfo_t themeinfo;
-extern Texture *game_tex;
-extern Texture *score_tex;
-extern Texture *enemy_tex;
-extern Texture *invinc_tex;
-extern Texture *slow_tex; 
-extern Texture *mini_tex;
-extern Texture *plus_tex;
-extern Texture *evil_tex;
-extern Texture *speed_tex;
-extern Texture *minus_tex;
-extern Texture *big_tex;
-extern Texture *shadow_tex;
+extern RefPtr<Texture> game_tex;
+extern RefPtr<Texture> score_tex;
+extern RefPtr<Texture> enemy_tex;
+extern RefPtr<Texture> invinc_tex;
+extern RefPtr<Texture> slow_tex; 
+extern RefPtr<Texture> mini_tex;
+extern RefPtr<Texture> plus_tex;
+extern RefPtr<Texture> evil_tex;
+extern RefPtr<Texture> speed_tex;
+extern RefPtr<Texture> minus_tex;
+extern RefPtr<Texture> big_tex;
+extern RefPtr<Texture> shadow_tex;
 
 int square_count=0;
 
@@ -186,7 +186,7 @@ void render_squares(float square_alpha, bool game) {
 				glRotatef(c->angle,0,0,1);
 				glColor4f(c->r,c->g,c->b,square_alpha);
 				glScalef(themeinfo.scale,themeinfo.scale,1.0);
-				render_poly(c->size,(c->tex==score_tex && powerup_mode==EVIL)?enemy_tex:c->tex,(powerup_mode==INVINC && c->tex==enemy_tex)?1.0f-(0.8f*effect_timer):(i==0)?square_alpha:square_alpha*((float)(4-i)/8.0f));
+				render_poly(c->size,c->tex/*(c->tex==score_tex && powerup_mode==EVIL)?enemy_tex:(Texture *)c->tex*/,(powerup_mode==INVINC && c->tex==enemy_tex)?1.0f-(0.8f*effect_timer):(i==0)?square_alpha:square_alpha*((float)(4-i)/8.0f));
 			}
 		}
 		c=c->next;

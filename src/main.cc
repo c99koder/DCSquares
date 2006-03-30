@@ -157,7 +157,7 @@ extern "C" int tiki_main(int argc, char **argv) {
 
 #ifdef DREAMCAST
   //arch_set_exit_path(ARCH_EXIT_MENU);
-  fs_chdir("/rd");
+  //fs_chdir("/rd");
 	
 	dcb_vmu_init();
 	sndoggvorbis_init();
