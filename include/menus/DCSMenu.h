@@ -11,7 +11,6 @@
 #include "drawables/menuList.h"
 #include "drawables/playField.h"
 #include "drawables/squaresBg.h"
-#include "drawables/banna.h"
 #include "drawables/box.h"
 
 #ifndef _DCSMENU_H

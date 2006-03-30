@@ -45,7 +45,13 @@ extern Texture *game_tex;
 extern Texture *score_tex;
 extern Texture *enemy_tex;
 extern Texture *invinc_tex;
+extern Texture *slow_tex; 
+extern Texture *mini_tex;
+extern Texture *plus_tex;
 extern Texture *evil_tex;
+extern Texture *speed_tex;
+extern Texture *minus_tex;
+extern Texture *big_tex;
 extern Texture *shadow_tex;
 
 int square_count=0;
@@ -68,14 +74,11 @@ void render_squares(float square_alpha, bool game) {
 	squarelist *c=squarehead;
 	float angle,x,y,dx,dy,l,i;
 
-//#ifdef MACOS
 	if(game)
 		glViewport(themeinfo.game_x,480-(themeinfo.game_y+themeinfo.game_h),themeinfo.game_w,themeinfo.game_h);
 	else
 		glViewport(themeinfo.title_x,480-(themeinfo.title_y+themeinfo.title_h),themeinfo.title_w,themeinfo.title_h);
-	//#else
-//	glViewport(themeinfo.game_x,themeinfo.game_y,themeinfo.game_w,themeinfo.game_h);
-//#endif
+
 	glEnable(GL_BLEND);
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_TEXTURE_2D);
@@ -169,6 +172,7 @@ void render_squares(float square_alpha, bool game) {
 				}
 			} else {
 				if(c->shadow_tex!=NULL) {
+//printf("Drawing shadow\n");
 					glLoadIdentity();
 					glTranslatef(c->x+2+dx,c->y+2+dy,0.011);
 					glRotatef(c->angle,0,0,1);
@@ -176,6 +180,7 @@ void render_squares(float square_alpha, bool game) {
 					glScalef(themeinfo.scale,themeinfo.scale,1.0);
 					render_poly(c->size,c->shadow_tex,square_alpha*((float)(4-i)/4.0f));
 				}
+//printf("Drawing type: %i\n",c->type);
 				glLoadIdentity();
 				glTranslatef(c->x+dx,c->y+dy,0.012);
 				glRotatef(c->angle,0,0,1);
@@ -291,10 +296,9 @@ squarelist *check_collide(squarelist *player) {
 
 		if(c!=player) {
 			min1=Vector(c->x-(c->size*themeinfo.scale),c->y-(c->size*themeinfo.scale),-1);
-			min2=Vector(c->x+(c->size*themeinfo.scale),c->y+(c->size*themeinfo.scale),1);
+			max1=Vector(c->x+(c->size*themeinfo.scale),c->y+(c->size*themeinfo.scale),1);
 			if(min1.x <= max2.x && max1.x >= min2.x &&
-		min1.y <= max2.y && max1.y >= min2.y &&
-		min1.z <= max2.z && max1.z >= min2.z) {
+			min1.y <= max2.y && max1.y >= min2.y) {
 				if(c!=NULL&&c->type>PLAYER_NET) {
 					c->deleted=1;
 					if(c->type==SCORE && powerup_mode!=EVIL) {
@@ -429,14 +433,44 @@ squarelist *create_square(int x, int y, int size, int type) {
 		case POWERDOWN:
 			c->r=(float)themeinfo.evil_r/255.0f; c->g=(float)themeinfo.evil_g/255.0f; c->b=(float)themeinfo.evil_b/255.0f;
 			c->type=14+(genrand_int32()%4);
-			if(themeinfo.evil[0]!='\0') c->tex=evil_tex+(c->type-14);
+			if(themeinfo.evil[0]!='\0') {
+				switch(c->type-10) {
+				case EVIL:
+					c->tex=evil_tex;
+					break;
+				case SPEED:
+					c->tex=speed_tex;
+					break;
+				case MINUS1000:
+					c->tex=minus_tex;
+					break;
+				case BIGSQUARE:
+					c->tex=big_tex;
+					break;
+				}
+			}
 			if(themeinfo.powershadow[0]!='\0') c->shadow_tex=shadow_tex;
 			c->size=10;
 			break;
 		case POWERUP:
 			c->r=(float)themeinfo.good_r/255.0f; c->g=(float)themeinfo.good_g/255.0f; c->b=(float)themeinfo.good_b/255.0f;
 			c->type=10+(genrand_int32()%4);
-			if(themeinfo.invinc[0]!='\0') c->tex=invinc_tex+(c->type-10);
+			if(themeinfo.invinc[0]!='\0') {
+				switch(c->type-10) {
+				case INVINC:
+					c->tex=invinc_tex;
+					break;
+				case SLOWMO:
+					c->tex=slow_tex;
+					break;
+				case PLUS1000:
+					c->tex=plus_tex;
+					break;
+				case MINISQUARE:
+					c->tex=mini_tex;
+					break;
+				}
+			}
 			if(themeinfo.powershadow[0]!='\0') c->shadow_tex=shadow_tex;
 			c->size=10;
 		default:

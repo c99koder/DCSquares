@@ -7,38 +7,66 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2208E350096858F1005C2102 /* LevelStats.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2208E34E096858F1005C2102 /* LevelStats.cpp */; };
-		2208E5D2096F47F7005C2102 /* HighScores.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2208E5D0096F47F7005C2102 /* HighScores.cpp */; };
-		222FC2F60953AE4E009582BD /* game.cc in Sources */ = {isa = PBXBuildFile; fileRef = 222FC2EE0953AE4E009582BD /* game.cc */; };
-		222FC2F70953AE4E009582BD /* hud.cc in Sources */ = {isa = PBXBuildFile; fileRef = 222FC2EF0953AE4E009582BD /* hud.cc */; };
-		222FC2F80953AE4E009582BD /* level.cc in Sources */ = {isa = PBXBuildFile; fileRef = 222FC2F00953AE4E009582BD /* level.cc */; };
-		222FC2F90953AE4E009582BD /* rand.cc in Sources */ = {isa = PBXBuildFile; fileRef = 222FC2F10953AE4E009582BD /* rand.cc */; };
-		222FC2FA0953AE4E009582BD /* score.cc in Sources */ = {isa = PBXBuildFile; fileRef = 222FC2F20953AE4E009582BD /* score.cc */; };
-		222FC2FB0953AE4E009582BD /* squares.cc in Sources */ = {isa = PBXBuildFile; fileRef = 222FC2F30953AE4E009582BD /* squares.cc */; };
-		222FC2FC0953AE4E009582BD /* theme.cc in Sources */ = {isa = PBXBuildFile; fileRef = 222FC2F40953AE4E009582BD /* theme.cc */; };
-		225E20160955FDB20086CB3C /* main.cc in Sources */ = {isa = PBXBuildFile; fileRef = 225E20150955FDB20086CB3C /* main.cc */; };
-		225E2099095601810086CB3C /* loading.png in Resources */ = {isa = PBXBuildFile; fileRef = 225E2044095601810086CB3C /* loading.png */; };
-		225E2144095601AF0086CB3C /* VeraBd.txf in Resources */ = {isa = PBXBuildFile; fileRef = 225E2142095601AF0086CB3C /* VeraBd.txf */; };
-		225E215A095602190086CB3C /* text.cc in Sources */ = {isa = PBXBuildFile; fileRef = 225E2158095602190086CB3C /* text.cc */; };
 		225E21DF095606350086CB3C /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 225E21DE095606350086CB3C /* OpenGL.framework */; };
-		225E2218095609BE0086CB3C /* TitleScreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 225E2216095609BE0086CB3C /* TitleScreen.cpp */; };
-		225E23BF09560AC40086CB3C /* menuList.cc in Sources */ = {isa = PBXBuildFile; fileRef = 225E23BD09560AC40086CB3C /* menuList.cc */; };
-		225E23C609560BEF0086CB3C /* playField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 225E23C409560BEF0086CB3C /* playField.cpp */; };
-		225E25880956173A0086CB3C /* squaresBg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 225E25860956173A0086CB3C /* squaresBg.cpp */; };
-		225E25EB0958EF490086CB3C /* banna.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 225E25E90958EF490086CB3C /* banna.cpp */; };
-		225E265A0958F41B0086CB3C /* DCSMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 225E26580958F41B0086CB3C /* DCSMenu.cpp */; };
-		225E26840958F9710086CB3C /* GamePlay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 225E26820958F9710086CB3C /* GamePlay.cpp */; };
-		2284517B095F2865002AF3FE /* squaresHUD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22845179095F2865002AF3FE /* squaresHUD.cpp */; };
-		228451F9095F6D91002AF3FE /* box.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 228451F7095F6D91002AF3FE /* box.cpp */; };
-		2292A1030983F92E00A517F0 /* HowToPlay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2292A1010983F92E00A517F0 /* HowToPlay.cpp */; };
-		229ACE8C0979A234001928CA /* MultiPlaySetup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 229ACE8A0979A234001928CA /* MultiPlaySetup.cpp */; };
-		22E2E7F50971ED0200D3CB40 /* NameEntry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22E2E7F30971ED0200D3CB40 /* NameEntry.cpp */; };
-		22EC3EC409A7BEC700938C38 /* themes in Resources */ = {isa = PBXBuildFile; fileRef = 22EC3EAA09A7BEC700938C38 /* themes */; };
-		22EC3EE809A8E2B400938C38 /* NetworkLobby.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22EC3EE609A8E2B400938C38 /* NetworkLobby.cpp */; };
-		22EC3F4009A8EE4A00938C38 /* net.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22EC3F3F09A8EE4A00938C38 /* net.cc */; };
-		22EC3F5F09A8EF1900938C38 /* http.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22EC3F5E09A8EF1900938C38 /* http.cc */; };
-		22EC442409AA5C8300938C38 /* Tiki.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22EC43E109AA5C8200938C38 /* Tiki.framework */; };
-		22EC442509AA5C8800938C38 /* Tiki.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22EC43E109AA5C8200938C38 /* Tiki.framework */; };
+		22EF8C3E09DC5BCC00C3095D /* box.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22EF8C3909DC5BCC00C3095D /* box.cpp */; };
+		22EF8C4009DC5BCC00C3095D /* playField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22EF8C3B09DC5BCC00C3095D /* playField.cpp */; };
+		22EF8C4109DC5BCC00C3095D /* squaresBg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22EF8C3C09DC5BCC00C3095D /* squaresBg.cpp */; };
+		22EF8C4209DC5BCC00C3095D /* squaresHUD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22EF8C3D09DC5BCC00C3095D /* squaresHUD.cpp */; };
+		22EF8C4409DC5C0D00C3095D /* menuList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22EF8C4309DC5C0D00C3095D /* menuList.cpp */; };
+		22EF8C4E09DC5C3200C3095D /* DCSMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22EF8C4509DC5C3200C3095D /* DCSMenu.cpp */; };
+		22EF8C4F09DC5C3200C3095D /* GamePlay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22EF8C4609DC5C3200C3095D /* GamePlay.cpp */; };
+		22EF8C5009DC5C3200C3095D /* HighScores.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22EF8C4709DC5C3200C3095D /* HighScores.cpp */; };
+		22EF8C5109DC5C3200C3095D /* HowToPlay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22EF8C4809DC5C3200C3095D /* HowToPlay.cpp */; };
+		22EF8C5209DC5C3200C3095D /* LevelStats.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22EF8C4909DC5C3200C3095D /* LevelStats.cpp */; };
+		22EF8C5309DC5C3200C3095D /* MultiPlaySetup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22EF8C4A09DC5C3200C3095D /* MultiPlaySetup.cpp */; };
+		22EF8C5409DC5C3200C3095D /* NameEntry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22EF8C4B09DC5C3200C3095D /* NameEntry.cpp */; };
+		22EF8C5509DC5C3200C3095D /* NetworkLobby.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22EF8C4C09DC5C3200C3095D /* NetworkLobby.cpp */; };
+		22EF8C5609DC5C3200C3095D /* TitleScreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22EF8C4D09DC5C3200C3095D /* TitleScreen.cpp */; };
+		22EF8C6309DC5C6C00C3095D /* game.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22EF8C5709DC5C6C00C3095D /* game.cc */; };
+		22EF8C6409DC5C6C00C3095D /* http.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22EF8C5809DC5C6C00C3095D /* http.cc */; };
+		22EF8C6509DC5C6C00C3095D /* hud.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22EF8C5909DC5C6C00C3095D /* hud.cc */; };
+		22EF8C6609DC5C6C00C3095D /* level.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22EF8C5A09DC5C6C00C3095D /* level.cc */; };
+		22EF8C6709DC5C6C00C3095D /* main.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22EF8C5B09DC5C6C00C3095D /* main.cc */; };
+		22EF8C6809DC5C6C00C3095D /* net.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22EF8C5C09DC5C6C00C3095D /* net.cc */; };
+		22EF8C6909DC5C6C00C3095D /* rand.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22EF8C5D09DC5C6C00C3095D /* rand.cc */; };
+		22EF8C6A09DC5C6C00C3095D /* score.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22EF8C5E09DC5C6C00C3095D /* score.cc */; };
+		22EF8C6B09DC5C6C00C3095D /* squares.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22EF8C5F09DC5C6C00C3095D /* squares.cc */; };
+		22EF8C6C09DC5C6C00C3095D /* text.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22EF8C6009DC5C6C00C3095D /* text.cc */; };
+		22EF8C6D09DC5C6C00C3095D /* theme.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22EF8C6109DC5C6C00C3095D /* theme.cc */; };
+		22EF8C8C09DC5C8D00C3095D /* loading.png in Resources */ = {isa = PBXBuildFile; fileRef = 22EF8C7009DC5C8D00C3095D /* loading.png */; };
+		22EF8C8D09DC5C8D00C3095D /* themes in Resources */ = {isa = PBXBuildFile; fileRef = 22EF8C7109DC5C8D00C3095D /* themes */; };
+		22EF8C8E09DC5C8D00C3095D /* VeraBd.txf in Resources */ = {isa = PBXBuildFile; fileRef = 22EF8C8B09DC5C8D00C3095D /* VeraBd.txf */; };
+		22EF8CD709DC5CAC00C3095D /* Tiki.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22EF8C9409DC5CAB00C3095D /* Tiki.framework */; };
+		22EF8CD809DC5CB800C3095D /* Tiki.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22EF8C9409DC5CAB00C3095D /* Tiki.framework */; };
+		22EF8D0209DC5CF800C3095D /* box.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22EF8CE409DC5CF800C3095D /* box.h */; };
+		22EF8D0309DC5CF800C3095D /* menuList.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22EF8CE509DC5CF800C3095D /* menuList.h */; };
+		22EF8D0409DC5CF800C3095D /* playField.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22EF8CE609DC5CF800C3095D /* playField.h */; };
+		22EF8D0509DC5CF800C3095D /* squaresBg.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22EF8CE709DC5CF800C3095D /* squaresBg.h */; };
+		22EF8D0609DC5CF800C3095D /* squaresHUD.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22EF8CE809DC5CF800C3095D /* squaresHUD.h */; };
+		22EF8D0709DC5CF800C3095D /* font.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22EF8CE909DC5CF800C3095D /* font.h */; };
+		22EF8D0809DC5CF800C3095D /* game.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22EF8CEA09DC5CF800C3095D /* game.h */; };
+		22EF8D0909DC5CF800C3095D /* http.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22EF8CEB09DC5CF800C3095D /* http.h */; };
+		22EF8D0A09DC5CF800C3095D /* hud.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22EF8CEC09DC5CF800C3095D /* hud.h */; };
+		22EF8D0B09DC5CF800C3095D /* input.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22EF8CED09DC5CF800C3095D /* input.h */; };
+		22EF8D0C09DC5CF800C3095D /* level.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22EF8CEE09DC5CF800C3095D /* level.h */; };
+		22EF8D0D09DC5CF800C3095D /* DCSMenu.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22EF8CF009DC5CF800C3095D /* DCSMenu.h */; };
+		22EF8D0E09DC5CF800C3095D /* GamePlay.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22EF8CF109DC5CF800C3095D /* GamePlay.h */; };
+		22EF8D0F09DC5CF800C3095D /* HighScores.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22EF8CF209DC5CF800C3095D /* HighScores.h */; };
+		22EF8D1009DC5CF800C3095D /* HowToPlay.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22EF8CF309DC5CF800C3095D /* HowToPlay.h */; };
+		22EF8D1109DC5CF800C3095D /* LevelStats.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22EF8CF409DC5CF800C3095D /* LevelStats.h */; };
+		22EF8D1209DC5CF800C3095D /* MultiPlaySetup.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22EF8CF509DC5CF800C3095D /* MultiPlaySetup.h */; };
+		22EF8D1309DC5CF800C3095D /* NameEntry.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22EF8CF609DC5CF800C3095D /* NameEntry.h */; };
+		22EF8D1409DC5CF800C3095D /* NetworkLobby.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22EF8CF709DC5CF800C3095D /* NetworkLobby.h */; };
+		22EF8D1509DC5CF800C3095D /* TitleScreen.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22EF8CF809DC5CF800C3095D /* TitleScreen.h */; };
+		22EF8D1609DC5CF800C3095D /* net.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22EF8CF909DC5CF800C3095D /* net.h */; };
+		22EF8D1709DC5CF800C3095D /* options.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22EF8CFA09DC5CF800C3095D /* options.h */; };
+		22EF8D1809DC5CF800C3095D /* rand.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22EF8CFB09DC5CF800C3095D /* rand.h */; };
+		22EF8D1909DC5CF800C3095D /* score.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22EF8CFC09DC5CF800C3095D /* score.h */; };
+		22EF8D1A09DC5CF800C3095D /* squarenet.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22EF8CFD09DC5CF800C3095D /* squarenet.h */; };
+		22EF8D1B09DC5CF800C3095D /* squares.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22EF8CFE09DC5CF800C3095D /* squares.h */; };
+		22EF8D1C09DC5CF800C3095D /* text.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22EF8CFF09DC5CF800C3095D /* text.h */; };
+		22EF8D1D09DC5CF800C3095D /* texture.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22EF8D0009DC5CF800C3095D /* texture.h */; };
+		22EF8D1E09DC5CF800C3095D /* theme.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22EF8D0109DC5CF800C3095D /* theme.h */; };
 		22F3A2C70953AA02005DB9D0 /* Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F3A2C40953AA02005DB9D0 /* Controller.m */; };
 		8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
@@ -68,7 +96,36 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				22EC442509AA5C8800938C38 /* Tiki.framework in CopyFiles */,
+				22EF8CD809DC5CB800C3095D /* Tiki.framework in CopyFiles */,
+				22EF8D0209DC5CF800C3095D /* box.h in CopyFiles */,
+				22EF8D0309DC5CF800C3095D /* menuList.h in CopyFiles */,
+				22EF8D0409DC5CF800C3095D /* playField.h in CopyFiles */,
+				22EF8D0509DC5CF800C3095D /* squaresBg.h in CopyFiles */,
+				22EF8D0609DC5CF800C3095D /* squaresHUD.h in CopyFiles */,
+				22EF8D0709DC5CF800C3095D /* font.h in CopyFiles */,
+				22EF8D0809DC5CF800C3095D /* game.h in CopyFiles */,
+				22EF8D0909DC5CF800C3095D /* http.h in CopyFiles */,
+				22EF8D0A09DC5CF800C3095D /* hud.h in CopyFiles */,
+				22EF8D0B09DC5CF800C3095D /* input.h in CopyFiles */,
+				22EF8D0C09DC5CF800C3095D /* level.h in CopyFiles */,
+				22EF8D0D09DC5CF800C3095D /* DCSMenu.h in CopyFiles */,
+				22EF8D0E09DC5CF800C3095D /* GamePlay.h in CopyFiles */,
+				22EF8D0F09DC5CF800C3095D /* HighScores.h in CopyFiles */,
+				22EF8D1009DC5CF800C3095D /* HowToPlay.h in CopyFiles */,
+				22EF8D1109DC5CF800C3095D /* LevelStats.h in CopyFiles */,
+				22EF8D1209DC5CF800C3095D /* MultiPlaySetup.h in CopyFiles */,
+				22EF8D1309DC5CF800C3095D /* NameEntry.h in CopyFiles */,
+				22EF8D1409DC5CF800C3095D /* NetworkLobby.h in CopyFiles */,
+				22EF8D1509DC5CF800C3095D /* TitleScreen.h in CopyFiles */,
+				22EF8D1609DC5CF800C3095D /* net.h in CopyFiles */,
+				22EF8D1709DC5CF800C3095D /* options.h in CopyFiles */,
+				22EF8D1809DC5CF800C3095D /* rand.h in CopyFiles */,
+				22EF8D1909DC5CF800C3095D /* score.h in CopyFiles */,
+				22EF8D1A09DC5CF800C3095D /* squarenet.h in CopyFiles */,
+				22EF8D1B09DC5CF800C3095D /* squares.h in CopyFiles */,
+				22EF8D1C09DC5CF800C3095D /* text.h in CopyFiles */,
+				22EF8D1D09DC5CF800C3095D /* texture.h in CopyFiles */,
+				22EF8D1E09DC5CF800C3095D /* theme.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,66 +135,65 @@
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
-		2208E34D096858F1005C2102 /* LevelStats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LevelStats.h; path = ../src/LevelStats.h; sourceTree = SOURCE_ROOT; };
-		2208E34E096858F1005C2102 /* LevelStats.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LevelStats.cpp; path = ../src/LevelStats.cpp; sourceTree = SOURCE_ROOT; };
-		2208E5CF096F47F7005C2102 /* HighScores.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HighScores.h; path = ../src/HighScores.h; sourceTree = SOURCE_ROOT; };
-		2208E5D0096F47F7005C2102 /* HighScores.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HighScores.cpp; path = ../src/HighScores.cpp; sourceTree = SOURCE_ROOT; };
-		222FC2EE0953AE4E009582BD /* game.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = game.cc; path = ../../common/game.cc; sourceTree = SOURCE_ROOT; };
-		222FC2EF0953AE4E009582BD /* hud.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = hud.cc; path = ../../common/hud.cc; sourceTree = SOURCE_ROOT; };
-		222FC2F00953AE4E009582BD /* level.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = level.cc; path = ../../common/level.cc; sourceTree = SOURCE_ROOT; };
-		222FC2F10953AE4E009582BD /* rand.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = rand.cc; path = ../../common/rand.cc; sourceTree = SOURCE_ROOT; };
-		222FC2F20953AE4E009582BD /* score.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = score.cc; path = ../../common/score.cc; sourceTree = SOURCE_ROOT; };
-		222FC2F30953AE4E009582BD /* squares.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = squares.cc; path = ../../common/squares.cc; sourceTree = SOURCE_ROOT; };
-		222FC2F40953AE4E009582BD /* theme.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = theme.cc; path = ../../common/theme.cc; sourceTree = SOURCE_ROOT; };
-		225E20150955FDB20086CB3C /* main.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cc; path = ../src/main.cc; sourceTree = SOURCE_ROOT; };
-		225E2044095601810086CB3C /* loading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = loading.png; path = ../../data/loading.png; sourceTree = SOURCE_ROOT; };
-		225E2142095601AF0086CB3C /* VeraBd.txf */ = {isa = PBXFileReference; lastKnownFileType = file; name = VeraBd.txf; path = ../../data/VeraBd.txf; sourceTree = SOURCE_ROOT; };
-		225E2158095602190086CB3C /* text.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = text.cc; path = ../../common/text.cc; sourceTree = SOURCE_ROOT; };
-		225E219F095604F80086CB3C /* game.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = game.h; path = ../../include/game.h; sourceTree = SOURCE_ROOT; };
-		225E21A0095604F80086CB3C /* http.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = http.h; path = ../../include/http.h; sourceTree = SOURCE_ROOT; };
-		225E21A1095604F80086CB3C /* hud.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = hud.h; path = ../../include/hud.h; sourceTree = SOURCE_ROOT; };
-		225E21A2095604F80086CB3C /* input.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = input.h; path = ../../include/input.h; sourceTree = SOURCE_ROOT; };
-		225E21A3095604F80086CB3C /* level.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = level.h; path = ../../include/level.h; sourceTree = SOURCE_ROOT; };
-		225E21A4095604F80086CB3C /* net.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = net.h; path = ../../include/net.h; sourceTree = SOURCE_ROOT; };
-		225E21A5095604F80086CB3C /* options.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = options.h; path = ../../include/options.h; sourceTree = SOURCE_ROOT; };
-		225E21A6095604F80086CB3C /* rand.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = rand.h; path = ../../include/rand.h; sourceTree = SOURCE_ROOT; };
-		225E21A7095604F80086CB3C /* score.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = score.h; path = ../../include/score.h; sourceTree = SOURCE_ROOT; };
-		225E21A8095604F80086CB3C /* squares.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = squares.h; path = ../../include/squares.h; sourceTree = SOURCE_ROOT; };
-		225E21A9095604F80086CB3C /* text.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = text.h; path = ../../include/text.h; sourceTree = SOURCE_ROOT; };
-		225E21AA095604F80086CB3C /* texture.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = texture.h; path = ../../include/texture.h; sourceTree = SOURCE_ROOT; };
-		225E21AB095604F80086CB3C /* theme.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = theme.h; path = ../../include/theme.h; sourceTree = SOURCE_ROOT; };
 		225E21DE095606350086CB3C /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
-		225E2215095609BE0086CB3C /* TitleScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TitleScreen.h; path = ../src/TitleScreen.h; sourceTree = SOURCE_ROOT; };
-		225E2216095609BE0086CB3C /* TitleScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TitleScreen.cpp; path = ../src/TitleScreen.cpp; sourceTree = SOURCE_ROOT; };
-		225E23BD09560AC40086CB3C /* menuList.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = menuList.cc; path = ../src/drawables/menuList.cc; sourceTree = SOURCE_ROOT; };
-		225E23BE09560AC40086CB3C /* menuList.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = menuList.h; path = ../src/drawables/menuList.h; sourceTree = SOURCE_ROOT; };
-		225E23C309560BEF0086CB3C /* playField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = playField.h; path = ../src/drawables/playField.h; sourceTree = SOURCE_ROOT; };
-		225E23C409560BEF0086CB3C /* playField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = playField.cpp; path = ../src/drawables/playField.cpp; sourceTree = SOURCE_ROOT; };
-		225E25850956173A0086CB3C /* squaresBg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = squaresBg.h; path = ../src/drawables/squaresBg.h; sourceTree = SOURCE_ROOT; };
-		225E25860956173A0086CB3C /* squaresBg.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = squaresBg.cpp; path = ../src/drawables/squaresBg.cpp; sourceTree = SOURCE_ROOT; };
-		225E25E80958EF480086CB3C /* banna.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = banna.h; path = ../src/drawables/banna.h; sourceTree = SOURCE_ROOT; };
-		225E25E90958EF490086CB3C /* banna.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = banna.cpp; path = ../src/drawables/banna.cpp; sourceTree = SOURCE_ROOT; };
-		225E26570958F41B0086CB3C /* DCSMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCSMenu.h; path = ../src/DCSMenu.h; sourceTree = SOURCE_ROOT; };
-		225E26580958F41B0086CB3C /* DCSMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DCSMenu.cpp; path = ../src/DCSMenu.cpp; sourceTree = SOURCE_ROOT; };
-		225E26810958F9710086CB3C /* GamePlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GamePlay.h; path = ../src/GamePlay.h; sourceTree = SOURCE_ROOT; };
-		225E26820958F9710086CB3C /* GamePlay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GamePlay.cpp; path = ../src/GamePlay.cpp; sourceTree = SOURCE_ROOT; };
-		22845178095F2865002AF3FE /* squaresHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = squaresHUD.h; path = ../src/drawables/squaresHUD.h; sourceTree = SOURCE_ROOT; };
-		22845179095F2865002AF3FE /* squaresHUD.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = squaresHUD.cpp; path = ../src/drawables/squaresHUD.cpp; sourceTree = SOURCE_ROOT; };
-		228451F6095F6D91002AF3FE /* box.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = box.h; path = ../src/drawables/box.h; sourceTree = SOURCE_ROOT; };
-		228451F7095F6D91002AF3FE /* box.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = box.cpp; path = ../src/drawables/box.cpp; sourceTree = SOURCE_ROOT; };
-		2292A1000983F92E00A517F0 /* HowToPlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HowToPlay.h; path = ../src/HowToPlay.h; sourceTree = SOURCE_ROOT; };
-		2292A1010983F92E00A517F0 /* HowToPlay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HowToPlay.cpp; path = ../src/HowToPlay.cpp; sourceTree = SOURCE_ROOT; };
-		229ACE890979A234001928CA /* MultiPlaySetup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MultiPlaySetup.h; path = ../src/MultiPlaySetup.h; sourceTree = SOURCE_ROOT; };
-		229ACE8A0979A234001928CA /* MultiPlaySetup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MultiPlaySetup.cpp; path = ../src/MultiPlaySetup.cpp; sourceTree = SOURCE_ROOT; };
-		22E2E7F20971ED0200D3CB40 /* NameEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NameEntry.h; path = ../src/NameEntry.h; sourceTree = SOURCE_ROOT; };
-		22E2E7F30971ED0200D3CB40 /* NameEntry.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NameEntry.cpp; path = ../src/NameEntry.cpp; sourceTree = SOURCE_ROOT; };
-		22EC3EAA09A7BEC700938C38 /* themes */ = {isa = PBXFileReference; lastKnownFileType = folder; name = themes; path = ../../goat/themes; sourceTree = SOURCE_ROOT; };
-		22EC3EE509A8E2B400938C38 /* NetworkLobby.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetworkLobby.h; path = ../src/NetworkLobby.h; sourceTree = SOURCE_ROOT; };
-		22EC3EE609A8E2B400938C38 /* NetworkLobby.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NetworkLobby.cpp; path = ../src/NetworkLobby.cpp; sourceTree = SOURCE_ROOT; };
-		22EC3F2F09A8EDF000938C38 /* squarenet.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = squarenet.h; path = ../../include/squarenet.h; sourceTree = SOURCE_ROOT; };
-		22EC3F3F09A8EE4A00938C38 /* net.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = net.cc; path = ../../common/net.cc; sourceTree = SOURCE_ROOT; };
-		22EC3F5E09A8EF1900938C38 /* http.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = http.cc; path = ../../common/http.cc; sourceTree = SOURCE_ROOT; };
-		22EC43E109AA5C8200938C38 /* Tiki.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Tiki.framework; path = ../../../../tiki/osx/build/Development/Tiki.framework; sourceTree = SOURCE_ROOT; };
+		22EF8C3909DC5BCC00C3095D /* box.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = box.cpp; path = ../src/drawables/box.cpp; sourceTree = SOURCE_ROOT; };
+		22EF8C3B09DC5BCC00C3095D /* playField.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = playField.cpp; path = ../src/drawables/playField.cpp; sourceTree = SOURCE_ROOT; };
+		22EF8C3C09DC5BCC00C3095D /* squaresBg.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = squaresBg.cpp; path = ../src/drawables/squaresBg.cpp; sourceTree = SOURCE_ROOT; };
+		22EF8C3D09DC5BCC00C3095D /* squaresHUD.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = squaresHUD.cpp; path = ../src/drawables/squaresHUD.cpp; sourceTree = SOURCE_ROOT; };
+		22EF8C4309DC5C0D00C3095D /* menuList.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = menuList.cpp; path = ../src/drawables/menuList.cpp; sourceTree = SOURCE_ROOT; };
+		22EF8C4509DC5C3200C3095D /* DCSMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = DCSMenu.cpp; path = ../src/menus/DCSMenu.cpp; sourceTree = SOURCE_ROOT; };
+		22EF8C4609DC5C3200C3095D /* GamePlay.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = GamePlay.cpp; path = ../src/menus/GamePlay.cpp; sourceTree = SOURCE_ROOT; };
+		22EF8C4709DC5C3200C3095D /* HighScores.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = HighScores.cpp; path = ../src/menus/HighScores.cpp; sourceTree = SOURCE_ROOT; };
+		22EF8C4809DC5C3200C3095D /* HowToPlay.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = HowToPlay.cpp; path = ../src/menus/HowToPlay.cpp; sourceTree = SOURCE_ROOT; };
+		22EF8C4909DC5C3200C3095D /* LevelStats.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = LevelStats.cpp; path = ../src/menus/LevelStats.cpp; sourceTree = SOURCE_ROOT; };
+		22EF8C4A09DC5C3200C3095D /* MultiPlaySetup.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = MultiPlaySetup.cpp; path = ../src/menus/MultiPlaySetup.cpp; sourceTree = SOURCE_ROOT; };
+		22EF8C4B09DC5C3200C3095D /* NameEntry.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = NameEntry.cpp; path = ../src/menus/NameEntry.cpp; sourceTree = SOURCE_ROOT; };
+		22EF8C4C09DC5C3200C3095D /* NetworkLobby.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = NetworkLobby.cpp; path = ../src/menus/NetworkLobby.cpp; sourceTree = SOURCE_ROOT; };
+		22EF8C4D09DC5C3200C3095D /* TitleScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = TitleScreen.cpp; path = ../src/menus/TitleScreen.cpp; sourceTree = SOURCE_ROOT; };
+		22EF8C5709DC5C6C00C3095D /* game.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = game.cc; path = ../src/game.cc; sourceTree = SOURCE_ROOT; };
+		22EF8C5809DC5C6C00C3095D /* http.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = http.cc; path = ../src/http.cc; sourceTree = SOURCE_ROOT; };
+		22EF8C5909DC5C6C00C3095D /* hud.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = hud.cc; path = ../src/hud.cc; sourceTree = SOURCE_ROOT; };
+		22EF8C5A09DC5C6C00C3095D /* level.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = level.cc; path = ../src/level.cc; sourceTree = SOURCE_ROOT; };
+		22EF8C5B09DC5C6C00C3095D /* main.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = main.cc; path = ../src/main.cc; sourceTree = SOURCE_ROOT; };
+		22EF8C5C09DC5C6C00C3095D /* net.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = net.cc; path = ../src/net.cc; sourceTree = SOURCE_ROOT; };
+		22EF8C5D09DC5C6C00C3095D /* rand.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = rand.cc; path = ../src/rand.cc; sourceTree = SOURCE_ROOT; };
+		22EF8C5E09DC5C6C00C3095D /* score.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = score.cc; path = ../src/score.cc; sourceTree = SOURCE_ROOT; };
+		22EF8C5F09DC5C6C00C3095D /* squares.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = squares.cc; path = ../src/squares.cc; sourceTree = SOURCE_ROOT; };
+		22EF8C6009DC5C6C00C3095D /* text.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = text.cc; path = ../src/text.cc; sourceTree = SOURCE_ROOT; };
+		22EF8C6109DC5C6C00C3095D /* theme.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = theme.cc; path = ../src/theme.cc; sourceTree = SOURCE_ROOT; };
+		22EF8C7009DC5C8D00C3095D /* loading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = loading.png; path = ../goat/loading.png; sourceTree = SOURCE_ROOT; };
+		22EF8C7109DC5C8D00C3095D /* themes */ = {isa = PBXFileReference; lastKnownFileType = folder; name = themes; path = ../goat/themes; sourceTree = SOURCE_ROOT; };
+		22EF8C8B09DC5C8D00C3095D /* VeraBd.txf */ = {isa = PBXFileReference; lastKnownFileType = file; name = VeraBd.txf; path = ../goat/VeraBd.txf; sourceTree = SOURCE_ROOT; };
+		22EF8C9409DC5CAB00C3095D /* Tiki.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Tiki.framework; path = ../../../tiki/osx/build/Development/Tiki.framework; sourceTree = SOURCE_ROOT; };
+		22EF8CE409DC5CF800C3095D /* box.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = box.h; sourceTree = "<group>"; };
+		22EF8CE509DC5CF800C3095D /* menuList.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = menuList.h; sourceTree = "<group>"; };
+		22EF8CE609DC5CF800C3095D /* playField.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = playField.h; sourceTree = "<group>"; };
+		22EF8CE709DC5CF800C3095D /* squaresBg.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = squaresBg.h; sourceTree = "<group>"; };
+		22EF8CE809DC5CF800C3095D /* squaresHUD.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = squaresHUD.h; sourceTree = "<group>"; };
+		22EF8CE909DC5CF800C3095D /* font.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = font.h; path = ../include/font.h; sourceTree = SOURCE_ROOT; };
+		22EF8CEA09DC5CF800C3095D /* game.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = game.h; path = ../include/game.h; sourceTree = SOURCE_ROOT; };
+		22EF8CEB09DC5CF800C3095D /* http.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = http.h; path = ../include/http.h; sourceTree = SOURCE_ROOT; };
+		22EF8CEC09DC5CF800C3095D /* hud.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = hud.h; path = ../include/hud.h; sourceTree = SOURCE_ROOT; };
+		22EF8CED09DC5CF800C3095D /* input.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = input.h; path = ../include/input.h; sourceTree = SOURCE_ROOT; };
+		22EF8CEE09DC5CF800C3095D /* level.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = level.h; path = ../include/level.h; sourceTree = SOURCE_ROOT; };
+		22EF8CF009DC5CF800C3095D /* DCSMenu.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = DCSMenu.h; sourceTree = "<group>"; };
+		22EF8CF109DC5CF800C3095D /* GamePlay.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GamePlay.h; sourceTree = "<group>"; };
+		22EF8CF209DC5CF800C3095D /* HighScores.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = HighScores.h; sourceTree = "<group>"; };
+		22EF8CF309DC5CF800C3095D /* HowToPlay.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = HowToPlay.h; sourceTree = "<group>"; };
+		22EF8CF409DC5CF800C3095D /* LevelStats.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = LevelStats.h; sourceTree = "<group>"; };
+		22EF8CF509DC5CF800C3095D /* MultiPlaySetup.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MultiPlaySetup.h; sourceTree = "<group>"; };
+		22EF8CF609DC5CF800C3095D /* NameEntry.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NameEntry.h; sourceTree = "<group>"; };
+		22EF8CF709DC5CF800C3095D /* NetworkLobby.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NetworkLobby.h; sourceTree = "<group>"; };
+		22EF8CF809DC5CF800C3095D /* TitleScreen.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = TitleScreen.h; sourceTree = "<group>"; };
+		22EF8CF909DC5CF800C3095D /* net.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = net.h; path = ../include/net.h; sourceTree = SOURCE_ROOT; };
+		22EF8CFA09DC5CF800C3095D /* options.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = options.h; path = ../include/options.h; sourceTree = SOURCE_ROOT; };
+		22EF8CFB09DC5CF800C3095D /* rand.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = rand.h; path = ../include/rand.h; sourceTree = SOURCE_ROOT; };
+		22EF8CFC09DC5CF800C3095D /* score.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = score.h; path = ../include/score.h; sourceTree = SOURCE_ROOT; };
+		22EF8CFD09DC5CF800C3095D /* squarenet.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = squarenet.h; path = ../include/squarenet.h; sourceTree = SOURCE_ROOT; };
+		22EF8CFE09DC5CF800C3095D /* squares.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = squares.h; path = ../include/squares.h; sourceTree = SOURCE_ROOT; };
+		22EF8CFF09DC5CF800C3095D /* text.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = text.h; path = ../include/text.h; sourceTree = SOURCE_ROOT; };
+		22EF8D0009DC5CF800C3095D /* texture.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = texture.h; path = ../include/texture.h; sourceTree = SOURCE_ROOT; };
+		22EF8D0109DC5CF800C3095D /* theme.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = theme.h; path = ../include/theme.h; sourceTree = SOURCE_ROOT; };
 		22F3A2C30953AA02005DB9D0 /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Controller.h; sourceTree = "<group>"; };
 		22F3A2C40953AA02005DB9D0 /* Controller.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Controller.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -156,7 +212,7 @@
 			files = (
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				225E21DF095606350086CB3C /* OpenGL.framework in Frameworks */,
-				22EC442409AA5C8300938C38 /* Tiki.framework in Frameworks */,
+				22EF8CD709DC5CAC00C3095D /* Tiki.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,7 +231,7 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				22EC43E109AA5C8200938C38 /* Tiki.framework */,
+				22EF8C9409DC5CAB00C3095D /* Tiki.framework */,
 				225E21DE095606350086CB3C /* OpenGL.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 			);
@@ -203,17 +259,17 @@
 		222FC2ED0953AC84009582BD /* common */ = {
 			isa = PBXGroup;
 			children = (
-				22EC3F5E09A8EF1900938C38 /* http.cc */,
-				22EC3F3F09A8EE4A00938C38 /* net.cc */,
-				225E2158095602190086CB3C /* text.cc */,
-				222FC2EE0953AE4E009582BD /* game.cc */,
-				222FC2EF0953AE4E009582BD /* hud.cc */,
-				222FC2F00953AE4E009582BD /* level.cc */,
-				222FC2F10953AE4E009582BD /* rand.cc */,
-				222FC2F20953AE4E009582BD /* score.cc */,
-				222FC2F30953AE4E009582BD /* squares.cc */,
-				222FC2F40953AE4E009582BD /* theme.cc */,
-				225E20150955FDB20086CB3C /* main.cc */,
+				22EF8C5709DC5C6C00C3095D /* game.cc */,
+				22EF8C5809DC5C6C00C3095D /* http.cc */,
+				22EF8C5909DC5C6C00C3095D /* hud.cc */,
+				22EF8C5A09DC5C6C00C3095D /* level.cc */,
+				22EF8C5B09DC5C6C00C3095D /* main.cc */,
+				22EF8C5C09DC5C6C00C3095D /* net.cc */,
+				22EF8C5D09DC5C6C00C3095D /* rand.cc */,
+				22EF8C5E09DC5C6C00C3095D /* score.cc */,
+				22EF8C5F09DC5C6C00C3095D /* squares.cc */,
+				22EF8C6009DC5C6C00C3095D /* text.cc */,
+				22EF8C6109DC5C6C00C3095D /* theme.cc */,
 			);
 			name = common;
 			sourceTree = "<group>";
@@ -221,20 +277,23 @@
 		225E219D095604E30086CB3C /* include */ = {
 			isa = PBXGroup;
 			children = (
-				22EC3F2F09A8EDF000938C38 /* squarenet.h */,
-				225E219F095604F80086CB3C /* game.h */,
-				225E21A0095604F80086CB3C /* http.h */,
-				225E21A1095604F80086CB3C /* hud.h */,
-				225E21A2095604F80086CB3C /* input.h */,
-				225E21A3095604F80086CB3C /* level.h */,
-				225E21A4095604F80086CB3C /* net.h */,
-				225E21A5095604F80086CB3C /* options.h */,
-				225E21A6095604F80086CB3C /* rand.h */,
-				225E21A7095604F80086CB3C /* score.h */,
-				225E21A8095604F80086CB3C /* squares.h */,
-				225E21A9095604F80086CB3C /* text.h */,
-				225E21AA095604F80086CB3C /* texture.h */,
-				225E21AB095604F80086CB3C /* theme.h */,
+				22EF8CE309DC5CF800C3095D /* drawables */,
+				22EF8CE909DC5CF800C3095D /* font.h */,
+				22EF8CEA09DC5CF800C3095D /* game.h */,
+				22EF8CEB09DC5CF800C3095D /* http.h */,
+				22EF8CEC09DC5CF800C3095D /* hud.h */,
+				22EF8CED09DC5CF800C3095D /* input.h */,
+				22EF8CEE09DC5CF800C3095D /* level.h */,
+				22EF8CEF09DC5CF800C3095D /* menus */,
+				22EF8CF909DC5CF800C3095D /* net.h */,
+				22EF8CFA09DC5CF800C3095D /* options.h */,
+				22EF8CFB09DC5CF800C3095D /* rand.h */,
+				22EF8CFC09DC5CF800C3095D /* score.h */,
+				22EF8CFD09DC5CF800C3095D /* squarenet.h */,
+				22EF8CFE09DC5CF800C3095D /* squares.h */,
+				22EF8CFF09DC5CF800C3095D /* text.h */,
+				22EF8D0009DC5CF800C3095D /* texture.h */,
+				22EF8D0109DC5CF800C3095D /* theme.h */,
 			);
 			name = include;
 			sourceTree = "<group>";
@@ -242,24 +301,15 @@
 		225E2214095609900086CB3C /* Menus */ = {
 			isa = PBXGroup;
 			children = (
-				225E2215095609BE0086CB3C /* TitleScreen.h */,
-				225E2216095609BE0086CB3C /* TitleScreen.cpp */,
-				225E26570958F41B0086CB3C /* DCSMenu.h */,
-				225E26580958F41B0086CB3C /* DCSMenu.cpp */,
-				225E26810958F9710086CB3C /* GamePlay.h */,
-				225E26820958F9710086CB3C /* GamePlay.cpp */,
-				2208E34D096858F1005C2102 /* LevelStats.h */,
-				2208E34E096858F1005C2102 /* LevelStats.cpp */,
-				2208E5CF096F47F7005C2102 /* HighScores.h */,
-				2208E5D0096F47F7005C2102 /* HighScores.cpp */,
-				22E2E7F20971ED0200D3CB40 /* NameEntry.h */,
-				22E2E7F30971ED0200D3CB40 /* NameEntry.cpp */,
-				229ACE890979A234001928CA /* MultiPlaySetup.h */,
-				229ACE8A0979A234001928CA /* MultiPlaySetup.cpp */,
-				2292A1000983F92E00A517F0 /* HowToPlay.h */,
-				2292A1010983F92E00A517F0 /* HowToPlay.cpp */,
-				22EC3EE509A8E2B400938C38 /* NetworkLobby.h */,
-				22EC3EE609A8E2B400938C38 /* NetworkLobby.cpp */,
+				22EF8C4509DC5C3200C3095D /* DCSMenu.cpp */,
+				22EF8C4609DC5C3200C3095D /* GamePlay.cpp */,
+				22EF8C4709DC5C3200C3095D /* HighScores.cpp */,
+				22EF8C4809DC5C3200C3095D /* HowToPlay.cpp */,
+				22EF8C4909DC5C3200C3095D /* LevelStats.cpp */,
+				22EF8C4A09DC5C3200C3095D /* MultiPlaySetup.cpp */,
+				22EF8C4B09DC5C3200C3095D /* NameEntry.cpp */,
+				22EF8C4C09DC5C3200C3095D /* NetworkLobby.cpp */,
+				22EF8C4D09DC5C3200C3095D /* TitleScreen.cpp */,
 			);
 			name = Menus;
 			sourceTree = "<group>";
@@ -267,21 +317,44 @@
 		225E23BC09560AB10086CB3C /* Drawables */ = {
 			isa = PBXGroup;
 			children = (
-				225E23BD09560AC40086CB3C /* menuList.cc */,
-				225E23BE09560AC40086CB3C /* menuList.h */,
-				225E23C309560BEF0086CB3C /* playField.h */,
-				225E23C409560BEF0086CB3C /* playField.cpp */,
-				225E25850956173A0086CB3C /* squaresBg.h */,
-				225E25860956173A0086CB3C /* squaresBg.cpp */,
-				225E25E80958EF480086CB3C /* banna.h */,
-				225E25E90958EF490086CB3C /* banna.cpp */,
-				22845178095F2865002AF3FE /* squaresHUD.h */,
-				22845179095F2865002AF3FE /* squaresHUD.cpp */,
-				228451F6095F6D91002AF3FE /* box.h */,
-				228451F7095F6D91002AF3FE /* box.cpp */,
+				22EF8C4309DC5C0D00C3095D /* menuList.cpp */,
+				22EF8C3909DC5BCC00C3095D /* box.cpp */,
+				22EF8C3B09DC5BCC00C3095D /* playField.cpp */,
+				22EF8C3C09DC5BCC00C3095D /* squaresBg.cpp */,
+				22EF8C3D09DC5BCC00C3095D /* squaresHUD.cpp */,
 			);
 			name = Drawables;
 			sourceTree = "<group>";
+		};
+		22EF8CE309DC5CF800C3095D /* drawables */ = {
+			isa = PBXGroup;
+			children = (
+				22EF8CE409DC5CF800C3095D /* box.h */,
+				22EF8CE509DC5CF800C3095D /* menuList.h */,
+				22EF8CE609DC5CF800C3095D /* playField.h */,
+				22EF8CE709DC5CF800C3095D /* squaresBg.h */,
+				22EF8CE809DC5CF800C3095D /* squaresHUD.h */,
+			);
+			name = drawables;
+			path = ../include/drawables;
+			sourceTree = SOURCE_ROOT;
+		};
+		22EF8CEF09DC5CF800C3095D /* menus */ = {
+			isa = PBXGroup;
+			children = (
+				22EF8CF009DC5CF800C3095D /* DCSMenu.h */,
+				22EF8CF109DC5CF800C3095D /* GamePlay.h */,
+				22EF8CF209DC5CF800C3095D /* HighScores.h */,
+				22EF8CF309DC5CF800C3095D /* HowToPlay.h */,
+				22EF8CF409DC5CF800C3095D /* LevelStats.h */,
+				22EF8CF509DC5CF800C3095D /* MultiPlaySetup.h */,
+				22EF8CF609DC5CF800C3095D /* NameEntry.h */,
+				22EF8CF709DC5CF800C3095D /* NetworkLobby.h */,
+				22EF8CF809DC5CF800C3095D /* TitleScreen.h */,
+			);
+			name = menus;
+			path = ../include/menus;
+			sourceTree = SOURCE_ROOT;
 		};
 		29B97314FDCFA39411CA2CEA /* TikiSquares */ = {
 			isa = PBXGroup;
@@ -311,9 +384,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				22EC3EAA09A7BEC700938C38 /* themes */,
-				225E2142095601AF0086CB3C /* VeraBd.txf */,
-				225E2044095601810086CB3C /* loading.png */,
+				22EF8C7009DC5C8D00C3095D /* loading.png */,
+				22EF8C7109DC5C8D00C3095D /* themes */,
+				22EF8C8B09DC5C8D00C3095D /* VeraBd.txf */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
@@ -382,9 +455,9 @@
 			files = (
 				8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */,
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
-				225E2099095601810086CB3C /* loading.png in Resources */,
-				225E2144095601AF0086CB3C /* VeraBd.txf in Resources */,
-				22EC3EC409A7BEC700938C38 /* themes in Resources */,
+				22EF8C8C09DC5C8D00C3095D /* loading.png in Resources */,
+				22EF8C8D09DC5C8D00C3095D /* themes in Resources */,
+				22EF8C8E09DC5C8D00C3095D /* VeraBd.txf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,32 +470,31 @@
 			files = (
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
 				22F3A2C70953AA02005DB9D0 /* Controller.m in Sources */,
-				222FC2F60953AE4E009582BD /* game.cc in Sources */,
-				222FC2F70953AE4E009582BD /* hud.cc in Sources */,
-				222FC2F80953AE4E009582BD /* level.cc in Sources */,
-				222FC2F90953AE4E009582BD /* rand.cc in Sources */,
-				222FC2FA0953AE4E009582BD /* score.cc in Sources */,
-				222FC2FB0953AE4E009582BD /* squares.cc in Sources */,
-				222FC2FC0953AE4E009582BD /* theme.cc in Sources */,
-				225E20160955FDB20086CB3C /* main.cc in Sources */,
-				225E215A095602190086CB3C /* text.cc in Sources */,
-				225E2218095609BE0086CB3C /* TitleScreen.cpp in Sources */,
-				225E23BF09560AC40086CB3C /* menuList.cc in Sources */,
-				225E23C609560BEF0086CB3C /* playField.cpp in Sources */,
-				225E25880956173A0086CB3C /* squaresBg.cpp in Sources */,
-				225E25EB0958EF490086CB3C /* banna.cpp in Sources */,
-				225E265A0958F41B0086CB3C /* DCSMenu.cpp in Sources */,
-				225E26840958F9710086CB3C /* GamePlay.cpp in Sources */,
-				2284517B095F2865002AF3FE /* squaresHUD.cpp in Sources */,
-				228451F9095F6D91002AF3FE /* box.cpp in Sources */,
-				2208E350096858F1005C2102 /* LevelStats.cpp in Sources */,
-				2208E5D2096F47F7005C2102 /* HighScores.cpp in Sources */,
-				22E2E7F50971ED0200D3CB40 /* NameEntry.cpp in Sources */,
-				229ACE8C0979A234001928CA /* MultiPlaySetup.cpp in Sources */,
-				2292A1030983F92E00A517F0 /* HowToPlay.cpp in Sources */,
-				22EC3EE809A8E2B400938C38 /* NetworkLobby.cpp in Sources */,
-				22EC3F4009A8EE4A00938C38 /* net.cc in Sources */,
-				22EC3F5F09A8EF1900938C38 /* http.cc in Sources */,
+				22EF8C3E09DC5BCC00C3095D /* box.cpp in Sources */,
+				22EF8C4009DC5BCC00C3095D /* playField.cpp in Sources */,
+				22EF8C4109DC5BCC00C3095D /* squaresBg.cpp in Sources */,
+				22EF8C4209DC5BCC00C3095D /* squaresHUD.cpp in Sources */,
+				22EF8C4409DC5C0D00C3095D /* menuList.cpp in Sources */,
+				22EF8C4E09DC5C3200C3095D /* DCSMenu.cpp in Sources */,
+				22EF8C4F09DC5C3200C3095D /* GamePlay.cpp in Sources */,
+				22EF8C5009DC5C3200C3095D /* HighScores.cpp in Sources */,
+				22EF8C5109DC5C3200C3095D /* HowToPlay.cpp in Sources */,
+				22EF8C5209DC5C3200C3095D /* LevelStats.cpp in Sources */,
+				22EF8C5309DC5C3200C3095D /* MultiPlaySetup.cpp in Sources */,
+				22EF8C5409DC5C3200C3095D /* NameEntry.cpp in Sources */,
+				22EF8C5509DC5C3200C3095D /* NetworkLobby.cpp in Sources */,
+				22EF8C5609DC5C3200C3095D /* TitleScreen.cpp in Sources */,
+				22EF8C6309DC5C6C00C3095D /* game.cc in Sources */,
+				22EF8C6409DC5C6C00C3095D /* http.cc in Sources */,
+				22EF8C6509DC5C6C00C3095D /* hud.cc in Sources */,
+				22EF8C6609DC5C6C00C3095D /* level.cc in Sources */,
+				22EF8C6709DC5C6C00C3095D /* main.cc in Sources */,
+				22EF8C6809DC5C6C00C3095D /* net.cc in Sources */,
+				22EF8C6909DC5C6C00C3095D /* rand.cc in Sources */,
+				22EF8C6A09DC5C6C00C3095D /* score.cc in Sources */,
+				22EF8C6B09DC5C6C00C3095D /* squares.cc in Sources */,
+				22EF8C6C09DC5C6C00C3095D /* text.cc in Sources */,
+				22EF8C6D09DC5C6C00C3095D /* theme.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,6 +528,7 @@
 					"$(FRAMEWORK_SEARCH_PATHS)",
 					"$(SRCROOT)/../../../../tiki/osx/build/Deployment",
 					"$(SRCROOT)/../../../../tiki/osx/build/Development",
+					"$(SRCROOT)/../../../tiki/osx/build/Development",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -480,6 +553,7 @@
 					"$(FRAMEWORK_SEARCH_PATHS)",
 					"$(SRCROOT)/../../../../tiki/osx/build/Deployment",
 					"$(SRCROOT)/../../../../tiki/osx/build/Development",
+					"$(SRCROOT)/../../../tiki/osx/build/Development",
 				);
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
@@ -501,8 +575,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					/sw/include/plib,
-					../../include,
+					../include,
 					"$(HEADER_SEARCH_PATHS)",
 				);
 				PREBINDING = NO;
@@ -521,8 +594,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					/sw/include/plib,
-					../../include,
+					../include,
 					"$(HEADER_SEARCH_PATHS)",
 				);
 				PREBINDING = NO;

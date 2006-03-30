@@ -17,7 +17,7 @@
 using namespace Tiki;
 using namespace Tiki::GL;
 
-#include "GamePlay.h"
+#include "menus/GamePlay.h"
 #include "drawables/squaresHUD.h"
 #include "level.h"
 #include "squares.h"
@@ -64,10 +64,12 @@ void GamePlay::init() {
 				player[p]->r=130.0f/255.0f;
 				player[p]->g=0.0f/255.0f;			
 				player[p]->b=200.0f/255.0f;
+#ifdef NET
 				if(current_level->net) {
 					netplayer=player[p];
 					netplayer->type=PLAYER_NET;
 				}
+#endif
 				break;
 		}
 	}
@@ -102,10 +104,11 @@ void GamePlay::controlPerFrame() {
 			m_exitSpeed=1.0f/30.0f;
 		}
 	}
-
+#ifdef NET
 	if(current_level->net) {
 		net_update();
 	}
+#endif
 }
 
 void GamePlay::inputEvent(const Event & evt) {
@@ -117,12 +120,14 @@ void GamePlay::inputEvent(const Event & evt) {
 			if(!m_exiting) {
 				player[evt.port]->x=evt.x;
 				player[evt.port]->y=evt.y;
+#ifdef NET
 				if(current_level->net) {
 					snGamePlayerMove m;
 					m.x=htonl(evt.x);
 					m.y=htonl(evt.y);
 					game_send(CHAN_GAME,GAME_PLAYERMOVE,sizeof(snGamePlayerMove),&m);
 				}
+#endif
 			}
 			break;
 		case Event::EvtBtnPress:

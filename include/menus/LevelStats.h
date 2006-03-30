@@ -10,9 +10,8 @@
 #include <Tiki/genmenu.h>
 #include "drawables/playField.h"
 #include "drawables/squaresBg.h"
-#include "drawables/banna.h"
 #include "drawables/squaresHUD.h"
-#include "DCSMenu.h"
+#include "menus/DCSMenu.h"
 
 class LevelStats : public DCSMenu {
 public:

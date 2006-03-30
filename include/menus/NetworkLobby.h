@@ -8,6 +8,7 @@
  */
 
 #include <Tiki/genmenu.h>
+#include <Tiki/drawables/banner.h>
 
 class NetworkLobby : public GenericMenu {
 public:

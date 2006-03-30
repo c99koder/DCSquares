@@ -46,11 +46,8 @@ themeinfo_t themeinfo = {
 void MessageBox(char *title, char *msg);
 
 void render_bg(Texture *tex, float fade) {
-#ifdef DREAMCAST
-  GLfloat uv[4]={1,1,0,0};
-#else
   GLfloat uv[4]={0,0,1,1};
-#endif
+
 	glEnable(GL_TEXTURE_2D);
 	glLoadIdentity();	
 	glColor3f(fade,fade,fade);
@@ -69,11 +66,8 @@ void render_bg(Texture *tex, float fade) {
 }
 
 void render_box(int x, int y, int w, int h, Texture *tex, float fade) {
-#ifdef DREAMCAST
-  GLfloat uv[4]={1,1,0,0};
-#else
   GLfloat uv[4]={0,0,1,1};
-#endif
+
 	glEnable(GL_TEXTURE_2D);
 	glLoadIdentity();	
 	glColor4f(1,1,1,fade);
@@ -97,7 +91,7 @@ void render_bg_game(Texture *tex, float fade) {
 	glColor3f(fade,fade,fade);
 	tex->select();
 	glBegin(GL_QUADS);
-#ifndef DREAMCAST
+
 	glTexCoord2f(0,0);
 	glVertex3f(0,0,0.9);
 	glTexCoord2f((float)themeinfo.game_x/640.0f,0);
@@ -133,43 +127,7 @@ void render_bg_game(Texture *tex, float fade) {
 	glVertex3f(640,480,0.9);
 	glTexCoord2f((float)themeinfo.game_x/640.0f,1);
 	glVertex3f((float)themeinfo.game_x,480,0.9);
-#else
-	glTexCoord2f(0,1);
-	glVertex3f(0,0,0.9);
-	glTexCoord2f((float)themeinfo.game_x/640.0f,1);
-	glVertex3f((float)themeinfo.game_x,0,0.9);
-	glTexCoord2f((float)themeinfo.game_x/640.0f,0);
-	glVertex3f((float)themeinfo.game_x,480,0.9);
-	glTexCoord2f(0,0);
-	glVertex3f(0,480,0.9);
 
-	glTexCoord2f((float)themeinfo.game_x/640.0f,1);
-	glVertex3f((float)themeinfo.game_x,0,0.9);
-	glTexCoord2f(((float)themeinfo.game_x+(float)themeinfo.game_w)/640.0f,1);
-	glVertex3f((float)themeinfo.game_x+(float)themeinfo.game_w,1,0.9);
-	glTexCoord2f(((float)themeinfo.game_x+(float)themeinfo.game_w)/640.0f,1-(float)themeinfo.game_y/480.0f);
-	glVertex3f((float)themeinfo.game_x+(float)themeinfo.game_w,(float)themeinfo.game_y,0.9);
-	glTexCoord2f((float)themeinfo.game_x/640.0f,1-(float)themeinfo.game_y/480.0f);
-	glVertex3f((float)themeinfo.game_x,(float)themeinfo.game_y,0.9);
-
-	glTexCoord2f(((float)themeinfo.game_x+(float)themeinfo.game_w)/640.0f,1);
-	glVertex3f((float)themeinfo.game_x+(float)themeinfo.game_w,0,0.02);
-	glTexCoord2f(1,1);
-	glVertex3f(640,0,0.02);
-	glTexCoord2f(1,1-(((float)themeinfo.game_y+(float)themeinfo.game_h)/480.0f));
-	glVertex3f(640,(float)themeinfo.game_y+(float)themeinfo.game_h,0.02);
-	glTexCoord2f(((float)themeinfo.game_x+(float)themeinfo.game_w)/640.0f,1-(((float)themeinfo.game_y+(float)themeinfo.game_h)/480.0f));
-	glVertex3f((float)themeinfo.game_x+(float)themeinfo.game_w,(float)themeinfo.game_y+(float)themeinfo.game_h,0.02);
-
-	glTexCoord2f((float)themeinfo.game_x/640.0f,1-(((float)themeinfo.game_y+(float)themeinfo.game_h)/480.0f));
-	glVertex3f((float)themeinfo.game_x,(float)themeinfo.game_y+(float)themeinfo.game_h,0.9);
-	glTexCoord2f(1,1-(((float)themeinfo.game_y+(float)themeinfo.game_h)/480.0f));
-	glVertex3f(640,(float)themeinfo.game_y+(float)themeinfo.game_h,0.9);
-	glTexCoord2f(1,0);
-	glVertex3f(640,480,0.9);
-	glTexCoord2f((float)themeinfo.game_x/640.0f,0);
-	glVertex3f((float)themeinfo.game_x,480,0.9);
-#endif
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
 }
@@ -180,7 +138,7 @@ void render_bg_title(Texture *tex, float fade) {
 	glColor3f(fade,fade,fade);
 	tex->select();
 	glBegin(GL_QUADS);
-#ifndef DREAMCAST
+
 	glTexCoord2f(0,0);
 	glVertex3f(0,0,0.9);
 	glTexCoord2f((float)themeinfo.title_x/640.0f,0);
@@ -216,71 +174,14 @@ void render_bg_title(Texture *tex, float fade) {
 	glVertex3f(640,480,0.9);
 	glTexCoord2f((float)themeinfo.title_x/640.0f,1);
 	glVertex3f((float)themeinfo.title_x,480,0.9);
-	
-	glTexCoord2f((float)themeinfo.title_x/640.0f,(float)themeinfo.title_y/480.0f);
-	glVertex3f((float)themeinfo.title_x,(float)themeinfo.title_y,0.1);
-	glTexCoord2f(((float)themeinfo.title_x+(float)themeinfo.title_w)/640.0f,(float)themeinfo.title_y/480.0f);
-	glVertex3f((float)themeinfo.title_x+(float)themeinfo.title_w,(float)themeinfo.title_y,0.1);
-	glTexCoord2f(((float)themeinfo.title_x+(float)themeinfo.title_w)/640.0f,((float)themeinfo.title_y+(float)themeinfo.title_h)/480.0f);
-	glVertex3f((float)themeinfo.title_x+(float)themeinfo.title_w,(float)themeinfo.title_y+(float)themeinfo.title_h,0.1);
-	glTexCoord2f((float)themeinfo.title_x/640.0f,((float)themeinfo.title_y+(float)themeinfo.title_h)/480.0f);
-	glVertex3f((float)themeinfo.title_x,(float)themeinfo.title_y+(float)themeinfo.title_h,0.1);
-#else
-	glTexCoord2f(0,1);
-	glVertex3f(0,0,0.9);
-	glTexCoord2f((float)themeinfo.title_x/640.0f,1);
-	glVertex3f((float)themeinfo.title_x,0,0.9);
-	glTexCoord2f((float)themeinfo.title_x/640.0f,0);
-	glVertex3f((float)themeinfo.title_x,480,0.9);
-	glTexCoord2f(0,0);
-	glVertex3f(0,480,0.9);
-	
-	glTexCoord2f((float)themeinfo.title_x/640.0f,1);
-	glVertex3f((float)themeinfo.title_x,0,0.9);
-	glTexCoord2f(((float)themeinfo.title_x+(float)themeinfo.title_w)/640.0f,1);
-	glVertex3f((float)themeinfo.title_x+(float)themeinfo.title_w,1,0.9);
-	glTexCoord2f(((float)themeinfo.title_x+(float)themeinfo.title_w)/640.0f,1-(float)themeinfo.title_y/480.0f);
-	glVertex3f((float)themeinfo.title_x+(float)themeinfo.title_w,(float)themeinfo.title_y,0.9);
-	glTexCoord2f((float)themeinfo.title_x/640.0f,1-(float)themeinfo.title_y/480.0f);
-	glVertex3f((float)themeinfo.title_x,(float)themeinfo.title_y,0.9);
-	
-	glTexCoord2f(((float)themeinfo.title_x+(float)themeinfo.title_w)/640.0f,1);
-	glVertex3f((float)themeinfo.title_x+(float)themeinfo.title_w,0,0.9);
-	glTexCoord2f(1,1);
-	glVertex3f(640,0,0.9);
-	glTexCoord2f(1,1-(((float)themeinfo.title_y+(float)themeinfo.title_h)/480.0f));
-	glVertex3f(640,(float)themeinfo.title_y+(float)themeinfo.title_h,0.9);
-	glTexCoord2f(((float)themeinfo.title_x+(float)themeinfo.title_w)/640.0f,1-(((float)themeinfo.title_y+(float)themeinfo.title_h)/480.0f));
-	glVertex3f((float)themeinfo.title_x+(float)themeinfo.title_w,(float)themeinfo.title_y+(float)themeinfo.title_h,0.9);
-	
-	glTexCoord2f((float)themeinfo.title_x/640.0f,1-(((float)themeinfo.title_y+(float)themeinfo.title_h)/480.0f));
-	glVertex3f((float)themeinfo.title_x,(float)themeinfo.title_y+(float)themeinfo.title_h,0.9);
-	glTexCoord2f(1,1-(((float)themeinfo.title_y+(float)themeinfo.title_h)/480.0f));
-	glVertex3f(640,(float)themeinfo.title_y+(float)themeinfo.title_h,0.9);
-	glTexCoord2f(1,0);
-	glVertex3f(640,480,0.9);
-	glTexCoord2f((float)themeinfo.title_x/640.0f,0);
-	glVertex3f((float)themeinfo.title_x,480,0.9);
-	
-	/*glTexCoord2f((float)themeinfo.title_x/640.0f,1-(float)themeinfo.title_y/480.0f);
-	glVertex3f((float)themeinfo.title_x,(float)themeinfo.title_y,0.01);
-	glTexCoord2f(((float)themeinfo.title_x+(float)themeinfo.title_w)/640.0f,1-(float)themeinfo.title_y/480.0f);
-	glVertex3f((float)themeinfo.title_x+(float)themeinfo.title_w,(float)themeinfo.title_y,0.01);
-	glTexCoord2f(((float)themeinfo.title_x+(float)themeinfo.title_w)/640.0f,1-((float)themeinfo.title_y+(float)themeinfo.title_h)/480.0f);
-	glVertex3f((float)themeinfo.title_x+(float)themeinfo.title_w,(float)themeinfo.title_y+(float)themeinfo.title_h,0.01);
-	glTexCoord2f((float)themeinfo.title_x/640.0f,1-((float)themeinfo.title_y+(float)themeinfo.title_h)/480.0f);
-	glVertex3f((float)themeinfo.title_x,(float)themeinfo.title_y+(float)themeinfo.title_h,0.01);*/
-#endif
+
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
 }
 
 void render_poly(int size, Texture *tex, float fade) {
-#ifdef DREAMCAST
-  GLfloat uv[4]={1,1,0,0};
-#else
   GLfloat uv[4]={0,0,1,1};
-#endif
+
 	glEnable(GL_TEXTURE_2D);
 	glColor4f(1,1,1,fade);
 	tex->select();
@@ -298,10 +199,10 @@ void render_poly(int size, Texture *tex, float fade) {
 }
 
 #ifdef DREAMCAST
-sfxhnd_t powerup=-1;
-sfxhnd_t powerdown=-1;
-sfxhnd_t collect=-1;
-sfxhnd_t gameover=-1;
+sfxhnd_t powerup=NULL;
+sfxhnd_t powerdown=NULL;
+sfxhnd_t collect=NULL;
+sfxhnd_t gameover=NULL;
 
 extern "C" {
 void update_lcds();

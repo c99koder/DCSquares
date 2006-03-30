@@ -20,7 +20,7 @@ using namespace Tiki;
 using namespace Tiki::GL;
 using namespace Tiki::GL::Plxcompat;
 
-#include "box.h"
+#include "drawables/box.h"
 #include "squares.h"
 #include "hud.h"
 

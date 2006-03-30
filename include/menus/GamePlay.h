@@ -12,8 +12,7 @@
 #include "drawables/playField.h"
 #include "drawables/squaresBg.h"
 #include "drawables/squaresHUD.h"
-#include "drawables/banna.h"
-#include "DCSMenu.h"
+#include "menus/DCSMenu.h"
 #include "squares.h"
 
 class GamePlay : public DCSMenu {

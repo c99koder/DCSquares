@@ -18,7 +18,6 @@ using namespace Tiki;
 using namespace Tiki::GL;
 
 #ifdef DREAMCAST
-#include <kos.h>
 #include <oggvorbis/sndoggvorbis.h>
 
 extern "C" {
@@ -96,7 +95,9 @@ void play_game(level_node *level) {
 		//if(current_level->players==1 && !check_win(game_gt,0))
 		//	sprintf(highcode,"GOAT-GOAT-GOAT");
 		delete gp;
+#ifdef NET
 		netplayer=NULL;
+#endif
 		if(quitting) return;
 		if(combo[0]>maxcombo[0]) maxcombo[0]=combo[0];
 		ls=new LevelStats();
@@ -174,6 +175,8 @@ extern "C" int tiki_main(int argc, char **argv) {
 	score_list_init();
 	load_theme("goat",0);
 	srand(time(0));
+
+#ifdef NET0
 	
 #if TIKI_PLAT == TIKI_MACOSX
 	NetworkLobby *nl = new NetworkLobby("192.168.11.100","c99koder","027325");
@@ -183,6 +186,8 @@ extern "C" int tiki_main(int argc, char **argv) {
 	nl->insertText(CHAN_GAME,"Connecting to lobby...");
 	nl->FadeIn();
 	nl->doMenu();
+
+#endif
 	
 #ifdef DREAMCAST
 	sndoggvorbis_start(theme_dir("title.ogg"),1);

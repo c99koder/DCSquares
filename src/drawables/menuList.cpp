@@ -26,8 +26,8 @@ using namespace Tiki;
 using namespace Tiki::GL;
 
 #include "text.h"
-#include "box.h"
-#include "menuList.h"
+#include "drawables/box.h"
+#include "drawables/menuList.h"
 
 menuList::menuList(Font *fnt) {
 	m_bg=new Box(0,0);

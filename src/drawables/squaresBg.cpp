@@ -16,7 +16,7 @@
 using namespace Tiki;
 using namespace Tiki::GL;
 
-#include "squaresBg.h"
+#include "drawables/squaresBg.h"
 #include "squares.h"
 #include "theme.h"
 

@@ -11,8 +11,7 @@
 #include "drawables/menuList.h"
 #include "drawables/playField.h"
 #include "drawables/squaresBg.h"
-#include "drawables/banna.h"
-#include "DCSMenu.h"
+#include "menus/DCSMenu.h"
 
 class TitleScreen : public DCSMenu {
 public:

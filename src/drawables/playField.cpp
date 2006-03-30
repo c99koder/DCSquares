@@ -16,7 +16,7 @@
 using namespace Tiki;
 using namespace Tiki::GL;
 
-#include "playField.h"
+#include "drawables/playField.h"
 #include "squares.h"
 #include "game.h"
 #include "level.h"

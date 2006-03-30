@@ -10,13 +10,14 @@
 #include "Tiki/tiki.h"
 #include "Tiki/genmenu.h"
 #include <Tiki/drawables/label.h>
+#include <Tiki/drawables/banner.h>
 #include <Tiki/anims/tintfader.h>
 #include <Tiki/texture.h>
 
 using namespace Tiki;
 using namespace Tiki::GL;
 
-#include "HowToPlay.h"
+#include "menus/HowToPlay.h"
 #include "squares.h"
 #include "score.h"
 #include "theme.h"
@@ -45,15 +46,15 @@ extern themeinfo_t themeinfo;
 	l->setTranslate(Vector(themeinfo.title_w/2,0,0)); \
 	m_help[m_page]->subAdd(l);
 
-#define BANNA(X, Y, TEXT, TEX) \
-	b=new Banna(Drawable::Trans,TEX);\
+#define BANNER(X, Y, TEXT, TEX) \
+	b=new Banner(Drawable::Trans,TEX);\
 	b->setTranslate(Vector(X,Y,0));\
 	b->setSize(32,32);\
 	m_help[m_page]->subAdd(b);\
 	COLOR_TEXT(X+10, Y+8, TEXT);
 
-#define BANNA_TOP(X, Y, TEXT, TEX) \
-	b=new Banna(Drawable::Trans,TEX);\
+#define BANNER_TOP(X, Y, TEXT, TEX) \
+	b=new Banner(Drawable::Trans,TEX);\
 	b->setTranslate(Vector(X,Y,0));\
 	b->setSize(32,32);\
 	m_help[m_page]->subAdd(b);\
@@ -73,7 +74,7 @@ extern Texture *big_tex;
 
 HowToPlay::HowToPlay() : DCSMenu(false) {
 	RefPtr<Label> l;
-	RefPtr<Banna> b;
+	RefPtr<Banner> b;
 	RefPtr<Box> plr;
 	init();
 	set_font_size(20);
@@ -103,11 +104,11 @@ during the game that will affect the gameplay.");
 	COLOR_TEXT(50,180,"Use your mouse or analog control stick to\n\
 move this player around the screen.");
 	
-	BANNA_TOP(40,230,"Collecting these gives you points!  The\n\
+	BANNER_TOP(40,230,"Collecting these gives you points!  The\n\
 amount you recieve per square depends on how\n\
 long you've been playing the current round.",score_tex);
 
-	BANNA_TOP(40,300,"Touching one of these will end your game!\n\
+	BANNER_TOP(40,300,"Touching one of these will end your game!\n\
 Avoid them at all cost!",enemy_tex);
 	
 	//-----------------------------
@@ -121,17 +122,17 @@ Avoid them at all cost!",enemy_tex);
 	
 	WHITE_TEXT(0,30,"Powerups");
 
-	BANNA(40,50,"Briefly makes you invicible to enemy squares.",invinc_tex);
-	BANNA(40,86,"Breifly decreases the speed of the squares.",slow_tex);
-	BANNA(40,122,"Gives you 1000 points!",plus_tex);
-	BANNA(40,158,"Shrinks the size of your player.",mini_tex);
+	BANNER(40,50,"Briefly makes you invicible to enemy squares.",invinc_tex);
+	BANNER(40,86,"Breifly decreases the speed of the squares.",slow_tex);
+	BANNER(40,122,"Gives you 1000 points!",plus_tex);
+	BANNER(40,158,"Shrinks the size of your player.",mini_tex);
 	
 	WHITE_TEXT(0,190,"Powerdowns");
 	
-	BANNA(40,210,"Briefly changes all squares to enemies.",evil_tex);
-	BANNA(40,246,"Briefly increases the speed of the squares.",speed_tex);
-	BANNA(40,282,"Takes away 1000 points.",minus_tex);
-	BANNA(40,318,"Increases the size of your player.",big_tex);
+	BANNER(40,210,"Briefly changes all squares to enemies.",evil_tex);
+	BANNER(40,246,"Briefly increases the speed of the squares.",speed_tex);
+	BANNER(40,282,"Takes away 1000 points.",minus_tex);
+	BANNER(40,318,"Increases the size of your player.",big_tex);
 	
 	l=new Label(fnt,"Press start or click to continue.",16,true,false);
 	l->setTranslate(Vector(themeinfo.title_x + themeinfo.title_w/2,themeinfo.title_y+themeinfo.title_h-16,100));
