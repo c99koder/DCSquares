@@ -186,7 +186,7 @@ void render_squares(float square_alpha, bool game) {
 				glRotatef(c->angle,0,0,1);
 				glColor4f(c->r,c->g,c->b,square_alpha);
 				glScalef(themeinfo.scale,themeinfo.scale,1.0);
-				render_poly(c->size,c->tex/*(c->tex==score_tex && powerup_mode==EVIL)?enemy_tex:(Texture *)c->tex*/,(powerup_mode==INVINC && c->tex==enemy_tex)?1.0f-(0.8f*effect_timer):(i==0)?square_alpha:square_alpha*((float)(4-i)/8.0f));
+				render_poly(c->size,(c->tex==score_tex && powerup_mode==EVIL)?enemy_tex:c->tex,(powerup_mode==INVINC && c->tex==enemy_tex)?1.0f-(0.8f*effect_timer):(i==0)?square_alpha:square_alpha*((float)(4-i)/8.0f));
 			}
 		}
 		c=c->next;

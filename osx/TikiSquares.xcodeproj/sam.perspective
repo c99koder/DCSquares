@@ -271,7 +271,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>40</integer>
+									<integer>44</integer>
 									<integer>35</integer>
 									<integer>0</integer>
 								</array>
@@ -312,7 +312,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>22F3A2660953A801005DB9D0</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>main.cc</string>
+								<string>squares.cc</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -320,11 +320,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>22F3A2670953A801005DB9D0</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>main.cc</string>
+										<string>squares.cc</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>22EF8DF609DC6D8E00C3095D</string>
+										<string>22EF8DFE09DC799100C3095D</string>
 										<key>history</key>
 										<array>
 											<string>22F3A2CB0953AA1D005DB9D0</string>
@@ -344,9 +344,9 @@
 											<string>22EF8D9109DC672E00C3095D</string>
 											<string>22EF8DA109DC694D00C3095D</string>
 											<string>22EF8DAC09DC697C00C3095D</string>
-											<string>22EF8DBC09DC6A1600C3095D</string>
 											<string>22EF8DF309DC6D8E00C3095D</string>
-											<string>22EF8DF409DC6D8E00C3095D</string>
+											<string>22EF8DFB09DC799100C3095D</string>
+											<string>22EF8DFC09DC799100C3095D</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -379,6 +379,7 @@
 											<string>22EF8DBE09DC6A1600C3095D</string>
 											<string>22EF8DC909DC6A4C00C3095D</string>
 											<string>22EF8DF509DC6D8E00C3095D</string>
+											<string>22EF8DFD09DC799100C3095D</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -591,7 +592,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>22EF8DF709DC6D8E00C3095D</string>
+										<string>22EF8DFF09DC799100C3095D</string>
 										<key>history</key>
 										<array>
 											<string>22F3A2CB0953AA1D005DB9D0</string>
