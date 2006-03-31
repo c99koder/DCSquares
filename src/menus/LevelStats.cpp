@@ -14,7 +14,7 @@
 using namespace Tiki;
 using namespace Tiki::GL;
 
-#include "LevelStats.h"
+#include "menus/LevelStats.h"
 
 LevelStats::LevelStats() : DCSMenu(false) {
 	hud=new squaresHUD(2);

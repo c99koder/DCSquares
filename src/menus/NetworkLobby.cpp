@@ -20,12 +20,12 @@ using namespace Tiki::GL;
 
 #include "drawables/box.h"
 
-#include "NetworkLobby.h"
+#include "menus/NetworkLobby.h"
 #include "squarenet.h"
 #include "net.h"
 
-extern Texture *bg_tex;
-extern Texture *game_tex;
+extern RefPtr<Texture> bg_tex;
+extern RefPtr<Texture> game_tex;
 extern RefPtr<Font> fnt;
 extern std::list<std::string> userlist;
 

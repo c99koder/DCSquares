@@ -19,12 +19,13 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="c:\glpng\include;../src;../../include;.;c:\OpenAL\include;&quot;C:\Documents and Settings\Sam\Desktop\tiki\win32\include&quot;;&quot;C:\Documents and Settings\Sam\Desktop\tiki\include&quot;"
+				AdditionalIncludeDirectories="../include;.;&quot;C:\Program Files\OpenAL 1.1 SDK\include&quot;;&quot;C:\Documents and Settings\Sam\Desktop\tiki\win32\include&quot;;&quot;C:\Documents and Settings\Sam\Desktop\tiki\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;TIKI"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
 				UsePrecompiledHeader="0"
+				BrowseInformation="1"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="TRUE"
 				DebugInformationFormat="4"
@@ -36,7 +37,7 @@
 				AdditionalDependencies="wsock32.lib"
 				OutputFile="$(OutDir)/DCSquares.exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;C:\glut-3.7.6-bin&quot;;C:\glpng\lib;C:\OpenAL\libs\Win32;&quot;C:\Documents and Settings\Sam\Desktop\tiki\win32\Release&quot;"
+				AdditionalLibraryDirectories="&quot;C:\Program Files\OpenAL 1.1 SDK\libs\Win32&quot;;&quot;C:\Documents and Settings\Sam\Desktop\tiki\win32\Debug&quot;"
 				IgnoreDefaultLibraryNames="libcd;libcmt"
 				GenerateDebugInformation="TRUE"
 				ProgramDatabaseFile="$(OutDir)/DCSquares.pdb"
@@ -71,13 +72,13 @@
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="c:\glpng\include;../src;../../include;.;c:\OpenAL\include;&quot;C:\Documents and Settings\Sam\Desktop\tiki\win32\include&quot;;&quot;C:\Documents and Settings\Sam\Desktop\tiki\include&quot;"
+				AdditionalIncludeDirectories="../include;.;&quot;C:\Program Files\OpenAL 1.1 SDK\include&quot;;&quot;C:\Documents and Settings\Sam\Desktop\tiki\win32\include&quot;;&quot;C:\Documents and Settings\Sam\Desktop\tiki\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;TIKI"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="TRUE"
-				DebugInformationFormat="3"
+				DebugInformationFormat="0"
 				DisableSpecificWarnings="4244;4305;4018"/>
 			<Tool
 				Name="VCCustomBuildTool"/>
@@ -86,9 +87,9 @@
 				AdditionalDependencies="wsock32.lib"
 				OutputFile="$(OutDir)/DCSquares.exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;C:\glut-3.7.6-bin&quot;;C:\glpng\lib;C:\OpenAL\libs\Win32;&quot;C:\Documents and Settings\Sam\Desktop\tiki\win32\Release&quot;"
+				AdditionalLibraryDirectories="C:\OpenAL\libs\Win32;&quot;C:\Documents and Settings\Sam\Desktop\tiki\win32\Release&quot;"
 				IgnoreDefaultLibraryNames="libc"
-				GenerateDebugInformation="TRUE"
+				GenerateDebugInformation="FALSE"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
@@ -123,6 +124,33 @@
 			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}">
 			<File
+				RelativePath="..\src\game.cc">
+			</File>
+			<File
+				RelativePath="..\src\http.cc">
+			</File>
+			<File
+				RelativePath="..\src\hud.cc">
+			</File>
+			<File
+				RelativePath="..\src\level.cc">
+			</File>
+			<File
+				RelativePath="..\src\main.cc">
+			</File>
+			<File
+				RelativePath="..\src\net.cc">
+			</File>
+			<File
+				RelativePath="..\src\rand.cc">
+			</File>
+			<File
+				RelativePath="..\src\score.cc">
+			</File>
+			<File
+				RelativePath="..\src\squares.cc">
+			</File>
+			<File
 				RelativePath=".\stdafx.cpp">
 				<FileConfiguration
 					Name="Debug|Win32">
@@ -137,6 +165,65 @@
 						UsePrecompiledHeader="1"/>
 				</FileConfiguration>
 			</File>
+			<File
+				RelativePath="..\src\text.cc">
+			</File>
+			<File
+				RelativePath="..\src\theme.cc">
+			</File>
+			<File
+				RelativePath="..\src\TikiSquares.cpp">
+			</File>
+			<Filter
+				Name="Menus"
+				Filter="">
+				<File
+					RelativePath="..\src\menus\DCSMenu.cpp">
+				</File>
+				<File
+					RelativePath="..\src\menus\GamePlay.cpp">
+				</File>
+				<File
+					RelativePath="..\src\menus\HighScores.cpp">
+				</File>
+				<File
+					RelativePath="..\src\menus\HowToPlay.cpp">
+				</File>
+				<File
+					RelativePath="..\src\menus\LevelStats.cpp">
+				</File>
+				<File
+					RelativePath="..\src\menus\MultiPlaySetup.cpp">
+				</File>
+				<File
+					RelativePath="..\src\menus\NameEntry.cpp">
+				</File>
+				<File
+					RelativePath="..\src\menus\NetworkLobby.cpp">
+				</File>
+				<File
+					RelativePath="..\src\menus\TitleScreen.cpp">
+				</File>
+			</Filter>
+			<Filter
+				Name="Drawables"
+				Filter="">
+				<File
+					RelativePath="..\src\drawables\box.cpp">
+				</File>
+				<File
+					RelativePath="..\src\drawables\menuList.cpp">
+				</File>
+				<File
+					RelativePath="..\src\drawables\playField.cpp">
+				</File>
+				<File
+					RelativePath="..\src\drawables\squaresBg.cpp">
+				</File>
+				<File
+					RelativePath="..\src\drawables\squaresHUD.cpp">
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -146,53 +233,106 @@
 				RelativePath=".\DCSquares.h">
 			</File>
 			<File
-				RelativePath="..\..\include\font.h">
+				RelativePath="..\include\font.h">
 			</File>
 			<File
-				RelativePath="..\..\include\game.h">
+				RelativePath="..\include\game.h">
 			</File>
 			<File
-				RelativePath="..\..\include\http.h">
+				RelativePath="..\include\http.h">
 			</File>
 			<File
-				RelativePath="..\..\include\hud.h">
+				RelativePath="..\include\hud.h">
 			</File>
 			<File
-				RelativePath="..\..\include\input.h">
+				RelativePath="..\include\input.h">
 			</File>
 			<File
-				RelativePath="..\..\include\level.h">
+				RelativePath="..\include\level.h">
 			</File>
 			<File
-				RelativePath="..\..\include\net.h">
+				RelativePath="..\include\net.h">
 			</File>
 			<File
-				RelativePath="..\..\include\options.h">
+				RelativePath="..\include\options.h">
 			</File>
 			<File
-				RelativePath="..\..\include\rand.h">
+				RelativePath="..\include\rand.h">
 			</File>
 			<File
 				RelativePath=".\Resource.h">
 			</File>
 			<File
-				RelativePath="..\..\include\score.h">
+				RelativePath="..\include\score.h">
 			</File>
 			<File
-				RelativePath="..\..\include\squarenet.h">
+				RelativePath="..\include\squarenet.h">
 			</File>
 			<File
-				RelativePath="..\..\include\squares.h">
+				RelativePath="..\include\squares.h">
 			</File>
 			<File
 				RelativePath=".\stdafx.h">
 			</File>
 			<File
-				RelativePath="..\..\include\text.h">
+				RelativePath="..\include\text.h">
 			</File>
 			<File
-				RelativePath="..\..\include\theme.h">
+				RelativePath="..\include\texture.h">
 			</File>
+			<File
+				RelativePath="..\include\theme.h">
+			</File>
+			<Filter
+				Name="Menus"
+				Filter="">
+				<File
+					RelativePath="..\include\menus\DCSMenu.h">
+				</File>
+				<File
+					RelativePath="..\include\menus\GamePlay.h">
+				</File>
+				<File
+					RelativePath="..\include\menus\HighScores.h">
+				</File>
+				<File
+					RelativePath="..\include\menus\HowToPlay.h">
+				</File>
+				<File
+					RelativePath="..\include\menus\LevelStats.h">
+				</File>
+				<File
+					RelativePath="..\include\menus\MultiPlaySetup.h">
+				</File>
+				<File
+					RelativePath="..\include\menus\NameEntry.h">
+				</File>
+				<File
+					RelativePath="..\include\menus\NetworkLobby.h">
+				</File>
+				<File
+					RelativePath="..\include\menus\TitleScreen.h">
+				</File>
+			</Filter>
+			<Filter
+				Name="Drawables"
+				Filter="">
+				<File
+					RelativePath="..\include\drawables\box.h">
+				</File>
+				<File
+					RelativePath="..\include\drawables\menuList.h">
+				</File>
+				<File
+					RelativePath="..\include\drawables\playField.h">
+				</File>
+				<File
+					RelativePath="..\include\drawables\squaresBg.h">
+				</File>
+				<File
+					RelativePath="..\include\drawables\squaresHUD.h">
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Resource Files"
@@ -206,144 +346,6 @@
 			</File>
 			<File
 				RelativePath=".\small.ico">
-			</File>
-		</Filter>
-		<Filter
-			Name="DCSquares"
-			Filter="">
-			<File
-				RelativePath="..\..\common\game.cc">
-			</File>
-			<File
-				RelativePath="..\..\common\http.cc">
-			</File>
-			<File
-				RelativePath="..\..\common\hud.cc">
-			</File>
-			<File
-				RelativePath="..\..\common\level.cc">
-			</File>
-			<File
-				RelativePath="..\src\main.cc">
-			</File>
-			<File
-				RelativePath="..\..\common\net.cc">
-			</File>
-			<File
-				RelativePath="..\..\common\rand.cc">
-			</File>
-			<File
-				RelativePath="..\..\common\score.cc">
-			</File>
-			<File
-				RelativePath="..\..\common\squares.cc">
-			</File>
-			<File
-				RelativePath="..\..\common\text.cc">
-			</File>
-			<File
-				RelativePath="..\..\common\theme.cc">
-			</File>
-			<File
-				RelativePath="..\..\common\TikiSquares.cpp">
-			</File>
-		</Filter>
-		<Filter
-			Name="Menus"
-			Filter="">
-			<File
-				RelativePath="..\src\DCSMenu.cpp">
-			</File>
-			<File
-				RelativePath="..\src\DCSMenu.h">
-			</File>
-			<File
-				RelativePath="..\src\GamePlay.cpp">
-			</File>
-			<File
-				RelativePath="..\src\GamePlay.h">
-			</File>
-			<File
-				RelativePath="..\src\HighScores.cpp">
-			</File>
-			<File
-				RelativePath="..\src\HighScores.h">
-			</File>
-			<File
-				RelativePath="..\src\HowToPlay.cpp">
-			</File>
-			<File
-				RelativePath="..\src\HowToPlay.h">
-			</File>
-			<File
-				RelativePath="..\src\LevelStats.cpp">
-			</File>
-			<File
-				RelativePath="..\src\LevelStats.h">
-			</File>
-			<File
-				RelativePath="..\src\MultiPlaySetup.cpp">
-			</File>
-			<File
-				RelativePath="..\src\MultiPlaySetup.h">
-			</File>
-			<File
-				RelativePath="..\src\NameEntry.cpp">
-			</File>
-			<File
-				RelativePath="..\src\NameEntry.h">
-			</File>
-			<File
-				RelativePath="..\src\NetworkLobby.cpp">
-			</File>
-			<File
-				RelativePath="..\src\NetworkLobby.h">
-			</File>
-			<File
-				RelativePath="..\src\TitleScreen.cpp">
-			</File>
-			<File
-				RelativePath="..\src\TitleScreen.h">
-			</File>
-		</Filter>
-		<Filter
-			Name="Drawables"
-			Filter="">
-			<File
-				RelativePath="..\src\drawables\banna.cpp">
-			</File>
-			<File
-				RelativePath="..\src\drawables\banna.h">
-			</File>
-			<File
-				RelativePath="..\src\drawables\box.cpp">
-			</File>
-			<File
-				RelativePath="..\src\drawables\box.h">
-			</File>
-			<File
-				RelativePath="..\src\drawables\menuList.cc">
-			</File>
-			<File
-				RelativePath="..\src\drawables\menuList.h">
-			</File>
-			<File
-				RelativePath="..\src\drawables\playField.cpp">
-			</File>
-			<File
-				RelativePath="..\src\drawables\playField.h">
-			</File>
-			<File
-				RelativePath="..\src\drawables\squaresBg.cpp">
-			</File>
-			<File
-				RelativePath="..\src\drawables\squaresBg.h">
-			</File>
-			<File
-				RelativePath="..\src\drawables\squaresHUD.cpp">
-			</File>
-			<File
-				RelativePath="..\src\drawables\squaresHUD.h">
 			</File>
 		</Filter>
 		<File

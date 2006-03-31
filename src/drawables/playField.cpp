@@ -33,7 +33,6 @@ extern "C" {
 #endif
 
 playField::playField(bool game) {
-	destroy_list();
 	init_genrand(Time::gettime()*1000);
 		
 	m_game = game;
@@ -41,6 +40,7 @@ playField::playField(bool game) {
 }
 
 playField::~playField() {
+	destroy_list();
 };
 
 void playField::draw(ObjType list) {

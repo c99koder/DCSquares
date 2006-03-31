@@ -16,7 +16,7 @@
 using namespace Tiki;
 using namespace Tiki::GL;
 
-#include "HighScores.h"
+#include "menus/HighScores.h"
 #include "squares.h"
 #include "score.h"
 #include "theme.h"

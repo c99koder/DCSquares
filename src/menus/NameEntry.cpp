@@ -14,7 +14,7 @@
 using namespace Tiki;
 using namespace Tiki::GL;
 
-#include "NameEntry.h"
+#include "menus/NameEntry.h"
 
 #include "squares.h"
 #include "theme.h"

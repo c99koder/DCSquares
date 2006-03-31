@@ -17,8 +17,9 @@
 
 class GamePlay : public DCSMenu {
 public:
-	void init();
 	GamePlay();
+	~GamePlay() {};
+	void init();
 	void controlPerFrame();
 	
 protected:

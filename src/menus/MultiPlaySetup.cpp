@@ -19,7 +19,7 @@
 using namespace Tiki;
 using namespace Tiki::GL;
 
-#include "MultiPlaySetup.h"
+#include "menus/MultiPlaySetup.h"
 #include "drawables/squaresHUD.h"
 #include "level.h"
 #include "squares.h"

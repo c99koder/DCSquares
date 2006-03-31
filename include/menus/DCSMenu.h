@@ -19,6 +19,7 @@
 class DCSMenu : public GenericMenu {
 public:
 	DCSMenu(bool game);
+	~DCSMenu();
 	void init();
 	void FadeIn();
 	void FadeOut();

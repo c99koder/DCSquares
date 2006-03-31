@@ -13,9 +13,11 @@
 #include <Tiki/gl.h>
 #include <Tiki/hid.h>
 #include <Tiki/texture.h>
+#include <Tiki/oggvorbis.h>
 
 using namespace Tiki;
 using namespace Tiki::GL;
+using namespace Tiki::Audio;
 
 #ifdef DREAMCAST
 #include <oggvorbis/sndoggvorbis.h>
@@ -48,14 +50,14 @@ using namespace Tiki::GL;
 using namespace Tiki::GL::Plxcompat;
 using namespace Tiki::Hid;
 
-#include "TitleScreen.h"
-#include "GamePlay.h"
-#include "LevelStats.h"
-#include "HighScores.h"
-#include "NameEntry.h"
-#include "MultiPlaySetup.h"
-#include "HowToPlay.h"
-#include "NetworkLobby.h"
+#include "menus/TitleScreen.h"
+#include "menus/GamePlay.h"
+#include "menus/LevelStats.h"
+#include "menus/HighScores.h"
+#include "menus/NameEntry.h"
+#include "menus/MultiPlaySetup.h"
+#include "menus/HowToPlay.h"
+#include "menus/NetworkLobby.h"
 
 extern float game_gt;
 extern char highcode[];
@@ -136,6 +138,7 @@ extern "C" int tiki_main(int argc, char **argv) {
 	HighScores *hs;
 	MultiPlaySetup *mps;
 	HowToPlay *hp;
+	VorbisStream bgm;
 	
 	// Init Tiki
 	Tiki::init(argc, argv);
@@ -144,15 +147,15 @@ extern "C" int tiki_main(int argc, char **argv) {
 	Hid::callbackReg(tkCallback, NULL);
 
 #if TIKI_PLAT==TIKI_WIN32 //init winsock
-		WORD sockVersion;
-	WSADATA wsaData;
-	int nret;
+		//WORD sockVersion;
+	//WSADATA wsaData;
+	//int nret;
 
-	sockVersion = MAKEWORD(1, 1);			// We'd like Winsock version 1.1
+	//sockVersion = MAKEWORD(1, 1);			// We'd like Winsock version 1.1
 
 
 	// We begin by initializing Winsock
-	WSAStartup(sockVersion, &wsaData);
+	//WSAStartup(sockVersion, &wsaData);
 #endif
 
 #ifdef DREAMCAST
@@ -193,6 +196,9 @@ extern "C" int tiki_main(int argc, char **argv) {
 	sndoggvorbis_start(theme_dir("title.ogg"),1);
 #endif
 	while(!quitting) {	
+		bgm.stop();
+		bgm.load(theme_dir("title.ogg"),1);
+		bgm.start();
 		ts=new TitleScreen();
 		ts->FadeIn();
 		ts->doMenu();

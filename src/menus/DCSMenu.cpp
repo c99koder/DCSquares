@@ -15,9 +15,9 @@
 using namespace Tiki;
 using namespace Tiki::GL;
 
+#include "menus/DCSMenu.h"
 #include "squares.h"
 #include "level.h"
-#include "DCSMenu.h"
 
 extern int scoreval;
 extern float tickval;
@@ -45,8 +45,10 @@ DCSMenu::DCSMenu(bool game) {
 	init();
 }
 
+DCSMenu::~DCSMenu() {
+}
+
 void DCSMenu::init() {
-	destroy_list();
 	tickval=current_level->tickval; //1.0
 	speedval=current_level->speedval; //1.2
 	scoreval=current_level->scoreval; //100

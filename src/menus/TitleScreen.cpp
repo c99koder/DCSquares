@@ -18,7 +18,7 @@
 using namespace Tiki;
 using namespace Tiki::GL;
 
-#include "TitleScreen.h"
+#include "menus/TitleScreen.h"
 #include "drawables/squaresHUD.h"
 #include "level.h"
 #include "squares.h"
