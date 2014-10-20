@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical" >
+
+    <android.opengl.GLSurfaceView
+        android:id="@+id/squaresView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dip"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/squaresView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="72dp"
+        android:src="@drawable/logo" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/squaresView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="32dp" >
+
+        <Button
+            android:id="@+id/playBtn"
+            android:layout_width="160dip"
+            android:layout_height="wrap_content"
+            android:text="New Game" android:layout_margin="16dp"/>
+
+        <Button
+            android:id="@+id/settingsBtn"
+            android:layout_width="160dip"
+            android:layout_height="wrap_content"
+            android:text="Settings" android:layout_margin="16dp"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/squaresView"
+        android:layout_alignLeft="@+id/squaresView"
+        android:text="Version 1.0" android:layout_marginLeft="6dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/squaresView"
+        android:layout_alignRight="@+id/squaresView"
+        android:text="© 2001-2011 Sam Steele" android:layout_marginRight="6dp"/>
+
+</RelativeLayout>
