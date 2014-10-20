@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ccc"
+    android:orientation="vertical" >
+
+    <android.opengl.GLSurfaceView
+        android:id="@+id/squaresView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="32dip"
+        android:layout_marginBottom="32dip"
+        android:layout_marginLeft="40dip"
+        android:layout_marginRight="40dip"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/squaresView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="72dp"
+        android:src="@drawable/logo" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/squaresView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="180dp"
+        android:textSize="20sp"
+        android:text="Press O to Start"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/squaresView"
+        android:layout_alignLeft="@+id/squaresView"
+        android:textSize="20sp"
+        android:text="Version 1.0-OUYA" android:layout_marginLeft="6dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/squaresView"
+        android:layout_alignRight="@+id/squaresView"
+        android:textSize="20sp"
+        android:text="© 2001-2013 Sam Steele" android:layout_marginRight="6dp"/>
+
+</RelativeLayout>
